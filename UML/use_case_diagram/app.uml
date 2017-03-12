@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor 部长 as minister
+actor 部员 as member
+rectangle APP端 {
+  (minister) -- (点对点通信)
+  (minister) -- (群组通信)
+  (minister) -- (查看未读\历史通知)
+  (minister) -- (任务管理)
+  (minister) -- (个人账户管理)
+  (个人账户管理) -- (member)
+  (任务管理) -- (member)
+  (点对点通信) -- (member)
+  (查看未读\历史通知) -- (member)
+  (参与群聊) -- (member)
+  (群组通信) --> (发起群聊)
+  (群组通信) --> (参与群聊)
+  (任务管理) -up-> (启动\结束任务)
+  (任务管理) -up-> (查看任务进度)
+  (任务管理) -up-> (处理待办任务)
+}
+@enduml
