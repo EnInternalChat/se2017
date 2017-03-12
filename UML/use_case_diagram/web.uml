@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor 管理员 as admin
+actor 部长 as minister
+rectangle Web端 {
+  (admin) -- (用户管理)
+  (用户管理) --> (修改用户属性)
+  (用户管理) --> (添加\删除用户)
+  (用户管理) --> (启用\禁用用户)
+  (修改用户属性) --> (修改基本属性)
+  (修改用户属性) --> (修改所属部门)
+  (admin) -- (任务流程管理)
+  (任务流程管理) --> (新建\删除任务流程)
+  (任务流程管理) --> (修改任务流程)
+  (admin) -- (组织结构管理)
+  (admin) -- (通知管理)
+  (通知管理) --> (发布通知)
+  (通知管理) --> (查看历史通知)
+  (admin) -- (个人信息管理)
+  (minister) -right- (通知管理)
+  (minister) -right- (个人账户管理)
+  (admin) -- (个人账户管理)
+}
+@enduml
