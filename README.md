@@ -1,2 +1,2 @@
 # se2017
-The comprehensive project
+The comprehensive project: APP test
