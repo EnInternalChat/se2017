@@ -1,0 +1,54 @@
+@startuml
+:部员;
+repeat
+  :登录系统;
+repeat while (登录成功?) is (失败\n) not (\n成功)
+split
+  :通信;
+  repeat
+    split
+      :点对点通信;
+    split again
+      :参与群聊;
+    end split
+  repeat while 
+split again
+  :通知管理;
+  repeat
+    split
+      :查看未读通知;
+    split again
+      :查看历史通知;
+    end split
+  repeat while
+split again
+  repeat
+    :任务管理;
+    split
+      :查看进行中任务;
+      split
+        :查看任务详情;
+      split again
+        :处理任务;
+      end split
+    split again
+      :查看历史任务;
+      :查看任务详情;
+    split again
+      :启动任务;
+      repeat
+        :填写任务详情;
+      repeat while (启动成功?) is (失败) not (成功)
+    end split
+  repeat while
+split again
+  :个人中心;
+  split
+    :注销账户;
+  split again
+    repeat
+      :修改账户信息;
+    repeat while (修改成功?) is (成功\失败)
+  end split
+end split
+@enduml
