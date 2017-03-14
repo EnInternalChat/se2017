@@ -1,0 +1,81 @@
+@startuml
+:管理员;
+repeat
+  :登录系统;
+repeat while (登录成功?) is (失败\n) not (\n成功)
+split
+  :组织结构管理;
+  repeat
+    :调整组织结构;
+  repeat while (调整成功?) is (失败,显示\n调整前结构\n) not (成功,显示\n调整后结构)
+split again
+  repeat
+    :用户管理;
+    split
+      repeat 
+        :添加用户;
+      repeat while (添加成功?) is (失败\n) not (成功)
+    split again
+      :删除用户;
+    split again
+      :启用\禁用用户;
+    split again
+      repeat
+        :修改用户属性;
+          split
+            repeat
+              :修改基本属性;
+            repeat while (修改成功?) is (失败\n) not (成功)
+          split again
+            :修改所属部门;
+            repeat 
+              :显示部门列表;
+            repeat while (修改成功?) is (失败\n) not (成功)
+          end split
+      repeat while
+    end split
+  repeat while
+split again
+  repeat 
+    :任务流程管理;
+    split
+      repeat
+        :新建任务流程;
+      repeat while (创建成功?) is (失败\n) not (成功)
+    split again
+      :删除任务流程;
+    split again
+      repeat
+        :修改任务流程;
+      repeat while (修改成功?) is (失败\n) not (成功)
+    end split
+  repeat while
+split again
+  split
+    repeat
+      :通知管理;
+      repeat
+        :发布通知;
+      repeat while (发布成功?) is (失败\n) not (成功)
+    repeat while
+  split again
+    repeat
+      :通知记录;
+      split
+        :查看历史通知;
+      split again
+        :删除历史通知;
+      end split
+    repeat while
+  end split
+split again
+  :个人中心;
+  split
+    :注销账户;
+  split again
+    repeat
+      :修改账户信息;
+    repeat while (修改成功?) is (成功\失败)
+  end split
+end split
+@enduml
