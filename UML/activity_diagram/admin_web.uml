@@ -16,9 +16,7 @@ split again
         :添加用户;
       repeat while (添加成功?) is (失败\n) not (成功)
     split again
-      :删除用户;
-    split again
-      :启用\禁用用户;
+      :删除,启用\禁用用户;
     split again
       repeat
         :修改用户属性;
