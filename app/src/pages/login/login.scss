@@ -1,0 +1,62 @@
+page-login {
+    .background {
+        background: map-get($colors, light)
+    }
+    .avator {
+        position: absolute;
+        top: 10%;
+        left: 35%;
+        max-width: 30%;
+    }
+    .input-area {
+        position: absolute;
+        top: 30%;
+        left: 0%;
+        right: 0%;
+        .item-block:first-child {
+            border-top: none;
+        }
+        .item-block:last-child {
+            border-bottom: none;
+        }
+        .item-block {
+            background-color: transparent;
+            border-top: none;
+            padding-left: 5%;
+            padding-right: 5%;
+            .item-inner {
+                border-width: 0px;
+                padding-right: 0%;
+                padding-left: 0%;
+            }
+        }
+        .input-text {
+            .item-inner{
+                border-width: 1px;
+                border-bottom-color: map-get($colors, divider); 
+            }
+        }
+        .label {
+            color: map-get($colors, third_text);
+            font-size: 1.8rem;
+            margin: 6px 0px 6px 0px;
+        }
+        .check-text {
+            font-size: 1.6rem;
+            color: map-get($colors, primary_text);
+        }
+        .text-input {
+            color: map-get($colors, primary_text);
+        }
+        .login-button {
+            background-color: map-get($colors, primary);
+            height: 36px;
+            font-size: 1.8rem;
+        }
+        .text-input-clear-icon {
+            background-color: transparent;
+            background-image: url(../../assets/img/delete.svg)
+        }
+    }
+
+}
