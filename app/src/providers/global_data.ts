@@ -9,8 +9,8 @@ export const enum AppLanguage {
 export class AppGlobal {
   private static instance: AppGlobal;
 
-  public user_name: string;
-  public avator_no: number;
+  private _user_name: string;
+  private _avator_no: number;
 
   public is_debug: boolean = true;
   public server_url: string = this.is_debug ? "http://" : "http://";
@@ -18,10 +18,9 @@ export class AppGlobal {
 
   private constructor() {
     let storage = StorageHelper.getInstance();
-    this.avator_no = storage.read_local_info('avator_no', 1);
-    this.user_name = storage.read_local_info('username', 'username@outlook.com');
+    this._avator_no = storage.read_local_info('avator_no', 1);
+    this._user_name = storage.read_local_info('username', 'username@outlook.com');
   }
-
   public static get_instance(): AppGlobal {
     if(!AppGlobal.instance) {
       AppGlobal.instance = new AppGlobal();
@@ -29,5 +28,17 @@ export class AppGlobal {
     return AppGlobal.instance;
   }
 
-  public 
+  set user_name(username: string) {
+    StorageHelper.getInstance().storage_info('username', username);
+  }
+  get user_name(): string {
+    return this._user_name;
+  }
+
+  set avator_no(no: number) {
+    StorageHelper.getInstance().storage_info('avator_no', no);
+  }
+  get avator_no(): number {
+    return this._avator_no;
+  }
 }

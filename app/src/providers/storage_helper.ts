@@ -1,4 +1,4 @@
-import { Storage, StorageConfig } from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 
 export class StorageHelper {
   private static storage_way: string = "indexeddb";
