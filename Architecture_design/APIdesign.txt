@@ -54,7 +54,7 @@ admin only:
 				ID:233,
 				password:"sdaaa",
 				avaator:2
-				phone:['13838472290',026-33324444],
+				phone:['13838472290','026-33324444'],
 				mail:['394859210@qq.com','dsdsfas@hotmail.com']
 			}
 		/section/add
@@ -66,12 +66,12 @@ admin only:
 			}
 		/section/update/addEmployee
 			{
-				employeeID:2345
+				employeeID:2345,
 				sectionID:[1233,3423]		//批量添加
 			}
 		/section/update/deleteEmployee
 			{
-				employeeID:2345
+				employeeID:2345,
 				sectionID:[1233,3423]		//批量删除
 			}
 		/section/delete
@@ -160,10 +160,30 @@ admin only:
 others:
 	post:
 		/login
+			{
+				username:"admin",
+				password:"32332223"
+			}//后台md5防注入
 		/logout
+			{
+				username:"admin",
+				password:"32332223"
+			}
 		/notification/send
+			{
+				type:"meeting"
+				section:123
+				content:"hi!~"
+			}
 		/task/progress
+			{
+
+			}
 		/personal/update
+			{
+				oldPwd:"2333",
+				newPwd:"12355"
+			}
 	get:
 		/login
 		/tasks
