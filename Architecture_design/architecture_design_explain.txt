@@ -60,9 +60,9 @@ employee example:[
 			{chatID:"2-144-5342", pieces:34}
 		],
 		tasks:[
-			{taskID:"2ANd790912", type:"", time:"2017-04-05T12:51:46.598Z", over:true},
-			{taskID:"2ANd790912", type:"", time:"2017-04-05T12:51:46.598Z", over:true, delete:true},
-			{taskID:"0GNn790S17", type:"", time:"2017-04-05T13:02:32.537Z", over:false}
+			{taskID:"2ANd790912", status:[(task url)], over:true},
+			{taskID:"2ANd790912", status:[(task url)], over:true, delete:true},
+			{taskID:"0GNn790S17", status:[(task url)], over:false}
 		]
 	},
 	{

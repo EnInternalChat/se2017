@@ -1,0 +1,8 @@
+{
+	activityID:"endEvent",
+	name:"over",
+	type:"endEvent",
+	createTime:
+	finishTime:
+	exclusiveGateway:[]
+}
