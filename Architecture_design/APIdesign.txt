@@ -1,0 +1,49 @@
+
+api:
+admin only:
+	post:
+		/login
+			{
+				username:"admin",
+				password:"32332223"
+			}//后台md5防注入
+		/logout
+			{
+				username:"admin",
+				password:"32332223"
+			}
+		/employee/new
+			{
+				name:"sabi",
+				password:"sdaaa",
+			}	
+		/employee/delete
+		/employee/update
+		/status/update
+		/task/update
+		/task/upload
+		/task/delete
+		/personal/update
+		/organization/add
+		/organization/update
+		/organization/delete
+	get:
+		/login
+		/employees
+		/tasks
+		/personal
+		/organizations
+others:
+	post:
+		/login
+		/logout
+		/notification/send
+		/task/progress
+		/personal/update
+	get:
+		/login
+		/tasks
+		/personal
+
+
+API权限检测（限定部长与管理员能访问的api）

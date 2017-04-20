@@ -6,7 +6,8 @@ chat Schema:[
 
 chat example:[
 	{
-		chatID:"1-233-112", 
+		companyID:1,
+		chatID:"112", 
 		members:["1-233-A11", "1-233-A21", "1-233-B541", "1-233-A91"],
 		owener:"1-233-A11",
 		messageList:[
@@ -17,7 +18,8 @@ chat example:[
 		]
 	},
 	{
-		chatID:"2-144-5342", 
+		companyID:2,
+		chatID:"5342", 
 		members:["2-144-A11", "2-144-A21", "2-144-B541", "2-A91"],
 		owener:"2-144-A11",
 		messageList:[
@@ -37,10 +39,11 @@ employee Schema:[
 
 employee example:[
 	{
-		ID:"2-144-A11",
+		ID:"A11",
 		name:"sabi",
 		password:"sdaaa",
 		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
+		positionID:233,
 		position:"A product manager";//±àºÅ£¿
 		gender:"female",
 		avaator:1
@@ -67,6 +70,7 @@ employee example:[
 		name:"jack",
 		password:"sdaaa",
 		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
+		positionID:0,
 		position:"Administrator";
 		gender:"male"
 	},
@@ -125,19 +129,3 @@ operation example:[
 	{operator:"2-0-V1", type:"sectionCreate", sectionID:"2-232", time:"2017-04-05T12:51:46.598Z"},
 	{operator:"2-11-22", type:"taskStart", taskID:"2ANd790912-2", time:"2017-04-05T12:51:46.598Z"}
 ]
-
-
-api:
-post:
-/login
-/logout
-/message/send
-/employee/new
-/employee/delete
-/employee/update
-/status/change
-/tasks/
-/personal/
-/organization/
-
-APIÈ¨ÏÞ¼ì²â
