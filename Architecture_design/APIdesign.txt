@@ -79,7 +79,7 @@ admin only:
 				sectionID:1233				//当前部门人员不为空不允许删除部门
 			}
 	get:
-		/login
+		/login(Response)
 			{
 				(all)
 			}
@@ -177,7 +177,7 @@ others:
 			}
 		/task/progress
 			{
-
+				operation:"yes"
 			}
 		/personal/update
 			{
@@ -185,7 +185,7 @@ others:
 				newPwd:"12355"
 			}
 	get:
-		/login
+		/login(Response)
 		/tasks
 		/personal
 
