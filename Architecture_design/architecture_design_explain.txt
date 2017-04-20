@@ -1,10 +1,143 @@
-1.服务展现层
-服务展现层分为APP端和WEB端两种不同的交互界面，相应的，在不同的用户端上面实现的服务也是有差别的。WEB端呈现的服务功能会区分部长和管理员登陆两种情况。
-2.信息服务层
-左边框部分是呈现在APP端的服务，右边框部分是呈现在WEB端的服务，中间交叉部分在两个用户端都有实现。
-3.数据转换层
-在数据层存储的数据是非关系型的，所以为了将数据序列化表现在信息服务层上面，方便用户使用，这个转换的过程需要数据转换层来实现。
-4.数据层
-存储用户信息，任务记录，聊天记录等，为信息服务层提供数据支持。其中操作记录是指管理操作的记录，为系统的回滚做准备。
-5.数据源
-从企业采集员工信息，企业结构等数据进行入库。
+Collections: chat, employee, company, task, operation
+
+chat Schema:[
+
+]
+
+chat example:[
+	{
+		chatID:"1-233-112", 
+		members:["1-233-A11", "1-233-A21", "1-233-B541", "1-233-A91"],
+		owener:"1-233-A11",
+		messageList:[
+			{speakerID:"1-233-A11", "type:"text", content:"Hey! your server has crushed!", time:"2017-04-05T12:51:46.598Z"}
+			{speakerID:"1-233-A21", "type:"text", content:"Oh my fault......", time:"2017-04-05T13:02:32.537Z"}
+			{speakerID:"1-233-B541", "type:"pic", format:"jpg", content:"[cache here]", time:"2017-04-05T13:03:14.286Z"}
+			{speakerID:"1-233-A91", "type:"video", format:"flv", content:"[cache here]", time:"2017-04-05T13:05:25.443Z"}
+		]
+	},
+	{
+		chatID:"2-144-5342", 
+		members:["2-144-A11", "2-144-A21", "2-144-B541", "2-A91"],
+		owener:"2-144-A11",
+		messageList:[
+			{speakerID:"2-144-A11", "type:"text", content:"Hey! your server has crushed!", time:"2017-04-05T12:51:46.598Z"}
+			{speakerID:"2-144-A21", "type:"text", content:"Oh my fault......", time:"2017-04-05T13:02:32.537Z"}
+			{speakerID:"2-144-B541", "type:"pic", format:"jpg", content:"[cache here]", time:"2017-04-05T13:03:14.286Z"}
+			{speakerID:"2-144-A91", "type:"video", format:"flv", content:"[cache here]", time:"2017-04-05T13:05:25.443Z"}
+		]
+	},
+
+	//......
+]
+
+employee Schema:[
+
+]
+
+employee example:[
+	{
+		ID:"2-144-A11",
+		name:"sabi",
+		password:"sdaaa",
+		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
+		position:"A product manager";//编号？
+		gender:"female",
+		avaator:1
+		phone:['13838472290',026-33324444],
+		mail:['394859210@qq.com','dsdsfas@hotmail.com']
+		notifications:[
+			{senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true},
+			{senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true, delete:true},
+			{senderID:"2-144-B1", time:"2017-04-05T13:02:32.537Z", content:"meeting tomorrow 9:00"}
+		],
+		chats:[
+			{chatID:"2-144-5342", pieces:234},
+			{chatID:"2-144-5342", pieces:0},
+			{chatID:"2-144-5342", pieces:34}
+		],
+		tasks:[
+			{taskID:"2ANd790912", type:"", time:"2017-04-05T12:51:46.598Z", over:true},
+			{taskID:"2ANd790912", type:"", time:"2017-04-05T12:51:46.598Z", over:true, delete:true},
+			{taskID:"0GNn790S17", type:"", time:"2017-04-05T13:02:32.537Z", over:false}
+		]
+	},
+	{
+		ID:"2-0-V1",
+		name:"jack",
+		password:"sdaaa",
+		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
+		position:"Administrator";
+		gender:"male"
+	},
+
+]
+
+company Schema:[
+
+]
+
+company example:[
+	{
+		ID:"1",
+		name:"Google",
+		sections:[
+			{
+				ID:"144",
+				name:"product develop",
+				leader:"1-144-231",
+				parrentSection:"132",
+				childrenSections:[''],
+				members:['1-144-10','1-144-11','1-144-12','1-144-13','1-144-14','1-144-15','1-144-16','1-144-17','1-144-18','1-144-19'],
+				note:"It's core production developing center."
+			},
+			{
+				ID:"132",
+				name:"Broad",
+				leader:"1-132-1",
+				childrenSections:['144'],
+				members:['1-132-10','1-132-11','1-132-12','1-132-13','1-132-14','1-132-15','1-132-16','1-132-17','1-132-18','1-132-19'],
+			},
+			{
+				ID:"0",
+				name:"Administrator",
+				member:"jack"
+			}
+		],
+		introduction:"we are the world";
+	}
+]
+
+task Schema:[
+]
+
+task example:[
+	{name:"dayOff", company:"Google" type:"leave", createTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z",file:"/source/Goole/dayoff.xml"},
+	{name:"finacialAudit", company:"Microsoft" type:"audit", createTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z", file:"/source/Microsoft/MSAudit.xml"},
+]
+
+operation Schema:[
+]
+
+operation example:[
+	{operator:"2-0-V1", type:"userCreate", userID:"1-22-233", time:"2017-04-05T12:51:46.598Z"},
+	{operator:"2-11-22", type:"noteSend", sectionID:"2-232", time:"2017-04-05T12:51:46.598Z"},
+	{operator:"2-0-V1", type:"sectionCreate", sectionID:"2-232", time:"2017-04-05T12:51:46.598Z"},
+	{operator:"2-11-22", type:"taskStart", taskID:"2ANd790912-2", time:"2017-04-05T12:51:46.598Z"}
+]
+
+
+api:
+post:
+/login
+/logout
+/message/send
+/employee/new
+/employee/delete
+/employee/update
+/status/change
+/tasks/
+/personal/
+/organization/
+
+API权限检测
