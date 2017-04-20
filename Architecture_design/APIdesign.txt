@@ -16,9 +16,23 @@ admin only:
 			{
 				name:"sabi",
 				password:"sdaaa",
+				positionID:233,
+				gender:true,
+				phone:['13838472290',026-33324444],					//optional
+				mail:['394859210@qq.com','dsdsfas@hotmail.com']		//optional
 			}	
 		/employee/delete
+			{
+				ID:233
+			}
 		/employee/update
+			{
+				ID:"A11",
+				name:"sabi",
+				password:"sdaaa",
+				positionID:233,
+				gender:false,
+			}
 		/status/update
 		/task/update
 		/task/upload
