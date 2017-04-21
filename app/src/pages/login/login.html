@@ -6,32 +6,32 @@
 -->
 <ion-content class="background">
   <div class="avator">
-    <img src="{{avator_path}}">
+    <img src="assets/img/avator/{{global_data.avator_no}}.png">
   </div>
 
-  <form #loginForm="ngForm" novalidate>
+  <form #loginForm="ngForm" (ngSubmit)="on_login()" novalidate>
     <ion-list class="input-area">
       <ion-item class="input-text">
         <ion-label floating color="primary">用户名</ion-label>
-        <ion-input type="text" clearInput="true" [(ngModel)]="login.username" name="username" #username="ngModel"></ion-input>
+        <ion-input type="text" clearInput="true" [(ngModel)]="username" name="username"></ion-input>
       </ion-item>
       <br>
       <ion-item class="input-text">
         <ion-label floating>密码</ion-label>
-        <ion-input type="password" clearInput="true" [(ngModel)]="login.password" name="password" #password="ngModel"></ion-input>
+        <ion-input type="password" clearInput="true" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
       <br>
       <ion-item>
         <ion-label class="check-text">记住密码</ion-label>
-        <ion-checkbox ng-model="isChecked"></ion-checkbox>
+        <ion-checkbox [checked]="remember_password" [(ngModel)]="remember_password" name="remember_password" (ionChange)="remember_password_change()"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label class="check-text">自动登录</ion-label>
-        <ion-checkbox ng-model="isChecked"></ion-checkbox>
+        <ion-checkbox [checked]="auto_login" [(ngModel)]="auto_login" name="auto_login" (ionChange)="auto_login_change()"></ion-checkbox>
       </ion-item>
       <br>
       <ion-item>
-        <button ion-button (click)="on_login()" class="login-button" block="true">登 录</button>
+        <button type="submit" ion-button class="login-button" block="true">登 录</button>
       </ion-item>
     </ion-list>
   </form>
