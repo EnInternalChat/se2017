@@ -1,0 +1,10 @@
+{
+	activityID:"reportBack",
+	name:"滚回来上班",
+	type:"userTask",
+	createTime:
+	finishTime:
+	exclusiveGateway:[
+		{yesDestinationActivityID: "endEvent"}
+	]
+}

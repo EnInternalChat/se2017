@@ -1,0 +1,11 @@
+{
+	activityID:"leaderAudit",
+	name:"领导审批",
+	type:"userTask",
+	createTime:
+	finishTime:
+	exclusiveGateway:[
+		{yesDestinationActivityID: "reportBack"}
+		{noDestinationActivityID: "modifyApply"}
+	]
+}

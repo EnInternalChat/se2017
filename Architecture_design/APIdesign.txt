@@ -1,0 +1,193 @@
+
+api:
+admin only:
+	post:
+		/login
+			{
+				username:"admin",
+				password:"32332223"
+			}//后台md5防注入
+		/logout
+			{
+				username:"admin",
+				password:"32332223"
+			}
+		/employee/new
+			{
+				name:"sabi",
+				password:"sdaaa",
+				positionID:233,
+				gender:true,
+				phone:['13838472290',026-33324444],					//optional
+				mail:['394859210@qq.com','dsdsfas@hotmail.com']		//optional
+			}	
+		/employee/delete
+			{
+				ID:233
+			}
+		/employee/update
+			{
+				ID:233,			
+				name:"sabi",		//optional
+				password:"sdaaa",	//optional
+				positionID:233,		//optional
+				gender:false,		//optional
+			}
+		/status/update
+			{
+				ID:233
+			}
+		/task/update
+			{
+				name:"gooff"
+			}
+		/task/upload
+			{
+				//不在mongo里，直接文件存储
+			}
+		/task/delete
+			{
+				name:"gooff"
+			}
+		/personal/update
+			{
+				ID:233,
+				password:"sdaaa",
+				avaator:2
+				phone:['13838472290','026-33324444'],
+				mail:['394859210@qq.com','dsdsfas@hotmail.com']
+			}
+		/section/add
+			{
+				name:"product develop",
+				leaderID:564,
+				parrentSection:2333,
+				note:"It's core production developing center."
+			}
+		/section/update/addEmployee
+			{
+				employeeID:2345,
+				sectionID:[1233,3423]		//批量添加
+			}
+		/section/update/deleteEmployee
+			{
+				employeeID:2345,
+				sectionID:[1233,3423]		//批量删除
+			}
+		/section/delete
+			{
+				sectionID:1233				//当前部门人员不为空不允许删除部门
+			}
+	get:
+		/login(Response)
+			{
+				(all)
+			}
+		/employees
+			{
+				total:123,
+				employees:[
+					{
+						ID:23,
+						name:"sabi",
+						positionID:233,
+						position:"A product manager";//编号？
+						gender:true,
+						avaator:1
+						phone:['13838472290',026-33324444],
+						mail:['394859210@qq.com','dsdsfas@hotmail.com']
+					},
+					{
+						ID:232,
+						name:"sfbd",
+						positionID:233,
+						position:"A product manager";//编号？
+						gender:true,
+						avaator:1
+						phone:['13838472290',026-33324444],
+						mail:['394859210@qq.com','dsdsfas@hotmail.com']
+					},
+				]
+			}
+		/tasks
+			{
+				total:12,
+				tasks:[
+					{
+						ID:123,
+						name:"goout",
+						picture:(binary data)
+					},
+					{
+						ID:123,
+						name:"goout",
+						picture:(binary data)
+					},
+				]
+			}
+		/personal
+			{
+				ID:1,
+				name:"jack",
+				positionID:0,
+				position:"Administrator";
+				gender:true
+			}
+		/sections
+			{
+				total:23,
+				sections:[
+					{
+						ID:144,
+						name:"product develop",
+						leaderID:564,
+						parrentSection:"132",
+						childrenSections:[''],
+						members:[22,1,3333,5,7,8,1111],
+						note:"It's core production developing center."
+					},
+					{
+						ID:233,
+						name:"product develop",
+						leaderID:564,
+						parrentSection:"132",
+						childrenSections:[''],
+						members:[22,1,3333,5,7,8,1111],
+						note:"It's core production developing center."
+					},
+				]
+			}
+others:
+	post:
+		/login
+			{
+				username:"admin",
+				password:"32332223"
+			}//后台md5防注入
+		/logout
+			{
+				username:"admin",
+				password:"32332223"
+			}
+		/notification/send
+			{
+				type:"meeting"
+				section:123
+				content:"hi!~"
+			}
+		/task/progress
+			{
+				operation:"yes"
+			}
+		/personal/update
+			{
+				oldPwd:"2333",
+				newPwd:"12355"
+			}
+	get:
+		/login(Response)
+		/tasks
+		/personal
+
+
+API权限检测（限定部长与管理员能访问的api）
