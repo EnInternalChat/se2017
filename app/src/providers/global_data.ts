@@ -17,9 +17,6 @@ export class AppGlobal {
 
   private storage: StorageHelper = StorageHelper.get_instance();
 
-  // private m_storage_value: Storage_data_t = {"username": this._user_name, "avator_no": this._avator_no};
-  // private m_default_data: Storage_data_t = {"username": "username@outlook.com", "avator_no": 1};
-
   public is_debug: boolean = true;
   public server_url: string = this.is_debug ? "http://" : "http://";
   public language: AppLanguage = AppLanguage.CN;

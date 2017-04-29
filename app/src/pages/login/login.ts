@@ -4,6 +4,8 @@ import { IonicPage} from 'ionic-angular';
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
+import { HTTPService } from '../../providers/http_helper';
+import { MD5 } from '../../providers/secure_md5';
 
 /**
  * Generated class for the Login page.
@@ -22,18 +24,25 @@ export class Login {
 
   username: string;
   password: string;
-  password_is_md5: boolean;
   remember_password: boolean;
   auto_login: boolean;
 
-  constructor(private native_helper: NativeServiceHelper) {
+  password_is_md5: boolean;
+
+  constructor(private native_helper: NativeServiceHelper,
+              private web_helper: HTTPService,
+              private md5_helper: MD5) 
+  {
     this.storage.read_local_info("remember_password", true).then((value) => {
       return this.remember_password = value;
     }).then((value) => {
       if(value){
         this.storage.read_secure_local_info("password", "").then((value) => {
           this.password = value;
-          this.password_is_md5 = true;
+          if(this.password == "")
+            this.password_is_md5 = false;
+          else
+            this.password_is_md5 = true;
         });
       }
       this.username = this.global_data.user_name;        
@@ -57,12 +66,23 @@ export class Login {
   on_login() {
     if(this.username == "" || this.password == "") {
       this.native_helper.show_toast("用户名和密码不能为空", 2000, "bottom");
-      return;
+      return;  
     }
-    this.storage.storage_info("username", this.username);
-    this.storage.storage_secure_info("password", this.password);
-    // this.set_avator();
-    // AppGlobal.get_instance().user_name = this.username;
+    let password_md5;
+    if(!this.password_is_md5) {
+      password_md5 = this.md5_helper.any_md5(this.password, 32);
+      this.password_is_md5 = true;
+    }
+    else
+      password_md5 = this.password;
+    this.web_helper.post(
+      '/login', {"username": this.username, "password": password_md5}).then(
+      (data) => {
+        if(this.remember_password || this.auto_login) {
+          this.storage.storage_info("username", this.username);
+          this.storage.storage_secure_info("password", password_md5);
+        }
+      });
   }
 
   remember_password_change() {

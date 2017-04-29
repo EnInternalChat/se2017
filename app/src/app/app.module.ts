@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
+import { HTTPService } from '../providers/http_helper';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,6 +36,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NativeServiceHelper,
+    HTTPService,
   ]
 })
 export class AppModule {}

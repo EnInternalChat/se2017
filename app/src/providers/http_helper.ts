@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { AppGlobal } from './global_data'
 
 /*
   Generated class for the LoginService provider.
@@ -12,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class HTTPService {
 
   private request_options: RequestOptions;
+  private base_url: string;
 
   constructor(public http: Http) {
     console.log('Hello LoginService Provider');
@@ -20,13 +22,14 @@ export class HTTPService {
         "Content-type": "application/x-www-form-urlencoded"
       })
     });
+    this.base_url = AppGlobal.get_instance().server_url;
   }
 
   public get(url: string, param: any):Promise<any> 
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.get(url + this.dict_to_query_str(param))
+      this.http.get(this.base_url + url + this.dict_to_query_str(param))
       .map(res => res.json())
       .subscribe(
         data => resolve(data),
@@ -38,7 +41,8 @@ export class HTTPService {
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.post(url, this.dict_to_query_str(param, false), this.request_options)
+      this.http.post(this.base_url + url,
+        this.dict_to_query_str(param, false), this.request_options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),

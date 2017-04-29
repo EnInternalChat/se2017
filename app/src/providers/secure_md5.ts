@@ -43,16 +43,16 @@ public rstr_md5(s) {
 * Calculate the HMAC-MD5, of a key and some data (raw strings)  
 */  
 public rstr_hmac_md5(key,data) {  
-  var bkey = this.rstr2binl(key);  
+  let bkey = this.rstr2binl(key);  
   if(bkey.length > 16) bkey = this.binl_md5(bkey,key.length * 8);  
 
-  var ipad = Array(16),opad = Array(16);  
-  for(var i = 0;i < 16;i++) {  
+  let ipad = Array(16),opad = Array(16);  
+  for(let i = 0;i < 16;i++) {  
     ipad[i] = bkey[i] ^ 0x36363636;  
     opad[i] = bkey[i] ^ 0x5C5C5C5C;  
   }  
 
-  var hash = this.binl_md5(ipad.concat(this.rstr2binl(data)),512 + data.length * 8);  
+  let hash = this.binl_md5(ipad.concat(this.rstr2binl(data)),512 + data.length * 8);  
   return this.binl2rstr(this.binl_md5(opad.concat(hash),512 + 128));  
 }  
 
@@ -61,10 +61,10 @@ public rstr_hmac_md5(key,data) {
 */  
 public rstr2hex(input) {  
   try { this.hexcase } catch(e) { this.hexcase = 0; }  
-  var hex_tab = this.hexcase ? "0123456789ABCDEF" : "0123456789abcdef";  
-  var output = "";  
-  var x;  
-  for(var i = 0;i < input.length;i++) {  
+  let hex_tab = this.hexcase ? "0123456789ABCDEF" : "0123456789abcdef";  
+  let output = "";  
+  let x;  
+  for(let i = 0;i < input.length;i++) {  
     x = input.charCodeAt(i);  
     output += hex_tab.charAt((x >>> 4) & 0x0F)  
     + hex_tab.charAt(x & 0x0F);  
@@ -77,14 +77,14 @@ public rstr2hex(input) {
 */  
 public rstr2b64(input) {  
   try { this.b64pad } catch(e) { this.b64pad = ''; }  
-  var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
-  var output = "";  
-  var len = input.length;  
-  for(var i = 0;i < len;i += 3) {  
-    var triplet = (input.charCodeAt(i) << 16)  
+  let tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
+  let output = "";  
+  let len = input.length;  
+  for(let i = 0;i < len;i += 3) {  
+    let triplet = (input.charCodeAt(i) << 16)  
     | (i + 1 < len ? input.charCodeAt(i + 1) << 8 : 0)  
     | (i + 2 < len ? input.charCodeAt(i + 2) : 0);  
-    for(var j = 0;j < 4;j++) {  
+    for(let j = 0;j < 4;j++) {  
       if(i * 8 + j * 6 > input.length * 8) output += this.b64pad;  
       else output += tab.charAt((triplet >>> 6 * (3 - j)) & 0x3F);  
     }  
@@ -96,11 +96,11 @@ public rstr2b64(input) {
 * Convert a raw string to an arbitrary string encoding  
 */  
 public rstr2any(input,encoding) {  
-  var divisor = encoding.length;  
-  var i,j,q,x,quotient;  
+  let divisor = encoding.length;  
+  let i,j,q,x,quotient;  
 
   /* Convert to an array of 16-bit big-endian values, forming the dividend */  
-  var dividend = Array(Math.ceil(input.length / 2));  
+  let dividend = Array(Math.ceil(input.length / 2));  
   for(i = 0;i < dividend.length;i++) {  
     dividend[i] = (input.charCodeAt(i * 2) << 8) | input.charCodeAt(i * 2 + 1);  
   }  
@@ -111,9 +111,9 @@ public rstr2any(input,encoding) {
 * forms the dividend for the next step. All remainders are stored for later  
 * use.  
 */  
-var full_length = Math.ceil(input.length * 8 /  
+let full_length = Math.ceil(input.length * 8 /  
   (Math.log(encoding.length) / Math.log(2)));  
-var remainders = Array(full_length);  
+let remainders = Array(full_length);  
 for(j = 0;j < full_length;j++) {  
   quotient = Array();  
   x = 0;  
@@ -129,7 +129,7 @@ for(j = 0;j < full_length;j++) {
 }  
 
 /* Convert the remainders to the output string */  
-var output = "";  
+let output = "";  
 for(i = remainders.length - 1;i >= 0;i--)  
   output += encoding.charAt(remainders[i]);  
 
@@ -141,9 +141,9 @@ return output;
 * For efficiency, this assumes the input is valid utf-16.  
 */  
 public str2rstr_utf8(input) {  
-  var output = "";  
-  var i = -1;  
-  var x,y;  
+  let output = "";  
+  let i = -1;  
+  let x,y;  
 
   while(++i < input.length) {  
     /* Decode utf-16 surrogate pairs */  
@@ -177,16 +177,16 @@ public str2rstr_utf8(input) {
 * Encode a string as utf-16  
 */  
 public str2rstr_utf16le(input) {  
-  var output = "";  
-  for(var i = 0;i < input.length;i++)  
+  let output = "";  
+  for(let i = 0;i < input.length;i++)  
     output += String.fromCharCode(input.charCodeAt(i) & 0xFF,  
       (input.charCodeAt(i) >>> 8) & 0xFF);  
   return output;  
 }  
 
 public str2rstr_utf16be(input) {  
-  var output = "";  
-  for(var i = 0;i < input.length;i++)  
+  let output = "";  
+  for(let i = 0;i < input.length;i++)  
     output += String.fromCharCode((input.charCodeAt(i) >>> 8) & 0xFF,  
       input.charCodeAt(i) & 0xFF);  
   return output;  
@@ -197,10 +197,10 @@ public str2rstr_utf16be(input) {
 * Characters >255 have their high-byte silently ignored.  
 */  
 public rstr2binl(input) {  
-  var output = Array(input.length >> 2);  
-  for(var i = 0;i < output.length;i++)  
+  let output = Array(input.length >> 2);  
+  for(let i = 0;i < output.length;i++)  
     output[i] = 0;  
-  for(var i = 0;i < input.length * 8;i += 8)  
+  for(let i = 0;i < input.length * 8;i += 8)  
     output[i >> 5] |= (input.charCodeAt(i / 8) & 0xFF) << (i % 32);  
   return output;  
 }  
@@ -209,8 +209,8 @@ public rstr2binl(input) {
 * Convert an array of little-endian words to a string  
 */  
 public binl2rstr(input) {  
-  var output = "";  
-  for(var i = 0;i < input.length * 32;i += 8)  
+  let output = "";  
+  for(let i = 0;i < input.length * 32;i += 8)  
     output += String.fromCharCode((input[i >> 5] >>> (i % 32)) & 0xFF);  
   return output;  
 }  
@@ -223,16 +223,16 @@ public binl_md5(x,len) {
   x[len >> 5] |= 0x80 << ((len) % 32);  
   x[(((len + 64) >>> 9) << 4) + 14] = len;  
 
-  var a = 1732584193;  
-  var b = -271733879;  
-  var c = -1732584194;  
-  var d = 271733878;  
+  let a = 1732584193;  
+  let b = -271733879;  
+  let c = -1732584194;  
+  let d = 271733878;  
 
-  for(var i = 0;i < x.length;i += 16) {  
-    var olda = a;  
-    var oldb = b;  
-    var oldc = c;  
-    var oldd = d;  
+  for(let i = 0;i < x.length;i += 16) {  
+    let olda = a;  
+    let oldb = b;  
+    let oldc = c;  
+    let oldd = d;  
 
     a = this.md5_ff(a,b,c,d,x[i + 0],7,-680876936);  
     d = this.md5_ff(d,a,b,c,x[i + 1],12,-389564586);  
@@ -334,8 +334,8 @@ public md5_ii(a,b,c,d,x,s,t) {
 * to work around bugs in some JS interpreters.  
 */  
 public safe_add(x,y) {  
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);  
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);  
+  let lsw = (x & 0xFFFF) + (y & 0xFFFF);  
+  let msw = (x >> 16) + (y >> 16) + (lsw >> 16);  
   return (msw << 16) | (lsw & 0xFFFF);  
 }  
 
