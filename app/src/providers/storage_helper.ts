@@ -9,18 +9,14 @@ export class StorageHelper {
 
   private secure_storage: SecureStorageObject;
 
-  private constructor(private storage: Storage, secureStorage: SecureStorage) {
+  private constructor(private storage: Storage) {
     this.storage.ready().then();
-    secureStorage.create('').then((secureObject: SecureStorageObject) => {
-      this.secure_storage = secureObject;
-    });
   }
 
   public static get_instance(): StorageHelper {
     if(StorageHelper.instance == undefined) {
       StorageHelper.instance = new StorageHelper(
-        new Storage(StorageHelper.storage_way),
-        new SecureStorage());
+        new Storage(StorageHelper.storage_way));
     }
     return StorageHelper.instance;
   }
@@ -56,32 +52,25 @@ export class StorageHelper {
     return this.storage.ready().then(() => {
       return this.storage.get(key).then(
         (value) => {
-          console.log("Secure info read: ", value);
-          if(value != null)
+          if(value != null) {
+            console.log("Secure read: ", key, ", ", value);
             return value;
-          else
+          }
+          else {
+            console.log("Secure read: ", key, ", ", default_value);
             return default_value;
+          }
         },
         (reason) => {
+          console.log("Default Secure read: ", key, ", ", default_value);
           return default_value;
         });
     });
-    // return this.secure_storage.get(key).then(
-    //   data => {
-    //     console.log("Secure info read: ", data);
-    //     if(data != null)
-    //       return data;
-    //     else
-    //       return default_value;
-    //   });
-    // console.log("Default Valid read: ", key, ", ", default_value);
-    // return default_value;
   }
 
   public storage_secure_info(key: any, value: any): void {
-    // this.secure_storage.set(key, value).then(
-    //   data => {},
-    //   error => { console.log(error); });
+    console.log("Storage value: ", key, ", ", value);
+    this.storage.set(key, value);
   }
 
   public remove_secure_info(key: any): void {

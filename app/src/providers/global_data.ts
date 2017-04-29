@@ -1,14 +1,11 @@
 import { StorageHelper } from './storage_helper';
-// import { Storage } from '@ionic/storage';
+import { MD5 } from './secure_md5';
 
 export const enum AppLanguage {
   CN = 1,
   EN = 2
 }
 
-// export interface Storage_data_t {
-//   [index: string] : any;
-// }
 
 // storage some useful value 
 export class AppGlobal {
@@ -16,6 +13,7 @@ export class AppGlobal {
 
   private _user_name: string;
   private _avator_no: number;
+  private md5_helper: MD5;
 
   private storage: StorageHelper = StorageHelper.get_instance();
 
@@ -28,6 +26,7 @@ export class AppGlobal {
 
   private constructor() 
   {
+    this.md5_helper = new MD5();
     Promise.all([this.read_username(), this.read_avator_no()]).then(() => {
       console.log("In Global(avator): ", this._avator_no);
       console.log("In Global(username): ", this._user_name);
@@ -42,7 +41,7 @@ export class AppGlobal {
   }
 
   private read_avator_no() {
-    return this.storage.read_local_info("avator_no", 1).then((value) => 
+    return this.storage.read_local_info("avator_no", 2).then((value) => 
     {
       return this._avator_no = value;
     });

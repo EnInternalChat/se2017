@@ -3,7 +3,7 @@ import { IonicPage} from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
-
+import { NativeServiceHelper } from '../../providers/native_service_helper';
 
 /**
  * Generated class for the Login page.
@@ -20,29 +20,27 @@ export class Login {
   global_data: AppGlobal = AppGlobal.get_instance();
   private storage: StorageHelper = StorageHelper.get_instance();
 
-  // username与password为可选类型，可以不包含
-  username: string ;
+  username: string;
   password: string;
+  password_is_md5: boolean;
   remember_password: boolean;
   auto_login: boolean;
 
-  constructor() {
+  constructor(private native_helper: NativeServiceHelper) {
     this.storage.read_local_info("remember_password", true).then((value) => {
       return this.remember_password = value;
     }).then((value) => {
       if(value){
-        this.storage.read_secure_local_info("password", "1q").then((value) => {
+        this.storage.read_secure_local_info("password", "").then((value) => {
           this.password = value;
+          this.password_is_md5 = true;
         });
-        this.username = this.global_data.user_name;        
       }
+      this.username = this.global_data.user_name;        
     });
     this.storage.read_local_info("auto_login", false).then((value) => {
       this.auto_login = value;
     });
-    // if(this.remember_password) {
-    //   this.password = this.storage.read_secure_local_info('passowrd', '');
-    // }
   }
 
   print_value() {
@@ -52,32 +50,27 @@ export class Login {
     console.log("password: " + this.password);
   }
 
-  on_login() {
-    this.remember_password = true;
-    this.auto_login = true;
-    this.username = "test";
-    this.password = "test1";
+  password_change() {
+    this.password_is_md5 = false;
+  }
 
+  on_login() {
+    if(this.username == "" || this.password == "") {
+      this.native_helper.show_toast("用户名和密码不能为空", 2000, "bottom");
+      return;
+    }
+    this.storage.storage_info("username", this.username);
+    this.storage.storage_secure_info("password", this.password);
     // this.set_avator();
     // AppGlobal.get_instance().user_name = this.username;
   }
 
   remember_password_change() {
-    // this.storage.storage_info('remember_password', this.login.remember_password);
-    // if(this.login.remember_password) {
-    //   this.storage.storage_secure_info('password', this.login.password);
-    // }
-    // else {
-    //   this.storage.remove_secure_info('password');
-    // }
-    // console.log("remember_pass: " + this.login.remember_password);
-    // console.log("auto_login: " + this.login.auto_login);
+    this.storage.storage_info('remember_password', this.remember_password);
   }
 
   auto_login_change() {    
-    // this.storage.storage_info('auto_login', this.login.auto_login);
-    // console.log("remember_pass: " + this.login.remember_password);
-    // console.log("auto_login: " + this.login.auto_login);
+    this.storage.storage_info('auto_login', this.auto_login);
   }
 
 }
