@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage} from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+
+import { BasisPage } from '../basis-page/basis-page';
 
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
@@ -28,10 +30,11 @@ export class Login {
   auto_login: boolean;
 
   password_is_md5: boolean;
+  md5_helper: MD5;
 
   constructor(private native_helper: NativeServiceHelper,
               private web_helper: HTTPService,
-              private md5_helper: MD5) 
+              private nav_ctrl: NavController) 
   {
     this.storage.read_local_info("remember_password", true).then((value) => {
       return this.remember_password = value;
@@ -50,6 +53,7 @@ export class Login {
     this.storage.read_local_info("auto_login", false).then((value) => {
       this.auto_login = value;
     });
+    this.md5_helper = new MD5();
   }
 
   print_value() {
@@ -70,19 +74,20 @@ export class Login {
     }
     let password_md5;
     if(!this.password_is_md5) {
-      password_md5 = this.md5_helper.any_md5(this.password, 32);
+      password_md5 = this.md5_helper.hex_md5(this.password);
       this.password_is_md5 = true;
     }
     else
       password_md5 = this.password;
-    this.web_helper.post(
-      '/login', {"username": this.username, "password": password_md5}).then(
-      (data) => {
-        if(this.remember_password || this.auto_login) {
-          this.storage.storage_info("username", this.username);
-          this.storage.storage_secure_info("password", password_md5);
-        }
-      });
+    // this.web_helper.post(
+    //   '/login', {"username": this.username, "password": password_md5}).then(
+    //   (data) => {
+    //     if(this.remember_password || this.auto_login) {
+    //       this.storage.storage_info("username", this.username);
+    //       this.storage.storage_secure_info("password", password_md5);
+    //     }
+    //   });
+      this.nav_ctrl.push(BasisPage);
   }
 
   remember_password_change() {

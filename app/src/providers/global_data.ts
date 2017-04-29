@@ -12,7 +12,7 @@ export class AppGlobal {
   private static instance: AppGlobal;
 
   private _user_name: string;
-  private _avator_no: number;
+  private _avator_path: string;
   private md5_helper: MD5;
 
   private storage: StorageHelper = StorageHelper.get_instance();
@@ -25,7 +25,7 @@ export class AppGlobal {
   {
     this.md5_helper = new MD5();
     Promise.all([this.read_username(), this.read_avator_no()]).then(() => {
-      console.log("In Global(avator): ", this._avator_no);
+      console.log("In Global(avator): ", this._avator_path);
       console.log("In Global(username): ", this._user_name);
     });
   }
@@ -40,7 +40,7 @@ export class AppGlobal {
   private read_avator_no() {
     return this.storage.read_local_info("avator_no", 2).then((value) => 
     {
-      return this._avator_no = value;
+      return this._avator_path = "assets/img/avator/" + value + ".png";
     });
   }
 
@@ -59,11 +59,12 @@ export class AppGlobal {
     return this._user_name;
   }
 
-  set avator_no(no: number) {
-    this._avator_no = no;
+  public set_avator_no(no: number) {
+    this._avator_path = "assets/img/avator/" + no + ".png";
     this.storage.storage_info('avator_no', no);
   }
-  get avator_no(): number {
-    return this._avator_no;
+
+  get avator_path(): string {
+    return this._avator_path;
   }
 }
