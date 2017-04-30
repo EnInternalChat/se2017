@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav, Keyboard, ToastController } from 'ionic-angular';
 
 import { Login } from '../pages/login/login';
+import { BasisPage } from '../pages/basis-page/basis-page';
 import { NativeServiceHelper } from '../providers/native_service_helper';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,6 +18,7 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage = Login;
+  // rootPage = BasisPage;
   pages: Array<{title: string, component: any}>;
   backPressed: boolean = false;
 

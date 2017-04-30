@@ -1,3 +1,41 @@
 page-basis-page {
+    .toolbar-background-md {
+        background-color: map-get($colors, primary);
+    }
+    .toolbar-title-md {
+        color: map-get($colors, light);
+    }
+    .bar-button-default-md {
+        color: map-get($colors, light);
+    }
+    .menu-header {
+        background-color: map-get($colors, primary);
+        width: 100%;
+        height: 30%;
+        .avator {
+            margin: 15% 25% 15% 15%;
+            max-width: 30%
+        }
+    }
+    .menu-content {
+        width: 100%;
+        height: 100%;
+    }
+    .menu-item {
+        .menu-item-img {
+            width: 10%;
+        }
+        .menu-item-title {
+            margin-left: 12%;
+            font-size: 2.0rem;
+            color: map-get($colors, primary_text)
+        }
+        .label {
+            margin: 4% 6% 4% 4%;
+        }
+        .item-block:last-child {
+            border-bottom: none;
+        }
+    }
 
 }

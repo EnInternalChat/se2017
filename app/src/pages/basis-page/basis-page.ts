@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, NavParams } from 'ionic-angular';
+
+import { AppGlobal } from '../../providers/global_data'
+import { ChatList } from '../chat-list/chat-list';
 import { TaskList } from '../task-list/task-list';
 import { Personal } from '../personal/personal';
 import { NotificationList } from '../notification-list/notification-list';
@@ -12,28 +15,32 @@ import { NotificationList } from '../notification-list/notification-list';
  */
 @IonicPage()
 @Component({
+  selector: 'page-basis-page',
   templateUrl: 'basis-page.html',
 })
 export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
   root_page: any = TaskList;
+  pages: Array<{title: string, component: any, icon_path: string}>;
 
-  pages: Array<{title: string, component: any}>; 
+  public global_data : AppGlobal; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pages = [
-      {title: "task_list", component: TaskList},
-      {title: "personal", component: Personal},
-      {title: "notification_list", component: NotificationList}
+      {title: "聊天管理", component: ChatList, icon_path: "../../assets/img/chat.png"},
+      {title: "任务管理", component: TaskList, icon_path: "../../assets/img/task.png"},
+      {title: "查看通知", component: NotificationList, icon_path: "../../assets/img/notification.png"},
+      {title: "账户设置", component: Personal, icon_path: "../../assets/img/setting.png"},
     ];
+    this.global_data = AppGlobal.get_instance();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BasisPage');
   }
 
-  open_page(page) {
+  public open_page(page) {
     this.nav.setRoot(page.component);
   }
 
