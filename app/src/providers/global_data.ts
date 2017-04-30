@@ -18,7 +18,7 @@ export class AppGlobal {
   private storage: StorageHelper = StorageHelper.get_instance();
 
   public is_debug: boolean = true;
-  public server_url: string = this.is_debug ? "http://" : "http://";
+  public server_url: string = this.is_debug ? "" : "http://";
   public language: AppLanguage = AppLanguage.CN;
 
   private constructor() 
@@ -31,7 +31,7 @@ export class AppGlobal {
   }
 
   private read_username() {
-    return this.storage.read_local_info("username", "username@outlook.com").then((value) => 
+    return this.storage.read_local_info("username", "username").then((value) => 
     {
       return this._user_name = value;
     });

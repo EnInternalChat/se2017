@@ -7,7 +7,13 @@
 <ion-menu [content]="menuContent">
   <ion-header class="menu-header">
     <div class="avator">
-      <img src="{{global_data.avator_path}}">
+      <span>
+        <img src="{{global_data.avator_path}}">
+      </span>
+      <span class="user-info">
+        <div>{{global_data.user_name}}</div>
+        <div>{{job}}</div>
+      </span>      
     </div>
   </ion-header>
 

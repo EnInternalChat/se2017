@@ -24,7 +24,8 @@ export class BasisPage {
   root_page: any = TaskList;
   pages: Array<{title: string, component: any, icon_path: string}>;
 
-  public global_data : AppGlobal; 
+  public global_data : AppGlobal;
+  public job : string = "管理员";
 
   public constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pages = [
