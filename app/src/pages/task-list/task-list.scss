@@ -1,3 +1,28 @@
 page-task-list {
+  .header-md {
+    background-color: map-get($colors, primary);
+  }
+  .task-slide-bar {
+    .segment-md {
+      padding: 0% 0% 0% 0%;
+      background-color: transparent;      
+      .segment-button {
+        color: map-get($colors, light);
+        opacity: 0.8;
+        font-size: 1.6rem;
+      }
+      .segment-button.segment-activated {
+        border-color: map-get($colors, light);
+        border-bottom-width: 4px;
+        opacity: 1;
+        font-weight: bolder;
+      }
+
+    }
+    .segment-ios {
+      padding: 0% 5% 3% 5%;
+      background-color: map-get($colors, ios-back);
+    }
+  }
 
 }
