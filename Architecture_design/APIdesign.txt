@@ -11,10 +11,10 @@ admin only:
 			}//后台md5防注入
 		/logout
 			{
-				username:"admin",
-				password:"32332223"
+				sessionID:"admin"
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-logout操作，password需要吗
+Q:logout操作，password需要吗
+A:不需要，已更正，username更正为sessionID
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>				
 			}
 		/employee/new
@@ -40,8 +40,10 @@ logout操作，password需要吗
 			}
 		/status/update
 			{
+				sessionID:"admin"
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-用处？
+Q:用处？
+A:改为sessionID，标识
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>			
 				ID:233
 			}
@@ -66,24 +68,27 @@ logout操作，password需要吗
 				mail:['394859210@qq.com','dsdsfas@hotmail.com']
 			}
 		/section/add
-			{
+			[
+				{
 				name:"product develop",
 				leaderID:564,
 				parrentSection:2333,
 				note:"It's core production developing center."
-			}
+				},
+			]
 		/section/update/addEmployee
 			{
-				employeeID:2345,
+				sectionID:2345,
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-批量添加部门？
+Q:批量添加部门？
+A:批量添加成员，手误，不好意思Orz。
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>				
-				sectionID:[1233,3423]		//批量添加
+				employeeID:[1233,3423]		//批量添加
 			}
 		/section/update/deleteEmployee
 			{
-				employeeID:2345,
-				sectionID:[1233,3423]		//批量删除
+				sectionID:2345,
+				employeeID:[1233,3423]		//批量删除
 			}
 		/section/delete
 			{
@@ -126,13 +131,16 @@ logout操作，password需要吗
 				tasks:[
 					{
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-task还需要xml源文件，建立时间，更新时间
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>					
+Q:task还需要xml源文件，建立时间，更新时间
+A:建立时间更新时间全部在后台调用服务器时间，前端不需要传时间数据过来，二进制数据xml已补上
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>		
+						xml:(binary)			
 						ID:123,
 						name:"goout",
 						picture:(binary data)
 					},
 					{
+						xml:(binary)	
 						ID:123,
 						name:"goout",
 						picture:(binary data)
@@ -146,8 +154,11 @@ task还需要xml源文件，建立时间，更新时间
 				positionID:0,
 				position:"Administrator";
 				gender:true
+				phone:"18689508947"
+				email:"476217804@qq.com"
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-还有phone和mail
+Q:还有phone和mail
+A:已补
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>				
 			}
 		/sections
@@ -189,8 +200,8 @@ others:
 		/notification/send
 			{
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-通知还要能get，还需要一个发布时间属性
-如果考虑到部长可以登录app与web端，是否需要添加一个已读/未读选项
+Q:通知还要能get，还需要一个发布时间属性，如果考虑到部长可以登录app与web端，是否需要添加一个已读/未读选项
+A:已补notifications的get，已读未读在get中已补上，发布时间属性后台会在插入数据库前补上，前台不需要传数据过来
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>			
 				type:"meeting"
 				section:123
@@ -209,6 +220,18 @@ others:
 		/login(Response)
 		/tasks
 		/personal
+		/notifications
+			[
+				{
+					sender:2344
+					type:"meeting"
+					time:"2017-04-05T13:02:32.537Z"
+					section:123
+					content:"hi!~"
+					read:false
+				},
+
+			]
 
 
 API权限检测（限定部长与管理员能访问的api）
