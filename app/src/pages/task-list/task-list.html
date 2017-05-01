@@ -1,10 +1,15 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>任务管理</ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="new_task()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
   <div class="task-slide-bar">
     <ion-segment [(ngModel)]="task_status">
       <ion-segment-button value="tasks_not_done">
@@ -19,12 +24,25 @@
 
 <ion-content (swipe)="swipe_event($event)">
   <div [ngSwitch]="task_status">
-    <ion-list *ngSwitchCase="tasks_not_done">
-<!--       <ion-item ng-repeat="item in items">  
-      </ion-item> -->
-      {{tasks_list_not_done.length}}
+    <ion-list *ngSwitchCase="'tasks_not_done'" class="not-done-list">
+      <ion-item *ngFor="let item of tasks_list_not_done">
+        <div class="task-info">
+          <div>
+            <span class="task-person">{{item.start_person}}</span>
+            <span class="task-time">{{item.update_time}}</span>
+          </div>
+          <div class="task-content">
+            {{item.content}}
+          </div>
+        </div>
+        <div class="task-detail-button">
+          <button ion-button icon-only clear>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>            
+        </div>
+      </ion-item>
     </ion-list>
-    <ion-list *ngSwitchCase="tasks_done">
+    <ion-list *ngSwitchCase="'tasks_done'">
       <!-- <ion-item ng-repeat="item in items"> -->
     
       <!-- </ion-item> -->

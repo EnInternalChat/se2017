@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { NewTask } from '../new-task/new-task';
 import { HTTPService } from '../../providers/http_helper';
 import { Task } from './task';
 /**
@@ -20,6 +21,7 @@ export class TaskList {
   task_status : string = this.task_status_array[0];
 
   tasks_list_not_done : Array<Task>;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public web_helper: HTTPService) {
@@ -28,10 +30,11 @@ export class TaskList {
         this.tasks_list_not_done = res;
         console.log(this.tasks_list_not_done);
       });
+    this.new_task();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TaskList');
+  new_task() {
+    this.navCtrl.push(NewTask);
   }
 
   swipe_event(event) {
@@ -48,4 +51,9 @@ export class TaskList {
       }
     }
   }
+
+  // 再次返回页面或者初次进入页面时刷新列表数据
+  ionViewWillEnter() {
+      
+  }  
 }

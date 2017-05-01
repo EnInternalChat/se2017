@@ -20,8 +20,55 @@ page-task-list {
 
     }
     .segment-ios {
-      padding: 0% 5% 3% 5%;
+      padding: 0% 10% 3% 10%;
       background-color: map-get($colors, ios-back);
+    }
+  }
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+
+  .not-done-list {
+    margin-top: 4px;
+    .item-block:first-child {
+      border-top: none;
+    }
+    .item-block:last-child {
+      border-bottom: none;
+    }
+    .label {
+      margin: 2px 4px 2px 4px;
+    }
+    .task-info {
+      width: 95%;
+      padding-right: 4%;
+      display: inline-block;
+      .task-person {
+        width: 30%;
+        display: inline-block;
+        color: map-get($colors, primary_text);
+        font-size: 1.4rem;
+      }
+      .task-time {
+        width: 70%;
+        display: inline-block;
+        text-align: right;
+        color: map-get($colors, third_text);
+        font-size: 1.4rem;
+      }
+      .task-content {
+        color: map-get($colors, third_text);
+        font-size: 1.6rem;
+        text-overflow: ellipsis; // 让超出的用...实现
+        white-space: nowrap; // 禁止换行
+        overflow: hidden;  // 超出的隐藏
+      }
+    }
+    .task-detail-button {
+      width: 5%;
+      display: inline-block;
+      position: absolute;
+      top: 20%;
     }
   }
 

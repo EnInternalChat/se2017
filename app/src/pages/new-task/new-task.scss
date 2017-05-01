@@ -1,0 +1,39 @@
+page-new-task {
+  .toolbar-title-md {
+    font-size: 1.8rem;
+  }
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .bar-button-md {
+    color: map-get($colors, light);
+    font-size: 1.8rem;
+  }
+
+  .new-task-info {
+    margin-top: 4px;
+    .item-block:first-child {
+      border-top: none;
+    }
+    .item-block:last-child {
+      border-bottom: none;
+    }
+    .select-task-type {
+      color: map-get($colors, primary_text);
+    }
+    .label-md {
+      color: map-get($colors, primary_text);
+    }
+    .label-ios {
+      color: map-get($colors, primary_text);
+    }
+    .text-input {
+      color: map-get($colors, primary_text);
+      border-bottom: 1px solid map-get($colors, divider);
+    }
+    .item-input.input-has-focus:last-child {
+      box-shadow: none;
+    }
+  }
+
+}

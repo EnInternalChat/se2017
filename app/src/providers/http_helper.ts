@@ -30,7 +30,10 @@ export class HTTPService {
     return new Promise((resolve, reject) => 
     {
       this.http.get(this.base_url + url + this.dict_to_query_str(param))
-      .map(res => res.json())
+      .map(res => {
+        console.log(res);
+        return res.json();
+      })
       .subscribe(
         data => resolve(data),
         error => console.log(error))
