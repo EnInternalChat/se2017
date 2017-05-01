@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,9 +41,9 @@ public class TestController {
         repositoryService=processEngine.getRepositoryService();
     }
 
-    private void diagramFile(File xml, OutputStream outputStream) {
+    private void diagramFile(File xmlFile, OutputStream outputStream) {
         Deployment deployment;
-        deployment = repositoryService.createDeployment().addClasspathResource("tmp"+File.separator+xml.getName()).deploy();
+        deployment = repositoryService.createDeployment().addClasspathResource("tmp"+File.separator+xmlFile.getName()).deploy();
         processDefinition=repositoryService.createProcessDefinitionQuery()
                 .deploymentId(deployment.getId()).singleResult();
         String diagramName=processDefinition.getDiagramResourceName();
@@ -70,10 +73,21 @@ public class TestController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/company", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public List<Map<String,Object>> allCompany() {
+        List<Map<String,Object>> data=new ArrayList<>();
+        Map<String,Object> resMap = new HashMap<String, Object>();
+        resMap.put("user","name");
+        return resMap;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/modelToDiagram", method = RequestMethod.POST)
-    public void diagram(@RequestParam("file")CommonsMultipartFile file, HttpServletResponse response) throws IOException {
+    public void diagram(@RequestParam("file")CommonsMultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
-        File xmlFile=new File("src"+File.separator+"main"+File.separator+"resources"+File.separator+"tmp"+File.separator+file.getName()+".bpmn20.xml");
+        String path= request.getServletContext().getRealPath("")+File.separator+"tmp"+File.separator;
+        System.out.println(path);
+        File xmlFile=new File(path, file.getName()+".bpmn20.xml");
         file.transferTo(xmlFile);
         diagramFile(xmlFile, response.getOutputStream());
     }
