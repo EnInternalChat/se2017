@@ -13,7 +13,7 @@
       </button>
     </ion-buttons>
     <ion-title>开始新任务</ion-title>
-    <ion-buttons right>
+    <ion-buttons right (click)="add_task()">
       <button ion-button clear>确认</button>
     </ion-buttons>    
   </ion-toolbar>
@@ -21,14 +21,21 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list>
+<ion-content>
+  <ion-list class="new-task-info">
     <ion-item>
       <ion-label>任务类型</ion-label>
-      <ion-select>
-        <ion-option value="ask_for_leave">请假</ion-option>
-        <ion-option value="play">玩耍</ion-option>
+      <ion-select class="select-task-type" interface="action-sheet" cancelText="取消" okText="确认" [(ngModel)]="task_type">
+        <ion-option *ngFor="let option of tasks_type_options" value="{{option.value}}">{{option.text}}</ion-option>
       </ion-select>  
+    </ion-item>
+    <ion-item>
+      <ion-label>发起人</ion-label>
+      <ion-label>{{user_name}}({{job}})</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>备注</ion-label>
+      <ion-textarea type="text" clearInput="true" rows="5"></ion-textarea>
     </ion-item>
   </ion-list>
 
