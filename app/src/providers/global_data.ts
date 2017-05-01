@@ -13,8 +13,10 @@ export class AppGlobal {
 
   private _user_name: string;
   private _avator_path: string;
-  private md5_helper: MD5;
 
+  public job : string = "管理员";
+
+  private md5_helper: MD5;
   private storage: StorageHelper = StorageHelper.get_instance();
 
   public is_debug: boolean = true;

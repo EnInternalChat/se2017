@@ -1,0 +1,13 @@
+page-new-task {
+  .toolbar-title-md {
+    font-size: 1.8rem;
+  }
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .bar-button-md {
+    color: map-get($colors, light);
+    font-size: 1.8rem;
+  }
+
+}

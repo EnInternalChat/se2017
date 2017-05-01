@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { TaskList } from '../pages/task-list/task-list';
+import { NewTask } from '../pages/new-task/new-task';
 import { Personal } from '../pages/personal/personal';
 import { NotificationList } from '../pages/notification-list/notification-list';
 
@@ -24,6 +25,7 @@ import { HTTPService } from '../providers/http_helper';
     Login,
     BasisPage,
     TaskList,
+    NewTask,
     Personal,
     NotificationList
   ],
@@ -40,6 +42,7 @@ import { HTTPService } from '../providers/http_helper';
     Login,
     BasisPage,
     TaskList,
+    NewTask,
     Personal,
     NotificationList
   ],
