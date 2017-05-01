@@ -76,9 +76,26 @@ public class TestController {
     @RequestMapping(value = "/company", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public List<Map<String,Object>> allCompany() {
         List<Map<String,Object>> data=new ArrayList<>();
-        Map<String,Object> resMap = new HashMap<String, Object>();
-        resMap.put("user","name");
-        return resMap;
+        List<Map<String,Object>> sections=new ArrayList<>();
+        Map<String,Object> oneCompany = new HashMap<>();
+        Map<String,Object> oneSection = new HashMap<>();
+        oneCompany.put("ID",1);
+        oneCompany.put("name","Google");
+
+        oneSection.put("ID",144);
+        oneSection.put("name", "product develop");
+        oneSection.put("leaderID",564);
+        oneSection.put("parrentSection",132);
+
+        sections.add(oneSection);
+        sections.add(oneSection);
+        sections.add(oneSection);
+
+        oneCompany.put("sections",sections);
+
+        data.add(oneCompany);
+        data.add(oneCompany);
+        return data;
     }
 
     @ResponseBody
