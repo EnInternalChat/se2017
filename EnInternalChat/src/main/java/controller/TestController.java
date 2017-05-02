@@ -85,7 +85,6 @@ public class TestController {
         oneSection.put("ID",144);
         oneSection.put("name", "product develop");
         oneSection.put("leaderID",564);
-        oneSection.put("parrentSection",132);
 
         sections.add(oneSection);
         sections.add(oneSection);
