@@ -1,0 +1,6 @@
+127.0.0.1 - - [03/May/2017:18:54:45 +0800] "GET / HTTP/1.1" 200 242 http-bio-80-exec-1 147
+127.0.0.1 - - [03/May/2017:18:55:35 +0800] "POST /modelToDiagram HTTP/1.1" 500 3971 http-bio-80-exec-3 11029
+0:0:0:0:0:0:0:1 - - [03/May/2017:18:55:48 +0800] "GET / HTTP/1.1" 200 242 http-bio-80-exec-5 5
+0:0:0:0:0:0:0:1 - - [03/May/2017:18:55:55 +0800] "POST /modelToDiagram HTTP/1.1" 500 3971 http-bio-80-exec-6 64
+0:0:0:0:0:0:0:1 - - [03/May/2017:18:55:59 +0800] "GET / HTTP/1.1" 200 242 http-bio-80-exec-7 7
+0:0:0:0:0:0:0:1 - - [03/May/2017:19:42:42 +0800] "POST /modelToDiagram HTTP/1.1" 500 3971 http-bio-80-exec-10 42
