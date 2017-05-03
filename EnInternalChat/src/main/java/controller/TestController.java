@@ -101,9 +101,15 @@ public class TestController {
     @RequestMapping(value = "/modelToDiagram", method = RequestMethod.POST)
     public void diagram(@RequestParam("file")CommonsMultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
-        String path= request.getServletContext().getRealPath("")+File.separator+"tmp"+File.separator;
+        String path= this.getClass().getResource("/").getPath()+File.separator+"tmp"+File.separator;
+        File dir=new File(path);
+        if(!dir.isDirectory()) dir.mkdir();
         System.out.println(path);
         File xmlFile=new File(path, file.getName()+".bpmn20.xml");
+        if(xmlFile.exists()) {
+            xmlFile.delete();
+            xmlFile.createNewFile();
+        }
         file.transferTo(xmlFile);
         diagramFile(xmlFile, response.getOutputStream());
     }
