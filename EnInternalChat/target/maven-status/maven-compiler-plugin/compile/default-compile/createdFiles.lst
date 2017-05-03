@@ -1,1 +1,7 @@
+controller\notificationController.class
+controller\PersonalController.class
+controller\RootController.class
+controller\TaskController.class
+controller\EmployeeController.class
 controller\TestController.class
+controller\SectionController.class

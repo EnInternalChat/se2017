@@ -9,7 +9,24 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>image/jpeg</value>
+                        <value>image/png</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <context:component-scan base-package="controller"></context:component-scan>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20000000" />
+        <property name="maxInMemorySize" value="4096" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="uploadTempDir" value="/tmp" />
+    </bean>
 </beans>
