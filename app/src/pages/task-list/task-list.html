@@ -25,7 +25,7 @@
 <ion-content (swipe)="swipe_event($event)">
   <div [ngSwitch]="task_status">
     <ion-list *ngSwitchCase="'tasks_not_done'" class="not-done-list">
-      <ion-item *ngFor="let item of tasks_list_not_done">
+      <ion-item *ngFor="let item of tasks_list_not_done" (click)="task_detail(item)">
         <div class="task-info">
           <div>
             <span class="task-person">{{item.start_person}}</span>
