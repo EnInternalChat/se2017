@@ -15,7 +15,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,9 +71,20 @@ public class TestController {
     @ResponseBody
     @RequestMapping(value = "/getJson", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public Map<String,Object> testSpring() {
-        Map<String,Object> resMap = new HashMap<String, Object>();
+        Map<String,Object> resMap = new HashMap<>();
         resMap.put("user","name");
         return resMap;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public void mongoBug() throws UnknownHostException {
+//        Mongo mongo = new Mongo("127.0.0.1", 27017);
+//        DB db = mongo.getDB( "test" );
+//        Set<String> collectionNames = db.getCollectionNames();
+//        for (String name : collectionNames) {
+//            System.out.println("collectionName==="+name);
+//        }
     }
 
     @ResponseBody
