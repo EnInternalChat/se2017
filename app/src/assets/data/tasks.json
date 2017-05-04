@@ -25,7 +25,7 @@
     },
     {
         "activityID": 53,
-        "content": "无事请假",
+        "content": "有大事请假",
         "startPerson": "张一",
         "startTime" : "2017/4/29 14:10",
         "updateTime": "2017/4/30 5:30",
@@ -38,12 +38,12 @@
             {
                 "finishTime" : "2017/5/1 10:10",
                 "person" : ["李四(经理)", "张三(主管)"],
-                "content" : "开始"                
+                "content" : "审核"                
             },
             {
                 "finishTime" : "2017/5/1 10:10",
                 "person" : ["李四(经理)", "张三(主管)"],                
-                "content" : "开始"
+                "content" : "处理"
             }
         ]
     },
@@ -62,11 +62,11 @@
             {
                 "finishTime" : "2017/5/1 10:10",
                 "person" : [],
-                "content" : "开始"                
+                "content" : "批准"                
             },
             {
                 "finishTime" : "2017/5/1 10:10",
-                "content" : "开始"
+                "content" : "处理"
             }
         ]
     }

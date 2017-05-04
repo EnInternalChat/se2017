@@ -18,11 +18,11 @@
     <ion-list class="task-info-list">
       <ion-item>
         <ion-label>发起人</ion-label>
-        <ion-label style="text-align: right;">{{task_info.startPerson}}</ion-label>
+        <ion-label style="text-align: right;">{{task_info.start_person}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label>开始时间</ion-label>
-        <ion-label style="text-align: right;">{{task_info.startTime}}</ion-label>
+        <ion-label style="text-align: right;">{{task_info.start_time}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label>备注</ion-label>
@@ -41,7 +41,8 @@
         <div>{{stage.time_hour}}</div>
       </div>
       <div class="task-stage-img">
-        <img class="stage-img" src="assets/img/task_pass.png"/>
+        <img *ngIf="stage.is_pass === true" class="stage-img" src="assets/img/task_pass.png"/>
+        <img *ngIf="stage.is_pass === false" class="stage-img" src="assets/img/task_doing.png"/>
       </div>
       <div class="task-stage-detail">
         <ion-card class="task-stage-content">
@@ -52,3 +53,14 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons left>
+      <button ion-button clear class="operation-button">驳回</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button clear class="operation-button">同意</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

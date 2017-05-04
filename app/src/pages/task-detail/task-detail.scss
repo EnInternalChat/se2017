@@ -13,6 +13,9 @@ page-task-detail {
 
   .toolbar {
     z-index: 15;
+    .toolbar-title-ios {
+      color: map-get($colors, primary);
+    }
   }
   .toolar-ios {
     border-bottom: none;
@@ -57,6 +60,19 @@ page-task-detail {
     }
   }
 
+  .footer-toolbar {
+    .operation-button {
+      font-size: 1.8rem;
+      margin: 0px 12px 0px 12px;
+    }
+    .bar-button-md {
+      color: map-get($colors, light);
+    }
+    .bar-button-ios {
+      color: map-get($colors, primary);
+    }
+  }
+
 
   .stages-line {
 
@@ -90,13 +106,6 @@ page-task-detail {
       .task-stage-img {
         width: 10%;
         display: inline-block;
-        position: relative;
-        div {
-          float: left;
-          height: 50%;
-          width: 100%;
-          margin-bottom: -50%;
-        }
         .stage-img {
           width: 100%;
           background: #fff;
@@ -110,7 +119,7 @@ page-task-detail {
         &:before {
           content: '';
           position: absolute;
-          top: 25%;
+          bottom: 30%;
           left: 35%;
           width: 0; 
           height: 0; 
@@ -125,9 +134,9 @@ page-task-detail {
           margin: 0px 8px 0px 8px;
 
           .card-header {
-            background: map-get($colors, primary);
+            // background: map-get($colors, primary);
             padding: 2px 8px 4px 8px;
-            color: map-get($colors, light);
+            color: map-get($colors, primary_text);
             font-size: 1.4rem;
             text-overflow: ellipsis; // 让超出的用...实现
             white-space: nowrap; // 禁止换行
@@ -137,7 +146,8 @@ page-task-detail {
           .card-content {
             padding: 4px 8px 2px 8px;
             font-size: 1.4rem;
-            color: map-get($colors, primary_text);
+            background: map-get($colors, primary);
+            color: map-get($colors, light);
             text-overflow: ellipsis; // 让超出的用...实现
             white-space: nowrap; // 禁止换行
             overflow: hidden;  // 超出的隐藏
