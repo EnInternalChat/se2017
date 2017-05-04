@@ -1,7 +1,12 @@
-controller\notificationController.class
+controller\TestController.class
+mongodb\service\MongoService.class
+controller\DataProcess.class
 controller\PersonalController.class
+mongodb\model\CollectionEntity.class
+mongodb\model\Employee.class
+controller\NotificationController.class
 controller\RootController.class
 controller\TaskController.class
 controller\EmployeeController.class
-controller\TestController.class
+mongodb\model\Person.class
 controller\SectionController.class
