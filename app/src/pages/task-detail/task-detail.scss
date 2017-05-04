@@ -65,7 +65,7 @@ page-task-detail {
       width: 2px;
       height: 100%;
       background: map-get($colors, primary);
-      left: 40%;
+      left: 30%;
       top: 0;
       position: absolute;
     }
@@ -73,60 +73,74 @@ page-task-detail {
     .task-stage-item {
       background: transparent;
       padding: 2px 0px 2px 0px;
+
       .item-inner {
         padding: 2px 0px 2px 0px;
       }
 
-      // @extend %clearfix;
       .task-stage-time {
-        width: 35%;
+        width: 25%;
         display: inline-block;
+        padding-left: 8px;
+        color: map-get($colors, primary_text);
+        font-size: 1.4rem;
+        text-align: center; 
       }
 
       .task-stage-img {
-        top : 2px;
-        width: 15%;
+        width: 10%;
         display: inline-block;
-        border-radius: 50%;
+        position: relative;
+        div {
+          float: left;
+          height: 50%;
+          width: 100%;
+          margin-bottom: -50%;
+        }
         .stage-img {
+          width: 100%;
           background: #fff;
           border-radius: 50%;
-          // margin-left: 2px;
-          width: 60%;
         }
       }
 
       .task-stage-detail {
-        width: 50%;
+        width: 65%;
         display: inline-block;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 25%;
+          left: 35%;
+          width: 0; 
+          height: 0; 
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent; 
+          border-left: 8px solid transparent;
+          border-right: 8px solid map-get($colors, primary);
+        }
+
         .task-stage-content {
           display: inline-block;
-          margin: 0px 12px 0px 7px;
-
-          &:before {
-            content: '';
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            width: 0; 
-            height: 0; 
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent; 
-            border-left: 8px solid transparent;
-            border-right: 8px solid map-get($colors, primary);
-          }
+          margin: 0px 8px 0px 8px;
 
           .card-header {
             background: map-get($colors, primary);
             padding: 2px 8px 4px 8px;
             color: map-get($colors, light);
             font-size: 1.4rem;
+            text-overflow: ellipsis; // 让超出的用...实现
+            white-space: nowrap; // 禁止换行
+            overflow: hidden;  // 超出的隐藏
           }
 
           .card-content {
             padding: 4px 8px 2px 8px;
             font-size: 1.4rem;
             color: map-get($colors, primary_text);
+            text-overflow: ellipsis; // 让超出的用...实现
+            white-space: nowrap; // 禁止换行
+            overflow: hidden;  // 超出的隐藏
           }
 
         }

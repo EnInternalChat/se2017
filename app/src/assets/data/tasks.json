@@ -8,17 +8,18 @@
         "stages" : [
             {
                 "finishTime" : "2017/5/1 10:10",
-                "person" : "",
-                "content" : "开始"
+                "person" : ["张三(管理员)"],
+                "content" : "请假开始"
             },
             {
-                "finishTime" : "2017/5/1 10:10",
-                "person" : ["", ""],
-                "content" : "开始"                
+                "finishTime" : "2017/5/1 12:30",
+                "person" : ["李二(HR)"],
+                "content" : "HR审核"                
             },
             {
-                "finishTime" : "2017/5/1 10:10",
-                "content" : "开始"
+                "finishTime" : "2017/5/1 15:30",
+                "person" : ["李四(经理)", "张三(主管)"],
+                "content" : "主管与经理批准"
             }
         ]
     },
@@ -31,16 +32,17 @@
         "stages" : [
             {
                 "finishTime" : "2017/5/1 10:10",
-                "person" : "",
+                "person" : ["李四(经理)", "张三(主管)"],
                 "content" : "开始"
             },
             {
                 "finishTime" : "2017/5/1 10:10",
-                "person" : ["", ""],
+                "person" : ["李四(经理)", "张三(主管)"],
                 "content" : "开始"                
             },
             {
                 "finishTime" : "2017/5/1 10:10",
+                "person" : ["李四(经理)", "张三(主管)"],                
                 "content" : "开始"
             }
         ]
@@ -54,12 +56,12 @@
         "stages" : [
             {
                 "finishTime" : "2017/5/1 10:10",
-                "person" : "",
+                "person" : ["李四(经理)", "张三(主管)"],
                 "content" : "开始"
             },
             {
                 "finishTime" : "2017/5/1 10:10",
-                "person" : ["", ""],
+                "person" : [],
                 "content" : "开始"                
             },
             {

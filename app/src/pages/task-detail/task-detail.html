@@ -18,15 +18,15 @@
     <ion-list class="task-info-list">
       <ion-item>
         <ion-label>发起人</ion-label>
-        <ion-label>{{task_info.startPerson}}({{job}})</ion-label>
+        <ion-label style="text-align: right;">{{task_info.startPerson}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label>开始时间</ion-label>
-        <ion-label>{{task_info.startTime}}</ion-label>
+        <ion-label style="text-align: right;">{{task_info.startTime}}</ion-label>
       </ion-item>
       <ion-item>
         <ion-label>备注</ion-label>
-        <ion-label>{{task_info.content}}</ion-label>
+        <ion-label style="text-align: right;">{{task_info.content}}</ion-label>
       </ion-item>
     </ion-list>
   </div>
@@ -35,18 +35,18 @@
 
 <ion-content>
   <ion-list no-lines class="stages-line">
-    <ion-item class="task-stage-item">
+    <ion-item class="task-stage-item" *ngFor="let stage of task_info.stages">
       <div class="task-stage-time">
-        
+        <div>{{stage.time_day}}</div>
+        <div>{{stage.time_hour}}</div>
       </div>
       <div class="task-stage-img">
         <img class="stage-img" src="assets/img/task_pass.png"/>
-        <div></div>
       </div>
       <div class="task-stage-detail">
         <ion-card class="task-stage-content">
-          <ion-card-header>张三(经理)</ion-card-header>
-          <ion-card-content>批准休假</ion-card-content>
+          <ion-card-header>{{stage.person_str}}</ion-card-header>
+          <ion-card-content>{{stage.content}}</ion-card-content>
           </ion-card>        
       </div>
     </ion-item>

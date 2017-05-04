@@ -22,7 +22,7 @@ export class StorageHelper {
   }
 
   public storage_info(key: any, value: any): void {
-    console.log("Valid in: ", key, value);
+    // console.log("Valid in: ", key, value);
     this.storage.set(key, value);
   }
 
@@ -32,16 +32,16 @@ export class StorageHelper {
       return this.storage.get(key).then(
         (value) => {
           if(value != null) {
-            console.log("Valid read: ", key, ", ", value);
+            // console.log("Valid read: ", key, ", ", value);
             return value;
           }
           else {
-            console.log("Valid read: ", key, ", ", default_value);
+            // console.log("Valid read: ", key, ", ", default_value);
             return default_value;
           }
         },
         (reason) => {
-          console.log("Default Valid read: ", key, ", ", default_value);
+          // console.log("Default Valid read: ", key, ", ", default_value);
           return default_value;
         });
     });
@@ -53,23 +53,23 @@ export class StorageHelper {
       return this.storage.get(key).then(
         (value) => {
           if(value != null) {
-            console.log("Secure read: ", key, ", ", value);
+            // console.log("Secure read: ", key, ", ", value);
             return value;
           }
           else {
-            console.log("Secure read: ", key, ", ", default_value);
+            // console.log("Secure read: ", key, ", ", default_value);
             return default_value;
           }
         },
         (reason) => {
-          console.log("Default Secure read: ", key, ", ", default_value);
+          // console.log("Default Secure read: ", key, ", ", default_value);
           return default_value;
         });
     });
   }
 
   public storage_secure_info(key: any, value: any): void {
-    console.log("Storage value: ", key, ", ", value);
+    // console.log("Storage value: ", key, ", ", value);
     this.storage.set(key, value);
   }
 
