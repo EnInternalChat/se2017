@@ -33,7 +33,7 @@ export class AppGlobal {
   }
 
   private read_username() {
-    return this.storage.read_local_info("username", "username").then((value) => 
+    return this.storage.read_local_info("username", "张三").then((value) => 
     {
       return this._user_name = value;
     });

@@ -32,7 +32,7 @@ export class TaskList {
           this.tasks_list_not_done.push(new Task(res[i]));
         }
         console.log("list: ", this.tasks_list_not_done);
-        this.task_detail(this.tasks_list_not_done[0]);
+        // this.task_detail(this.tasks_list_not_done[0]);
       });
     // this.new_task();
   }

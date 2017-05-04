@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
+import { ChatList } from '../pages/chat-list/chat-list';
 import { TaskList } from '../pages/task-list/task-list';
 import { TaskDetail } from '../pages/task-detail/task-detail';
 import { NewTask } from '../pages/new-task/new-task';
@@ -25,6 +26,7 @@ import { HTTPService } from '../providers/http_helper';
     MyApp,
     Login,
     BasisPage,
+    ChatList,
     TaskList,
     TaskDetail,
     NewTask,
@@ -43,6 +45,7 @@ import { HTTPService } from '../providers/http_helper';
     MyApp,
     Login,
     BasisPage,
+    ChatList,
     TaskList,
     TaskDetail,
     NewTask,

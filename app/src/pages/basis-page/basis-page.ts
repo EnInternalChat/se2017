@@ -21,7 +21,8 @@ import { NotificationList } from '../notification-list/notification-list';
 export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
-  root_page: any = TaskList;
+  // root_page: any = TaskList;
+  root_page: any = Personal;
   pages: Array<{title: string, component: any, icon_path: string}>;
 
   public global_data : AppGlobal;
