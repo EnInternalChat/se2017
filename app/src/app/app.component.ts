@@ -17,8 +17,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  // rootPage = Login;
-  rootPage = BasisPage;
+  rootPage = Login;
+  // rootPage = BasisPage;
   pages: Array<{title: string, component: any}>;
   backPressed: boolean = false;
 

@@ -42,11 +42,23 @@
         </div>
       </ion-item>
     </ion-list>
-    <ion-list *ngSwitchCase="'tasks_done'">
-      <!-- <ion-item ng-repeat="item in items"> -->
-    
-      <!-- </ion-item> -->
-      Done
+    <ion-list *ngSwitchCase="'tasks_done'" class="not-done-list">
+      <ion-item *ngFor="let item of tasks_list_not_done" (click)="task_detail(item)">
+        <div class="task-info">
+          <div>
+            <span class="task-person">{{item.start_person}}</span>
+            <span class="task-time">{{item.update_time}}</span>
+          </div>
+          <div class="task-content">
+            {{item.content}}
+          </div>
+        </div>
+        <div class="task-detail-button">
+          <button ion-button icon-only clear>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>            
+        </div>
+      </ion-item>
     </ion-list>
   </div>
 </ion-content>

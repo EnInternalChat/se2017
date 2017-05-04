@@ -40,7 +40,7 @@ export class AppGlobal {
   }
 
   private read_avator_no() {
-    return this.storage.read_local_info("avator_no", 2).then((value) => 
+    return this.storage.read_local_info("avator_no", 3).then((value) => 
     {
       return this._avator_path = "assets/img/avator/" + value + ".png";
     });

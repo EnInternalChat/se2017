@@ -21,8 +21,8 @@ import { NotificationList } from '../notification-list/notification-list';
 export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
-  // root_page: any = TaskList;
-  root_page: any = Personal;
+  root_page: any = TaskList;
+  // root_page: any = Personal;
   pages: Array<{title: string, component: any, icon_path: string}>;
 
   public global_data : AppGlobal;
@@ -30,10 +30,10 @@ export class BasisPage {
 
   public constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pages = [
-      {title: "聊天管理", component: ChatList, icon_path: "../../assets/img/chat.png"},
-      {title: "任务管理", component: TaskList, icon_path: "../../assets/img/task.png"},
-      {title: "查看通知", component: NotificationList, icon_path: "../../assets/img/notification.png"},
-      {title: "账户设置", component: Personal, icon_path: "../../assets/img/setting.png"},
+      {title: "聊天管理", component: ChatList, icon_path: "assets/img/chat.png"},
+      {title: "任务管理", component: TaskList, icon_path: "assets/img/task.png"},
+      {title: "查看通知", component: NotificationList, icon_path: "assets/img/notification.png"},
+      {title: "账户设置", component: Personal, icon_path: "assets/img/setting.png"},
     ];
     this.global_data = AppGlobal.get_instance();
   }
