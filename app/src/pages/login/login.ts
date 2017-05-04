@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 
 import { BasisPage } from '../basis-page/basis-page';
 
@@ -34,7 +34,8 @@ export class Login {
 
   constructor(private native_helper: NativeServiceHelper,
               private web_helper: HTTPService,
-              private nav_ctrl: NavController) 
+              private nav_ctrl: NavController,
+              private load_ctrl: LoadingController) 
   {
     this.storage.read_local_info("remember_password", true).then((value) => {
       return this.remember_password = value;
@@ -79,15 +80,19 @@ export class Login {
     }
     else
       password_md5 = this.password;
-    // this.web_helper.post(
-    //   '/login', {"username": this.username, "password": password_md5}).then(
-    //   (data) => {
-    //     if(this.remember_password || this.auto_login) {
-    //       this.storage.storage_info("username", this.username);
-    //       this.storage.storage_secure_info("password", password_md5);
-    //     }
-    //   });
-      this.nav_ctrl.push(BasisPage);
+    let loading = this.load_ctrl.create({ "content": "登录中..."});
+    loading.present();
+    this.web_helper.post(
+      '/login.do', {"name": this.username, "pwd": password_md5}).then(
+      (data) => {
+        console.log("Response: ", data);
+        if(this.remember_password || this.auto_login) {
+          this.storage.storage_info("username", this.username);
+          this.storage.storage_secure_info("password", password_md5);
+        }
+        loading.dismiss();
+        this.nav_ctrl.push(BasisPage);
+      });
   }
 
   remember_password_change() {

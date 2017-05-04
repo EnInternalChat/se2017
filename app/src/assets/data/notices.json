@@ -1,0 +1,12 @@
+[
+    {
+        "sendPerson": "张三",
+        "sendTime": "2017/5/5 8:50",
+        "content": "下午五点会议室开会"
+    },
+    {
+        "sendPerson": "李四",
+        "sendTime": "2017/5/3 12:50",
+        "content": "今晚加班两个小时"
+    }
+]

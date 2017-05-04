@@ -1,21 +1,67 @@
 <!--
-  Generated template for the NotificationList page.
+  Generated template for the noticeList page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-
-    <ion-toolbar>
+  <ion-toolbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title class="toolbar-title">查看通知</ion-title>
+    <ion-title>查看通知</ion-title>
   </ion-toolbar>
+  <div class="read-slide-bar">
+    <ion-segment [(ngModel)]="read_status">
+      <ion-segment-button value="notice_not_read">
+        未读通知
+      </ion-segment-button>
+      <ion-segment-button value="notice_old">
+        历史通知
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content (swipe)="swipe_event($event)">
+  <div [ngSwitch]="read_status">
+    <ion-list *ngSwitchCase="'notice_not_read'" class="not-read-list">
+      <ion-item *ngFor="let item of notice_list_not_read">
+        <div class="notice-info">
+          <div>
+            <span class="notice-person">{{item.send_person}}</span>
+            <span class="notice-time">{{item.send_time}}</span>
+          </div>
+          <div class="notice-content">
+            {{item.content}}
+          </div>
+        </div>
+        <div class="notice-detail-button">
+          <button ion-button icon-only clear>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>            
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'notice_old'" class="not-read-list">
+      <ion-item *ngFor="let item of notice_list_not_read" >
+        <div class="notice-info">
+          <div>
+            <span class="notice-person">{{item.send_person}}</span>
+            <span class="notice-time">{{item.send_time}}</span>
+          </div>
+          <div class="notice-content">
+            {{item.content}}
+          </div>
+        </div>
+        <div class="notice-detail-button">
+          <button ion-button icon-only clear>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>            
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

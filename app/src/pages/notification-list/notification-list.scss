@@ -4,4 +4,75 @@ page-notification-list {
     color: map-get($colors, primary);
   }
 
+  .header-md {
+    background-color: map-get($colors, primary);
+  }
+  .read-slide-bar {
+    .segment-md {
+      padding: 0% 0% 0% 0%;
+      background-color: transparent;      
+      .segment-button {
+        color: map-get($colors, light);
+        opacity: 0.8;
+        font-size: 1.6rem;
+      }
+      .segment-button.segment-activated {
+        border-color: map-get($colors, light);
+        border-bottom-width: 4px;
+        opacity: 1;
+        font-weight: bolder;
+      }
+
+    }
+    .segment-ios {
+      padding: 0% 10% 3% 10%;
+      background-color: map-get($colors, ios-back);
+    }
+  }
+
+  .not-read-list {
+    margin-top: 4px;
+    .item-block:first-child {
+      border-top: none;
+    }
+    .item-block:last-child {
+      border-bottom: none;
+    }
+    .label {
+      margin: 2px 4px 2px 4px;
+    }
+    .notice-info {
+      width: 95%;
+      padding-right: 4%;
+      display: inline-block;
+      .notice-person {
+        width: 30%;
+        display: inline-block;
+        color: map-get($colors, primary_text);
+        font-size: 1.4rem;
+      }
+      .notice-time {
+        width: 70%;
+        display: inline-block;
+        text-align: right;
+        color: map-get($colors, third_text);
+        font-size: 1.4rem;
+      }
+      .notice-content {
+        color: map-get($colors, third_text);
+        font-size: 1.6rem;
+        text-overflow: ellipsis; // 让超出的用...实现
+        white-space: nowrap; // 禁止换行
+        overflow: hidden;  // 超出的隐藏
+      }
+    }
+    .notice-detail-button {
+      width: 5%;
+      display: inline-block;
+      position: absolute;
+      top: 20%;
+    }
+  }
+
+
 }
