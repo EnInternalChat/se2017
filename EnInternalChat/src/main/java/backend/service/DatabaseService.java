@@ -5,6 +5,7 @@ import backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,11 +13,11 @@ import java.util.List;
  */
 
 @Service
-public class DataService {
+public class DatabaseService {
     private final EmployeeRepository repository;
 
     @Autowired
-    public DataService(EmployeeRepository repository) {
+    public DatabaseService(EmployeeRepository repository) {
         this.repository=repository;
     }
 
@@ -27,7 +28,17 @@ public class DataService {
         employee.setName("fog");
         employee.setGender(false);
         employee=repository.save(employee);
-
+        employee=new Employee();
+        employee.setAvatar(1);
+        employee.setName("fog");
+        employee.setID(233333);
+        employee.setPwd("ddd");
+        ArrayList<String> ll=new ArrayList<>();
+        ll.add("ssss");
+        ll.add("qqqqqqqqq");
+        employee.setPhone(ll);
+        employee=repository.save(employee);
         List<Employee> result=repository.findByName("fog");
+        System.out.println(result);
     }
 }

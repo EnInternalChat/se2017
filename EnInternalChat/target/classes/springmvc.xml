@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -23,7 +23,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="basicPack.*" />
+    <context:component-scan base-package="backend.*" />
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="20000000" />
@@ -32,22 +32,16 @@
         <property name="uploadTempDir" value="/tmp" />
     </bean>
 
-    <!--<bean id="template" class="org.springframework.data.mongodb.core.MongoTemplate">-->
-        <!--<constructor-arg>-->
-            <!--<bean class="com.mongodb.MongoClient">-->
-                <!--<constructor-arg name="host" value="123.206.121.176" />-->
-                <!--<constructor-arg name="port" value="27017" />-->
-            <!--</bean>-->
-        <!--</constructor-arg>-->
-        <!--<constructor-arg name="databaseName" value="database" />-->
-    <!--</bean>-->
-    <mongo:repositories base-package="basicPack.repository" />
-
+    <mongo:repositories base-package="backend.repository" />
     <mongo:mongo host="123.206.121.176" port="27017"/>
-
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo"/>
-        <constructor-arg name="databaseName" value="geospatial"/>
+        <constructor-arg name="databaseName" value="EnInternalChat"/>
     </bean>
 
+    <!--<context:annotation-config/>-->
+    <!--<bean id="lettuceConnectionFactory"-->
+          <!--class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"-->
+          <!--p:host-name="10.0.0.102" p:port="6379"/>-->
+    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
 </beans>
