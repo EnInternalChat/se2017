@@ -22,8 +22,9 @@
 
 
 <ion-content class="setting-content">
-  <div class="avator">
+  <div class="avator" (click)="show_avator_slector()">
     <img src="{{global_data.avator_path}}">
+    <div>点击更换头像</div>
   </div>
   <ion-list class="setting-list">
     <ion-item>

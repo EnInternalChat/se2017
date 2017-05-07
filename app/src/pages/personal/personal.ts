@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,
          AlertController, LoadingController } from 'ionic-angular';
 
+import { AvatorSelector } from '../avator-selector/avator-selector';
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
@@ -33,7 +34,7 @@ export class Personal {
     this.global_data = AppGlobal.get_instance();
     this.language_options = [
       {"value": "zh_cn", "text": "简体中文"},
-      {"value": "en_us", "text": "English"}
+      {"value": "en_us", "text": "English"},
     ];
     this.language = this.language_options[0].value;
     this.storage_helper = StorageHelper.get_instance();
@@ -41,6 +42,10 @@ export class Personal {
 
   log_out() {
 
+  }
+
+  show_avator_slector() {
+    this.navCtrl.push(AvatorSelector);
   }
 
   show_password_prompt() {
@@ -83,8 +88,7 @@ export class Personal {
         }
       }]
     });
-    password_prompt.present();
-    
+    password_prompt.present(); 
   }
 
   change_password(pwd_old: string, pwd_new: string):boolean {

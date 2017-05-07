@@ -1,0 +1,38 @@
+page-avator-selector {
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .bar-button-md {
+    color: map-get($colors, light);
+    font-size: 1.8rem;
+  }
+  .avator {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px; 
+    img {
+      width: 40%;
+      margin-left: 30%;
+      margin-right: 30%;
+    }
+  }  
+
+  .avator-type-list {
+    .item-block {
+      .label {
+        margin: 6px 4px 6px 4px;
+        font-size: 1.4rem;
+        color: map-get($colors, primary_text);
+      }
+    }
+    .item-ios {
+      &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+}
