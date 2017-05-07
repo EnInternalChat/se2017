@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, NavParams } from 'ionic-angular';
 
-import { AppGlobal } from '../../providers/global_data'
+import { AppGlobal } from '../../providers/global_data';
 import { ChatList } from '../chat-list/chat-list';
 import { TaskList } from '../task-list/task-list';
 import { Personal } from '../personal/personal';
@@ -21,8 +21,9 @@ import { NotificationList } from '../notification-list/notification-list';
 export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
-  root_page: any = TaskList;
-  // root_page: any = Personal;
+  // root_page: any = TaskList;
+  root_page: any = Personal;
+  // root_page: any = NotificationList;
   pages: Array<{title: string, component: any, icon_path: string}>;
 
   public global_data : AppGlobal;

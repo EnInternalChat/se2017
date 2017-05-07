@@ -22,12 +22,11 @@ export class HTTPService {
         "Content-type": "application/x-www-form-urlencoded"
       })
     });
-    // this.base_url = AppGlobal.get_instance().server_url;
+    this.base_url = AppGlobal.get_instance().server_url;
   }
 
   public get(url: string, param: any):Promise<any> 
   {
-    this.base_url = "";
     return new Promise((resolve, reject) => 
     {
       this.http.get(this.base_url + url + this.dict_to_query_str(param))
@@ -37,21 +36,20 @@ export class HTTPService {
       })
       .subscribe(
         data => resolve(data),
-        error => console.log(error))
+        error => reject(error))
     });
   }
 
   public post(url: string, param: any): Promise<any>
   {
-    this.base_url = AppGlobal.get_instance().server_url;
     return new Promise((resolve, reject) => 
     {
-      this.http.post(this.base_url + url + this.dict_to_query_str(param, true),
+      this.http.post(this.base_url + url + this.dict_to_query_str(param),
         null, this.request_options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),
-        error => console.log(error))
+        error => reject(error))
     });
   }
 

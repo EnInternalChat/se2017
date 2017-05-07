@@ -34,7 +34,40 @@ page-personal {
       .setting-item-value {
         text-align: right;
       }
+
+      .change-password-button {
+        margin: 5% 3% 0 3%;
+        width: 95%;
+        height: 20%;
+        .button-inner {
+          font-size: 2.0rem;
+          margin: 8px 2px 8px 2px;
+        }
+      }
     }
   }
 
+}
+
+.password-alert {
+  .alert-title {
+    text-align: center;
+    font-size: 2.0rem;
+    color: map-get($colors, primary_text);
+  }
+  .alert-button-group {
+    padding: 0 0 0 0;
+  }
+  .alert-button {
+    overflow: hidden;
+    flex: 1 1 auto;
+    margin: 0;
+    min-width: 50%;
+    font-size: 1.8rem;
+    color: map-get($colors, primary);
+    background-color: transparent;
+    .button-inner {
+      justify-content: center;
+    }
+  }
 }

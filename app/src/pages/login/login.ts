@@ -75,7 +75,7 @@ export class Login {
     }
     let password_md5;
     if(!this.password_is_md5) {
-      password_md5 = this.md5_helper.hex_md5(this.password);
+      password_md5 = this.global_data.encrypt_pwd(this.password);
       this.password_is_md5 = true;
     }
     else

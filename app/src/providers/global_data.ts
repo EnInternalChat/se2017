@@ -19,7 +19,7 @@ export class AppGlobal {
   private md5_helper: MD5;
   private storage: StorageHelper = StorageHelper.get_instance();
 
-  public is_debug: boolean = false;
+  public is_debug: boolean = true;
   public server_url: string = this.is_debug ? "" : "http://123.206.121.176:8888/EnInternalChat";
   public language: AppLanguage = AppLanguage.CN;
 
@@ -51,6 +51,10 @@ export class AppGlobal {
       AppGlobal.instance = new AppGlobal();
     }
     return AppGlobal.instance;
+  }
+
+  public encrypt_pwd(password: string): string {
+    return this.md5_helper.hex_md5(password);
   }
 
   set user_name(username: string) {
