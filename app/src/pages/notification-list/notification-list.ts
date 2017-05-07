@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Notice } from '../../providers/notification';
 import { HTTPService } from '../../providers/http_helper';
+import { MyTimeFormat } from '../../providers/pipes';
 
 /**
  * Generated class for the NotificationList page.
@@ -16,7 +17,6 @@ import { HTTPService } from '../../providers/http_helper';
   templateUrl: 'notification-list.html',
 })
 export class NotificationList {
-
 
   read_status_array = ['notice_not_read', 'notice_old'];
   read_status : string = this.read_status_array[0];

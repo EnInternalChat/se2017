@@ -2,8 +2,6 @@ export class TaskStage {
   public finish_time : string;
   public person : Array<string>;
   public content : string;
-  // public time_day : string;
-  // public time_hour : string;
   public person_str : string;
 
   public is_pass : boolean = true;
@@ -12,15 +10,6 @@ export class TaskStage {
     this.finish_time = json["finishTime"];
     this.person = json["person"];
     this.content = json["content"];
-    // let times = this.finish_time.split(" ");
-    // if(times.length >= 2) {
-    //   this.time_day = times[0];
-    //   this.time_hour = times[1];
-    // }
-    // else {
-    //   this.time_day = this.finish_time;
-    //   this.time_hour = "";
-    // }
     if(this.person != undefined)
       this.person_str = this.person.join(",");
     else

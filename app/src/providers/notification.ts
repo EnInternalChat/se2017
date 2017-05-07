@@ -6,7 +6,7 @@ export class Notice {
 
   constructor(json: any) {
     this.send_person = json["sendPerson"];
-    this.send_time = NativeServiceHelper.format_time(json["sendTime"]);
+    this.send_time = json["sendTime"];
     this.content = json["content"];  
   }
 }

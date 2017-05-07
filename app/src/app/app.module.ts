@@ -20,6 +20,7 @@ import { NotificationList } from '../pages/notification-list/notification-list';
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
+import { MyTimeFormat } from '../providers/pipes';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HTTPService } from '../providers/http_helper';
     TaskDetail,
     NewTask,
     Personal,
-    NotificationList
+    NotificationList,
+    MyTimeFormat
   ],
   imports: [
     BrowserModule,

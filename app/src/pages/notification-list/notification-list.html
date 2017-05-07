@@ -32,7 +32,7 @@
         <div class="notice-info">
           <div>
             <span class="notice-person">{{item.send_person}}</span>
-            <span class="notice-time">{{item.send_time}}</span>
+            <span class="notice-time">{{item.send_time | time_format}}</span>
           </div>
           <div class="notice-content">
             {{item.content}}
@@ -50,7 +50,7 @@
         <div class="notice-info">
           <div>
             <span class="notice-person">{{item.send_person}}</span>
-            <span class="notice-time">{{item.send_time}}</span>
+            <span class="notice-time">{{item.send_time | time_format}}</span>
           </div>
           <div class="notice-content">
             {{item.content}}
