@@ -3,12 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
@@ -22,7 +23,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="controller"></context:component-scan>
+    <context:component-scan base-package="backend.*" />
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="20000000" />
@@ -30,5 +31,17 @@
         <property name="defaultEncoding" value="UTF-8" />
         <property name="uploadTempDir" value="/tmp" />
     </bean>
-    <import resource="mongodb-context.xml" />
+
+    <mongo:repositories base-package="backend.repository" />
+    <mongo:mongo host="123.206.121.176" port="27017"/>
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="EnInternalChat"/>
+    </bean>
+
+    <!--<context:annotation-config/>-->
+    <!--<bean id="lettuceConnectionFactory"-->
+          <!--class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"-->
+          <!--p:host-name="10.0.0.102" p:port="6379"/>-->
+    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
 </beans>
