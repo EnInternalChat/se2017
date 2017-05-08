@@ -16,7 +16,9 @@ import { TaskList } from '../pages/task-list/task-list';
 import { TaskDetail } from '../pages/task-detail/task-detail';
 import { NewTask } from '../pages/new-task/new-task';
 import { Personal } from '../pages/personal/personal';
+import { AvatorSelector } from '../pages/avator-selector/avator-selector';
 import { NotificationList } from '../pages/notification-list/notification-list';
+import { NotificationDetail } from '../pages/notification-detail/notification-detail';
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
@@ -32,7 +34,9 @@ import { MyTimeFormat } from '../providers/pipes';
     TaskDetail,
     NewTask,
     Personal,
+    AvatorSelector,
     NotificationList,
+    NotificationDetail,
     MyTimeFormat
   ],
   imports: [
@@ -52,7 +56,9 @@ import { MyTimeFormat } from '../providers/pipes';
     TaskDetail,
     NewTask,
     Personal,
-    NotificationList
+    AvatorSelector,
+    NotificationList,
+    NotificationDetail
   ],
   providers: [
     StatusBar,

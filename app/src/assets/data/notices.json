@@ -1,12 +1,26 @@
 [
     {
+        "notificationID": 123,
         "sendPerson": "张三",
         "sendTime": "2017-05-07T08:50+08:00",
-        "content": "下午五点会议室开会"
+        "title": "开会",
+        "content": "*下午五点会议室开会*",
+        "read": false
     },
     {
+        "notificationID": 23,
+        "sendPerson": "张三",
+        "sendTime": "2017-05-05T18:00+08:00",
+        "title": "开个会",
+        "content": "* 马上开个会",
+        "read": false
+    },
+    {
+        "notificationID": 64,
         "sendPerson": "李四",
         "sendTime": "2017-05-03T12:50+08:00",
-        "content": "今晚加班两个小时"
+        "title": "加班通知",
+        "content": "> 今晚加班两个小时",
+        "read": true
     }
 ]

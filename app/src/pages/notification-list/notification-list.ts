@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { NotificationDetail } from '../notification-detail/notification-detail';
 import { Notice } from '../../providers/notification';
 import { HTTPService } from '../../providers/http_helper';
 import { MyTimeFormat } from '../../providers/pipes';
@@ -22,21 +23,35 @@ export class NotificationList {
   read_status : string = this.read_status_array[0];
 
   public notice_list_not_read : Array<Notice> = [];
+  public notice_list_read : Array<Notice> = [];
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public web_helper: HTTPService) {
     this.web_helper.get("assets/data/notices.json", null).then(
       (res) => {
+        let new_notice: Notice;
         for (let i = 0, n = res.length; i < n; i++) {
-          this.notice_list_not_read.push(new Notice(res[i]));
+          new_notice = new Notice(res[i]);
+          if(new_notice.is_read)
+            this.notice_list_read.push(new_notice);
+          else
+            this.notice_list_not_read.push(new_notice);
         }
         console.log("list: ", this.notice_list_not_read);
         // this.task_detail(this.tasks_list_not_done[0]);
       });
   }
 
-  public notice_datail(notice : Notice) {
-    return "";
+  public read_notice(notice : Notice) {
+    notice.is_read = true;
+    this.notice_list_read.push(notice);
+    let index = this.notice_list_not_read.findIndex(
+      (notice) => { return notice.is_read; });
+    this.notice_list_not_read.splice(index, 1);
+  }
+
+  public notice_detail(notice : Notice) {
+    this.navCtrl.push(NotificationDetail, { notice: notice });
   }
 
 

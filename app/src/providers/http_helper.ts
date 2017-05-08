@@ -16,7 +16,6 @@ export class HTTPService {
   private base_url: string;
 
   constructor(public http: Http) {
-    console.log('Hello LoginService Provider');
     this.request_options = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded"

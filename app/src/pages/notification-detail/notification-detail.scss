@@ -1,0 +1,37 @@
+page-notification-detail {
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+
+  .notice-info {
+    width: 100%;
+    border-bottom: 1px solid map-get($colors, divider);
+
+    .notice-title {
+      color: map-get($colors, primary_text);
+      font-size: 2.2rem;
+      text-align: left;
+      word-wrap:break-word
+    }
+
+    .notice-send-info {
+      width: 100%;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      color: map-get($colors, third_text);
+      font-size: 1.4rem;
+      .notice-sender {
+        display: inline-block;
+      }
+      .notice-send-time {
+        display: inline-block;
+        margin-left: 16px;
+      }
+    }
+  }
+
+  .notice-content {
+    color: map-get($colors, primary_text);
+  }
+
+}

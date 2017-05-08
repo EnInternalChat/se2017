@@ -13,6 +13,7 @@ export class AppGlobal {
 
   private _user_name: string;
   private _avator_path: string;
+  private _avator_no: number;
 
   public job : string = "管理员";
 
@@ -42,6 +43,7 @@ export class AppGlobal {
   private read_avator_no() {
     return this.storage.read_local_info("avator_no", 3).then((value) => 
     {
+      this._avator_no = value;
       return this._avator_path = "assets/img/avator/" + value + ".png";
     });
   }
@@ -66,11 +68,16 @@ export class AppGlobal {
   }
 
   public set_avator_no(no: number) {
+    this._avator_no = no;
     this._avator_path = "assets/img/avator/" + no + ".png";
     this.storage.storage_info('avator_no', no);
   }
 
   get avator_path(): string {
     return this._avator_path;
+  }
+
+  get avator_no(): number {
+    return this._avator_no;
   }
 }

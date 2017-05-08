@@ -44,6 +44,7 @@ page-task-detail {
     background-repeat: repeat-x;
     background-position: 0 -2px;
     content: "";
+    z-index: 20;
   }
   .task-info-list {
     margin: 0px 0px 0px 0px;
