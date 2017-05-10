@@ -14,7 +14,7 @@ back ==> front:
 处理任务：
 {
 	activityID:"leaderAudit",
-	name:"领导审批",
+	content:"领导审批",
 	finishTime:
 	person:["张三","李四","caochun"],
 	exclusiveGateway:[

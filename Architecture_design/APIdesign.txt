@@ -107,7 +107,7 @@ A:批量添加成员，手误，不好意思Orz。
 						ID:23,
 						name:"sabi",
 						positionID:233,
-						position:"A product manager";//编号？
+						positionName:"A product manager";//编号？
 						gender:true,
 						avaator:1
 						phone:['13838472290',026-33324444],
@@ -117,7 +117,7 @@ A:批量添加成员，手误，不好意思Orz。
 						ID:232,
 						name:"sfbd",
 						positionID:233,
-						position:"A product manager";//编号？
+						positionName:"A product manager";//编号？
 						gender:true,
 						avaator:1
 						phone:['13838472290',026-33324444],
@@ -140,7 +140,7 @@ A:建立时间更新时间全部在后台调用服务器时间，前端不需要
 						picture:(binary data)
 					},
 					{
-						xml:(binary)	
+						xml:(binary)
 						ID:123,
 						name:"goout",
 						picture:(binary data)
@@ -169,7 +169,7 @@ A:已补
 						ID:144,
 						name:"product develop",
 						leaderID:564,				
-						parrentSection:"132",
+						parrentSectionID:"132",
 						childrenSections:[''],
 						members:[22,1,3333,5,7,8,1111],
 						note:"It's core production developing center."
@@ -178,7 +178,7 @@ A:已补
 						ID:233,
 						name:"product develop",
 						leaderID:564,
-						parrentSection:"132",
+						parrentSectionID:"132",
 						childrenSections:[''],
 						members:[22,1,3333,5,7,8,1111],
 						note:"It's core production developing center."
@@ -229,13 +229,10 @@ A:已补notifications的get，已读未读在get中已补上，发布时间属�
 			[
 				{
 					notificationID:23232
-					senderName:"hhhhh"
-					title:"meeting"
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-type是指通知类型？改为通知标题更好
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+					sender:2344
+					type:"meeting"
 					time:"2017-04-05T13:02:32.537Z"
-					section:[123]
+					section:123
 					content:"hi!~"
 					read:false
 				},
