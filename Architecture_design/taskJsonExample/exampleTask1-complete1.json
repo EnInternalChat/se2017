@@ -1,0 +1,55 @@
+{
+	"taskID": 2333,
+	"taskName":"请假流程-邮件任务",
+	"startPerson": ["张三"],
+	"over":true,
+	"stages":[
+		{
+			activityID:"deptLeaderAudit",
+			content:"部门领导审批",
+			startTime:"2017-05-10T14:36:44+0800",
+			finishTime:"2017-05-12T14:36:44+0800",
+			person:["张三","李四"],
+			exclusiveGateway:[
+				{operationID: "agree", operationName:"同意"},
+				{operationID: "refuse", operationName:"拒绝"}
+			]
+		},
+		{
+			activityID:"hrAudit",
+			content:"人事审批",
+			startTime:"2017-05-12T14:36:44+0800",
+			finishTime:"2017-05-14T14:36:44+0800",
+			person:["caochun"],
+			exclusiveGateway:[
+				{operationID: "agree", operationName:"同意"},
+				{operationID: "refuse", operationName:"拒绝"}
+			]
+		},
+		{
+			activityID:"sendMailForApproved",
+			content:"审批通过通知申请人",
+			startTime:"2017-05-15T14:36:44+0800",
+			finishTime:"2017-05-16T14:36:44+0800",
+			person:["自己"],
+			exclusiveGateway:[
+				{operationID: "next", operationName:"确认"}
+			]
+		},
+		{
+			activityID:"repostBack",
+			content:"销假",
+			startTime:"2017-05-19T14:36:44+0800",
+			finishTime:"2017-05-20T14:36:44+0800",
+			person:["自己"],
+			exclusiveGateway:[
+				{operationID: "next", operationName:"确认"}
+			]
+		},
+		{
+			activityID:"endEvent",
+			content:"结束",
+			startTime:"2017-05-20T14:36:44+0800"
+		}
+	]
+}

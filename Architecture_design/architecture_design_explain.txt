@@ -44,15 +44,15 @@ employee example:[
 		password:"sdaaa",
 		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
 		positionID:233,
-		position:"A product manager";//±àºÅ£¿
+		position:"A product manager";
 		gender:true,
 		avaator:1
 		phone:['13838472290',026-33324444],
 		mail:['394859210@qq.com','dsdsfas@hotmail.com']
 		notifications:[
-			{senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true},
-			{senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true, delete:true},
-			{senderID:"2-144-B1", time:"2017-04-05T13:02:32.537Z", content:"meeting tomorrow 9:00"}
+			{notificationID:12333, senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true},
+			{notificationID:12333, senderID:"2-144-A1", time:"2017-04-05T12:51:46.598Z", content:"4.09: on day off", read:true, delete:true},
+			{notificationID:12333, senderID:"2-144-B1", time:"2017-04-05T13:02:32.537Z", content:"meeting tomorrow 9:00"}
 		],
 		chats:[
 			{chatID:"2-144-5342", pieces:234},
@@ -90,7 +90,7 @@ company example:[
 				ID:144,
 				name:"product develop",
 				leaderID:564,
-				parrentSection:"132",
+				parrentSectionID:"132",
 				childrenSections:[''],
 				members:[22,1,3333,5,7,8,1111],
 				note:"It's core production developing center."
