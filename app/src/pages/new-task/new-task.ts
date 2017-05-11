@@ -22,8 +22,9 @@ export class NewTask {
   public tasks_type_options : Array<{value : string, text : string}>;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
-    let global_data = AppGlobal.get_instance();
+              public navParams: NavParams,
+              private global_data: AppGlobal) {
+    // let global_data = AppGlobal.get_instance();
     this.user_name = global_data.user_name;
     this.job = global_data.job;
     this.tasks_type_options = [

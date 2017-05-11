@@ -15,13 +15,15 @@ export class HTTPService {
   private request_options: RequestOptions;
   private base_url: string;
 
-  constructor(public http: Http) {
+  constructor(
+    public http: Http,
+    public global_data: AppGlobal) {
     this.request_options = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded"
       })
     });
-    this.base_url = AppGlobal.get_instance().server_url;
+    this.base_url = this.global_data.server_url;
   }
 
   public get(url: string, param: any):Promise<any> 

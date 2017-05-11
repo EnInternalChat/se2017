@@ -16,9 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
-  // rootPage = Login;
-  rootPage = BasisPage;
+  rootPage = Login;
+  // rootPage = BasisPage;
   pages: Array<{title: string, component: any}>;
   backPressed: boolean = false;
 
@@ -29,7 +28,7 @@ export class MyApp {
     private splashScreen: SplashScreen,
     private toastCtrl: ToastController,
     private keyBoard: Keyboard,
-    private nativeService: NativeServiceHelper,
+    private native: NativeServiceHelper,
   ) {
     this.initializeApp();
 
@@ -45,12 +44,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      if(!this.nativeService.is_network_connect()) {
-        this.toastCtrl.create({
-          message: "无网络连接",
-          position: "bottom",
-          duration: 2000,
-        }).present();
+      if(!this.native.is_network_connect()) {
+        this.native.show_toast("无网络连接", 2000);
       }
       this.platform.registerBackButtonAction(() => {
         if(this.keyBoard.isOpen()) {
@@ -75,11 +70,7 @@ export class MyApp {
       this.platform.exitApp();
     }
     else {
-      this.toastCtrl.create({
-        message: "再按一次退出应用",
-        duration: 2000,
-        position: "bottom",
-      }).present();
+      this.native.show_toast("再按一次退出应用", 2000);
       this.backPressed = true;
       setTimeout(() => this.backPressed = false, 2000);
     }

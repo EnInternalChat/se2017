@@ -23,15 +23,14 @@ export class TaskDetail {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public config: Config) {
-    let global_data = AppGlobal.get_instance();
+    public config: Config,
+    private global_data: AppGlobal) {
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
     this.operation_options = [
       {"value": "yes", "text": "同意"},
       {"value": "no", "text": "驳回"}
     ];
-    // console.log("detail: ", this.task_info.stages[0]);
   }
 
   go_back() {

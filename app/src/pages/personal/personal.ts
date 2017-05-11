@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,
+import { IonicPage, NavController, NavParams, Events, 
          AlertController, LoadingController } from 'ionic-angular';
 
 import { AvatorSelector } from '../avator-selector/avator-selector';
@@ -21,27 +21,28 @@ import { HTTPService } from '../../providers/http_helper';
 })
 export class Personal {
 
-  public global_data : AppGlobal;
   public language : string;
   public language_options : Array<{value : string, text : string}>;
-  public storage_helper: StorageHelper;
   constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               public alertCtrl: AlertController,
               public loadCtrl: LoadingController,
-              public nativeService: NativeServiceHelper,
+              public native: NativeServiceHelper,
               public web_helper: HTTPService,
-              public navParams: NavParams) {
-    this.global_data = AppGlobal.get_instance();
+              public global_data: AppGlobal,
+              public storage: StorageHelper,
+              public events: Events) {
     this.language_options = [
       {"value": "zh_cn", "text": "简体中文"},
       {"value": "en_us", "text": "English"},
     ];
     this.language = this.language_options[0].value;
-    this.storage_helper = StorageHelper.get_instance();
   }
 
   log_out() {
-
+    console.log(this.navCtrl);
+    console.log(this.navCtrl.length());
+    this.events.publish('logout');
   }
 
   show_avator_slector() {
@@ -79,9 +80,9 @@ export class Personal {
         text: "确认",
         handler: data => {
           if(data.pwd_new != data.pwd_new_check)
-            this.nativeService.show_toast("两次新密码不一致", 3000, "bottom");
+            this.native.show_toast("两次新密码不一致");
           else if (!this.change_password(data.pwd_old, data.pwd_new))
-            this.nativeService.show_toast("修改密码失败", 3000, "bottom");
+            this.native.show_toast("修改密码失败");
           else
             return true;
           return false;
@@ -92,20 +93,19 @@ export class Personal {
   }
 
   change_password(pwd_old: string, pwd_new: string):boolean {
-    let loading = this.loadCtrl.create({"content": "请稍候..."});
-    loading.present();
+    this.native.loading("请稍候...");
     this.web_helper.post("/personal/update", {
       "oldPwd": this.global_data.encrypt_pwd(pwd_old),
       "newPwd": this.global_data.encrypt_pwd(pwd_new)
     }).then(
     (data) => {
       console.log("Response: ", data);
-      loading.dismiss();
+      this.native.stop_loading();
       return true;
     },
     (error) => {
       console.log(error);
-      loading.dismiss();
+      this.native.stop_loading();
       return false;
     });
     return false;

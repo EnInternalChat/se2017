@@ -22,6 +22,9 @@ import { NotificationDetail } from '../pages/notification-detail/notification-de
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
+import { StorageHelper } from '../providers/storage_helper';
+import { MD5 } from '../providers/secure_md5';
+import { AppGlobal } from '../providers/global_data';
 import { MyTimeFormat } from '../providers/pipes';
 
 @NgModule({
@@ -43,7 +46,10 @@ import { MyTimeFormat } from '../providers/pipes';
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     HttpModule,
   ],
   bootstrap: [IonicApp],
@@ -67,6 +73,9 @@ import { MyTimeFormat } from '../providers/pipes';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NativeServiceHelper,
     HTTPService,
+    StorageHelper,
+    AppGlobal,
+    MD5
   ]
 })
 export class AppModule {}

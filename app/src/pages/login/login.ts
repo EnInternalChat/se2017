@@ -21,8 +21,8 @@ import { MD5 } from '../../providers/secure_md5';
   templateUrl: 'login.html',
 })
 export class Login {
-  global_data: AppGlobal = AppGlobal.get_instance();
-  private storage: StorageHelper = StorageHelper.get_instance();
+  // global_data: AppGlobal = AppGlobal.get_instance();
+  // private storage: StorageHelper = StorageHelper.get_instance();
 
   username: string;
   password: string;
@@ -30,18 +30,22 @@ export class Login {
   auto_login: boolean;
 
   password_is_md5: boolean;
-  md5_helper: MD5;
+  // md5_helper: MD5;
 
-  constructor(private native_helper: NativeServiceHelper,
+  constructor(private native: NativeServiceHelper,
               private web_helper: HTTPService,
               private nav_ctrl: NavController,
-              private load_ctrl: LoadingController) 
-  {
+              private global_data: AppGlobal,
+              private storage: StorageHelper,
+              private md5_helper: MD5) {
+  }
+
+  ionViewDidEnter() {
     this.storage.read_local_info("remember_password", true).then((value) => {
       return this.remember_password = value;
     }).then((value) => {
       if(value){
-        this.storage.read_secure_local_info("password", "").then((value) => {
+        this.storage.read_local_info("password", "").then((value) => {
           this.password = value;
           if(this.password == "")
             this.password_is_md5 = false;
@@ -53,8 +57,9 @@ export class Login {
     });
     this.storage.read_local_info("auto_login", false).then((value) => {
       this.auto_login = value;
+      if(this.auto_login)
+        this.on_login();
     });
-    this.md5_helper = new MD5();
   }
 
   print_value() {
@@ -70,7 +75,7 @@ export class Login {
 
   on_login() {
     if(this.username == "" || this.password == "") {
-      this.native_helper.show_toast("用户名和密码不能为空", 2000, "bottom");
+      this.native.show_toast("用户名和密码不能为空", 2000, "bottom");
       return;  
     }
     let password_md5;
@@ -80,18 +85,24 @@ export class Login {
     }
     else
       password_md5 = this.password;
-    let loading = this.load_ctrl.create({ "content": "登录中..."});
-    loading.present();
+    this.native.loading("登录中...");
     this.web_helper.post(
       '/login.do', {"name": this.username, "pwd": password_md5}).then(
       (data) => {
         console.log("Response: ", data);
         if(this.remember_password || this.auto_login) {
           this.storage.storage_info("username", this.username);
-          this.storage.storage_secure_info("password", password_md5);
+          this.storage.storage_info("password", password_md5);
         }
-        loading.dismiss();
+        this.native.stop_loading();
         this.nav_ctrl.push(BasisPage);
+        return true;
+      },
+      (error) => {
+        this.native.stop_loading();
+        this.native.show_toast("请检查网络");
+        this.nav_ctrl.push(BasisPage);
+        return true;
       });
   }
 
