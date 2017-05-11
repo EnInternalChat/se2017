@@ -43,7 +43,7 @@
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'tasks_done'" class="not-done-list">
-      <ion-item *ngFor="let item of tasks_list_not_done" (click)="task_detail(item)">
+      <ion-item *ngFor="let item of tasks_list_done" (click)="task_detail(item)">
         <div class="task-info">
           <div>
             <span class="task-person">{{item.start_person}}</span>

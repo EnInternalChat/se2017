@@ -19,7 +19,7 @@ export class TaskDetail {
 
   public task_info : Task;
   public user_name : string;
-  public operation_options : Array<{value : string, text : string}>;
+  public operation_options : Array<{value : string, text : string}> = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,10 +27,14 @@ export class TaskDetail {
     private global_data: AppGlobal) {
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
-    this.operation_options = [
-      {"value": "yes", "text": "同意"},
-      {"value": "no", "text": "驳回"}
-    ];
+    if(this.task_info.over)
+      return;
+    let gateways = this.task_info.stages[this.task_info.stages.length - 1].exclusive_gateway;
+    gateways.forEach(
+      (item) => this.operation_options.push({
+        "value": item.operation_id,
+        "text": item.operation_name
+      }));
   }
 
   go_back() {

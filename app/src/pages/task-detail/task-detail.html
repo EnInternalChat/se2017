@@ -37,12 +37,13 @@
   <ion-list no-lines class="stages-line">
     <ion-item class="task-stage-item" *ngFor="let stage of task_info.stages">
       <div class="task-stage-time">
-        <div>{{stage.finish_time | date: 'y/MM/dd'}}</div>
-        <div>{{stage.finish_time | date: 'HH:mm'}}</div>
+        <div>{{stage.start_time | date: 'y/MM/dd'}}</div>
+        <div>{{stage.start_time | date: 'HH:mm'}}</div>
       </div>
       <div class="task-stage-img">
-        <img *ngIf="stage.is_pass === true" class="stage-img" src="assets/img/task_pass.png"/>
-        <img *ngIf="stage.is_pass === false" class="stage-img" src="assets/img/task_doing.png"/>
+        <img *ngIf="stage.status === 0" class="stage-img" src="assets/img/task_pass.png"/>
+        <img *ngIf="stage.status === 1" class="stage-img" src="assets/img/task_doing.png"/>
+        <img *ngIf="stage.status === 2" class="stage-img" src="assets/img/task_end.png"/>
       </div>
       <div class="task-stage-detail">
         <ion-card class="task-stage-content">
@@ -54,12 +55,17 @@
   </ion-list>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar class="footer-toolbar">
+<ion-footer *ngIf="!task_info.over">
+<!--   <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 2">
     <ion-buttons left>
       <button ion-button clear class="operation-button">驳回</button>
     </ion-buttons>
     <ion-buttons right>
+      <button ion-button clear class="operation-button">同意</button>
+    </ion-buttons>
+  </ion-toolbar> -->
+  <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 2">
+    <ion-buttons style="text-align: center;">
       <button ion-button clear class="operation-button">同意</button>
     </ion-buttons>
   </ion-toolbar>

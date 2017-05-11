@@ -63,7 +63,7 @@ page-task-detail {
 
   .footer-toolbar {
     .operation-button {
-      font-size: 1.8rem;
+      font-size: 2.0rem;
       margin: 0px 12px 0px 12px;
     }
     .bar-button-md {
@@ -82,9 +82,8 @@ page-task-detail {
       width: 2px;
       height: 100%;
       background: map-get($colors, primary);
-      left: 30%;
-      top: 0;
-      position: absolute;
+      left: 29%;
+      position: fixed;
     }
 
     .task-stage-item {

@@ -22,6 +22,7 @@ export class TaskList {
   task_status : string = this.task_status_array[0];
 
   tasks_list_not_done : Array<Task> = [];
+  tasks_list_done: Array<Task> = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,12 +31,14 @@ export class TaskList {
     this.web_helper.get("assets/data/tasks.json", null).then(
       (res) => {
         for (let i = 0, n = res.length; i < n; i++) {
-          this.tasks_list_not_done.push(new Task(res[i]));
+          if(res[i].over)
+            this.tasks_list_done.push(new Task(res[i]));
+          else
+            this.tasks_list_not_done.push(new Task(res[i]));
         }
         console.log("list: ", this.tasks_list_not_done);
         // this.task_detail(this.tasks_list_not_done[0]);
       });
-    // this.new_task();
   }
 
   new_task() {

@@ -16,8 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = Login;
-  // rootPage = BasisPage;
+  // rootPage = Login;
+  rootPage = BasisPage;
   pages: Array<{title: string, component: any}>;
   backPressed: boolean = false;
 
