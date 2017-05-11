@@ -7,8 +7,8 @@
 		{
 			activityID:"deptLeaderAudit",
 			content:"部门领导审批",
-			startTime:"2017-05-10T14:36:44+0800",
-			finishTime:"2017-05-12T14:36:44+0800",
+			startTime:"2017-05-10T14:36:44+08:00",
+			finishTime:"2017-05-12T14:36:44+08:00",
 			person:["张三","李四"],
 			exclusiveGateway:[
 				{operationID: "hrAudit", operationName:"同意"},
@@ -18,8 +18,8 @@
 		{
 			activityID:"modifyApply",
 			content:"调整申请",
-			startTime:"2017-05-12T14:36:44+0800",
-			finishTime:"2017-05-14T14:36:44+0800",
+			startTime:"2017-05-12T14:36:44+08:00",
+			finishTime:"2017-05-14T14:36:44+08:00",
 			person:["caochun"],
 			exclusiveGateway:[
 				{operationID: "endEvent", operationName:"结束旅程"},
@@ -29,8 +29,8 @@
 		{
 			activityID:"deptLeaderAudit",
 			content:"部门领导审批",
-			startTime:"2017-05-14T14:36:44+0800",
-			finishTime:"2017-05-15T14:36:44+0800",
+			startTime:"2017-05-14T14:36:44+08:00",
+			finishTime:"2017-05-15T14:36:44+08:00",
 			person:["张三","李四"],
 			exclusiveGateway:[
 				{operationID: "hrAudit", operationName:"同意"},
@@ -40,7 +40,7 @@
 		{
 			activityID:"hrAudit",
 			content:"人事审批",
-			startTime:"2017-05-15T14:36:44+0800",
+			startTime:"2017-05-15T14:36:44+08:00",
 			finishTime:"",
 			person:["caochun"],
 			exclusiveGateway:[
