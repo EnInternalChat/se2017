@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Config } from 'ionic-angular';
 
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
@@ -20,7 +20,10 @@ export class TaskDetail {
   public task_info : Task;
   public user_name : string;
   public operation_options : Array<{value : string, text : string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public config: Config) {
     let global_data = AppGlobal.get_instance();
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
@@ -32,6 +35,7 @@ export class TaskDetail {
   }
 
   go_back() {
+    this.config.set('ios', 'pageTransition', 'md-transition');
     this.navCtrl.pop();
   }
 

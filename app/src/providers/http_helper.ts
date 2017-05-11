@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { AppGlobal } from './global_data'
+import { AppGlobal } from './global_data';
 
 /*
   Generated class for the LoginService provider.

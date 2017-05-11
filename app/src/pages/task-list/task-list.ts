@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Config } from 'ionic-angular';
 
 import { TaskDetail } from '../task-detail/task-detail';
 import { NewTask } from '../new-task/new-task';
@@ -25,6 +25,7 @@ export class TaskList {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public config: Config,
               public web_helper: HTTPService) {
     this.web_helper.get("assets/data/tasks.json", null).then(
       (res) => {
@@ -42,6 +43,7 @@ export class TaskList {
   }
 
   task_detail(task) {
+    this.config.set('ios', 'pageTransition', 'md-transition');
     this.navCtrl.push(TaskDetail, { task: task });
   }
 
@@ -62,6 +64,6 @@ export class TaskList {
 
   // 再次返回页面或者初次进入页面时刷新列表数据
   ionViewWillEnter() {
-
+    this.config.set('ios', 'pageTransition', 'ios-transition');
   }  
 }
