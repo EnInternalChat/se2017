@@ -6,33 +6,33 @@
 	"over":true,//此处暂不确定
 	"stages":[
 		{
-			activityID:"internalCreateApply",
-			content:"发起申请",
-			startTime:"2017-05-10T14:36:44+0800",
-			finishTime:"2017-05-12T14:36:44+0800",
-			person:["张三","李四"],
-			exclusiveGateway:[
-				{operationID: "internalApprove", operationName:"确认"}
+			"activityID":"internalCreateApply",
+			"content":"发起申请",
+			"startTime":"2017-05-10T14:36:44+08:00",
+			"finishTime":"2017-05-12T14:36:44+08:00",
+			"person":["张三","李四"],
+			"exclusiveGateway":[
+				{"operationID": "internalApprove", "operationName":"确认"}
 			]
 		},
 		{
-			activityID:"internalApprove",
-			content:"上级审批",
-			startTime:"2017-05-12T14:36:44+0800",
-			finishTime:"2017-05-13T14:36:44+0800",
-			person:["张三"],
-			exclusiveGateway:[
-				{operationID: "internalScanCattle", operationName:"通过"},
-				{operationID: "internalEnd", operationName:"不通过"}
+			"activityID":"internalApprove",
+			"content":"上级审批",
+			"startTime":"2017-05-12T14:36:44+08:00",
+			"finishTime":"2017-05-13T14:36:44+08:00",
+			"person":["张三"],
+			"exclusiveGateway":[
+				{"operationID": "internalScanCattle", "operationName":"通过"},
+				{"operationID": "internalEnd", "operationName":"不通过"}
 			]
 		},
 		{
-			activityID:"internalAutoApprove",
-			content:"自动审批",
-			startTime:"2017-05-14T14:36:44+0800",
-			finishTime:"2017-05-15T14:36:44+0800",
-			person:["张三"],
-			exclusiveGateway:[]
+			"activityID":"internalAutoApprove",
+			"content":"自动审批",
+			"startTime":"2017-05-14T14:36:44+08:00",
+			"finishTime":"2017-05-15T14:36:44+08:00",
+			"person":["张三"],
+			"exclusiveGateway":[]
 		},
 	]
 }

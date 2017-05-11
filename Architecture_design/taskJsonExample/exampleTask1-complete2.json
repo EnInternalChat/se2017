@@ -5,64 +5,64 @@
 	"over":true,
 	"stages":[
 		{
-			activityID:"deptLeaderAudit",
-			content:"部门领导审批",
-			startTime:"2017-05-10T14:36:44+0800",
-			finishTime:"2017-05-12T14:36:44+0800",
-			person:["张三","李四"],
-			exclusiveGateway:[
-				{operationID: "hrAudit", operationName:"同意"},
-				{operationID: "modifyApply", operationName:"拒绝"}
+			"activityID":"deptLeaderAudit",
+			"content":"部门领导审批",
+			"startTime":"2017-05-10T14:36:44+08:00",
+			"finishTime":"2017-05-12T14:36:44+08:00",
+			"person":["张三","李四"],
+			"exclusiveGateway":[
+				{"operationID": "hrAudit", "operationName":"同意"},
+				{"operationID": "modifyApply", "operationName":"拒绝"}
 			]
 		},
 		{
-			activityID:"modifyApply",
-			content:"调整申请",
-			startTime:"2017-05-12T14:36:44+0800",
-			finishTime:"2017-05-14T14:36:44+0800",
-			person:["caochun"],
-			exclusiveGateway:[
-				{operationID: "endEvent", operationName:"结束旅程"},
-				{operationID: "deptLeaderAudit", operationName:"更新申请"}
+			"activityID":"modifyApply",
+			"content":"调整申请",
+			"startTime":"2017-05-12T14:36:44+08:00",
+			"finishTime":"2017-05-14T14:36:44+08:00",
+			"person":["caochun"],
+			"exclusiveGateway":[
+				{"operationID": "endEvent", "operationName":"结束旅程"},
+				{"operationID": "deptLeaderAudit", "operationName":"更新申请"}
 			]
 		},
 		{
-			activityID:"deptLeaderAudit",
-			content:"部门领导审批",
-			startTime:"2017-05-14T14:36:44+0800",
-			finishTime:"2017-05-15T14:36:44+0800",
-			person:["张三","李四"],
-			exclusiveGateway:[
-				{operationID: "hrAudit", operationName:"同意"},
-				{operationID: "modifyApply", operationName:"拒绝"}
+			"activityID":"deptLeaderAudit",
+			"content":"部门领导审批",
+			"startTime":"2017-05-14T14:36:44+08:00",
+			"finishTime":"2017-05-15T14:36:44+08:00",
+			"person":["张三","李四"],
+			"exclusiveGateway":[
+				{"operationID": "hrAudit", "operationName":"同意"},
+				{"operationID": "modifyApply", "operationName":"拒绝"}
 			]
 		},
 		{
-			activityID:"hrAudit",
-			content:"人事审批",
-			startTime:"2017-05-15T14:36:44+0800",
-			finishTime:"2017-05-16T14:36:44+0800",
-			person:["caochun"],
-			exclusiveGateway:[
-				{operationID: "sendMailForApproved", operationName:"同意"},
-				{operationID: "modifyApply", operationName:"拒绝"}
+			"activityID":"hrAudit",
+			"content":"人事审批",
+			"startTime":"2017-05-15T14:36:44+08:00",
+			"finishTime":"2017-05-16T14:36:44+08:00",
+			"person":["caochun"],
+			"exclusiveGateway":[
+				{"operationID": "sendMailForApproved", "operationName":"同意"},
+				{"operationID": "modifyApply", "operationName":"拒绝"}
 			]
 		},
 		{
-			activityID:"modifyApply",
-			content:"调整申请",
-			startTime:"2017-05-15T14:36:44+0800",
-			finishTime:"2017-05-16T14:36:44+0800",
-			person:["caochun"],
-			exclusiveGateway:[
-				{operationID: "endEvent", operationName:"结束旅程"},
-				{operationID: "deptLeaderAudit", operationName:"更新申请"}
+			"activityID":"modifyApply",
+			"content":"调整申请",
+			"startTime":"2017-05-15T14:36:44+08:00",
+			"finishTime":"2017-05-16T14:36:44+08:00",
+			"person":["caochun"],
+			"exclusiveGateway":[
+				{"operationID": "endEvent", "operationName":"结束旅程"},
+				{"operationID": "deptLeaderAudit", "operationName":"更新申请"}
 			]
 		},
 		{
-			activityID:"endEvent",
-			content:"结束",
-			startTime:"2017-05-16T14:36:44+0800"
+			"activityID":"endEvent",
+			"content":"结束",
+			"startTime":"2017-05-16T14:36:44+08:00"
 		}
 	]
 }
