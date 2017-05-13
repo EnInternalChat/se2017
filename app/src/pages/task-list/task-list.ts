@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Config } from 'ionic-angular';
 import { TaskDetail } from '../task-detail/task-detail';
 import { NewTask } from '../new-task/new-task';
 import { HTTPService } from '../../providers/http_helper';
+import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { Task } from '../../providers/task';
 /**
  * Generated class for the TaskList page.
@@ -24,21 +25,15 @@ export class TaskList {
   tasks_list_not_done : Array<Task> = [];
   tasks_list_done: Array<Task> = [];
 
+  public currentPage: number = 0;
+  public limit: number = 10;
+  public hasNextPage: boolean = true;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public config: Config,
-              public web_helper: HTTPService) {
-    this.web_helper.get("assets/data/tasks.json", null).then(
-      (res) => {
-        for (let i = 0, n = res.length; i < n; i++) {
-          if(res[i].over)
-            this.tasks_list_done.push(new Task(res[i]));
-          else
-            this.tasks_list_not_done.push(new Task(res[i]));
-        }
-        console.log("list: ", this.tasks_list_not_done);
-        // this.task_detail(this.tasks_list_not_done[0]);
-      });
+              public web_helper: HTTPService,
+              public native: NativeServiceHelper) {
   }
 
   new_task() {
@@ -68,5 +63,49 @@ export class TaskList {
   // 再次返回页面或者初次进入页面时刷新列表数据
   ionViewWillEnter() {
     this.config.set('ios', 'pageTransition', 'ios-transition');
-  }  
+    this.currentPage = 0;
+    this.hasNextPage = true;
+    this.tasks_list_not_done = [];
+    this.tasks_list_done = [];
+    let p1 = this.loadList("tasks_not_done");
+    let p2 = this.loadList("tasks_done");
+    this.native.loading("请稍候...");
+    Promise.all([p1, p2]).then(
+      () => this.native.stop_loading());
+  }
+
+  public loadList(which_list: string): Promise<any> {
+    return this.web_helper.get("assets/data/tasks.json", null).then(
+      (res) => {
+        this.hasNextPage = (res.length >= this.limit);
+        if(this.hasNextPage)
+          this.currentPage++;
+        for (let i = 0, n = res.length; i < n; i++) {
+          if(res[i].over)
+            this.tasks_list_done.push(new Task(res[i]));
+          else
+            this.tasks_list_not_done.push(new Task(res[i]));
+          return true;
+        }
+      },
+      (error) => this.native.show_toast("网络连接异常！"));
+
+  }
+
+  public doRefresh(refresher) {
+    this.currentPage = 0;
+    this.hasNextPage = true;
+    this.loadList("tasks_not_done").then(
+      () => refresher.complete());
+  }
+
+  public loadMore(infiniteScroll) {
+    if(!this.hasNextPage) {
+      infiniteScroll.complete();
+      return;
+    }
+    this.loadList("tasks_not_done").then(
+      () => infiniteScroll.complete());
+  }
+
 }

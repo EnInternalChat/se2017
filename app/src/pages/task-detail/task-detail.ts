@@ -32,9 +32,10 @@ export class TaskDetail {
     let gateways = this.task_info.stages[this.task_info.stages.length - 1].exclusive_gateway;
     gateways.forEach(
       (item) => this.operation_options.push({
-        "value": item.operation_id,
-        "text": item.operation_name
+        "value": item.operationID,
+        "text": item.operationName
       }));
+    console.log("Options: ", this.operation_options);
   }
 
   go_back() {

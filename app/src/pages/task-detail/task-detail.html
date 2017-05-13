@@ -55,18 +55,32 @@
   </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="!task_info.over">
-<!--   <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 2">
+<ion-footer *ngIf="!task_info.over" [ngSwitch]="operation_options.length">
+  <ion-toolbar class="footer-toolbar" *ngSwitchCase="2">
     <ion-buttons left>
-      <button ion-button clear class="operation-button">驳回</button>
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
     </ion-buttons>
     <ion-buttons right>
-      <button ion-button clear class="operation-button">同意</button>
-    </ion-buttons>
-  </ion-toolbar> -->
-  <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 2">
-    <ion-buttons style="text-align: center;">
-      <button ion-button clear class="operation-button">同意</button>
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[1].value)">{{operation_options[1].text}}</button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+  <ion-toolbar class="footer-toolbar" *ngSwitchCase="1"> 
+    <ion-buttons style="text-align: center;">
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
+    </ion-buttons>
+  </ion-toolbar>
+    
+<!--   <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 2">
+    <ion-buttons left>
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[1].value)">{{operation_options[1].text}}</button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="footer-toolbar" *ngIf="operation_options.length === 1" > 
+    <ion-buttons style="text-align: center;">
+      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
+    </ion-buttons>
+  </ion-toolbar>
+ --></ion-footer>

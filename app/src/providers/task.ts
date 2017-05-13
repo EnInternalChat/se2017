@@ -4,7 +4,7 @@ export class TaskStage {
   public start_time: string;
   public finish_time : string;
   public person : Array<string>;
-  public exclusive_gateway: Array<{operation_id: string, operation_name: string}>;
+  public exclusive_gateway: Array<{operationID: string, operationName: string}>;
 
   public person_str : string;
   public status: number; // 0: pass, 1: doing, 2: end
