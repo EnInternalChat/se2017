@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,13 +13,12 @@ import java.util.Map;
 /**
  * Created by lenovo on 2017/5/4.
  */
+
+@Component
 public class DataProcessCenter {
-    private final DatabaseService databaseService;
 
     @Autowired
-    public DataProcessCenter(DatabaseService databaseService) {
-        this.databaseService=databaseService;
-    }
+    private DatabaseService databaseService;
 
     static SimpleDateFormat timeParse=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     public List<Map<String,Object>> notifications() {
@@ -152,5 +152,9 @@ public class DataProcessCenter {
         alltask.add(one);
         alltask.add(one);
         return alltask;
+    }
+
+    public void testWork() {
+        databaseService.doWork();
     }
 }

@@ -1,7 +1,5 @@
 package backend.controller;
 
-import backend.mdoel.Company;
-import backend.service.DatabaseService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
@@ -38,7 +36,7 @@ public class TestController {
     ProcessDefinition processDefinition;
 
     @Autowired
-    private DatabaseService service;
+    private DataProcessCenter dataProcessCenter;
 
     public TestController() {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
@@ -84,8 +82,8 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public Company mongoBug() throws UnknownHostException {
-        return service.doWork();
+    public void mongoBug() throws UnknownHostException {
+        dataProcessCenter.testWork();
     }
 
     @ResponseBody

@@ -7,7 +7,7 @@ backend\repository\TaskRepository.class
 backend\mdoel\Task.class
 backend\controller\TestController.class
 backend\controller\PersonalController.class
-backend\controller\DataCenter.class
+backend\repository\SectionRepository.class
 backend\service\DatabaseService.class
 backend\repository\ChatRepository.class
 backend\repository\NotificationRepository.class
@@ -18,4 +18,6 @@ backend\controller\NotificationController.class
 backend\controller\SectionController.class
 backend\mdoel\Section.class
 backend\repository\CompanyRepository.class
+backend\util\SectionTree.class
 backend\mdoel\Company.class
+backend\controller\DataProcessCenter.class
