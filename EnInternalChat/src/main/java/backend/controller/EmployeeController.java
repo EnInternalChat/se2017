@@ -13,12 +13,12 @@ import java.util.Map;
 
 @Controller
 public class EmployeeController {
-    DataProcess dataProcess=new DataProcess();
+    DataProcessCenter dataProcessCenter =new DataProcessCenter();
 
     @ResponseBody
     @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public Map<String,Object> allEmployees() {
-        Map<String,Object> resMap = dataProcess.employees();
+        Map<String,Object> resMap = dataProcessCenter.employees();
         return resMap;
     }
 }

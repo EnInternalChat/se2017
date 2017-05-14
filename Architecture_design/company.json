@@ -1,0 +1,149 @@
+{
+	"name":"google",
+	"sections":[
+		{
+			"_id":1,
+			"name":"董事会",
+			"leaderID":564,				
+			"membersID":[22,1,3333,5,7,8,1111],
+			"note":"It's core production developing center.",
+			"childrenSections":[2]
+		},
+		{
+			"_id":2,
+			"name":"总经理",
+			"leaderID":56,				
+			"membersID":[14],
+			"note":"It's core production developing center.",
+			"childrenSections":[3,11,111,111111]
+		},
+		{
+			"_id":3,
+			"name":"分公司",
+			"leaderID":500,				
+			"membersID":[1804,34477],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":11,
+			"name":"副总经理1",
+			"leaderID":500,				
+			"membersID":[6766666],
+			"note":"It's core production developing center.",
+			"childrenSections":[300,80,90]
+		},
+		{
+			"_id":111,
+			"name":"副总经理2",
+			"leaderID":5000,				
+			"membersID":[678],
+			"note":"It's core production developing center.",
+			"childrenSections":[360,860,980]
+		},
+		{
+			"_id":111111,
+			"name":"副总经理3",
+			"leaderID":5080,				
+			"membersID":[6789],
+			"note":"It's core production developing center.",
+			"childrenSections":[777,77122,7777]
+		},
+		{
+			"_id":300,
+			"name":"市场部",
+			"leaderID":100,				
+			"membersID":[141,344,34224],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":80,
+			"name":"设计部",
+			"leaderID":10000,				
+			"membersID":[1461,3744,34224],
+			"note":"It's core production developing center.",
+			"childrenSections":[300,3001]
+		},
+		{
+			"_id":90,
+			"name":"业务部",
+			"leaderID":180,				
+			"membersID":[1,34400,4224],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":360,
+			"name":"网络部",
+			"leaderID":100,				
+			"membersID":[141,3448888,34224],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":860,
+			"name":"开发部",
+			"leaderID":10000,				
+			"membersID":[1461,3744,34224],
+			"note":"It's core production developing center.",
+			"childrenSections":[37700,31200]
+		},
+		{
+			"_id":980,
+			"name":"技术部",
+			"leaderID":10880,				
+			"membersID":[188,37800,420],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":777,
+			"name":"财务部",
+			"leaderID":590,				
+			"membersID":[2888,67389],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":77122,
+			"name":"客服部",
+			"leaderID":590,				
+			"membersID":[28,690],
+			"note":"It's core production developing center.",
+			"childrenSections":[7227,707]
+		},
+		{
+			"_id":7777,
+			"name":"行政部",
+			"leaderID":5970,				
+			"membersID":[28788,673897],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":717,
+			"name":"人力资源部",
+			"leaderID":51570,				
+			"membersID":[70788,6],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":7227,
+			"name":"客户服务",
+			"leaderID":522970,				
+			"membersID":[228788,32897],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		},
+		{
+			"_id":707,
+			"name":"技术支持",
+			"leaderID":51,				
+			"membersID":[21,31],
+			"note":"It's core production developing center.",
+			"childrenSections":[]
+		}
+	]
+}

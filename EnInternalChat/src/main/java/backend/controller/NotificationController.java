@@ -13,12 +13,12 @@ import java.util.Map;
  */
 @Controller
 public class NotificationController {
-    DataProcess dataProcess=new DataProcess();
+    DataProcessCenter dataProcessCenter =new DataProcessCenter();
 
     @ResponseBody
     @RequestMapping(value = "/notifications", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public List<Map<String,Object>> allNotifications() {
-        List<Map<String,Object>> notifications=dataProcess.notifications();
+        List<Map<String,Object>> notifications= dataProcessCenter.notifications();
         return notifications;
     }
 }
