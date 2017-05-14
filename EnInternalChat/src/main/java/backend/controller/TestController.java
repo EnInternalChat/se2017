@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.mdoel.Company;
 import backend.service.DatabaseService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
@@ -83,8 +84,8 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public void mongoBug() throws UnknownHostException {
-        service.doWork();
+    public Company mongoBug() throws UnknownHostException {
+        return service.doWork();
     }
 
     @ResponseBody

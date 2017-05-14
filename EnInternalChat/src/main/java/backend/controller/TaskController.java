@@ -14,11 +14,11 @@ import java.util.Map;
 
 @Controller
 public class TaskController {
-    DataCenter dataCenter =new DataCenter();
+    DataProcessCenter dataProcessCenter =new DataProcessCenter();
 
     @ResponseBody
     @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public List<Map<String,Object>> allTask() {
-        return dataCenter.tasks();
+        return dataProcessCenter.tasks();
     }
 }

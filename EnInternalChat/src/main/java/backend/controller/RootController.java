@@ -13,16 +13,16 @@ import java.util.Map;
 @Controller
 @CrossOrigin
 public class RootController {
-    DataCenter dataCenter =new DataCenter();
+    DataProcessCenter dataProcessCenter =new DataProcessCenter();
 
     @ResponseBody
     @RequestMapping(value = "/login.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Map<String,Object> logindo(@RequestParam("name") String name,@RequestParam("pwd") String password) {
         Map<String,Object> resMap = new HashMap<>();
         //assert
-        resMap.putAll(dataCenter.personal());
-        resMap.put("notifications", dataCenter.notifications());
-        resMap.put("tasks", dataCenter.tasks());
+        resMap.putAll(dataProcessCenter.personal());
+        resMap.put("notifications", dataProcessCenter.notifications());
+        resMap.put("tasks", dataProcessCenter.tasks());
         return resMap;
     }
 }

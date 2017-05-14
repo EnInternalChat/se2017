@@ -17,6 +17,7 @@ public class Notification {
 
     public Notification(long sentTime) {
         this.sentTime = sentTime;
+        senderID=233;
     }
 
     public void setID(int ID) {

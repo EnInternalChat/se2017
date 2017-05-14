@@ -25,6 +25,9 @@ public class Employee {
     private boolean gender;
 
     public Employee() {
+        sectionID=companyID=233;
+        avatar=2;
+        pwd=position=name="dfsgsdfhfgjdfj";
         phone=new ArrayList<>();
         email=new ArrayList<>();
         chats=new ArrayList<>();

@@ -13,12 +13,12 @@ import java.util.Map;
 
 @Controller
 public class SectionController {
-    DataCenter dataCenter =new DataCenter();
+    DataProcessCenter dataProcessCenter =new DataProcessCenter();
 
     @ResponseBody
     @RequestMapping(value = "/sections", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public Map<String,Object> allSections() {
-        Map<String,Object> resMap= dataCenter.sections();
+        Map<String,Object> resMap= dataProcessCenter.sections();
         return resMap;
     }
 }

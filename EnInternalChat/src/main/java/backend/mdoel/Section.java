@@ -1,5 +1,7 @@
 package backend.mdoel;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,9 @@ import java.util.ArrayList;
  */
 
 public class Section {
+    @Id
     private long ID;
+    private long companyID;
     private long leaderID;
     private long parrentSectionID;
     private ArrayList<Long> membersID;
@@ -19,6 +23,14 @@ public class Section {
     public Section() {
         membersID=new ArrayList<>();
         childrenSectionsID=new ArrayList<>();
+    }
+
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(long companyID) {
+        this.companyID = companyID;
     }
 
     public void setID(long ID) {

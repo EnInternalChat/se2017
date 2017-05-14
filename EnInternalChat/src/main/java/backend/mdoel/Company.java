@@ -2,19 +2,30 @@ package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
-
 /**
  * Created by lenovo on 2017/5/14.
  */
 public class Company {
     @Id
     private long ID;
+    private long headSecID;
     private String name;
-    private ArrayList<Section> sections;
+    private String introduction;
 
-    public Company() {
-        sections=new ArrayList<>();
+    public long getHeadSecID() {
+        return headSecID;
+    }
+
+    public void setHeadSecID(long headSecID) {
+        this.headSecID = headSecID;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public long getID() {
@@ -23,15 +34,6 @@ public class Company {
 
     public String getName() {
         return name;
-    }
-
-    public ArrayList<Section> getSections() {
-        return sections;
-    }
-
-    public boolean addSection(Section section) {
-        sections.add(section);
-        return true;
     }
 
     public void setID(int ID) {

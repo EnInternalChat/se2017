@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:mongo="http://www.springframework.org/schema/data/mongo" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -39,9 +40,9 @@
         <constructor-arg name="databaseName" value="EnInternalChatTest"/>
     </bean>
 
-    <!--<context:annotation-config/>-->
-    <!--<bean id="lettuceConnectionFactory"-->
-          <!--class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"-->
-          <!--p:host-name="10.0.0.102" p:port="6379"/>-->
-    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
+    <context:annotation-config/>
+    <bean id="lettuceConnectionFactory"
+          class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"
+          p:host-name="10.0.0.102" p:port="6379"/>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
 </beans>

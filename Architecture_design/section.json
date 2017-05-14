@@ -1,5 +1,6 @@
 {
-	"total":23
+	"total":23,
+	"companyName":"baidu",
 	"section":{
 		"ID":1,
 		"name":"董事会",
@@ -83,7 +84,7 @@
 								"ID":360,
 								"name":"网络部",
 								"leaderID":100,				
-								"membersID":[3448888,344,34224],
+								"membersID":[3448888,344,34227],
 								"note":"It's core production developing center.",
 								"childrenSections":[]
 							},
