@@ -36,7 +36,7 @@
     <mongo:mongo host="123.206.121.176" port="27017"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo"/>
-        <constructor-arg name="databaseName" value="EnInternalChat"/>
+        <constructor-arg name="databaseName" value="EnInternalChatTest"/>
     </bean>
 
     <!--<context:annotation-config/>-->

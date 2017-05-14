@@ -12,12 +12,12 @@ import java.util.Map;
  */
 @Controller
 public class PersonalController {
-    DataProcess dataProcess=new DataProcess();
+    DataCenter dataCenter =new DataCenter();
 
     @ResponseBody
     @RequestMapping(value = "/personal", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public Map<String, Object> personalData() {
-        Map<String,Object> resMap=dataProcess.personal();
+        Map<String,Object> resMap= dataCenter.personal();
         return resMap;
     }
 }

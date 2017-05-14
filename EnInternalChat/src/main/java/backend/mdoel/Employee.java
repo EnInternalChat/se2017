@@ -1,20 +1,44 @@
 package backend.mdoel;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by lenovo on 2017/5/7.
  */
 public class Employee {
-    private int ID;
-    private int positionID;
+    @Id
+    private long ID;
+    private long companyID;
+    private long sectionID;
     private int avatar;
     private String name;
     private String pwd;
     private String position;
     private ArrayList<String> phone;
     private ArrayList<String> email;
+    private ArrayList<Map<String, Object>> chats;
+    private ArrayList<Map<String, Object>> notifications;
+    private ArrayList<Map<String, Object>> tasks;
     private boolean gender;
+
+    public Employee() {
+        phone=new ArrayList<>();
+        email=new ArrayList<>();
+        chats=new ArrayList<>();
+        notifications=new ArrayList<>();
+        tasks=new ArrayList<>();
+    }
+
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(long companyID) {
+        this.companyID = companyID;
+    }
 
     public String getPosition() {
         return position;
@@ -24,12 +48,12 @@ public class Employee {
         this.position = position;
     }
 
-    public int getPositionID() {
-        return positionID;
+    public long getSectionID() {
+        return sectionID;
     }
 
-    public void setPositionID(int positionID) {
-        this.positionID = positionID;
+    public void setSectionID(int sectionID) {
+        this.sectionID = sectionID;
     }
 
     public int getAvatar() {
@@ -64,12 +88,8 @@ public class Employee {
         this.email = email;
     }
 
-    public int getID() {
+    public long getID() {
         return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getName() {
@@ -86,6 +106,33 @@ public class Employee {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public ArrayList<Map<String, Object>> getChats() {
+        return chats;
+    }
+
+    public ArrayList<Map<String, Object>> getNotifications() {
+        return notifications;
+    }
+
+    public ArrayList<Map<String, Object>> getTasks() {
+        return tasks;
+    }
+
+    public boolean addChat(Map<String, Object> newChat) {
+        chats.add(newChat);
+        return true;
+    }
+
+    public boolean addNotification(Map<String, Object> newNotification) {
+        notifications.add(newNotification);
+        return true;
+    }
+
+    public boolean addTask(Map<String, Object> newTask) {
+        notifications.add(newTask);
+        return true;
     }
 
 }

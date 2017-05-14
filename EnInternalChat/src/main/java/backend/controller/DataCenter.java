@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by lenovo on 2017/5/4.
  */
-public class DataProcess {
+public class DataCenter {
     static SimpleDateFormat timeParse=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     public List<Map<String,Object>> notifications() {
         List<Map<String,Object>> notifications=new ArrayList<>();
