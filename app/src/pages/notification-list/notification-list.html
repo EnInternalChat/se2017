@@ -28,7 +28,7 @@
 <ion-content (swipe)="swipe_event($event)">
   <div [ngSwitch]="read_status">
     <ion-list *ngSwitchCase="'notice_not_read'" class="not-read-list">
-      <ion-item *ngFor="let item of notice_list_not_read" (click)="read_notice(item);notice_detail(item)">
+      <ion-item *ngFor="let item of notice_list_not_read; trackBy: track_by_id" (click)="read_notice(item);notice_detail(item)">
         <div class="notice-info">
           <div>
             <span class="notice-person">{{item.send_person}}</span>

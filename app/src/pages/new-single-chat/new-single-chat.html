@@ -1,0 +1,35 @@
+<!--
+  Generated template for the NewSingleChat page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="go_back()"> 
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>开启私聊</ion-title>
+    <ion-buttons right (click)="new_chat()">
+      <button ion-button clear>确认</button>
+    </ion-buttons>    
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="employee-list" radio-group>
+  <ion-item *ngFor="let item of employee_list">
+      <ion-avatar item-left>
+        <!-- <img src="assets/img/avator/{{item.avator}}.png"> -->
+        <img src="assets/img/avator/2.png">
+      </ion-avatar>
+      <ion-label>张三</ion-label>
+      <ion-radio></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

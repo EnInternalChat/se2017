@@ -21,9 +21,19 @@ page-avator-selector {
     .item-block {
       .label {
         margin: 6px 4px 6px 4px;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         color: map-get($colors, primary_text);
       }
+    }
+    .item-radio-checked.item-md .label {
+      color: map-get($colors, primary);
+      margin: 6px 4px 6px 4px;
+      font-size: 1.6rem;
+    }
+    .item-radio-checked.item-ios .label {
+      color: map-get($colors, primary);
+      margin: 6px 4px 6px 4px;
+      font-size: 1.6rem;
     }
     .item-ios {
       &:first-child {

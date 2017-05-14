@@ -23,7 +23,8 @@ export class BasisPage {
 
   // root_page: any = TaskList;
   // root_page: any = Personal;
-  root_page: any = NotificationList;
+  // root_page: any = NotificationList;
+  root_page: any = ChatList;
   pages: Array<{title: string, component: Component, icon_path: string}>;
 
   public job : string = "管理员";
@@ -55,7 +56,7 @@ export class BasisPage {
     this.events.subscribe('logout', 
       () => this.navCtrl.pop());
     // 注册全局切换页面事件
-    this.events.subscribe('open_page',
+    this.events.subscribe('open_notice',
       (page_index) => {
         this.open_page(this.pages[page_index]);
         return true;
@@ -64,7 +65,7 @@ export class BasisPage {
 
   ionViewWillUnload() {
     this.events.unsubscribe('logout');
-    this.events.unsubscribe('open_page');
+    this.events.unsubscribe('open_notice');
   }
 
 }

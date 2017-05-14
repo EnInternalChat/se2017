@@ -1,0 +1,64 @@
+page-new-group-chat {
+  .toolbar-title-md {
+    font-size: 2.0rem;
+  }
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .bar-button-md {
+    color: map-get($colors, light);
+    font-size: 1.8rem;
+  }
+
+  .sections-list {
+    .item-block:first-child {
+      border-top: none;
+    }
+    .item-block:last-child {
+      border-bottom: none;
+    }
+    .company-name {
+      margin-bottom: 0px;
+      padding-left: 16px;
+      min-height: 4.5rem;
+      border: none;
+      font-size: 2.4rem;
+      color: map-get($colors, primary_dark);
+      text-transform: none;
+      font-weight: 400;
+      letter-spacing: 0.1rem;
+    }
+  }
+
+  .section-item {
+    .checkbox {
+      width: 8%;
+      margin: 8px 16px 8px 0px !important;
+    }
+    .item-inner {
+      width: 80%;
+      height: 100%;
+      display: inline-block;
+      .input-wrapper {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @for $i from 1 through 10 {
+    .section-depth-#{$i} {
+      margin-right: 0px;
+      margin-left: 24px * ($i - 1) !important;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-top: 8px;
+      padding-bottom: 4px;
+      padding-left: 4px;
+      // border-left: 1px dotted map-get($colors, divider);
+      font-size: 1.8rem;
+      color: map-get($colors, primary_text);   
+    }
+  }
+
+}

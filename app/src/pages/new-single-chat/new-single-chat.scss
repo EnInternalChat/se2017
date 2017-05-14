@@ -1,0 +1,40 @@
+page-new-single-chat {
+  .toolbar-title-md {
+    font-size: 2.0rem;
+  }
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .bar-button-md {
+    color: map-get($colors, light);
+    font-size: 1.8rem;
+  }
+
+  .employee-list {
+    .item-block {
+      padding-left: 0px;
+      &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      .label {
+        color: map-get($colors, primary_text);
+        margin: 4px 8px 4px 8px;
+        font-size: 1.8rem;
+      }
+    }
+    .item-radio-checked.item-md .label {
+      color: map-get($colors, primary);
+      margin: 4px 8px 4px 8px;
+      font-size: 1.8rem;
+    }
+    .item-radio-checked.item-ios .label {
+      color: map-get($colors, primary);
+      margin: 4px 8px 4px 8px;
+      font-size: 1.8rem;
+    }
+
+  }
+}

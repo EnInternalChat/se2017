@@ -19,9 +19,8 @@ declare let window;
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = Login;
-  // rootPage = BasisPage;
-  // rootPage = Push;
+  // rootPage = Login;
+  rootPage = BasisPage;
   backPressed: boolean = false;
 
   constructor(
@@ -71,9 +70,8 @@ export class MyApp {
           else if(this.platform.is('ios')) {
             keys_dict = window.plugins.jPushPlugin.openNotification;
           }
-          this.events.publish('open_page', keys_dict['page']);
+          this.events.publish('open_notice', keys_dict['page']);
           return true;
-          // this.msgList.push({content:window.plugins.jPushPlugin.receiveNotification.alert})
         }, false);
     }
   }

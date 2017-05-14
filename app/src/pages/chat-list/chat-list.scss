@@ -4,4 +4,9 @@ page-chat-list {
     color: map-get($colors, primary);
   }
 
+  .button-in-fab {
+    color: map-get($colors, light);
+    background-color: map-get($colors, primary);
+  }
+
 }

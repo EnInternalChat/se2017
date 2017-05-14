@@ -42,6 +42,10 @@ export class NotificationList {
       });
   }
 
+  public track_by_id(index: number, notice: Notice) {
+    return notice.id;
+  }
+
   public read_notice(notice : Notice) {
     notice.is_read = true;
     this.notice_list_read.push(notice);

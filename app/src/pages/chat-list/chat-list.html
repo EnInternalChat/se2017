@@ -18,4 +18,17 @@
 
 <ion-content padding>
 
+  <ion-fab bottom right >
+    <button ion-fab color="danger" large>
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab class="button-in-fab" (click)="new_single_chat()">
+        <ion-icon name="md-text"></ion-icon>
+      </button>
+      <button ion-fab class="button-in-fab" (click)="new_group_chat()">
+        <ion-icon name="ios-people"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
+import { NewGroupChat } from '../new-group-chat/new-group-chat';
+import { NewSingleChat } from '../new-single-chat/new-single-chat';
 /**
  * Generated class for the ChatList page.
  *
@@ -14,11 +16,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatList {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+      public navCtrl: NavController,
+      public navParams: NavParams,) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatList');
+    // console.log('ionViewDidLoad ChatList');
+    // this.new_group_chat();
+    this.new_single_chat();
+  }
+
+  new_group_chat() {
+    this.navCtrl.push(NewGroupChat);
+  }
+
+  new_single_chat() {
+    this.navCtrl.push(NewSingleChat);
   }
 
 }

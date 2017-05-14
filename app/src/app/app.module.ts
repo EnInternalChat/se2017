@@ -12,6 +12,8 @@ import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { ChatList } from '../pages/chat-list/chat-list';
+import { NewGroupChat } from '../pages/new-group-chat/new-group-chat';
+import { NewSingleChat } from '../pages/new-single-chat/new-single-chat';
 import { TaskList } from '../pages/task-list/task-list';
 import { TaskDetail } from '../pages/task-detail/task-detail';
 import { NewTask } from '../pages/new-task/new-task';
@@ -19,8 +21,6 @@ import { Personal } from '../pages/personal/personal';
 import { AvatorSelector } from '../pages/avator-selector/avator-selector';
 import { NotificationList } from '../pages/notification-list/notification-list';
 import { NotificationDetail } from '../pages/notification-detail/notification-detail';
-
-import { Push } from '../pages/push/push';
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
@@ -35,6 +35,8 @@ import { MyTimeFormat } from '../providers/pipes';
     Login,
     BasisPage,
     ChatList,
+    NewGroupChat,
+    NewSingleChat,
     TaskList,
     TaskDetail,
     NewTask,
@@ -42,8 +44,7 @@ import { MyTimeFormat } from '../providers/pipes';
     AvatorSelector,
     NotificationList,
     NotificationDetail,
-    MyTimeFormat,
-    Push
+    MyTimeFormat
   ],
   imports: [
     BrowserModule,
@@ -61,14 +62,15 @@ import { MyTimeFormat } from '../providers/pipes';
     Login,
     BasisPage,
     ChatList,
+    NewSingleChat,
+    NewGroupChat,
     TaskList,
     TaskDetail,
     NewTask,
     Personal,
     AvatorSelector,
     NotificationList,
-    NotificationDetail,
-    Push
+    NotificationDetail
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Config } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Config, Events } from 'ionic-angular';
 
 import { TaskDetail } from '../task-detail/task-detail';
 import { NewTask } from '../new-task/new-task';
@@ -33,6 +33,7 @@ export class TaskList {
               public navCtrl: NavController,
               public navParams: NavParams,
               public config: Config,
+              public events: Events,
               public web_helper: HTTPService,
               public native: NativeServiceHelper) {
     this.task_status_array = ['tasks_not_done', 'tasks_done'];
@@ -69,21 +70,15 @@ export class TaskList {
   }
 
   // 再次返回页面或者初次进入页面时刷新列表数据
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.config.set('ios', 'pageTransition', 'ios-transition');
     this.currentPage = 0;
     this.hasNextPage = true;
     this.tasks_list_not_done = [];
     this.tasks_list_done = [];
-    // let p1 = this.loadList("tasks_not_done");
-    // let p2 = this.loadList("tasks_done");
     this.native.loading("请稍候...");
     this.loadList("tasks_not_done").then(
-      () => {
-        this.changeDetect.reattach()
-        this.changeDetect.detectChanges();
-        return true;
-      });
+      () => this.native.stop_loading());
   }
 
   public loadList(which_list: string): Promise<any> {

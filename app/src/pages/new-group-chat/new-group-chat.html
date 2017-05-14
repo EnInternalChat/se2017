@@ -1,0 +1,35 @@
+<!--
+  Generated template for the NewGroupChat page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="go_back()"> 
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>开启群聊</ion-title>
+    <ion-buttons right (click)="new_chat()">
+      <button ion-button clear>确认</button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list class="sections-list">
+    <ion-list-header class="company-name">
+    {{company_name}}
+    </ion-list-header>
+    <ion-item *ngFor="let item of sections; index as i;" class="section-item">
+      <ion-label class="section-depth-{{item.depth}}">{{item.name}}</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="item.checked" (click)="check_change(item, i)" [disabled]="item.checked && i !== choose_index"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
