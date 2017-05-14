@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, Nav, NavController, NavParams, Events, MenuController } from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
 import { ChatList } from '../chat-list/chat-list';
@@ -24,11 +24,12 @@ export class BasisPage {
   // root_page: any = TaskList;
   // root_page: any = Personal;
   root_page: any = NotificationList;
-  pages: Array<{title: string, component: any, icon_path: string}>;
+  pages: Array<{title: string, component: Component, icon_path: string}>;
 
   public job : string = "管理员";
 
   public constructor(
+    public menuCtrl: MenuController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public global_data: AppGlobal,
@@ -39,20 +40,31 @@ export class BasisPage {
       {title: "查看通知", component: NotificationList, icon_path: "assets/img/notification.png"},
       {title: "账户设置", component: Personal, icon_path: "assets/img/setting.png"},
     ];
-    // this.global_data = AppGlobal.get_instance();
   }
 
   public open_page(page) {
     this.nav.setRoot(page.component);
   }
 
+  public open_notification_info() {
+
+  }
+
   ionViewDidLoad() {
+    // 注册全局注销事件
     this.events.subscribe('logout', 
       () => this.navCtrl.pop());
+    // 注册全局切换页面事件
+    this.events.subscribe('open_page',
+      (page_index) => {
+        this.open_page(this.pages[page_index]);
+        return true;
+      });
   } 
 
   ionViewWillUnload() {
     this.events.unsubscribe('logout');
+    this.events.unsubscribe('open_page');
   }
 
 }

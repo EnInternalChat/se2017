@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Config } from 'ionic-angular';
 
 import { TaskDetail } from '../task-detail/task-detail';
@@ -19,21 +19,29 @@ import { Task } from '../../providers/task';
 })
 export class TaskList {
 
-  task_status_array = ['tasks_not_done', 'tasks_done'];
-  task_status : string = this.task_status_array[0];
+  task_status_array: Array<string>;
+  task_status : string;
 
-  tasks_list_not_done : Array<Task> = [];
-  tasks_list_done: Array<Task> = [];
+  tasks_list_not_done : Array<Task>;
+  tasks_list_done: Array<Task>;
 
-  public currentPage: number = 0;
-  public limit: number = 10;
-  public hasNextPage: boolean = true;
+  currentPage: number;
+  limit: number;
+  hasNextPage: boolean;
 
-  constructor(public navCtrl: NavController,
+  constructor(public changeDetect: ChangeDetectorRef,
+              public navCtrl: NavController,
               public navParams: NavParams,
               public config: Config,
               public web_helper: HTTPService,
               public native: NativeServiceHelper) {
+    this.task_status_array = ['tasks_not_done', 'tasks_done'];
+    this.task_status = this.task_status_array[0];
+    this.tasks_list_done = [];
+    this.tasks_list_not_done = [];
+    this.currentPage = 0;
+    this.limit = 10;
+    this.hasNextPage = true;
   }
 
   new_task() {
@@ -67,11 +75,15 @@ export class TaskList {
     this.hasNextPage = true;
     this.tasks_list_not_done = [];
     this.tasks_list_done = [];
-    let p1 = this.loadList("tasks_not_done");
-    let p2 = this.loadList("tasks_done");
+    // let p1 = this.loadList("tasks_not_done");
+    // let p2 = this.loadList("tasks_done");
     this.native.loading("请稍候...");
-    Promise.all([p1, p2]).then(
-      () => this.native.stop_loading());
+    this.loadList("tasks_not_done").then(
+      () => {
+        this.changeDetect.reattach()
+        this.changeDetect.detectChanges();
+        return true;
+      });
   }
 
   public loadList(which_list: string): Promise<any> {
@@ -85,8 +97,10 @@ export class TaskList {
             this.tasks_list_done.push(new Task(res[i]));
           else
             this.tasks_list_not_done.push(new Task(res[i]));
-          return true;
         }
+        console.log("list_not_done: ", this.tasks_list_not_done);
+        console.log("list_done: ", this.tasks_list_done);
+        return true;
       },
       (error) => this.native.show_toast("网络连接异常！"));
 
@@ -95,6 +109,8 @@ export class TaskList {
   public doRefresh(refresher) {
     this.currentPage = 0;
     this.hasNextPage = true;
+    this.tasks_list_done = [];
+    this.tasks_list_not_done = [];
     this.loadList("tasks_not_done").then(
       () => refresher.complete());
   }

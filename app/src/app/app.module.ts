@@ -20,6 +20,8 @@ import { AvatorSelector } from '../pages/avator-selector/avator-selector';
 import { NotificationList } from '../pages/notification-list/notification-list';
 import { NotificationDetail } from '../pages/notification-detail/notification-detail';
 
+import { Push } from '../pages/push/push';
+
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
 import { StorageHelper } from '../providers/storage_helper';
@@ -40,7 +42,8 @@ import { MyTimeFormat } from '../providers/pipes';
     AvatorSelector,
     NotificationList,
     NotificationDetail,
-    MyTimeFormat
+    MyTimeFormat,
+    Push
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { MyTimeFormat } from '../providers/pipes';
     Personal,
     AvatorSelector,
     NotificationList,
-    NotificationDetail
+    NotificationDetail,
+    Push
   ],
   providers: [
     StatusBar,

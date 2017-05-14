@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 
 @Injectable()
 export class StorageHelper {

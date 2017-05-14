@@ -1,14 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav, Keyboard, ToastController } from 'ionic-angular';
+import { Platform, MenuController, Nav, Keyboard, Events } from 'ionic-angular';
 
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { NativeServiceHelper } from '../providers/native_service_helper';
 
+import { Push } from '../pages/push/push';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+declare let window;
 
 @Component({
   templateUrl: 'app.html'
@@ -16,9 +19,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // rootPage = Login;
-  rootPage = BasisPage;
-  pages: Array<{title: string, component: any}>;
+  rootPage = Login;
+  // rootPage = BasisPage;
+  // rootPage = Push;
   backPressed: boolean = false;
 
   constructor(
@@ -26,16 +29,10 @@ export class MyApp {
     public menu: MenuController,
     public statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private toastCtrl: ToastController,
+    private events: Events,
     private keyBoard: Keyboard,
-    private native: NativeServiceHelper,
-  ) {
+    private native: NativeServiceHelper) {
     this.initializeApp();
-
-    // set our app's pages
-    this.pages = [
-      { title: 'Login', component: Login },
-    ];
   }
 
   initializeApp() {
@@ -47,6 +44,7 @@ export class MyApp {
       if(!this.native.is_network_connect()) {
         this.native.show_toast("无网络连接", 2000);
       }
+      this.initJPush();
       this.platform.registerBackButtonAction(() => {
         if(this.keyBoard.isOpen()) {
           this.keyBoard.close();
@@ -58,11 +56,35 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+  initJPush() {
+    if(!this.platform.is('android') && !this.platform.is('ios'))
+      return;
+    //启动极光推送
+    if(window.plugins && 　window.plugins.jPushPlugin) {
+      window.plugins.jPushPlugin.init();
+      document.addEventListener("jpush.openNotification", 
+        () => {
+          let keys_dict;
+          if(this.platform.is('android')) {
+            keys_dict = window.plugins.jPushPlugin.openNotification.extras;
+          }
+          else if(this.platform.is('ios')) {
+            keys_dict = window.plugins.jPushPlugin.openNotification;
+          }
+          this.events.publish('open_page', keys_dict['page']);
+          return true;
+          // this.msgList.push({content:window.plugins.jPushPlugin.receiveNotification.alert})
+        }, false);
+    }
+  }
+
+  setAlias() {
+    //设置Alias
+    // if (this.alias && this.alias.trim() != '') {
+    //   window.plugins.jPushPlugin.setAlias(this.alias);
+    // }
+    // else 
+    //   alert('Alias不能为空');
   }
 
   public show_exit_toast() {
