@@ -21,7 +21,7 @@
 			"ID":3,
 			"name":"分公司",
 			"leaderID":500,				
-			"membersID":[14,344],
+			"membersID":[1804,34477],
 			"note":"It's core production developing center.",
 			"childrenSections":[]
 		},
@@ -29,7 +29,7 @@
 			"ID":11,
 			"name":"副总经理1",
 			"leaderID":500,				
-			"membersID":[6789],
+			"membersID":[6766666],
 			"note":"It's core production developing center.",
 			"childrenSections":[300,80,90]
 		},
@@ -77,7 +77,7 @@
 			"ID":360,
 			"name":"网络部",
 			"leaderID":100,				
-			"membersID":[141,344,34224],
+			"membersID":[141,3448888,34224],
 			"note":"It's core production developing center.",
 			"childrenSections":[]
 		},
@@ -128,7 +128,7 @@
 			"membersID":[70788,6],
 			"note":"It's core production developing center.",
 			"childrenSections":[]
-		}
+		},
 		{
 			"ID":7227,
 			"name":"客户服务",
