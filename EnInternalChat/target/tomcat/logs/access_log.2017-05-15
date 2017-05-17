@@ -1,2 +1,4 @@
-0:0:0:0:0:0:0:1 - - [15/May/2017:01:45:22 +0800] "GET /testMongo HTTP/1.1" 200 - http-bio-80-exec-2 43061
-0:0:0:0:0:0:0:1 - - [15/May/2017:01:47:41 +0800] "GET /testMongo HTTP/1.1" 200 - http-bio-80-exec-2 7067
+0:0:0:0:0:0:0:1 - - [15/May/2017:20:00:44 +0800] "GET /testMongo HTTP/1.1" 500 14119 http-bio-80-exec-2 29721
+0:0:0:0:0:0:0:1 - - [15/May/2017:20:02:32 +0800] "GET /testMongo HTTP/1.1" 200 - http-bio-80-exec-2 44669
+0:0:0:0:0:0:0:1 - - [15/May/2017:20:06:42 +0800] "GET /testMongo HTTP/1.1" 500 16719 http-bio-80-exec-2 12567
+0:0:0:0:0:0:0:1 - - [15/May/2017:20:22:22 +0800] "GET /testMongo HTTP/1.1" 500 16719 http-bio-80-exec-2 11709

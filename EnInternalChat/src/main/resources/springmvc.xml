@@ -40,9 +40,9 @@
         <constructor-arg name="databaseName" value="EnInternalChatTest"/>
     </bean>
 
-    <context:annotation-config/>
-    <bean id="lettuceConnectionFactory"
-          class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"
-          p:host-name="10.0.0.102" p:port="6379"/>
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    <!--<context:annotation-config/>-->
+    <!--<bean id="lettuceConnectionFactory"-->
+          <!--class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"-->
+          <!--p:host-name="123.206.121.176" p:port="6379"/>-->
+    <!--<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>-->
 </beans>

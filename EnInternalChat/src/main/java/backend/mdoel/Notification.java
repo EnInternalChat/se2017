@@ -2,22 +2,43 @@ package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lenovo on 2017/5/14.
  */
 public class Notification {
     @Id
     private long ID;
+    private long companyID;
     private long senderID;
-    private long rcvSecID;
     private long sentTime;
     private String content;
     private String senderName;
-    private String rcvSecName;
+    private String title;
+    private List<Long> rcvSecID;
 
     public Notification(long sentTime) {
         this.sentTime = sentTime;
         senderID=233;
+        rcvSecID=new ArrayList<>();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(long companyID) {
+        this.companyID = companyID;
     }
 
     public void setID(int ID) {
@@ -28,10 +49,6 @@ public class Notification {
         this.senderID = senderID;
     }
 
-    public void setRcvSecID(int rcvSecID) {
-        this.rcvSecID = rcvSecID;
-    }
-
     public void setContent(String content) {
         this.content = content;
     }
@@ -40,20 +57,12 @@ public class Notification {
         this.senderName = senderName;
     }
 
-    public void setRcvSecName(String rcvSecName) {
-        this.rcvSecName = rcvSecName;
-    }
-
     public long getID() {
         return ID;
     }
 
     public long getSenderID() {
         return senderID;
-    }
-
-    public long getRcvSecID() {
-        return rcvSecID;
     }
 
     public long getSentTime() {
@@ -66,9 +75,5 @@ public class Notification {
 
     public String getSenderName() {
         return senderName;
-    }
-
-    public String getRcvSecName() {
-        return rcvSecName;
     }
 }

@@ -3,6 +3,7 @@ package backend.mdoel;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,11 +18,11 @@ public class Employee {
     private String name;
     private String pwd;
     private String position;
-    private ArrayList<String> phone;
-    private ArrayList<String> email;
-    private ArrayList<Map<String, Object>> chats;
-    private ArrayList<Map<String, Object>> notifications;
-    private ArrayList<Map<String, Object>> tasks;
+    private List<String> phone;
+    private List<String> email;
+    private List<Map<String, Object>> chats;
+    private List<Map<String, Object>> notifications;
+    private List<Map<String, Object>> tasks;
     private boolean gender;
 
     public Employee() {
@@ -75,7 +76,7 @@ public class Employee {
         this.gender = gender;
     }
 
-    public ArrayList<String> getPhone() {
+    public List<String> getPhone() {
         return phone;
     }
 
@@ -83,7 +84,7 @@ public class Employee {
         this.phone = phone;
     }
 
-    public ArrayList<String> getEmail() {
+    public List<String> getEmail() {
         return email;
     }
 
@@ -111,15 +112,15 @@ public class Employee {
         this.pwd = pwd;
     }
 
-    public ArrayList<Map<String, Object>> getChats() {
+    public List<Map<String, Object>> getChats() {
         return chats;
     }
 
-    public ArrayList<Map<String, Object>> getNotifications() {
+    public List<Map<String, Object>> getNotifications() {
         return notifications;
     }
 
-    public ArrayList<Map<String, Object>> getTasks() {
+    public List<Map<String, Object>> getTasks() {
         return tasks;
     }
 

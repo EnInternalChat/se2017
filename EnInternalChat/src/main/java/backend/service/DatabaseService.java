@@ -2,6 +2,7 @@ package backend.service;
 
 import backend.mdoel.Company;
 import backend.mdoel.Employee;
+import backend.mdoel.Process;
 import backend.repository.*;
 import backend.util.SectionTree;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,16 @@ import java.util.Map;
 public class DatabaseService {
     private final EmployeeRepository employeeRepository;
     private final NotificationRepository notificationRepository;
-    private final TaskRepository taskRepository;
+    private final ProcessRepository processRepository;
     private final ChatRepository chatRepository;
     private final CompanyRepository companyRepository;
     private final SectionRepository sectionRepository;
 
     @Autowired
-    public DatabaseService(EmployeeRepository employeeRepository, NotificationRepository notificationRepository, TaskRepository taskRepository, ChatRepository chatRepository, CompanyRepository companyRepository, SectionRepository sectionRepository) {
+    public DatabaseService(EmployeeRepository employeeRepository, NotificationRepository notificationRepository, ProcessRepository processRepository, ChatRepository chatRepository, CompanyRepository companyRepository, SectionRepository sectionRepository) {
         this.employeeRepository = employeeRepository;
         this.notificationRepository = notificationRepository;
-        this.taskRepository = taskRepository;
+        this.processRepository = processRepository;
         this.chatRepository = chatRepository;
         this.companyRepository=companyRepository;
         this.sectionRepository=sectionRepository;
@@ -56,7 +57,12 @@ public class DatabaseService {
         return result;
     }
 
-        public Company doWork() {
+    public boolean addProcessToDb(Process process) {
+        processRepository.save(process);
+        return true;
+    }
+
+        public void doWork() {
 //
 //        Employee employee=new Employee();
 //        employee.setName("fog");
@@ -73,7 +79,7 @@ public class DatabaseService {
 //        employee=repository.save(employee);
 //        List<Employee> result=repository.findByName("fog");
 //        System.out.println(result);
-            return companyRepository.findOne((long) 1);
+            System.out.println(companyRepository.findOne((long) 1));
     }
 
 }
