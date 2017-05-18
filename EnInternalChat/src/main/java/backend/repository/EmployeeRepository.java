@@ -1,14 +1,17 @@
 package backend.repository;
 
 import backend.mdoel.Employee;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by lenovo on 2017/5/7.
  */
-public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+
+@Repository
+public interface EmployeeRepository extends MongoRepository<Employee, Long> {
     List<Employee> findBySectionIDAndCompanyID (long companyID, long sectionID);
     List<Employee> findByCompanyID(long companyID);
 }

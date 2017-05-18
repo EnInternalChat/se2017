@@ -1,6 +1,7 @@
 package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.Map;
 /**
  * Created by lenovo on 2017/5/7.
  */
+
+@Document
 public class Employee {
     @Id
     private long ID;
@@ -16,7 +19,7 @@ public class Employee {
     private long sectionID;
     private int avatar;
     private String name;
-    private String pwd;
+    private String password;
     private String position;
     private List<String> phone;
     private List<String> email;
@@ -24,16 +27,25 @@ public class Employee {
     private List<Map<String, Object>> notifications;
     private List<Map<String, Object>> tasks;
     private boolean gender;
+    private boolean active;
 
     public Employee() {
         sectionID=companyID=233;
         avatar=2;
-        pwd=position=name="dfsgsdfhfgjdfj";
+        password=position=name="dfsgsdfhfgjdfj";
         phone=new ArrayList<>();
         email=new ArrayList<>();
         chats=new ArrayList<>();
         notifications=new ArrayList<>();
         tasks=new ArrayList<>();
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public long getCompanyID() {
@@ -104,12 +116,12 @@ public class Employee {
         this.name = name;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Map<String, Object>> getChats() {
@@ -139,4 +151,15 @@ public class Employee {
         return true;
     }
 
+    public boolean addPhone(String newPhone) {
+        if(!phone.contains(newPhone)) return false;
+        phone.add(newPhone);
+        return true;
+    }
+
+    public boolean addMail(String newEmail) {
+        if(!email.contains(newEmail)) return false;
+        email.add(newEmail);
+        return true;
+    }
 }

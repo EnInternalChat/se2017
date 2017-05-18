@@ -166,8 +166,9 @@ public class DataProcessCenter {
         Process process=new Process(companyID,name,path,timestamp,timestamp,0);
         return databaseService.addProcessToDb(process);
     }
-
-    public boolean updateProcessTime() {
-        long timestamp=System.currentTimeMillis();
-    }
+//
+//    public boolean updateProcessTime() {
+//        long timestamp=System.currentTimeMillis();
+//        return true;
+//    }
 }

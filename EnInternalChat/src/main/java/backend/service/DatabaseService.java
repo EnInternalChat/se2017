@@ -8,6 +8,7 @@ import backend.util.SectionTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,40 +47,31 @@ public class DatabaseService {
         List<Employee> employees=employeeRepository.findByCompanyID(companyID);
         result.put("total",employees.size());
         result.put("employees",employees);
-        return result;
+        return result;//TODO different data
     }
 
     public Map<String, Object> colSecEmployeeData(long companyID, long sectionID) {
         Map<String,Object> result=new HashMap<>();
         List<Employee> employees=employeeRepository.findBySectionIDAndCompanyID(companyID,sectionID);
         result.put("total",employees.size());
-        result.put("employees",employees);
+        result.put("employees",employees);//TODO frontend different data
         return result;
     }
+
+
 
     public boolean addProcessToDb(Process process) {
         processRepository.save(process);
         return true;
     }
 
-        public void doWork() {
-//
-//        Employee employee=new Employee();
-//        employee.setName("fog");
-//        employee.setGender(false);
-//        employee=repository.save(employee);
-//        employee=new Employee();
-//        employee.setAvatar(1);
-//        employee.setName("fog");
-//        employee.setPwd("ddd");
-//        ArrayList<String> ll=new ArrayList<>();
-//        ll.add("ssss");
-//        ll.add("qqqqqqqqq");
-//        employee.setPhone(ll);
-//        employee=repository.save(employee);
-//        List<Employee> result=repository.findByName("fog");
-//        System.out.println(result);
-            System.out.println(companyRepository.findOne((long) 1));
+    public void doWork() {
+        ArrayList<String> test=new ArrayList<>();
+        test.add("1111");
+        test.add("e35564543");
+        Employee employee=employeeRepository.findOne((long) 28);
+        employee.setPassword("sssssssssss");
+        employeeRepository.save(employee);
     }
 
 }

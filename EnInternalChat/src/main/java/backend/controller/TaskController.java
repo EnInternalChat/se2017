@@ -25,6 +25,7 @@ import java.util.Map;
  */
 
 @Controller
+@RequestMapping(value = "/task")
 public class TaskController {
     @Autowired
     DataProcessCenter dataProcessCenter;
@@ -76,13 +77,13 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/task", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public List<Map<String,Object>> allTask() {
         return dataProcessCenter.tasks();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/task/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
         String token=request.getHeader("");
         //TODO headername
