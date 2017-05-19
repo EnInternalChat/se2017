@@ -1,7 +1,9 @@
 package backend.controller;
 
+import backend.mdoel.Process;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,13 +14,12 @@ import java.util.Map;
 /**
  * Created by lenovo on 2017/5/4.
  */
+
+@Component
 public class DataProcessCenter {
-    private final DatabaseService databaseService;
 
     @Autowired
-    public DataProcessCenter(DatabaseService databaseService) {
-        this.databaseService=databaseService;
-    }
+    private DatabaseService databaseService;
 
     static SimpleDateFormat timeParse=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     public List<Map<String,Object>> notifications() {
@@ -153,4 +154,21 @@ public class DataProcessCenter {
         alltask.add(one);
         return alltask;
     }
+
+    public void testWork() {
+        databaseService.doWork();
+    }
+
+    public boolean addNewProcess(String token, String name, String path) {
+        long timestamp=System.currentTimeMillis();
+        long companyID=0;
+        //TODO getid
+        Process process=new Process(companyID,name,path,timestamp,timestamp,0);
+        return databaseService.addProcessToDb(process);
+    }
+//
+//    public boolean updateProcessTime() {
+//        long timestamp=System.currentTimeMillis();
+//        return true;
+//    }
 }

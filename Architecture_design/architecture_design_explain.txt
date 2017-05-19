@@ -41,9 +41,8 @@ employee example:[
 	{
 		ID:23,
 		name:"sabi",
-		password:"sdaaa",
-		pwdmd5:"aeb6f78a3e53dcc3312c702b6d2a5d93",
-		positionID:233,
+		pwd:"aeb6f78a3e53dcc3312c702b6d2a5d93",
+		sectionID:233,
 		position:"A product manager";
 		gender:true,
 		avaator:1
@@ -55,14 +54,14 @@ employee example:[
 			{notificationID:12333}
 		],
 		chats:[
-			{chatID:"2-144-5342", pieces:234, delete:true},
-			{chatID:"2-144-5342", pieces:0},
-			{chatID:"2-144-5342", pieces:34}
+			{"chatID":5342, "pieces":234, "delete":true},
+			{"chatID":5342, "pieces":0},
+			{"chatID":5342, "pieces":34}
 		],
 		tasks:[
-			{taskID:"2ANd790912", status:[(task url)], over:true},
-			{taskID:"2ANd790912", status:[(task url)], over:true, delete:true},
-			{taskID:"0GNn790S17", status:[(task url)], over:false}
+			{taskID:2342, over:true},
+			{taskID:224, over:true, delete:true},
+			{taskID:1256, over:false}
 		]
 	},
 	{
