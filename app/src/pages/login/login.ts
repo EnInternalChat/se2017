@@ -21,8 +21,6 @@ import { MD5 } from '../../providers/secure_md5';
   templateUrl: 'login.html',
 })
 export class Login {
-  // global_data: AppGlobal = AppGlobal.get_instance();
-  // private storage: StorageHelper = StorageHelper.get_instance();
 
   username: string;
   password: string;
@@ -30,7 +28,6 @@ export class Login {
   auto_login: boolean;
 
   password_is_md5: boolean;
-  // md5_helper: MD5;
 
   constructor(private native: NativeServiceHelper,
               private web_helper: HTTPService,
@@ -99,6 +96,10 @@ export class Login {
         return true;
       },
       (error) => {
+        if(this.remember_password) {
+          this.storage.storage_info("username", this.username);
+          this.storage.storage_info("password", password_md5);
+        }
         this.native.stop_loading();
         this.native.show_toast("请检查网络");
         this.nav_ctrl.push(BasisPage);

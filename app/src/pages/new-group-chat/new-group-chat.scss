@@ -49,7 +49,7 @@ page-new-group-chat {
   @for $i from 1 through 10 {
     .section-depth-#{$i} {
       margin-right: 0px;
-      margin-left: 24px * ($i - 1) !important;
+      margin-left: 32px * ($i - 1) !important;
       margin-top: 0px;
       margin-bottom: 0px;
       padding-top: 8px;

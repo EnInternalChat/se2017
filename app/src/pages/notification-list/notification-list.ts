@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NotificationDetail } from '../notification-detail/notification-detail';
 import { Notice } from '../../providers/notification';
 import { HTTPService } from '../../providers/http_helper';
-import { MyTimeFormat } from '../../providers/pipes';
+import { NativeServiceHelper } from '../../providers/native_service_helper';
 
 /**
  * Generated class for the NotificationList page.
@@ -26,7 +26,18 @@ export class NotificationList {
   public notice_list_read : Array<Notice> = [];
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public web_helper: HTTPService) {
+              public web_helper: HTTPService,
+              public native: NativeServiceHelper) {
+  }
+
+  ionViewWillEnter() {
+    this.notice_list_read = [];
+    this.notice_list_not_read = [];
+    this.update_notice_list();
+  }
+
+  public update_notice_list(){
+    this.native.loading();
     this.web_helper.get("assets/data/notices.json", null).then(
       (res) => {
         let new_notice: Notice;
@@ -37,8 +48,11 @@ export class NotificationList {
           else
             this.notice_list_not_read.push(new_notice);
         }
-        console.log("list: ", this.notice_list_not_read);
-        // this.task_detail(this.tasks_list_not_done[0]);
+        this.native.stop_loading();
+      },
+      (error) => {
+        this.native.stop_loading();
+        this.native.show_toast("获取通知信息失败");
       });
   }
 

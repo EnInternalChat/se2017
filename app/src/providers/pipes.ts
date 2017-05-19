@@ -29,3 +29,14 @@ export class MyTimeFormat implements PipeTransform {
     }
   }
 }
+
+
+@Pipe(
+{
+  name: 'markdown_parser',
+})
+export class MarkDownParser implements PipeTransform {
+  transform(value: string, args: string[]): any {
+    return value.replace(/[#\*\+~=\^!\[\]\(\)`>]/g, "");
+  }
+}

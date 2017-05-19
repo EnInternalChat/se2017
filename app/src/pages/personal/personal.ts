@@ -79,12 +79,22 @@ export class Personal {
       {
         text: "确认",
         handler: data => {
-          if(data.pwd_new != data.pwd_new_check)
+          if(data.pwd_old === '') 
+            this.native.show_toast("旧密码不能为空");
+          else if(data.pwd_new === '' || data.pwd_new_check === '')
+            this.native.show_toast("新密码不能为空");
+          else if(data.pwd_new != data.pwd_new_check) 
             this.native.show_toast("两次新密码不一致");
-          else if (!this.change_password(data.pwd_old, data.pwd_new))
-            this.native.show_toast("修改密码失败");
-          else
-            return true;
+          else {
+            this.change_password(data.pwd_old, data.pwd_new).then(
+              (result) => {
+                if(result)
+                  password_prompt.dismiss().then(
+                    () => this.native.show_toast("修改密码成功"));
+                else
+                  this.native.show_toast("修改密码失败");
+              });
+          }
           return false;
         }
       }]
@@ -92,22 +102,19 @@ export class Personal {
     password_prompt.present(); 
   }
 
-  change_password(pwd_old: string, pwd_new: string):boolean {
-    this.native.loading("请稍候...");
-    this.web_helper.post("/personal/update", {
+  change_password(pwd_old: string, pwd_new: string):Promise<any> {
+    this.native.loading();
+    return this.web_helper.post("/personal/update", {
       "oldPwd": this.global_data.encrypt_pwd(pwd_old),
       "newPwd": this.global_data.encrypt_pwd(pwd_new)
     }).then(
     (data) => {
-      console.log("Response: ", data);
       this.native.stop_loading();
       return true;
     },
     (error) => {
-      console.log(error);
       this.native.stop_loading();
       return false;
     });
-    return false;
   }
 }

@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { ChatList } from '../pages/chat-list/chat-list';
+import { ChatDetail } from '../pages/chat-detail/chat-detail';
 import { NewGroupChat } from '../pages/new-group-chat/new-group-chat';
 import { NewSingleChat } from '../pages/new-single-chat/new-single-chat';
 import { TaskList } from '../pages/task-list/task-list';
@@ -24,10 +25,11 @@ import { NotificationDetail } from '../pages/notification-detail/notification-de
 
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { HTTPService } from '../providers/http_helper';
+import { ChatService } from '../providers/chats_service';
 import { StorageHelper } from '../providers/storage_helper';
 import { MD5 } from '../providers/secure_md5';
 import { AppGlobal } from '../providers/global_data';
-import { MyTimeFormat } from '../providers/pipes';
+import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MyTimeFormat } from '../providers/pipes';
     Login,
     BasisPage,
     ChatList,
+    ChatDetail,
     NewGroupChat,
     NewSingleChat,
     TaskList,
@@ -44,7 +47,8 @@ import { MyTimeFormat } from '../providers/pipes';
     AvatorSelector,
     NotificationList,
     NotificationDetail,
-    MyTimeFormat
+    MyTimeFormat,
+    MarkDownParser
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,7 @@ import { MyTimeFormat } from '../providers/pipes';
     Login,
     BasisPage,
     ChatList,
+    ChatDetail,
     NewSingleChat,
     NewGroupChat,
     TaskList,
@@ -79,6 +84,7 @@ import { MyTimeFormat } from '../providers/pipes';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NativeServiceHelper,
     HTTPService,
+    ChatService,
     StorageHelper,
     AppGlobal,
     MD5

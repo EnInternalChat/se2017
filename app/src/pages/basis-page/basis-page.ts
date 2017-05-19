@@ -2,10 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, NavParams, Events, MenuController } from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
+import { ChatService } from '../../providers/chats_service';
 import { ChatList } from '../chat-list/chat-list';
 import { TaskList } from '../task-list/task-list';
 import { Personal } from '../personal/personal';
 import { NotificationList } from '../notification-list/notification-list';
+
+import { NativeServiceHelper } from '../../providers/native_service_helper';
 
 /**
  * Generated class for the BasisPage page.
@@ -34,6 +37,7 @@ export class BasisPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public global_data: AppGlobal,
+    public chat_service: ChatService,
     public events: Events) {
     this.pages = [
       {title: "聊天管理", component: ChatList, icon_path: "assets/img/chat.png"},
@@ -52,9 +56,17 @@ export class BasisPage {
   }
 
   ionViewDidLoad() {
+    this.chat_service.login('testuser', '123456').then(
+      (data) => console.log("登录成功"),
+      (error) => console.log("登录失败"));
     // 注册全局注销事件
     this.events.subscribe('logout', 
-      () => this.navCtrl.pop());
+      () => {
+        this.chat_service.logout().then(
+          (data) => console.log("注销成功"),
+          (error) => console.log("注销失败")).then(
+          () => this.navCtrl.pop());
+      });
     // 注册全局切换页面事件
     this.events.subscribe('open_notice',
       (page_index) => {

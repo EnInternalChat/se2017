@@ -35,7 +35,7 @@
             <span class="notice-time">{{item.send_time | time_format}}</span>
           </div>
           <div class="notice-content">
-            {{item.content}}
+            {{item.content | markdown_parser}}
           </div>
         </div>
         <div class="notice-detail-button">
@@ -53,7 +53,7 @@
             <span class="notice-time">{{item.send_time | time_format}}</span>
           </div>
           <div class="notice-content">
-            {{item.content}}
+            {{item.content | markdown_parser}}
           </div>
         </div>
         <div class="notice-detail-button">

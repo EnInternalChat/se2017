@@ -18,6 +18,25 @@
 
 <ion-content padding>
 
+  <ion-list class="conversation-list">
+    <ion-item *ngFor="let item of conversation_list">
+      <ion-avatar item-left>
+        <img src="assets/img/avator/{{item.avator}}.png">
+      </ion-avatar>   
+      <div class="conversation-info">
+        <div>
+          <div class="send-person">{{item.send_user_name}}</div>
+          <div class="send-time">{{item.last_msg_date | date: 'y-MM-ddTHH:mm' | time_format}}</div>
+        </div>
+        <div class="content">
+          <div class="msg-content" *ngIf="!item.is_text_img">{{item.last_text}}</div>
+          <div class="msg-content" *ngIf="item.is_text_img">[图片]</div>
+          <ion-badge class="unread-msg-count" color="accent" *ngIf="item.unread_message_n >= 1">{{item.unread_message_n}}</ion-badge>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
   <ion-fab bottom right >
     <button ion-fab color="danger" large>
       <ion-icon name="md-add"></ion-icon>

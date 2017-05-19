@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { NotificationList } from './notification-list';
-import { MyTimeFormat } from '../../providers/pipes';
+import { MyTimeFormat, MarkDownParser } from '../../providers/pipes';
 
 @NgModule({
   declarations: [
     NotificationList,
-    MyTimeFormat
+    MyTimeFormat,
+    MarkDownParser
   ],
   imports: [
     IonicModule.forRoot(NotificationList),

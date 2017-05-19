@@ -6,8 +6,6 @@ import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { NativeServiceHelper } from '../providers/native_service_helper';
 
-import { Push } from '../pages/push/push';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -19,8 +17,8 @@ declare let window;
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // rootPage = Login;
-  rootPage = BasisPage;
+  rootPage = Login;
+  // rootPage = BasisPage;
   backPressed: boolean = false;
 
   constructor(
@@ -49,6 +47,7 @@ export class MyApp {
           this.keyBoard.close();
           return;
         }
+        this.native.stop_loading();
         this.show_exit_toast();
         return;
       }, 1);
@@ -72,6 +71,10 @@ export class MyApp {
           }
           this.events.publish('open_notice', keys_dict['page']);
           return true;
+        }, false);
+      document.addEventListener("jmessage.onReceiveMessage",
+        (msg: any) => {
+          console.log(new Date(), ": ", msg.content);
         }, false);
     }
   }

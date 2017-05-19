@@ -88,10 +88,11 @@ export class TaskList {
         if(this.hasNextPage)
           this.currentPage++;
         for (let i = 0, n = res.length; i < n; i++) {
-          if(res[i].over)
-            this.tasks_list_done.push(new Task(res[i]));
+          let new_task = new Task(res[i]);
+          if(new_task.over)
+            this.tasks_list_done.push(new_task);
           else
-            this.tasks_list_not_done.push(new Task(res[i]));
+            this.tasks_list_not_done.push(new_task);
         }
         console.log("list_not_done: ", this.tasks_list_not_done);
         console.log("list_done: ", this.tasks_list_done);

@@ -4,6 +4,63 @@ page-chat-list {
     color: map-get($colors, primary);
   }
 
+  .scroll-content {
+    padding: 0px !important;
+  }
+
+  .conversation-list {
+    margin-top: 4px;
+    .item-block {
+      padding: 4px 0px 4px 16px;
+      &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: 0.55px solid #c8c7cc;        
+      }
+    }
+    .label {
+      margin: 0px;
+    }
+    .conversation-info {
+      width: 100%;
+      display: inline-block;
+      .send-person {
+        width: 40%;
+        display: inline-block;
+        color: map-get($colors, primary_text);
+        font-size: 1.4rem;
+      }
+      .send-time {
+        width: 55%;
+        display: inline-block;
+        text-align: right;
+        color: map-get($colors, third_text);
+        font-size: 1.4rem;
+      }
+      .content {
+        width: 100%;
+        .msg-content {
+            width: 80%;
+            display: inline-block;
+            margin-right: 10%;
+            color: map-get($colors, third_text);
+            font-size: 1.6rem;
+            text-overflow: ellipsis; // 让超出的用...实现
+            white-space: nowrap; // 禁止换行
+            overflow-x: hidden;  // 超出的隐藏
+          }
+          .unread-msg-count {
+            position: absolute;
+            margin-top: 2px;
+            display: inline-block;
+            border-radius: 50%;
+            padding: 4px 6px;
+          }
+        }
+      }
+  }
+
   .button-in-fab {
     color: map-get($colors, light);
     background-color: map-get($colors, primary);
