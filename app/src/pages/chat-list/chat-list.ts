@@ -34,15 +34,12 @@ export class ChatList {
   }
 
   ionViewDidLoad() {
-    this.events.subscribe('fresh_conversation_list', 
-      () => this.update_conversation_list());
   }
 
   ionViewWillUnload() {
-    this.events.unsubscribe('fresh_conversation_list');
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.update_conversation_list();
   }
 
@@ -89,7 +86,7 @@ export class ChatList {
   }
 
   public conversation_detail(conversation) {
-    this.navCtrl.push(ChatDetail, {data: conversation});
+    this.navCtrl.push(ChatDetail, {conversation: conversation});
   }
 
   public new_group_chat() {

@@ -6,13 +6,79 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>chat-detail</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="go_back()"> 
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <div>{{con_title}}</div>
+    </ion-title> 
+  </ion-toolbar>
 
 </ion-header>
 
+<ion-content>
+  <ion-refresher (ionRefresh)="load_more($event)" class="load-more">
+    <ion-refresher-content pullingText="下拉加载更多" refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
 
-<ion-content padding>
+ <ion-list no-lines class="msg-list">
+  <ion-item>
+    <div class="msg-other">
+      <div class="sender-avator">
+        <img src="assets/img/avator/3.png">
+      </div>
+      <div class="msg-info">
+        <div class="sender-person">张三</div>
+        <div class="msg-detail">
+          <ion-card class="msg-content">
+            <ion-card-content>测试信息测试信息测试信息测试信息测试信息测试信息测</ion-card-content>
+          </ion-card>        
+        </div>
+      </div>
+    </div>
+<!--     <div class="msg-my">   
+      <div class="msg-info">
+        <div class="msg-detail">
+          <ion-card class="msg-content">
+            <ion-card-content>测试信息测试信息测试信息测试信息测试信息测试信息测试信息</ion-card-content>
+          </ion-card>        
+        </div>
+      </div>
+      <div class="sender-avator">
+        <img src="assets/img/avator/3.png">
+      </div>   
+    </div> -->
+  </ion-item>
+  <ion-item>
+    <div class="msg-my">   
+      <div class="msg-info">
+        <div class="msg-detail">
+          <ion-card class="msg-content">
+            <ion-card-content>测试信息测试信息测试信息测试信息测试信息测试信息测试信息</ion-card-content>
+          </ion-card>        
+        </div>
+      </div>
+      <div class="sender-avator">
+        <img src="assets/img/avator/3.png">
+      </div>   
+    </div>
+  </ion-item>
+</ion-list>
 
 </ion-content>
+
+<ion-footer class="msg-input-bar">
+  <div>
+    <button ion-button class="msg-add-img" large>
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+    <ion-input class="msg-input"></ion-input>
+    <button ion-button class="msg-send" large>
+      <ion-icon name="md-send"></ion-icon>
+    </button>
+  </div>
+</ion-footer>

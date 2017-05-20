@@ -1,3 +1,197 @@
 page-chat-detail {
+  .toolbar-title-ios {
+    color: map-get($colors, primary);
+  }
+  .has-refresher > .scroll-content {
+    border-top: none;
+  }
 
+  .msg-list {
+    .item-block {
+      padding-left: 12px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      .item-inner {
+        padding-right: 0px;
+        .label {
+          margin: 2px 0px 2px 0px;
+        }
+      }
+    }
+  }
+
+  .msg-other {
+    min-height: 64px;
+    .sender-avator {
+      width: 20%;
+      display: inline-block;
+      top: 10%;
+      position: absolute;
+      img {
+        width: 90%;
+        margin-bottom: 20%;
+      }
+    }
+    .msg-info {
+      max-width: 80%;
+      display: inline-block;
+      margin-left: 20%;
+      .sender-person {
+        color: map-get($colors, primary_text);
+        font-size: 1.4rem;
+        margin-left: 8px;
+      }
+      .msg-detail {
+        &:before {
+          content: '';
+          position: absolute;
+          top: 36px;
+          left: 20%;
+          width: 0; 
+          height: 0; 
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent; 
+          border-left: 10px solid transparent;
+          border-right: 10px solid map-get($colors, primary_light);
+        }
+        .msg-content {
+          margin: 8px;
+          padding: 6px 16px 6px 12px;
+          background-color: map-get($colors, primary_light);
+          .card-content {
+            padding: 0px;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            color: map-get($colors, primary_text);
+            word-wrap:break-word; 
+            word-break:normal;
+            white-space: normal;
+            &:after {
+              content: '\A';
+              white-space: pre;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  .msg-my {
+    min-height: 64px;
+    .sender-avator {
+      width: 20%;
+      display: inline-block;
+      position: absolute;
+      top: 10%;
+      img {
+        width: 90%;
+        margin-bottom: 20%;
+      }
+    }
+    .msg-info {
+      max-width: 80%;
+      display: inline-block;
+      .msg-detail {
+        margin-top: 8px;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 20px;
+          right: 18%;
+          width: 0; 
+          height: 0; 
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent; 
+          border-left: 10px solid #ffddd2;
+          border-right: 10px solid transparent;
+        }
+        .msg-content {
+          z-index: 0;
+          margin: 8px;
+          width: calc(100% - 22px);
+          padding: 6px 16px 6px 12px;
+          background-color: #ffddd2;
+          .card-content {
+            padding: 0px;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            color: map-get($colors, primary_text);
+            word-wrap:break-word; 
+            word-break:normal;
+            white-space: normal;
+            &:after {
+              content: '\A';
+              white-space: pre;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  .load-more {
+    .refresher-pulling {
+      .refresher-pulling-icon {
+        color: map-get($colors, primary_dark);
+      }
+      .refresher-pulling-text {
+        color: map-get($colors, third_text);
+      }
+    }
+    .refresher-refreshing {
+      .refresher-refreshing-icon .spinner svg {
+        circle {
+          stroke: map-get($colors, primary_dark);
+        }
+        line {
+          stroke: map-get($colors, primary_dark);
+        }
+      }
+      .refresher-refreshing-text {
+        color: map-get($colors, third_text);
+      }
+    }
+  } 
+
+  .msg-input-bar {
+    background-color: map-get($colors, light);
+    .msg-add-img {
+      margin-left: 8px;
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+    }
+    .msg-input {
+      margin-left: 64px;
+      position: absolute;
+      display: inline-block;
+      margin: 4px 4px 4px 4px;
+      padding-left: 4px;
+      padding-right: 4px;
+      width: calc(100% - 124px);
+      height: 48px;
+      border-radius: 4px;
+      font-size: 1.6rem;
+      color: map-get($colors, primary_text);
+      background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      .text-input {
+        margin: 12px 4px 12px 4px; 
+      }
+    }
+    .msg-send {
+      position: absolute;
+      right: 6px;
+      bottom: 0px;
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+    }
+  }
 }

@@ -93,8 +93,8 @@ export class Login {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
         }
-        this.native.stop_loading();
-        this.nav_ctrl.push(BasisPage);
+        // this.native.stop_loading();
+        // this.nav_ctrl.push(BasisPage);
         return true;
       },
       (error) => {
@@ -102,9 +102,9 @@ export class Login {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
         }
-        this.native.stop_loading();
+        // this.native.stop_loading();
         this.native.show_toast("请检查网络");
-        this.nav_ctrl.push(BasisPage);
+        // this.nav_ctrl.push(BasisPage);
         return true;
       }).then(
       (data) => {

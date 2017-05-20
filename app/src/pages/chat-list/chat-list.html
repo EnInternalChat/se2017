@@ -19,7 +19,7 @@
 <ion-content padding>
 
   <ion-list class="conversation-list">
-    <ion-item *ngFor="let item of conversation_list">
+    <ion-item *ngFor="let item of conversation_list" (click)="conversation_detail(item)">
       <ion-avatar item-left>
         <img src="assets/img/avator/{{item.avator}}.png">
       </ion-avatar>   

@@ -29,16 +29,20 @@ export class NativeServiceHelper {
   }
 
   public loading(message: string = '请稍候...') {
-    if(this.load == null) {
-      this.load = this.loadCtrl.create({ content: message });
-      this.load.present();
+    if(this.load != null) {
+      this.load.dismiss();
+      this.load = null;
     }
+    this.load = this.loadCtrl.create({ content: message });
+    this.load.present();
   }
 
   public stop_loading() {
     if(this.load == null)
       return;
-    this.load.dismiss();
-    this.load = null;
+    else {
+      this.load.dismiss();
+      this.load = null;
+    }
   }
 }

@@ -15,6 +15,7 @@ export class ChatService {
       this.is_platform = true;
     else 
       this.is_platform = false;
+    this.is_platform = false;
   }
 
   public login(username, password): Promise<any> {
@@ -43,6 +44,17 @@ export class ChatService {
       return new Promise((resolve, reject) =>
         window.JMessage.enterGroupConversation(username, resolve, reject));
     }
+  }
+
+  public exit_conversation() {
+    return new Promise((resolve, reject) =>
+      window.JMessage.exitConversation(resolve, reject));
+  }
+
+  public get_message(username: string, is_single: boolean, from: number) {
+    return new Promise((resolve, reject) => 
+      window.JMessage.getHistoryMessages(is_single ? 'single' : 'group', 
+        username, null, from, 20, resolve, reject));
   }
 
 
