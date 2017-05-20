@@ -56,9 +56,6 @@ export class BasisPage {
   }
 
   ionViewDidLoad() {
-    this.chat_service.login('testuser', '123456').then(
-      (data) => console.log("登录成功"),
-      (error) => console.log("登录失败"));
     // 注册全局注销事件
     this.events.subscribe('logout', 
       () => {

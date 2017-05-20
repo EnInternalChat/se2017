@@ -25,12 +25,13 @@
       </ion-avatar>   
       <div class="conversation-info">
         <div>
-          <div class="send-person">{{item.send_user_name}}</div>
+          <div class="send-person" *ngIf="item.is_single">{{item.send_user_name}}</div>
+          <div class="send-person" *ngIf="!item.is_single">{{item.group_name}}</div>
           <div class="send-time">{{item.last_msg_date | date: 'y-MM-ddTHH:mm' | time_format}}</div>
         </div>
         <div class="content">
-          <div class="msg-content" *ngIf="!item.is_text_img">{{item.last_text}}</div>
-          <div class="msg-content" *ngIf="item.is_text_img">[图片]</div>
+          <div class="msg-content" *ngIf="!item.is_text_img">{{item.send_user_name}}: {{item.last_text}}</div>
+          <div class="msg-content" *ngIf="item.is_text_img">{{item.send_user_name}}: [图片]</div>
           <ion-badge class="unread-msg-count" color="accent" *ngIf="item.unread_message_n >= 1">{{item.unread_message_n}}</ion-badge>
         </div>
       </div>

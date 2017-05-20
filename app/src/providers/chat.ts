@@ -44,6 +44,8 @@ export class Conversation {
   public is_single: boolean;
   public avator: string;
 
+  public group_id: string;
+  public group_name: string;
   public send_user_id: string;
   public send_user_name: string;
 
@@ -65,13 +67,22 @@ export class Conversation {
     else {
       this.is_single = false;
       this.avator = 'group_chat';
+      this.group_id = json['targetId'];
+      this.group_name = json['title'];
     }
     if(json['latestMessage'] == null) {
-      this.send_user_name = this.send_user_id = json['targetId'];
+      if(this.is_single)
+        this.send_user_name = this.send_user_id = json['targetId'];
+      else 
+        this.send_user_id = this.send_user_name = '';
     }
     else {
-      this.send_user_id = json['latestMessage']['targetInfo']['userID'];
-      this.send_user_name = json['latestMessage']['targetInfo']['userName'];
+      if(this.is_single) {
+        this.send_user_id = json['latestMessage']['targetInfo']['userID'];
+        this.send_user_name = json['latestMessage']['targetInfo']['userName'];        
+      }
+      else 
+        this.send_user_id = this.send_user_name = json['latestMessage']['fromID'];
     }
     this.update_last_msg(json);
   }
@@ -86,12 +97,10 @@ export class Conversation {
     this.unread_message_n = json['unReadMsgCnt'];
     if(!this.is_single) {
       if(json['latestMessage'] == null) {
-        this.send_user_name = this.send_user_id = json['targetId'];
+        this.send_user_name = this.send_user_id = '';
       }
-      else {
-        this.send_user_id = json['latestMessage']['targetInfo']['userID'];
-        this.send_user_name = json['latestMessage']['targetInfo']['userName'];
-      }
+      else 
+        this.send_user_id = this.send_user_name = json['latestMessage']['fromID'];
     }
 
   }

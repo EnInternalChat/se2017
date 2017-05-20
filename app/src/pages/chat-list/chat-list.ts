@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Events } from 'ionic-angular';
 
 import { NewGroupChat } from '../new-group-chat/new-group-chat';
 import { NewSingleChat } from '../new-single-chat/new-single-chat';
@@ -28,14 +28,21 @@ export class ChatList {
       public platform: Platform,
       public navCtrl: NavController,
       public navParams: NavParams,
+      public events: Events,
       public native: NativeServiceHelper,
       public chat_service: ChatService) {
   }
 
   ionViewDidLoad() {
+    this.events.subscribe('fresh_conversation_list', 
+      () => this.update_conversation_list());
   }
 
-  ionViewWillEnter() {
+  ionViewWillUnload() {
+    this.events.unsubscribe('fresh_conversation_list');
+  }
+
+  ionViewDidEnter() {
     this.update_conversation_list();
   }
 
@@ -75,8 +82,10 @@ export class ChatList {
         break;
       }
     }
-    if(!in_list)
+    if(!in_list) {
+      console.log('add item');
       this.conversation_list.push(new Conversation(json));
+    }
   }
 
   public conversation_detail(conversation) {

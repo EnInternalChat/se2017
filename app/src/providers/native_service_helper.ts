@@ -29,8 +29,10 @@ export class NativeServiceHelper {
   }
 
   public loading(message: string = '请稍候...') {
-    this.load = this.loadCtrl.create({ content: message });
-    this.load.present();
+    if(this.load == null) {
+      this.load = this.loadCtrl.create({ content: message });
+      this.load.present();
+    }
   }
 
   public stop_loading() {

@@ -72,9 +72,10 @@ export class MyApp {
           this.events.publish('open_notice', keys_dict['page']);
           return true;
         }, false);
-      document.addEventListener("jmessage.onReceiveMessage",
+      document.addEventListener('jmessage.onOpenMessage', 
         (msg: any) => {
-          console.log(new Date(), ": ", msg.content);
+          this.events.publish('open_notice', 0);
+          return true;
         }, false);
     }
   }

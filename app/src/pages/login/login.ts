@@ -7,6 +7,7 @@ import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { HTTPService } from '../../providers/http_helper';
+import { ChatService } from '../../providers/chats_service';
 import { MD5 } from '../../providers/secure_md5';
 
 /**
@@ -34,7 +35,8 @@ export class Login {
               private nav_ctrl: NavController,
               private global_data: AppGlobal,
               private storage: StorageHelper,
-              private md5_helper: MD5) {
+              private md5_helper: MD5,
+              public chat_service: ChatService) {
   }
 
   ionViewDidEnter() {
@@ -104,7 +106,16 @@ export class Login {
         this.native.show_toast("请检查网络");
         this.nav_ctrl.push(BasisPage);
         return true;
-      });
+      }).then(
+      (data) => {
+          return this.chat_service.login(this.username, this.password).then(
+            (data) => console.log("登录成功"),
+            (error) => console.log("登录失败"));
+        }).then(
+        () => {
+          this.native.stop_loading();
+          this.nav_ctrl.push(BasisPage);
+        });
   }
 
   remember_password_change() {
