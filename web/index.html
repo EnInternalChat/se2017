@@ -87,12 +87,12 @@
 				<div class="meun-title">部门管理</div>
 				<div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="images/icon_house_grey.png">部门管理</div>
 				
-				<div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="images/icon_card_grey.png">人员信息</div>
+				
 				
 				<div class="meun-title">任务管理</div>
 				<div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务流程</div>
 				<div class="meun-title">通知管理</div>
-				<div class="meun-item" href="#sitt" aria-controls="sitt" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">通知查看</div>
+				<div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">通知查看</div>
 			</div>
 			<!-- 右侧具体内容栏目 -->
 			<div id="rightContent">
@@ -531,7 +531,7 @@
 						<div class="data-div">
 							<div class="row tableHeader">
 								<div class="col-xs-2 ">
-									用户名
+									用户ID
 								</div>
 								<div class="col-xs-2">
 									部门
@@ -559,7 +559,7 @@
 										程序部
 									</div>
 									<div class="col-xs-2">
-										李豆豆
+										李四
 									</div>
 									<div class="col-xs-2">
 										13688889999
@@ -620,7 +620,7 @@
 										<div class="container-fluid">
 											<form class="form-horizontal">
 												<div class="form-group ">
-													<label for="sName" class="col-xs-3 control-label">用户名：</label>
+													<label for="sName" class="col-xs-3 control-label">用户ID：</label>
 													<div class="col-xs-8 ">
 														<input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
 													</div>
@@ -658,8 +658,8 @@
 													<div class="col-xs-8">
 														<select class=" form-control select-duiqi">
 															<option value="">管理员</option>
-															<option value="">普通用户</option>
-															<option value="">游客</option>
+															<option value="">部长</option>
+															<option value="">部员</option>
 														</select>
 													</div>
 												</div>
@@ -1341,137 +1341,7 @@
 					</div>
 					
 					<!--人员管理模块-->
-					<div role="tabpanel" class="tab-pane" id="stud">
-						<div class="check-div form-inline">
-							<div class="col-xs-5">
-								<input type="text" class=" form-control input-sm" placeholder="输入文字搜索" style="	!height: 40px!important;">
-								<button class="btn btn-white btn-xs ">查 询 </button>
-							</div>
-							<div class="col-xs-4 col-lg-3 col-md-5" style="padding-right: 40px;text-align: right;float: right;">
-								
-								
-								<a href="#" title="导入人员信息表...">导入人员信息表...</a>
-								
-								<!--
-								<label for="daoru">导入人员信息表:&nbsp;</label>
-								<button class="btn btn-white btn-xs " id="daoru">选取文件 </button>
-								
-								<button class="btn btn-white btn-xs ">导入 </button>
-								-->
-							</div>
-
-						</div>
-						<div class="data-div">
-							<div class="row tableHeader">
-								<div class="col-xs-2 ">
-									ID号
-								</div>
-								<div class="col-xs-1 ">
-									姓名
-								</div>
-								<div class="col-xs-2">
-									部门
-								</div>
-								<div class="col-xs-2">
-									职位
-								</div>
-								<div class="col-xs-2 ">
-									入职时间
-								</div>
-								<div class="col-xs-2">
-									禁言次数
-								</div>
-								<div class="col-xs-1">
-									操作
-								</div>
-							</div>
-							<div class="tablebody">
-
-								<div class="row">
-									<div class="col-xs-2 ">
-										6426398978
-									</div>
-									<div class="col-xs-1">
-										邓超
-									</div>
-									<div class="col-xs-2">
-										程序部
-									</div>
-									<div class="col-xs-2">
-										部员
-									</div>
-									<div class="col-xs-2">
-										2014年9月
-									</div>
-									<div class="col-xs-2">
-										2
-									</div>
-									<div class="col-xs-1">
-										<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteObey">清除违规</button>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-						<!--页码块-->
-						<footer class="footer">
-							<ul class="pagination">
-								<li>
-									<select>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
-									页
-								</li>
-								<li class="gray">
-									共20页
-								</li>
-								<li>
-									<i class="glyphicon glyphicon-menu-left">
-										</i>
-								</li>
-								<li>
-									<i class="glyphicon glyphicon-menu-right">
-										</i>
-								</li>
-							</ul>
-						</footer>
-
-						<!--弹出删除违约记录警告窗口-->
-
-						<div class="modal fade" id="deletenoti" role="dialog" aria-labelledby="gridSystemModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
-									</div>
-									<div class="modal-body">
-										<div class="container-fluid">
-											确定要删除该禁言记录？删除后不可恢复！
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-										<button type="button" class="btn btn-xs btn-danger">保 存</button>
-									</div>
-								</div>
-								<!-- /.modal-content -->
-							</div>
-							<!-- /.modal-dialog -->
-						</div>
-						<!-- /.modal -->
-
-					</div>
+					
 				</div><!-- 资源管理模块 -->
 			</div><!-- 右侧具体内容栏目 -->
 		</div>
