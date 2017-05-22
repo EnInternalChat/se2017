@@ -1,6 +1,8 @@
 package backend.controller;
 
+import backend.mdoel.Company;
 import backend.mdoel.Process;
+import backend.mdoel.Section;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +23,6 @@ public class DataProcessCenter {
     @Autowired
     private DatabaseService databaseService;
 
-    static SimpleDateFormat timeParse=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
     public List<Map<String,Object>> notifications() {
         List<Map<String,Object>> notifications=new ArrayList<>();
         Map<String,Object> resMap=new HashMap<>();
@@ -165,6 +166,14 @@ public class DataProcessCenter {
         //TODO getid
         Process process=new Process(companyID,name,path,timestamp,timestamp,0);
         return databaseService.addProcessToDb(process);
+    }
+
+    public Section findSecByID(long id) {
+        return databaseService.findSecByID(id);
+    }
+
+    public Company findComByID(long id) {
+        return databaseService.findComById(id);
     }
 //
 //    public boolean updateProcessTime() {

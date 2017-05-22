@@ -1,5 +1,7 @@
 package backend.mdoel;
 
+import backend.serial.SectionSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,31 +16,35 @@ import java.util.Set;
  */
 
 @Document
+@JsonSerialize(using = SectionSerializer.class)
 public class Section {
     @Id
     private long ID;
     private long companyID;
-    private long leaderID;
+    @DBRef
+    private Employee leader;
     //private long parrentSectionID;
-    private Collection<Long> membersID;
+    @DBRef
+    private Collection<Employee> members;
     @DBRef
     private Collection<Section> childrenSections;
     private String name;
     private String note;
 
     public Section() {
-        membersID=new HashSet<>();
+        members=new HashSet<>();
         childrenSections=new HashSet<>();
     }
 
-    public Section(long leaderID, String name, String note) {
+    public Section(long companyID, Employee leader, String name, String note) {
         this();
-        this.leaderID = leaderID;
+        this.companyID = companyID;
+        this.leader = leader;
         this.name = name;
         this.note = note;
     }
 
-    public Collection<Section> getChildrenSectionsID() {
+    public Collection<Section> getChildrenSections() {
         return childrenSections;
     }
 
@@ -58,8 +64,8 @@ public class Section {
         this.ID = ID;
     }
 
-    public void setLeaderID(long leaderID) {
-        this.leaderID = leaderID;
+    public void setLeaderID(Employee leader) {
+        this.leader = leader;
     }
 
 //    public void setParrentSectionID(long parrentSectionID) {
@@ -78,20 +84,20 @@ public class Section {
         return ID;
     }
 
-    public long getLeaderID() {
-        return leaderID;
+    public Employee getLeader() {
+        return leader;
     }
 
 //    public long getParrentSectionID() {
 //        return parrentSectionID;
 //    }
 
-    public Collection<Long> getMembersID() {
-        return membersID;
+    public Collection<Employee> getMembers() {
+        return members;
     }
 
-    public boolean addMember(long ID) {
-        membersID.add(ID);
+    public boolean addMember(Employee employee) {
+        members.add(employee);
         return true;
     }
 

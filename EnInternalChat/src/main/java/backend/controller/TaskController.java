@@ -6,6 +6,7 @@ import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,13 +78,13 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Map<String,Object>> allTask() {
         return dataProcessCenter.tasks();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
         String token=request.getHeader("");
         //TODO headername
@@ -113,8 +114,8 @@ public class TaskController {
             return infoType(2, file.getName());
         }
         System.out.println("Found process definition ["
-                        + processDefinition.getName() + "] with id ["
-                        + processDefinition.getId() + "]");
+                + processDefinition.getName() + "] with id ["
+                + processDefinition.getId() + "]");
         dataProcessCenter.addNewProcess(token, processDefinition.getName(), processFile.getAbsolutePath());
         return infoType(3, file.getName());
     }

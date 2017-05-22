@@ -74,19 +74,30 @@ public class DatabaseService {
         employeeRepository.save(employee);
     }
 
+    public Section findSecByID(long id) {
+        return sectionRepository.findOne(id);
+    }
+
+    public Company findComById(long id) {
+        return companyRepository.findOne(id);
+    }
+
     public void testNewStruc() {
         Company company=new Company();
-        Section section1=new Section(12,"fir","aha");
+        company.setName("google");
+        company.setIntroduction("nihao");
+        Employee employee=new Employee();
+        Section section1=new Section(0,employee,"ass","note");
         section1.setID(0);
-        Section section2=new Section(11,"sec","aha");
+        Section section2=new Section(0,employee,"fsdf","note");
         section2.setID(1);
-        Section section3=new Section(11,"thir","aha");
+        Section section3=new Section(0,employee,"afsfs","note");
         section3.setID(2);
-        Section section4=new Section(11,"for","aha");
+        Section section4=new Section(0,employee,"dsfsss","note");
         section4.setID(3);
-        Section section5=new Section(11,"fif","aha");
+        Section section5=new Section(0,employee,"aeyys","note");
         section5.setID(4);
-        Section section6=new Section(11,"six","aha");
+        Section section6=new Section(0,employee,"asyqq","note");
         section6.setID(5);
         company.setHeadSec(section1);
         section1.addChildSec(section2);
@@ -94,14 +105,15 @@ public class DatabaseService {
         section2.addChildSec(section4);
         section3.addChildSec(section5);
         section3.addChildSec(section6);
+        employeeRepository.insert(employee);
         sectionRepository.insert(section2);
         sectionRepository.insert(section1);
         sectionRepository.insert(section3);
         sectionRepository.insert(section5);
         sectionRepository.insert(section6);
         sectionRepository.insert(section4);
-        companyRepository.insert(company);
+        companyRepository.save(company);
         Company result=companyRepository.findOne((long) 0);
-        System.out.println(result.getHeadSec().getChildrenSectionsID().size());
+        System.out.println(result.getHeadSec().getChildrenSections().size());
     }
 }

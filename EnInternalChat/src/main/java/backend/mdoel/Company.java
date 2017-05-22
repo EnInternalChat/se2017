@@ -1,5 +1,7 @@
 package backend.mdoel;
 
+import backend.serial.CompanySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document
+@JsonSerialize(using = CompanySerializer.class)
 public class Company {
     @Id
     private long ID;
@@ -19,6 +22,10 @@ public class Company {
 
     public Section getHeadSec() {
         return headSec;
+    }
+
+    public boolean hasSection() {
+        return headSec != null;
     }
 
     public void setHeadSec(Section headSec) {

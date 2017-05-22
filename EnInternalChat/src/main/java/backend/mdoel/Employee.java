@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * Created by lenovo on 2017/5/7.
@@ -23,9 +22,9 @@ public class Employee {
     private String position;
     private Collection<String> phone;
     private Collection<String> email;
-    private Collection<Map<String, Object>> chats;
-    private Collection<Map<String, Object>> notifications;
-    private Collection<Map<String, Object>> tasks;
+    private Collection<Chat> chats;
+    private Collection<Notification> notifications;
+    private Collection<Process> processes;
     private boolean gender;
     private boolean active;
 
@@ -37,7 +36,7 @@ public class Employee {
         email=new ArrayList<>();
         chats=new ArrayList<>();
         notifications=new ArrayList<>();
-        tasks=new ArrayList<>();
+        processes =new ArrayList<>();
     }
 
     public boolean isActive() {
@@ -124,30 +123,30 @@ public class Employee {
         this.password = password;
     }
 
-    public Collection<Map<String, Object>> getChats() {
+    public Collection<Chat> getChats() {
         return chats;
     }
 
-    public Collection<Map<String, Object>> getNotifications() {
+    public Collection<Notification> getNotifications() {
         return notifications;
     }
 
-    public Collection<Map<String, Object>> getTasks() {
-        return tasks;
+    public Collection<Process> getProcesses() {
+        return processes;
     }
 
-    public boolean addChat(Map<String, Object> newChat) {
+    public boolean addChat(Chat newChat) {
         chats.add(newChat);
         return true;
     }
 
-    public boolean addNotification(Map<String, Object> newNotification) {
+    public boolean addNotification(Notification newNotification) {
         notifications.add(newNotification);
         return true;
     }
 
-    public boolean addTask(Map<String, Object> newTask) {
-        notifications.add(newTask);
+    public boolean addTask(Process newProcess) {
+        processes.add(newProcess);
         return true;
     }
 
