@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -21,11 +21,11 @@ public class Employee {
     private String name;
     private String password;
     private String position;
-    private List<String> phone;
-    private List<String> email;
-    private List<Map<String, Object>> chats;
-    private List<Map<String, Object>> notifications;
-    private List<Map<String, Object>> tasks;
+    private Collection<String> phone;
+    private Collection<String> email;
+    private Collection<Map<String, Object>> chats;
+    private Collection<Map<String, Object>> notifications;
+    private Collection<Map<String, Object>> tasks;
     private boolean gender;
     private boolean active;
 
@@ -88,19 +88,19 @@ public class Employee {
         this.gender = gender;
     }
 
-    public List<String> getPhone() {
+    public Collection<String> getPhone() {
         return phone;
     }
 
-    public void setPhone(ArrayList<String> phone) {
+    public void setPhone(Collection<String> phone) {
         this.phone = phone;
     }
 
-    public List<String> getEmail() {
+    public Collection<String> getEmail() {
         return email;
     }
 
-    public void setEmail(ArrayList<String> email) {
+    public void setEmail(Collection<String> email) {
         this.email = email;
     }
 
@@ -124,15 +124,15 @@ public class Employee {
         this.password = password;
     }
 
-    public List<Map<String, Object>> getChats() {
+    public Collection<Map<String, Object>> getChats() {
         return chats;
     }
 
-    public List<Map<String, Object>> getNotifications() {
+    public Collection<Map<String, Object>> getNotifications() {
         return notifications;
     }
 
-    public List<Map<String, Object>> getTasks() {
+    public Collection<Map<String, Object>> getTasks() {
         return tasks;
     }
 

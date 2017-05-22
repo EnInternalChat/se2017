@@ -156,7 +156,7 @@ public class DataProcessCenter {
     }
 
     public void testWork() {
-        databaseService.doWork();
+        databaseService.testNewStruc();
     }
 
     public boolean addNewProcess(String token, String name, String path) {

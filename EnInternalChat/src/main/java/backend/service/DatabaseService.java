@@ -3,8 +3,8 @@ package backend.service;
 import backend.mdoel.Company;
 import backend.mdoel.Employee;
 import backend.mdoel.Process;
+import backend.mdoel.Section;
 import backend.repository.*;
-import backend.util.SectionTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +35,12 @@ public class DatabaseService {
         this.companyRepository=companyRepository;
         this.sectionRepository=sectionRepository;
     }
-
-    public Map<String,Object> colSectionData(long companyID) {
-        Company company=companyRepository.findOne(companyID);
-        String name=company.getName();
-        return SectionTree.create(sectionRepository, company.getHeadSecID(),name);
-    }
+//
+//    public Map<String,Object> colSectionData(long companyID) {
+//        Company company=companyRepository.findOne(companyID);
+//        String name=company.getName();
+//        return SectionTree.create(sectionRepository, company.,name);
+//    }
 
     public Map<String,Object> colEmployeeData(long companyID) {
         Map<String,Object> result=new HashMap<>();
@@ -74,4 +74,34 @@ public class DatabaseService {
         employeeRepository.save(employee);
     }
 
+    public void testNewStruc() {
+        Company company=new Company();
+        Section section1=new Section(12,"fir","aha");
+        section1.setID(0);
+        Section section2=new Section(11,"sec","aha");
+        section2.setID(1);
+        Section section3=new Section(11,"thir","aha");
+        section3.setID(2);
+        Section section4=new Section(11,"for","aha");
+        section4.setID(3);
+        Section section5=new Section(11,"fif","aha");
+        section5.setID(4);
+        Section section6=new Section(11,"six","aha");
+        section6.setID(5);
+        company.setHeadSec(section1);
+        section1.addChildSec(section2);
+        section1.addChildSec(section3);
+        section2.addChildSec(section4);
+        section3.addChildSec(section5);
+        section3.addChildSec(section6);
+        sectionRepository.insert(section2);
+        sectionRepository.insert(section1);
+        sectionRepository.insert(section3);
+        sectionRepository.insert(section5);
+        sectionRepository.insert(section6);
+        sectionRepository.insert(section4);
+        companyRepository.insert(company);
+        Company result=companyRepository.findOne((long) 0);
+        System.out.println(result.getHeadSec().getChildrenSectionsID().size());
+    }
 }

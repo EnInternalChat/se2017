@@ -1,10 +1,13 @@
 package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by lenovo on 2017/5/14.
  */
+
+@Document
 public class Process {
     @Id
     private long ID;

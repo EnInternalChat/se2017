@@ -1,31 +1,28 @@
 package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by lenovo on 2017/5/14.
  */
+
+@Document
 public class Company {
     @Id
     private long ID;
-    private long headSecID;
+    @DBRef
+    private Section headSec;
     private String name;
     private String introduction;
-    private List<Section> sections;
 
-    public Company() {
-        sections=new ArrayList<>();
+    public Section getHeadSec() {
+        return headSec;
     }
 
-    public long getHeadSecID() {
-        return headSecID;
-    }
-
-    public void setHeadSecID(long headSecID) {
-        this.headSecID = headSecID;
+    public void setHeadSec(Section headSec) {
+        this.headSec = headSec;
     }
 
     public String getIntroduction() {
