@@ -27,7 +27,6 @@
 
     <context:component-scan base-package="backend.*" />
 
-    <!--<bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swaggerConfig" />-->
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
