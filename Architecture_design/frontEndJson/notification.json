@@ -1,0 +1,72 @@
+{
+	"notificationID":12333,
+	"senderID":2023,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":false
+}
+{
+	"notificationID":13,
+	"senderID":2303,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":false
+}
+{
+	"notificationID":657,
+	"senderID":23333,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":true
+}
+{
+	"notificationID":12333,
+	"senderID":23,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":false
+}
+{
+	"notificationID":1773,
+	"senderID":23333,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":false
+}
+{
+	"notificationID":67,
+	"senderID":23333,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":true
+}
+{
+	"notificationID":1773,
+	"senderID":27333,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":false
+}
+{
+	"notificationID":6117,
+	"senderID":233,
+	"senderName":"lansakfj",
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!",
+	"read":true
+}

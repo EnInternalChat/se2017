@@ -1,0 +1,12 @@
+{
+	"status":true,
+	"info":"登陆成功",//token 在header里
+}
+{
+	"status":false,
+	"info":"您当前已在别的用户端登录",
+}
+{
+	"status":false,
+	"info":"密码或用户名错误"
+}
