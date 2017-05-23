@@ -23,9 +23,10 @@ page-chat-detail {
   .msg-other {
     min-height: 64px;
     .sender-avator {
-      width: 20%;
+      width: 64px;
       display: inline-block;
       top: 10%;
+      left: 8px;
       position: absolute;
       img {
         width: 90%;
@@ -33,9 +34,9 @@ page-chat-detail {
       }
     }
     .msg-info {
-      max-width: 80%;
+      max-width: calc(100% - 64px);
       display: inline-block;
-      margin-left: 20%;
+      margin-left: 64px;
       .sender-person {
         color: map-get($colors, primary_text);
         font-size: 1.4rem;
@@ -46,7 +47,7 @@ page-chat-detail {
           content: '';
           position: absolute;
           top: 36px;
-          left: 20%;
+          left: 64px;
           width: 0; 
           height: 0; 
           border-top: 10px solid transparent;
@@ -79,26 +80,26 @@ page-chat-detail {
 
   .msg-my {
     min-height: 64px;
+    float: right;
     .sender-avator {
-      width: 20%;
+      width: 64px;
       display: inline-block;
-      position: absolute;
-      top: 10%;
       img {
         width: 90%;
         margin-bottom: 20%;
       }
     }
     .msg-info {
-      max-width: 80%;
+      max-width: calc(100% - 64px);
       display: inline-block;
+      vertical-align: top;
       .msg-detail {
         margin-top: 8px;
         &:before {
           content: '';
           position: absolute;
-          top: 20px;
-          right: 18%;
+          top: 16px;
+          right: 64px;
           width: 0; 
           height: 0; 
           border-top: 10px solid transparent;
@@ -163,7 +164,7 @@ page-chat-detail {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+      box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
     }
     .msg-input {
       margin-left: 64px;
@@ -191,7 +192,7 @@ page-chat-detail {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+      box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
     }
   }
 }

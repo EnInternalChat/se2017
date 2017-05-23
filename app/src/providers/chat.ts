@@ -20,10 +20,11 @@ export class Message {
   public is_img: boolean;
   public content: any;
   public create_time: string;
-  constructor(json) {
+  public is_my_send: boolean;
+  constructor(json, cur_username: string) {
     this.id = json['serverMessageId'];
     this.from_user = json['fromName'];
-    this.from_user_avator = json['targetInfo']['nickname'];
+    this.from_user_avator = json['fromNickname'];
     if(json['contentType'] === 'text')
       this.is_img = false;
     else
@@ -36,6 +37,7 @@ export class Message {
       this.content = new ImageMessage(msg_content);
     else
       this.content = msg_content['text'];
+    this.is_my_send = (cur_username === this.from_user);
   }
 }
 
@@ -55,31 +57,37 @@ export class Conversation {
   public last_msg_date: string;
   public msg_list: Array<Message> = [];
 
+  get target_id() {
+    if(this.is_single)
+      return this.send_user_name;
+    else
+      return this.group_id;
+  }
+
   constructor(json) {
     this.id = json['id'];
     if(json['type'] === 'single') {
       this.is_single = true;
-      if(json['latestMessage'] == null)
-        this.avator = '';
-      else
-        this.avator = json['latestMessage']['targetInfo']['nickname'];
+      this.avator = json['targetInfo']['nickname'];
     }
     else {
       this.is_single = false;
       this.avator = 'group_chat';
-      this.group_id = json['targetId'];
-      this.group_name = json['title'];
+      this.group_id = json['targetInfo']['groupID'];
+      this.group_name = json['targetInfo']['groupName'];
     }
     if(json['latestMessage'] == null) {
-      if(this.is_single)
-        this.send_user_name = this.send_user_id = json['targetId'];
+      if(this.is_single) {
+        this.send_user_name = json['targetInfo']['userName'];
+        this.send_user_id = json['targetInfo']['userID'];
+      }
       else 
         this.send_user_id = this.send_user_name = '';
     }
     else {
       if(this.is_single) {
-        this.send_user_id = json['latestMessage']['targetInfo']['userID'];
-        this.send_user_name = json['latestMessage']['targetInfo']['userName'];        
+        this.send_user_id = json['targetInfo']['userID'];
+        this.send_user_name = json['targetInfo']['userName'];        
       }
       else 
         this.send_user_id = this.send_user_name = json['latestMessage']['fromID'];

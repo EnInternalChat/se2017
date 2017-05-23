@@ -7,15 +7,17 @@ declare let window;
 @Injectable()
 export class ChatService {
   public is_platform: boolean;
+  public message_count: number = 20;
 
   constructor(
     public platform: Platform,
     public http: HTTPService) {
-    if(this.platform.is('android') || this.platform.is('ios'))
+    if((this.platform.is('android') || this.platform.is('ios'))
+      && this.platform.userAgent().indexOf('Linux x86_64') == -1)
       this.is_platform = true;
     else 
       this.is_platform = false;
-    this.is_platform = false;
+    // this.is_platform = false;
   }
 
   public login(username, password): Promise<any> {
@@ -35,14 +37,14 @@ export class ChatService {
       window.JMessage.getConversationList(resolve, reject));
   }
 
-  public enter_conversation(is_single: boolean, username: string): Promise<any> {
+  public enter_conversation(is_single: boolean, target: string): Promise<any> {
     if(is_single) {
       return new Promise((resolve, reject) =>
-        window.JMessage.enterSingleConversation(username, null, resolve, reject));
+        window.JMessage.enterSingleConversation(target, null, resolve, reject));
     }
     else {
       return new Promise((resolve, reject) =>
-        window.JMessage.enterGroupConversation(username, resolve, reject));
+        window.JMessage.enterGroupConversation(target, resolve, reject));
     }
   }
 
@@ -54,7 +56,18 @@ export class ChatService {
   public get_message(username: string, is_single: boolean, from: number) {
     return new Promise((resolve, reject) => 
       window.JMessage.getHistoryMessages(is_single ? 'single' : 'group', 
-        username, null, from, 20, resolve, reject));
+        username, null, from, this.message_count, resolve, reject));
+  }
+
+  public send_text_message(target: string, content: string, is_single: boolean) {
+    if(is_single) {
+      return new Promise((resolve, reject) =>
+        window.JMessage.sendSingleTextMessage(target, content, null, resolve, reject));
+    }
+    else {
+      return new Promise((resolve, reject) =>
+        window.JMessage.sendGroupTextMessage(target, content, resolve, reject));
+    }
   }
 
 
