@@ -23,12 +23,38 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="84">
+              <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Chat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-62">
+              <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="764">
+              <caret line="114" column="31" lean-forward="false" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2831#2832#0" expanded="true" />
+                <element signature="e#2883#2884#0" expanded="true" />
+                <element signature="e#2926#2927#0" expanded="true" />
+                <element signature="e#2978#2979#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,6 +64,34 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="43">
               <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Company.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Company.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="57" column="1" lean-forward="true" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#585#586#0" expanded="true" />
+                <element signature="e#615#616#0" expanded="true" />
+                <element signature="e#650#651#0" expanded="true" />
+                <element signature="e#688#689#0" expanded="true" />
+                <element signature="e#812#813#0" expanded="true" />
+                <element signature="e#847#848#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompanySerializer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/serial/CompanySerializer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,23 +99,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <file leaf-file-name="SectionSerializer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/serial/SectionSerializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-              <folding />
+            <state relative-caret-position="161">
+              <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java">
+      <file leaf-file-name="Section.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Section.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
+            <state relative-caret-position="420">
+              <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1217#1218#0" expanded="true" />
+                <element signature="e#1256#1257#0" expanded="true" />
+                <element signature="e#2204#2205#0" expanded="true" />
+                <element signature="e#2234#2235#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="490">
+              <caret line="100" column="27" lean-forward="false" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
+              <folding>
+                <element signature="e#3719#3720#0" expanded="true" />
+                <element signature="e#3781#3782#0" expanded="true" />
+                <element signature="e#3959#3960#0" expanded="true" />
+                <element signature="e#4021#4022#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,70 +146,20 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
-              <caret line="152" column="25" lean-forward="true" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
+              <caret line="175" column="47" lean-forward="false" selection-start-line="175" selection-start-column="47" selection-end-line="175" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#notifications#0;class#DataProcessCenter#0" expanded="false" />
                 <element signature="method#personal#0;class#DataProcessCenter#0" expanded="false" />
                 <element signature="method#employees#0;class#DataProcessCenter#0" expanded="false" />
                 <element signature="method#sections#0;class#DataProcessCenter#0" expanded="false" />
+                <element signature="e#5148#5149#0" expanded="true" />
+                <element signature="e#5194#5195#0" expanded="true" />
+                <element signature="e#5553#5554#0" expanded="true" />
+                <element signature="e#5607#5608#0" expanded="true" />
+                <element signature="e#5650#5651#0" expanded="true" />
+                <element signature="e#5704#5705#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SectionTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/backend/util/SectionTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SectionRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/SectionRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TaskController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="79" column="29" lean-forward="false" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
-              <folding>
-                <element signature="method#infoType#0;class#TaskController#0" expanded="false" />
-                <element signature="e#3145#3146#0" expanded="true" />
-                <element signature="e#3193#3194#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TestController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1659">
-              <caret line="115" column="72" lean-forward="false" selection-start-line="115" selection-start-column="72" selection-end-line="115" selection-end-column="99" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -167,8 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/basicPack/controller/DataProcess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/basicPack/controller/EmployeeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/basicPack/controller/NotificationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/basicPack/controller/PersonalController.java" />
         <option value="$PROJECT_DIR$/src/main/java/basicPack/controller/RootController.java" />
@@ -182,42 +205,44 @@
         <option value="$PROJECT_DIR$/src/main/java/backend/config/Initializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/DataProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/notification.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Chat.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/SecurityInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/HttpSessionConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/MvcInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/util/StandardTimeFormat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Section.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Company.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/controller/TestController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/TaskRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Notification.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/SectionController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/RootController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/PersonalController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/NotificationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/controller/EmployeeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Task.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Process.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Employee.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/EmployeeRepositoryImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/EmployeeRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/ChatRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/CompanyRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/NotificationRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/repository/ProcessRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/repository/SectionRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/util/SectionTree.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/backend/controller/TaskController.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/SwaggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/backend/config/Swagger2Config.java" />
         <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/util/SectionTree.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Process.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Notification.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Chat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/repository/SectionRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/controller/TaskController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Section.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Employee.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/serial/SectionSerializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/serial/CompanySerializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/mdoel/Company.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java" />
       </list>
     </option>
   </component>
@@ -264,10 +289,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="23" />
-    <option name="y" value="32" />
+    <option name="x" value="126" />
+    <option name="y" value="27" />
     <option name="width" value="1208" />
-    <option name="height" value="744" />
+    <option name="height" value="711" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -445,6 +470,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EnInternalChat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EnInternalChat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="serial" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1127,7 +1182,7 @@
       <workItem from="1493885157256" duration="15299000" />
       <workItem from="1493904118236" duration="47557000" />
       <workItem from="1494589927113" duration="13612000" />
-      <workItem from="1494772079850" duration="47368000" />
+      <workItem from="1494772079850" duration="68595000" />
     </task>
     <servers />
   </component>
@@ -1137,7 +1192,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178256000" />
+    <option name="totallyTimeSpent" value="199483000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1149,12 +1204,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="23" y="32" width="1208" height="744" extended-state="0" />
+    <frame x="126" y="27" width="1208" height="711" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2913257" sideWeight="0.4904181" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30795848" sideWeight="0.49738675" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1171,12 +1226,12 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2913257" sideWeight="0.50958186" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30795848" sideWeight="0.50261325" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4965157" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.48432055" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2839721" sideWeight="0.48292682" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2839721" sideWeight="0.51707315" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33060557" sideWeight="0.49303135" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2768166" sideWeight="0.4860627" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1207,7 +1262,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java</url>
-          <line>123</line>
+          <line>124</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -1221,8 +1276,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/mongodb/model/Employee.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/mongodb/model/CollectionEntity.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/Impl.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/EmployeeRepositoryImpl.java" />
@@ -1255,105 +1308,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/util/StandardTimeFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/SectionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/RootController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/PersonalController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="40" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/NotificationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/EmployeeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Notification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Process.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="17" column="108" lean-forward="false" selection-start-line="17" selection-start-column="108" selection-end-line="17" selection-end-column="108" />
-          <folding>
-            <element signature="e#668#669#0" expanded="true" />
-            <element signature="e#701#702#0" expanded="true" />
-            <element signature="e#751#752#0" expanded="true" />
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#830#831#0" expanded="true" />
-            <element signature="e#863#864#0" expanded="true" />
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#957#958#0" expanded="true" />
-            <element signature="e#987#988#0" expanded="true" />
-            <element signature="e#1015#1016#0" expanded="true" />
-            <element signature="e#1055#1056#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1237#1238#0" expanded="true" />
-            <element signature="e#1269#1270#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1365,55 +1324,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Section.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1076#1077#0" expanded="true" />
-            <element signature="e#1105#1106#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-            <element signature="e#1186#1187#0" expanded="true" />
-            <element signature="e#2623#2624#0" expanded="true" />
-            <element signature="e#2651#2652#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/EmployeeRepositoryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="16" column="47" lean-forward="false" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/ChatRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="8" column="50" lean-forward="false" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/CompanyRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1423,72 +1338,6 @@
           <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/NotificationRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="10" column="63" lean-forward="false" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/ProcessRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="10" column="50" lean-forward="false" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/SectionRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/util/SectionTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="53" column="27" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1659">
-          <caret line="115" column="72" lean-forward="false" selection-start-line="115" selection-start-column="72" selection-end-line="115" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="152" column="25" lean-forward="true" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#notifications#0;class#DataProcessCenter#0" expanded="false" />
-            <element signature="method#personal#0;class#DataProcessCenter#0" expanded="false" />
-            <element signature="method#employees#0;class#DataProcessCenter#0" expanded="false" />
-            <element signature="method#sections#0;class#DataProcessCenter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1509,18 +1358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TaskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="79" column="29" lean-forward="false" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
-          <folding>
-            <element signature="method#infoType#0;class#TaskController#0" expanded="false" />
-            <element signature="e#3145#3146#0" expanded="true" />
-            <element signature="e#3193#3194#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1529,21 +1366,280 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/backend/config/Swagger2Config.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/NotificationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/RootController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/NotificationRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="10" column="63" lean-forward="false" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/ProcessRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="10" column="50" lean-forward="false" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/util/StandardTimeFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/util/SectionTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Process.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Notification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/PersonalController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TaskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="86" column="85" lean-forward="false" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
+          <folding>
+            <element signature="method#infoType#0;class#TaskController#0" expanded="false" />
+            <element signature="e#3193#3194#0" expanded="true" />
+            <element signature="e#3241#3242#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/SectionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/ChatRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1990">
+          <caret line="149" column="20" lean-forward="true" selection-start-line="149" selection-start-column="20" selection-end-line="149" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1963#1964#0" expanded="true" />
+            <element signature="e#1991#1992#0" expanded="true" />
+            <element signature="e#2045#2046#0" expanded="true" />
+            <element signature="e#2079#2080#0" expanded="true" />
+            <element signature="e#2123#2124#0" expanded="true" />
+            <element signature="e#2151#2152#0" expanded="true" />
+            <element signature="e#2205#2206#0" expanded="true" />
+            <element signature="e#2239#2240#0" expanded="true" />
+            <element signature="e#2266#2267#0" expanded="true" />
+            <element signature="e#2291#2292#0" expanded="true" />
+            <element signature="e#2322#2323#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+            <element signature="e#2421#2422#0" expanded="true" />
+            <element signature="e#2456#2457#0" expanded="true" />
+            <element signature="e#2487#2488#0" expanded="true" />
+            <element signature="e#2535#2536#0" expanded="true" />
+            <element signature="e#2575#2576#0" expanded="true" />
+            <element signature="e#2617#2618#0" expanded="true" />
+            <element signature="e#2645#2646#0" expanded="true" />
+            <element signature="e#2703#2704#0" expanded="true" />
+            <element signature="e#2739#2740#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/SectionRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="11" column="50" lean-forward="false" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/repository/CompanyRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/serial/SectionSerializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/serial/CompanySerializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Section.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1217#1218#0" expanded="true" />
+            <element signature="e#1256#1257#0" expanded="true" />
+            <element signature="e#2204#2205#0" expanded="true" />
+            <element signature="e#2234#2235#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/DataProcessCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="175" column="47" lean-forward="false" selection-start-line="175" selection-start-column="47" selection-end-line="175" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#notifications#0;class#DataProcessCenter#0" expanded="false" />
+            <element signature="method#personal#0;class#DataProcessCenter#0" expanded="false" />
+            <element signature="method#employees#0;class#DataProcessCenter#0" expanded="false" />
+            <element signature="method#sections#0;class#DataProcessCenter#0" expanded="false" />
+            <element signature="e#5148#5149#0" expanded="true" />
+            <element signature="e#5194#5195#0" expanded="true" />
+            <element signature="e#5553#5554#0" expanded="true" />
+            <element signature="e#5607#5608#0" expanded="true" />
+            <element signature="e#5650#5651#0" expanded="true" />
+            <element signature="e#5704#5705#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/config/Swagger2Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="84">
+          <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="100" column="27" lean-forward="false" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
+          <folding>
+            <element signature="e#3719#3720#0" expanded="true" />
+            <element signature="e#3781#3782#0" expanded="true" />
+            <element signature="e#3959#3960#0" expanded="true" />
+            <element signature="e#4021#4022#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/service/DatabaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="764">
+          <caret line="114" column="31" lean-forward="false" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2883#2884#0" expanded="true" />
+            <element signature="e#2926#2927#0" expanded="true" />
+            <element signature="e#2978#2979#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/backend/mdoel/Company.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="57" column="1" lean-forward="true" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#585#586#0" expanded="true" />
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#688#689#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+            <element signature="e#847#848#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

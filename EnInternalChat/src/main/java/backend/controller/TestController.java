@@ -1,5 +1,7 @@
 package backend.controller;
 
+import backend.mdoel.Company;
+import backend.mdoel.Section;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
@@ -7,6 +9,7 @@ import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,7 +76,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getJson", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/getJson", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Map<String,Object> testSpring() {
         Map<String,Object> resMap = new HashMap<>();
         resMap.put("user","name");
@@ -81,13 +84,25 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void mongoBug() throws UnknownHostException {
         dataProcessCenter.testWork();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/company", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/testSerialize1", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Section getSecs() {
+        return dataProcessCenter.findSecByID((long) 0);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testSerialize2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Company getCompany() {
+        return dataProcessCenter.findComByID((long) 0);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/company", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Map<String,Object>> allCompany() {
         List<Map<String,Object>> data=new ArrayList<>();
         List<Map<String,Object>> sections=new ArrayList<>();
@@ -128,7 +143,7 @@ public class TestController {
         diagramFile(xmlFile, response.getOutputStream());
     }
 //
-//    @RequestMapping(value = "/login", produces = "application/json;charset=UTF-8")
+//    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    public Map<String, String> helloUser(Principal principal) {
 //        HashMap<String, String> result = new HashMap<>();
 //        result.put("username", principal.getName());

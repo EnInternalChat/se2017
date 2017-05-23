@@ -1,23 +1,35 @@
 package backend.mdoel;
 
+import backend.serial.CompanySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by lenovo on 2017/5/14.
  */
+
+@Document
+@JsonSerialize(using = CompanySerializer.class)
 public class Company {
     @Id
     private long ID;
-    private long headSecID;
+    @DBRef
+    private Section headSec;
     private String name;
     private String introduction;
 
-    public long getHeadSecID() {
-        return headSecID;
+    public Section getHeadSec() {
+        return headSec;
     }
 
-    public void setHeadSecID(long headSecID) {
-        this.headSecID = headSecID;
+    public boolean hasSection() {
+        return headSec != null;
+    }
+
+    public void setHeadSec(Section headSec) {
+        this.headSec = headSec;
     }
 
     public String getIntroduction() {

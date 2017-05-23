@@ -4,8 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Created by lenovo on 2017/5/7.
@@ -21,11 +20,11 @@ public class Employee {
     private String name;
     private String password;
     private String position;
-    private List<String> phone;
-    private List<String> email;
-    private List<Map<String, Object>> chats;
-    private List<Map<String, Object>> notifications;
-    private List<Map<String, Object>> tasks;
+    private Collection<String> phone;
+    private Collection<String> email;
+    private Collection<Chat> chats;
+    private Collection<Notification> notifications;
+    private Collection<Process> processes;
     private boolean gender;
     private boolean active;
 
@@ -37,7 +36,7 @@ public class Employee {
         email=new ArrayList<>();
         chats=new ArrayList<>();
         notifications=new ArrayList<>();
-        tasks=new ArrayList<>();
+        processes =new ArrayList<>();
     }
 
     public boolean isActive() {
@@ -88,19 +87,19 @@ public class Employee {
         this.gender = gender;
     }
 
-    public List<String> getPhone() {
+    public Collection<String> getPhone() {
         return phone;
     }
 
-    public void setPhone(ArrayList<String> phone) {
+    public void setPhone(Collection<String> phone) {
         this.phone = phone;
     }
 
-    public List<String> getEmail() {
+    public Collection<String> getEmail() {
         return email;
     }
 
-    public void setEmail(ArrayList<String> email) {
+    public void setEmail(Collection<String> email) {
         this.email = email;
     }
 
@@ -124,30 +123,30 @@ public class Employee {
         this.password = password;
     }
 
-    public List<Map<String, Object>> getChats() {
+    public Collection<Chat> getChats() {
         return chats;
     }
 
-    public List<Map<String, Object>> getNotifications() {
+    public Collection<Notification> getNotifications() {
         return notifications;
     }
 
-    public List<Map<String, Object>> getTasks() {
-        return tasks;
+    public Collection<Process> getProcesses() {
+        return processes;
     }
 
-    public boolean addChat(Map<String, Object> newChat) {
+    public boolean addChat(Chat newChat) {
         chats.add(newChat);
         return true;
     }
 
-    public boolean addNotification(Map<String, Object> newNotification) {
+    public boolean addNotification(Notification newNotification) {
         notifications.add(newNotification);
         return true;
     }
 
-    public boolean addTask(Map<String, Object> newTask) {
-        notifications.add(newTask);
+    public boolean addTask(Process newProcess) {
+        processes.add(newProcess);
         return true;
     }
 

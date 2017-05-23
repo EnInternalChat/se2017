@@ -1,0 +1,72 @@
+{
+	"companyID":1,
+	"notificationID":12333,
+	"senderID":2023,
+	"rcvSecID":[1222,23451,357,57831,456],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":1,
+	"notificationID":13,
+	"senderID":2303,
+	"rcvSecID":[1357,57831,456],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":1,
+	"notificationID":657,
+	"senderID":23333,
+	"rcvSecID":[57831,456],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":1,
+	"notificationID":12333,
+	"senderID":23,
+	"rcvSecID":[451,831,456],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":12,
+	"notificationID":1773,
+	"senderID":23333,
+	"rcvSecID":[1357],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":1,
+	"notificationID":67,
+	"senderID":23333,
+	"rcvSecID":[57831],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":12,
+	"notificationID":1773,
+	"senderID":27333,
+	"rcvSecID":[1357],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}
+{
+	"companyID":12,
+	"notificationID":6117,
+	"senderID":233,
+	"rcvSecID":[57831],
+	"sentTime":"2017-04-05T12:51:46.598Z",
+	"content":"4.09: on day off",
+	"title":"Important!"
+}

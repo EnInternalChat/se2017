@@ -1,13 +1,16 @@
 package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by lenovo on 2017/5/14.
  */
+
+@Document
 public class Notification {
     @Id
     private long ID;
@@ -17,7 +20,7 @@ public class Notification {
     private String content;
     private String senderName;
     private String title;
-    private List<Long> rcvSecID;
+    private Collection<Long> rcvSecID;
 
     public Notification(long sentTime) {
         this.sentTime = sentTime;

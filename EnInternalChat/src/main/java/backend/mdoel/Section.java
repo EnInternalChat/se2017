@@ -1,28 +1,55 @@
 package backend.mdoel;
 
+import backend.serial.SectionSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by lenovo on 2017/5/14.
  * database model,not for front end
  */
 
+@Document
+@JsonSerialize(using = SectionSerializer.class)
 public class Section {
     @Id
     private long ID;
     private long companyID;
-    private long leaderID;
-    private long parrentSectionID;
-    private ArrayList<Long> membersID;
-    private ArrayList<Long> childrenSectionsID;
+    @DBRef
+    private Employee leader;
+    //private long parrentSectionID;
+    @DBRef
+    private Collection<Employee> members;
+    @DBRef
+    private Collection<Section> childrenSections;
     private String name;
     private String note;
 
     public Section() {
-        membersID=new ArrayList<>();
-        childrenSectionsID=new ArrayList<>();
+        members=new HashSet<>();
+        childrenSections=new HashSet<>();
+    }
+
+    public Section(long companyID, Employee leader, String name, String note) {
+        this();
+        this.companyID = companyID;
+        this.leader = leader;
+        this.name = name;
+        this.note = note;
+    }
+
+    public Collection<Section> getChildrenSections() {
+        return childrenSections;
+    }
+
+    public void setChildrenSectionsID(Set<Section> childrenSections) {
+        this.childrenSections = childrenSections;
     }
 
     public long getCompanyID() {
@@ -37,13 +64,13 @@ public class Section {
         this.ID = ID;
     }
 
-    public void setLeaderID(long leaderID) {
-        this.leaderID = leaderID;
+    public void setLeaderID(Employee leader) {
+        this.leader = leader;
     }
 
-    public void setParrentSectionID(long parrentSectionID) {
-        this.parrentSectionID = parrentSectionID;
-    }
+//    public void setParrentSectionID(long parrentSectionID) {
+//        this.parrentSectionID = parrentSectionID;
+//    }
 
     public void setName(String name) {
         this.name = name;
@@ -57,30 +84,21 @@ public class Section {
         return ID;
     }
 
-    public long getLeaderID() {
-        return leaderID;
+    public Employee getLeader() {
+        return leader;
     }
 
-    public long getParrentSectionID() {
-        return parrentSectionID;
+//    public long getParrentSectionID() {
+//        return parrentSectionID;
+//    }
+
+    public Collection<Employee> getMembers() {
+        return members;
     }
 
-    public boolean addChildSection(long ID) {
-        childrenSectionsID.add(ID);
+    public boolean addMember(Employee employee) {
+        members.add(employee);
         return true;
-    }
-
-    public ArrayList<Long> getMembersID() {
-        return membersID;
-    }
-
-    public boolean addMember(long ID) {
-        membersID.add(ID);
-        return true;
-    }
-
-    public ArrayList<Long> getChildrenSectionsID() {
-        return childrenSectionsID;
     }
 
     public String getName() {
@@ -89,5 +107,15 @@ public class Section {
 
     public String getNote() {
         return note;
+    }
+
+    public boolean addChildSec(Section section) {
+        childrenSections.add(section);
+        return true;
+    }
+
+    public boolean deleteChildSec(Section section) {
+        childrenSections.remove(section);
+        return true;
     }
 }

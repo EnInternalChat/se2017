@@ -1,0 +1,188 @@
+{
+	"total":23,
+	"companyName":"baidu",
+	"section":{
+		"ID":1,
+		"name":"董事会",
+		"leaderID":564,				
+		"membersID":[22,1,3333,5,7,8,1111],
+		"note":"It's core production developing center.",
+		"childrenSections":[
+			{
+				"ID":2,
+				"name":"总经理",
+				"leaderID":56,				
+				"membersID":[14],
+				"note":"It's core production developing center.",
+				"childrenSections":[
+					{
+						"ID":3,
+						"name":"分公司",
+						"leaderID":500,				
+						"membersID":[1804,34477],
+						"note":"It's core production developing center.",
+						"childrenSections":[]
+					},
+					{
+						"ID":11,
+						"name":"副总经理1",
+						"leaderID":500,				
+						"membersID":[6766666],
+						"note":"It's core production developing center.",
+						"childrenSections":[
+							{
+								"ID":300,
+								"name":"市场部",
+								"leaderID":100,				
+								"membersID":[141,344,34224],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							},
+							{
+								"ID":80,
+								"name":"设计部",
+								"leaderID":10000,				
+								"membersID":[1461,3744,34224],
+								"note":"It's core production developing center.",
+								"childrenSections":[
+									{
+										"ID":300,
+										"name":"设计一部",
+										"leaderID":10880,				
+										"membersID":[1641,3644,3824],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									},
+									{
+										"ID":3001,
+										"name":"设计二部",
+										"leaderID":10880,				
+										"membersID":[1641,3644,3824],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									}
+								]
+							},
+							{
+								"ID":90,
+								"name":"业务部",
+								"leaderID":180,				
+								"membersID":[1,34400,4224],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							}
+						]
+					},
+					{
+						"ID":111,
+						"name":"副总经理2",
+						"leaderID":5000,				
+						"membersID":[678],
+						"note":"It's core production developing center.",
+						"childrenSections":[
+							{
+								"ID":360,
+								"name":"网络部",
+								"leaderID":100,				
+								"membersID":[3448888,344,34227],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							},
+							{
+								"ID":860,
+								"name":"开发部",
+								"leaderID":10000,				
+								"membersID":[1461,3744,34224],
+								"note":"It's core production developing center.",
+								"childrenSections":[
+									{
+										"ID":37700,
+										"name":"开发一部",
+										"leaderID":1230,				
+										"membersID":[1641,3644,3824],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									},
+									{
+										"ID":31200,
+										"name":"开发二部",
+										"leaderID":233,				
+										"membersID":[16771,33104,38204],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									}
+								]
+							},
+							{
+								"ID":980,
+								"name":"技术部",
+								"leaderID":10880,				
+								"membersID":[188,37800,420],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							}
+						]
+					},
+					{
+						"ID":111111,
+						"name":"副总经理3",
+						"leaderID":5080,				
+						"membersID":[6789],
+						"note":"It's core production developing center.",
+						"childrenSections":[
+							{
+								"ID":777,
+								"name":"财务部",
+								"leaderID":590,				
+								"membersID":[2888,67389],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							},
+							{
+								"ID":77122,
+								"name":"客服部",
+								"leaderID":590,				
+								"membersID":[28,690],
+								"note":"It's core production developing center.",
+								"childrenSections":[
+									{
+										"ID":7227,
+										"name":"客户服务",
+										"leaderID":522970,				
+										"membersID":[228788,32897],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									},
+									{
+										"ID":707,
+										"name":"技术支持",
+										"leaderID":51,				
+										"membersID":[21,31],
+										"note":"It's core production developing center.",
+										"childrenSections":[]
+									}
+								]
+							},
+							{
+								"ID":7777,
+								"name":"行政部",
+								"leaderID":5970,				
+								"membersID":[28788,673897],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							},
+							{
+								"ID":717,
+								"name":"人力资源部",
+								"leaderID":51570,				
+								"membersID":[70788,6],
+								"note":"It's core production developing center.",
+								"childrenSections":[]
+							}
+						]
+					},
+				]
+			}
+		]
+	}
+}

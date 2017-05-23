@@ -1,0 +1,20 @@
+{
+	"upload":true,
+	"deploy":true,
+	"info":"流程文件传输失败或传输文件本身为空"
+}
+{
+	"upload":true,
+	"deploy":false,
+	"info":"bpmn.xml: 已存在同名流程"
+}
+{
+	"upload":true,
+	"deploy":false,
+	"info":"流程部署失败，请检查流程文件内容与格式是否合法"
+}
+{
+	"upload":false,
+	"deploy":false,
+	"info":"流程文件传输失败"
+}

@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface SectionRepository extends MongoRepository<Section, Long> {
     List<Section> findByCompanyID(long companyID);
-    List<Section> findByCompanyIDAndParrentSectionID(long companyID,long parrentSectionID);
 }
