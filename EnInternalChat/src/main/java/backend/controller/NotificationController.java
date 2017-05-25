@@ -1,6 +1,7 @@
 package backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,7 @@ public class NotificationController {
     DataProcessCenter dataProcessCenter;
 
     @ResponseBody
-    @RequestMapping(value = "/notifications", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/notifications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Map<String,Object>> allNotifications() {
         List<Map<String,Object>> notifications= dataProcessCenter.notifications();
         return notifications;

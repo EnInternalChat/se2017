@@ -5,6 +5,7 @@ import backend.mdoel.Process;
 import backend.mdoel.Section;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.data.redis.RedisOperationsSessionRepository;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ public class DataProcessCenter {
 
     @Autowired
     private DatabaseService databaseService;
+    @Autowired
+    private RedisOperationsSessionRepository sessionRepository;
 
     public List<Map<String,Object>> notifications() {
         List<Map<String,Object>> notifications=new ArrayList<>();
@@ -42,28 +45,6 @@ public class DataProcessCenter {
         notifications.add(resMap);
 
         return notifications;
-    }
-
-    public Map<String, Object> personal() {
-        Map<String,Object> resMap=new HashMap<>();
-        List<String> phone=new ArrayList<>();
-        List<String> email=new ArrayList<>();
-        resMap.put("ID",1);
-        resMap.put("name","jack");
-        resMap.put("positionID",0);
-        resMap.put("position","Administrator");
-        resMap.put("gender",true);
-
-        phone.add("13838472290");
-        phone.add("026-33324444");
-
-        resMap.put("phone",phone);
-
-        email.add("394859210@qq.com");
-        email.add("dsdsfas@hotmail.com");
-
-        resMap.put("email",email);
-        return resMap;
     }
 
     public Map<String,Object> employees() {
@@ -173,6 +154,7 @@ public class DataProcessCenter {
     }
 
     public Company findComByID(long id) {
+        sessionRepository.save(sessionRepository.createSession());
         return databaseService.findComById(id);
     }
 //

@@ -142,17 +142,12 @@ public class TestController {
         file.transferTo(xmlFile);
         diagramFile(xmlFile, response.getOutputStream());
     }
-//
-//    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public Map<String, String> helloUser(Principal principal) {
-//        HashMap<String, String> result = new HashMap<>();
-//        result.put("username", principal.getName());
-//        return result;
-//    }
-//
-//    @RequestMapping("/logout")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void logout(HttpSession session) {
-//        session.invalidate();
-//    }
+
+    @ResponseBody
+    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void helloUser(HttpServletResponse response) {
+
+    }
+
+
 }
