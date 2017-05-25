@@ -1,6 +1,7 @@
 package backend.repository;
 
 import backend.mdoel.Employee;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,6 @@ import java.util.List;
 public interface EmployeeRepository extends MongoRepository<Employee, Long> {
     List<Employee> findBySectionIDAndCompanyID (long companyID, long sectionID);
     List<Employee> findByCompanyID(long companyID);
+    List<Employee> findBySectionIDAndCompanyID (long companyID, long sectionID, Pageable pageable);
+    List<Employee> findByCompanyID(long companyID, Pageable pageable);
 }

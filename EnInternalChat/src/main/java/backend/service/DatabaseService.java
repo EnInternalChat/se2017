@@ -6,12 +6,10 @@ import backend.mdoel.Process;
 import backend.mdoel.Section;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lenovo on 2017/5/7.
@@ -41,6 +39,14 @@ public class DatabaseService {
 //        String name=company.getName();
 //        return SectionTree.create(sectionRepository, company.,name);
 //    }
+
+    public Collection<Employee> employeesCompany(long companyID, Pageable pageable) {
+        if(pageable != null) {
+            return employeeRepository.findByCompanyID(companyID,pageable);
+        } else {
+            return employeeRepository.findByCompanyID(companyID);
+        }
+    }
 
     public Map<String,Object> colEmployeeData(long companyID) {
         Map<String,Object> result=new HashMap<>();
@@ -106,6 +112,14 @@ public class DatabaseService {
         section3.addChildSec(section5);
         section3.addChildSec(section6);
         employeeRepository.insert(employee);
+        employeeRepository.insert(new Employee(1));
+        employeeRepository.insert(new Employee(2));
+        employeeRepository.insert(new Employee(3));
+        employeeRepository.insert(new Employee(4));
+        employeeRepository.insert(new Employee(5));
+        employeeRepository.insert(new Employee(6));
+        employeeRepository.insert(new Employee(7));
+        employeeRepository.insert(new Employee(8));
         sectionRepository.insert(section2);
         sectionRepository.insert(section1);
         sectionRepository.insert(section3);

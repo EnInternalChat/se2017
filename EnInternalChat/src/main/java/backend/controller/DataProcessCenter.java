@@ -1,17 +1,16 @@
 package backend.controller;
 
 import backend.mdoel.Company;
+import backend.mdoel.Employee;
 import backend.mdoel.Process;
 import backend.mdoel.Section;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lenovo on 2017/5/4.
@@ -22,6 +21,14 @@ public class DataProcessCenter {
 
     @Autowired
     private DatabaseService databaseService;
+
+    //TODO formal method
+    public Collection<Employee> employeesCompany(long companyID, Pageable pageable) {
+        Collection<Employee> data = databaseService.employeesCompany(companyID,pageable);
+        return data;
+    }
+    //TODO formal method
+
 
     public List<Map<String,Object>> notifications() {
         List<Map<String,Object>> notifications=new ArrayList<>();
@@ -42,35 +49,6 @@ public class DataProcessCenter {
         notifications.add(resMap);
 
         return notifications;
-    }
-
-    public Map<String,Object> employees() {
-        Map<String,Object> resMap = new HashMap<>();
-        Map<String,Object> employee = new HashMap<>();
-        List<Map<String, Object>> employees= new ArrayList<>();
-        List<String> phone=new ArrayList<>();
-        List<String> email=new ArrayList<>();
-        resMap.put("total",2);
-
-        employee.put("Id",23);
-        employee.put("name","sabi");
-        employee.put("positionID",233);
-        employee.put("positionName","product manager");
-        employee.put("gender",true);
-        employee.put("avatar",1);
-
-        phone.add("13838472290");
-        phone.add("026-33324444");
-
-        employee.put("phone",phone);
-
-        email.add("394859210@qq.com");
-        email.add("dsdsfas@hotmail.com");
-
-        employee.put("email",email);
-
-        resMap.put("employees",employee);
-        return resMap;
     }
 
     public Map<String,Object> sections() {

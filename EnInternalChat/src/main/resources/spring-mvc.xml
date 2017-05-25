@@ -27,7 +27,7 @@
     
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/*" />
+            <mvc:mapping path="/**" />
             <bean class="backend.security.GlobalInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

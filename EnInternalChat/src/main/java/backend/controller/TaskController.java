@@ -2,7 +2,6 @@ package backend.controller;
 
 import org.activiti.bpmn.exceptions.XMLException;
 import org.activiti.engine.*;
-import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/tasks")
 public class TaskController {
     @Autowired
     DataProcessCenter dataProcessCenter;
@@ -36,19 +35,8 @@ public class TaskController {
     TaskService taskService;
     IdentityService identityService;
 
-    public TaskController() {
-        ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000")
-                .setJdbcUsername("sa")
-                .setJdbcPassword("")
-                .setJdbcDriver("org.h2.Driver")
-                .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-        ProcessEngine processEngine=cfg.buildProcessEngine();
-        repositoryService=processEngine.getRepositoryService();
-        taskService=processEngine.getTaskService();
-        historyService=processEngine.getHistoryService();
-        identityService=processEngine.getIdentityService();
-    }
+    @Autowired
+    ProcessEngineConfiguration cfg;
 
     private Map<String, Object> infoType(int type, String name) {
         Map<String, Object> deployResult=new HashMap<>();
@@ -78,8 +66,13 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Map<String,Object>> allTask() {
+        ProcessEngine processEngine=cfg.buildProcessEngine();
+        repositoryService=processEngine.getRepositoryService();
+        taskService=processEngine.getTaskService();
+        historyService=processEngine.getHistoryService();
+        identityService=processEngine.getIdentityService();
         return dataProcessCenter.tasks();
     }
 

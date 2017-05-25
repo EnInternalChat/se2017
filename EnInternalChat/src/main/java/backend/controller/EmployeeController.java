@@ -1,26 +1,36 @@
 package backend.controller;
 
+import backend.mdoel.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Created by lenovo on 2017/5/2.
  */
 
 @Controller
+@RequestMapping(value = "/employees")
 public class EmployeeController {
     @Autowired
     DataProcessCenter dataProcessCenter;
 
     @ResponseBody
-    @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public Map<String,Object> allEmployees() {
-        Map<String,Object> resMap = dataProcessCenter.employees();
-        return resMap;
+    @RequestMapping(value = "/{companyID}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public Collection<Employee> employeesData(@PathVariable("companyID") Integer companyID, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "limit", required = false) Integer limit) {
+        Collection<Employee> employees=dataProcessCenter.employeesCompany(companyID,null);
+        if(page == null && limit == null) {
+            return employees;
+        } else if(page == null || limit == null) {
+            return null;
+        } else if(page*limit<employees.size()) {
+            PageRequest pageRequest=new PageRequest(page,limit);
+            employees=dataProcessCenter.employeesCompany(companyID,pageRequest);
+            return employees;
+        }
+        return null;
     }
 }

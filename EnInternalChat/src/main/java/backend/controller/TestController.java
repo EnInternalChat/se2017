@@ -25,9 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -102,31 +100,6 @@ public class TestController {
     public Company getCompany(HttpSession session) {
         session.setAttribute("name", "Amayadream");
         return dataProcessCenter.findComByID((long) 0);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/company", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Map<String,Object>> allCompany() {
-        List<Map<String,Object>> data=new ArrayList<>();
-        List<Map<String,Object>> sections=new ArrayList<>();
-        Map<String,Object> oneCompany = new HashMap<>();
-        Map<String,Object> oneSection = new HashMap<>();
-        oneCompany.put("ID",1);
-        oneCompany.put("name","Google");
-
-        oneSection.put("ID",144);
-        oneSection.put("name", "product develop");
-        oneSection.put("leaderID",564);
-
-        sections.add(oneSection);
-        sections.add(oneSection);
-        sections.add(oneSection);
-
-        oneCompany.put("sections",sections);
-
-        data.add(oneCompany);
-        data.add(oneCompany);
-        return data;
     }
 
     @ResponseBody
