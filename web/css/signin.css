@@ -3,16 +3,16 @@ body {
 }
 
 .signin {
-	width:477px;
-	height:479px;
-	background:url(../images/login_bg.png) no-repeat;
-	margin:0 auto;
+	width: 30%;
+	height: 70%;
+	/*background:url(../images/login_bg.png) no-repeat;*/
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    margin:0 auto;
 	
 	position:absolute;
-	top:50%;
-	left:50%;
-	margin-top:-239px;
-	margin-left:-238px;
+	top:15%;
+	left:35%;
 }
 .signin-head {
 	margin:0 auto;
@@ -25,11 +25,16 @@ body {
   margin: 0 auto;
 }
 .form-signin .checkbox {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    background: transparent;
+    border: none;
 }
-.form-signin .checkbox {
-  font-weight: normal;
+.checkbox .input-group-addon {
+    border: none !important;
+    background: transparent;
 }
+
 .form-signin .form-control {
   position: relative;
   font-size: 16px;
@@ -58,4 +63,22 @@ body {
 }
 .form-signin button {
   border-radius: 0;
+}
+
+#login_form #login_username {
+    margin: 2% 5% 2% 5%;
+    /*margin: 5% 0 5% 0;*/
+    width: 90%;
+    border-radius: 0;
+}
+
+#login_form #login_pwd {
+    margin: 2% 5% 2% 5%;
+    width: 90%;
+    border-radius: 0;
+}
+
+#login_submit {
+    margin: 5% 5% 5% 5%;
+    width: 90%;
 }
