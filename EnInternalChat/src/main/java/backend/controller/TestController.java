@@ -19,6 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,13 +92,15 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize1", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Section getSecs() {
+    public Section getSecs(HttpSession session) {
+        System.out.println(session.getAttribute("name"));
         return dataProcessCenter.findSecByID((long) 0);
     }
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Company getCompany() {
+    public Company getCompany(HttpSession session) {
+        session.setAttribute("name", "Amayadream");
         return dataProcessCenter.findComByID((long) 0);
     }
 

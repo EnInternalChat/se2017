@@ -13,8 +13,13 @@ public class GlobalInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        System.out.println("preHandle all path");
-        return false;
+        if(httpServletRequest.getHeader("x-auth-token") != null) {
+            System.out.println("preHandle all path:"+httpServletRequest.getHeader("x-auth-token"));
+            return true;
+        } else {
+            System.out.println("no header");
+            return true;
+        }
     }
 
     @Override

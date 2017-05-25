@@ -5,7 +5,6 @@ import backend.mdoel.Process;
 import backend.mdoel.Section;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.session.data.redis.RedisOperationsSessionRepository;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -23,8 +22,6 @@ public class DataProcessCenter {
 
     @Autowired
     private DatabaseService databaseService;
-    @Autowired
-    private RedisOperationsSessionRepository sessionRepository;
 
     public List<Map<String,Object>> notifications() {
         List<Map<String,Object>> notifications=new ArrayList<>();
@@ -154,7 +151,7 @@ public class DataProcessCenter {
     }
 
     public Company findComByID(long id) {
-        sessionRepository.save(sessionRepository.createSession());
+        //sessionRepository.save(sessionRepository.createSession());
         return databaseService.findComById(id);
     }
 //
