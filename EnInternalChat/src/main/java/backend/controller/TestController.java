@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.mdoel.Company;
 import backend.mdoel.Section;
+import backend.service.DatabaseService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
@@ -38,7 +39,7 @@ public class TestController {
     ProcessDefinition processDefinition;
 
     @Autowired
-    private DataProcessCenter dataProcessCenter;
+    private DatabaseService databaseService;
 
     public TestController() {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
@@ -85,21 +86,21 @@ public class TestController {
     @ResponseBody
     @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void mongoBug() throws UnknownHostException {
-        dataProcessCenter.testWork();
+        databaseService.testNewStruc();
     }
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize1", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Section getSecs(HttpSession session) {
         System.out.println(session.getAttribute("name"));
-        return dataProcessCenter.findSecByID((long) 0);
+        return databaseService.findSecByID((long) 0);
     }
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Company getCompany(HttpSession session) {
         session.setAttribute("name", "Amayadream");
-        return dataProcessCenter.findComByID((long) 0);
+        return databaseService.findComById((long) 0);
     }
 
     @ResponseBody

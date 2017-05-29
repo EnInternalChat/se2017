@@ -1,5 +1,7 @@
 package backend.security;
 
+import org.activiti.engine.impl.util.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,12 +15,28 @@ public class GlobalInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if(httpServletRequest.getHeader("x-auth-token") != null) {
-            System.out.println("preHandle all path:"+httpServletRequest.getHeader("x-auth-token"));
+        System.out.println(httpServletRequest.getMethod()+"|"+httpServletRequest.getPathInfo()+"|"+httpServletRequest.getHeader("x-auth-token"));
+        if(httpServletRequest.isRequestedSessionIdValid()) {
+            if(httpServletRequest.getPathInfo().equals("/login") && httpServletRequest.getMethod() == "POST") {
+                httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                JSONObject jsonObject=new JSONObject();
+                jsonObject.put("status",false);
+                jsonObject.put("info","您已经登录，如需登录其他账号，请先退出当前账号!");
+                httpServletResponse.getWriter().write(jsonObject.toString());
+                System.out.println("repeat login");
+                return false;
+            }
             return true;
         } else {
-            System.out.println("no header");
-            return true;
+            if(httpServletRequest.getPathInfo().equals("/login")) {
+                return true;
+            }
+            httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("status",false);
+            jsonObject.put("info","您尚未登录，请登录后再操作");
+            httpServletResponse.getWriter().write(jsonObject.toString());
+            return false;
         }
     }
 

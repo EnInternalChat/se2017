@@ -17,4 +17,5 @@ public interface EmployeeRepository extends MongoRepository<Employee, Long> {
     List<Employee> findByCompanyID(long companyID);
     List<Employee> findBySectionIDAndCompanyID (long companyID, long sectionID, Pageable pageable);
     List<Employee> findByCompanyID(long companyID, Pageable pageable);
+    List<Employee> findByCompanyIDAndName(long companyID, String name);
 }

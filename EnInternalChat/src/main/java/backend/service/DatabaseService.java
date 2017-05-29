@@ -5,10 +5,13 @@ import backend.mdoel.Employee;
 import backend.mdoel.Process;
 import backend.mdoel.Section;
 import backend.repository.*;
+import org.activiti.engine.impl.util.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -66,7 +69,11 @@ public class DatabaseService {
 
 
 
-    public boolean addProcessToDb(Process process) {
+    public boolean addNewProcess(String token, String name, String path) {
+        long timestamp=System.currentTimeMillis();
+        long companyID=0;
+        //TODO getid
+        Process process=new Process(companyID,name,path,timestamp,timestamp,0);
         processRepository.save(process);
         return true;
     }
@@ -86,6 +93,27 @@ public class DatabaseService {
 
     public Company findComById(long id) {
         return companyRepository.findOne(id);
+    }
+
+    public JSONObject findLoginEmployee(long companyId, String name, String password, HttpServletRequest httpServletRequest) {
+        JSONObject jsonObject=new JSONObject();
+        List<Employee> employees=employeeRepository.findByCompanyIDAndName(companyId, name);
+        if(employees.size() == 0) {
+            jsonObject.put("status",false);
+            jsonObject.put("info","此公司当前不存在该用户");
+            return jsonObject;
+        }
+        Employee employee=employees.get(0);
+        if(!employee.getPassword().equals(password)) {
+            jsonObject.put("status",false);
+            jsonObject.put("info","用户名或密码错误");
+        } else {
+            HttpSession httpSession=httpServletRequest.getSession();
+            httpSession.setAttribute("user",employee);
+            jsonObject.put("status",true);
+            jsonObject.put("info","登陆成功");
+        }
+        return jsonObject;
     }
 
     public void testNewStruc() {
