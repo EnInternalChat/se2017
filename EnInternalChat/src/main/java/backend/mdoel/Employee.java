@@ -25,6 +25,7 @@ public class Employee implements Serializable {
     private Collection<String> phone;
     private Collection<String> email;
     private Collection<Chat> chats;
+    private RoleType roleType;
     @DBRef
     private Collection<Notification> notifications;
     @DBRef

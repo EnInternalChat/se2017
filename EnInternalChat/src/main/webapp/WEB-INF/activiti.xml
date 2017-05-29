@@ -17,6 +17,8 @@
         <property name="databaseSchemaUpdate" value="true" />
         <property name="transactionManager" ref="transactionManager" />
         <property name="jobExecutorActivate" value="false" />
+
+        <property name="deploymentResources" value="classpath*:bpmn/*.bpmn20.xml" />
     </bean>
     <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
         <property name="processEngineConfiguration" ref="processEngineConfiguration" />
@@ -30,6 +32,7 @@
     <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
     <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
     <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
+
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

@@ -1,10 +1,18 @@
 package backend.controller;
 
+import backend.mdoel.Employee;
+import backend.service.ActivitiService;
 import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +23,22 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/tasks")
 public class TaskController {
-    @Autowired
     DatabaseService databaseService;
+    ActivitiService activitiService;
+
+    @Autowired
+    public TaskController(DatabaseService databaseService, ActivitiService activitiService) {
+        this.databaseService = databaseService;
+        this.activitiService = activitiService;
+    }
+
+    private Map<String, Object> infoType() {
+        Map<String, Object> deployResult=new HashMap<>();
+        deployResult.put("upload",false);
+        deployResult.put("deploy",false);
+        deployResult.put("info","非法操作!用户状态存在问题!");
+        return deployResult;
+    }
 
     private Map<String, Object> infoType(int type, String name) {
         Map<String, Object> deployResult=new HashMap<>();
@@ -44,10 +66,27 @@ public class TaskController {
                 return null;
         }
     }
-//
-//    @ResponseBody
-//    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
-//        String
-//    }
+
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
+        Employee employee=(Employee) request.getSession().getAttribute("user");
+        if(employee == null) {
+            return infoType();
+        }
+        //TODO cirfirm role
+        long companyId=employee.getCompanyID();
+        Map<String, Object> typeMap=activitiService.deployProcess(file, companyId);
+        int type=(int) typeMap.get("type");
+        String name=typeMap.get("name").toString();
+        return infoType(type,name);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void start() {
+        activitiService.test();
+    }
+
+
 }

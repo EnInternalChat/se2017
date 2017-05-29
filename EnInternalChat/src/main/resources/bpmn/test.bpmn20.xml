@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <definitions id="definitions"
              targetNamespace="http://activiti.org/bpmn20"
              xmlns:activiti="http://activiti.org/bpmn"
@@ -35,9 +36,7 @@
         </userTask>
 
         <sequenceFlow id='flow3' sourceRef='verifyReportTask' targetRef='theEnd' />
-
         <endEvent id="theEnd" />
-
     </process>
 
 </definitions>

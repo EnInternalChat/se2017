@@ -31,12 +31,15 @@ public class GlobalInterceptor implements HandlerInterceptor {
             if(httpServletRequest.getPathInfo().equals("/login")) {
                 return true;
             }
-            httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("status",false);
-            jsonObject.put("info","您尚未登录，请登录后再操作");
-            httpServletResponse.getWriter().write(jsonObject.toString());
-            return false;
+
+//            httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+//            JSONObject jsonObject=new JSONObject();
+//            jsonObject.put("status",false);
+//            jsonObject.put("info","您尚未登录，请登录后再操作");
+//            httpServletResponse.getWriter().write(jsonObject.toString());
+//            return false;
+            //TODO now close, open later
+            return true;
         }
     }
 
