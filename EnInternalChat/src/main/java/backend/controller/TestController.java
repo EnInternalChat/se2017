@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.mdoel.Company;
 import backend.mdoel.Section;
+import backend.service.DatabaseService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
@@ -19,14 +20,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,7 +39,7 @@ public class TestController {
     ProcessDefinition processDefinition;
 
     @Autowired
-    private DataProcessCenter dataProcessCenter;
+    private DatabaseService databaseService;
 
     public TestController() {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
@@ -86,44 +86,21 @@ public class TestController {
     @ResponseBody
     @RequestMapping(value = "/testMongo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void mongoBug() throws UnknownHostException {
-        dataProcessCenter.testWork();
+        databaseService.testNewStruc();
     }
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize1", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Section getSecs() {
-        return dataProcessCenter.findSecByID((long) 0);
+    public Section getSecs(HttpSession session) {
+        System.out.println(session.getAttribute("name"));
+        return databaseService.findSecByID((long) 0);
     }
 
     @ResponseBody
     @RequestMapping(value = "/testSerialize2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Company getCompany() {
-        return dataProcessCenter.findComByID((long) 0);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/company", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Map<String,Object>> allCompany() {
-        List<Map<String,Object>> data=new ArrayList<>();
-        List<Map<String,Object>> sections=new ArrayList<>();
-        Map<String,Object> oneCompany = new HashMap<>();
-        Map<String,Object> oneSection = new HashMap<>();
-        oneCompany.put("ID",1);
-        oneCompany.put("name","Google");
-
-        oneSection.put("ID",144);
-        oneSection.put("name", "product develop");
-        oneSection.put("leaderID",564);
-
-        sections.add(oneSection);
-        sections.add(oneSection);
-        sections.add(oneSection);
-
-        oneCompany.put("sections",sections);
-
-        data.add(oneCompany);
-        data.add(oneCompany);
-        return data;
+    public Company getCompany(HttpSession session) {
+        session.setAttribute("name", "Amayadream");
+        return databaseService.findComById((long) 0);
     }
 
     @ResponseBody
@@ -142,17 +119,12 @@ public class TestController {
         file.transferTo(xmlFile);
         diagramFile(xmlFile, response.getOutputStream());
     }
-//
-//    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public Map<String, String> helloUser(Principal principal) {
-//        HashMap<String, String> result = new HashMap<>();
-//        result.put("username", principal.getName());
-//        return result;
-//    }
-//
-//    @RequestMapping("/logout")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void logout(HttpSession session) {
-//        session.invalidate();
-//    }
+
+    @ResponseBody
+    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void helloUser(HttpServletResponse response) {
+
+    }
+
+
 }

@@ -111,12 +111,12 @@ company example:[
 	}
 ]
 
-task Schema:[
+process Schema:[
 ]
 
-task example:[
-	{companyID:1, taskID:122, name:"dayOff", type:"leave", uploadTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z",file:"/source/Goole/dayoff.xml", count:23452},
-	{companyID:2, taskID:122, name:"finacialAudit", type:"audit", uploadTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z", file:"/source/Microsoft/MSAudit.xml", count:23452},
+process example:[
+	{companyID:1, processID:122, name:"dayOff", type:"leave", uploadTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z",file:"/source/Goole/dayoff.xml", count:23452},
+	{companyID:2, processID:122, name:"finacialAudit", type:"audit", uploadTime:"2017-04-05T12:51:46.598Z", updateTime:"2017-04-05T12:51:46.598Z", file:"/source/Microsoft/MSAudit.xml", count:23452},
 ]
 
 operation Schema:[

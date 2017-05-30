@@ -1,10 +1,8 @@
 package backend.controller;
 
-import org.activiti.bpmn.exceptions.XMLException;
-import org.activiti.engine.*;
-import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.ProcessDefinition;
+import backend.mdoel.Employee;
+import backend.service.ActivitiService;
+import backend.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -15,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,28 +21,23 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/tasks")
 public class TaskController {
+    DatabaseService databaseService;
+    ActivitiService activitiService;
+
     @Autowired
-    DataProcessCenter dataProcessCenter;
+    public TaskController(DatabaseService databaseService, ActivitiService activitiService) {
+        this.databaseService = databaseService;
+        this.activitiService = activitiService;
+    }
 
-    RepositoryService repositoryService;
-    HistoryService historyService;
-    TaskService taskService;
-    IdentityService identityService;
-
-    public TaskController() {
-        ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000")
-                .setJdbcUsername("sa")
-                .setJdbcPassword("")
-                .setJdbcDriver("org.h2.Driver")
-                .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-        ProcessEngine processEngine=cfg.buildProcessEngine();
-        repositoryService=processEngine.getRepositoryService();
-        taskService=processEngine.getTaskService();
-        historyService=processEngine.getHistoryService();
-        identityService=processEngine.getIdentityService();
+    private Map<String, Object> infoType() {
+        Map<String, Object> deployResult=new HashMap<>();
+        deployResult.put("upload",false);
+        deployResult.put("deploy",false);
+        deployResult.put("info","非法操作!用户状态存在问题!");
+        return deployResult;
     }
 
     private Map<String, Object> infoType(int type, String name) {
@@ -78,45 +68,25 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Map<String,Object>> allTask() {
-        return dataProcessCenter.tasks();
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
+        Employee employee=(Employee) request.getSession().getAttribute("user");
+        if(employee == null) {
+            return infoType();
+        }
+        //TODO cirfirm role
+        long companyId=employee.getCompanyID();
+        Map<String, Object> typeMap=activitiService.deployProcess(file, companyId);
+        int type=(int) typeMap.get("type");
+        String name=typeMap.get("name").toString();
+        return infoType(type,name);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Map<String, Object> uploadProcess(@RequestParam("newTaskFile")CommonsMultipartFile file, HttpServletRequest request) {
-        String token=request.getHeader("");
-        //TODO headername
-        if(file.isEmpty())
-            return infoType(0, file.getName());
-        String path= this.getClass().getResource("/").getPath()+ File.separator+"tmp"+File.separator;
-        File dir=new File(path);
-        if(!dir.isDirectory()) dir.mkdir();
-        System.out.println(path);
-        File processFile=new File(path, file.getName());
-        if(processFile.exists())
-            return infoType(1, file.getName());
-        //you still need companyID(get from session map(Map<String, Map<String, String>)
-        ProcessDefinition processDefinition;
-        try {
-            processFile.createNewFile();
-            file.transferTo(processFile);
-            Deployment deployment;
-            try {
-                deployment = repositoryService.createDeployment().addClasspathResource("tmp"+File.separator+processFile.getName()).deploy();
-                processDefinition=repositoryService.createProcessDefinitionQuery()
-                        .deploymentId(deployment.getId()).singleResult();
-            } catch (XMLException e) {
-                return infoType(2, file.getName());
-            }
-        } catch (IOException e) {
-            return infoType(2, file.getName());
-        }
-        System.out.println("Found process definition ["
-                + processDefinition.getName() + "] with id ["
-                + processDefinition.getId() + "]");
-        dataProcessCenter.addNewProcess(token, processDefinition.getName(), processFile.getAbsolutePath());
-        return infoType(3, file.getName());
+    @RequestMapping(value = "/upload", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void start() {
+        activitiService.test();
     }
+
+
 }

@@ -1,8 +1,10 @@
 package backend.mdoel;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,7 +13,7 @@ import java.util.Collection;
  */
 
 @Document
-public class Employee {
+public class Employee implements Serializable {
     @Id
     private long ID;
     private long companyID;
@@ -23,7 +25,10 @@ public class Employee {
     private Collection<String> phone;
     private Collection<String> email;
     private Collection<Chat> chats;
+    private RoleType roleType;
+    @DBRef
     private Collection<Notification> notifications;
+    @DBRef
     private Collection<Process> processes;
     private boolean gender;
     private boolean active;
@@ -37,6 +42,10 @@ public class Employee {
         chats=new ArrayList<>();
         notifications=new ArrayList<>();
         processes =new ArrayList<>();
+    }
+
+    public Employee(long ID) {
+        this.ID = ID;
     }
 
     public boolean isActive() {
