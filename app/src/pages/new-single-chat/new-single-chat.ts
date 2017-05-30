@@ -17,7 +17,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
 })
 export class NewSingleChat {
 
-  public employee_list: any = [1, 2, 3, 4, 5, 6, 7];
+  public employee_list: any = [1, 2, 3, 4, 5, 6, 1];
 
   constructor(
     public navCtrl: NavController, 

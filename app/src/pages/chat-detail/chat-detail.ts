@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, 
+         ActionSheetController } from 'ionic-angular';
 
 import { ChatService } from '../../providers/chats_service';
 import { AppGlobal } from '../../providers/global_data';
@@ -28,6 +29,7 @@ export class ChatDetail {
   public input_msg: string;
 
   constructor(
+    public actionCtrl: ActionSheetController,
     public changeDetect: ChangeDetectorRef,
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -53,6 +55,7 @@ export class ChatDetail {
         this.get_history_message();
         document.addEventListener("jmessage.onReceiveMessage",
         (msg: any) => this.on_receive_message(msg), false);
+        this.content.scrollToBottom(500);
       },
       (error) => {
         this.native.show_toast('无法开始会话');
@@ -67,10 +70,6 @@ export class ChatDetail {
   public on_receive_message(msg: any) {
     this.con.msg_list.unshift(new Message(msg, this.global_data.user_name));
     this.changeDetect.detectChanges();
-  }
-
-  public get_unread_message() {
-
   }
 
   public get_history_message() {
@@ -122,6 +121,30 @@ export class ChatDetail {
         this.input_msg = '';
         this.content.scrollToBottom(500);
       });
+  }
+
+  public send_img_msg(image_data) {
+    if(image_data == null || image_data == '')
+      return;
+  }
+
+  public get_img_msg() {
+    let img_action_selector = this.actionCtrl.create({
+      cssClass: "image-actionsheet"
+    });
+    img_action_selector.addButton({
+      text: '拍照', icon:'md-camera', handler: () => this.take_photo()});
+    img_action_selector.addButton({
+      text: '从相册选择', icon: 'md-images', handler: () => this.pick_image()});
+    img_action_selector.present();
+  }
+
+  public take_photo() {
+
+  }
+
+  public pick_image() {
+
   }
 
   public go_back() {

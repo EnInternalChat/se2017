@@ -36,8 +36,6 @@ export class ChatList {
   ionViewDidLoad() {
   }
 
-  ionViewWillUnload() {
-  }
 
   ionViewWillEnter() {
     this.update_conversation_list();
@@ -63,8 +61,9 @@ export class ChatList {
         this.native.show_toast("获取聊天列表失败");
       }).catch(
       () => {
-        this.native.stop_loading();
-        this.native.show_toast("获取聊天列表失败");
+        this.update_conversation_list();
+        // this.native.stop_loading();
+        // this.native.show_toast("无法连接到服务器");
       });
   }
 

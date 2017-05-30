@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { BasisPage } from '../basis-page/basis-page';
 
+import { UIText } from '../../providers/ui_text';
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
@@ -36,6 +37,7 @@ export class Login {
               private global_data: AppGlobal,
               private storage: StorageHelper,
               private md5_helper: MD5,
+              public ui: UIText,
               public chat_service: ChatService) {
   }
 
@@ -84,11 +86,10 @@ export class Login {
     }
     else
       password_md5 = this.password;
-    this.native.loading("登录中...");
+    this.native.loading();
     this.web_helper.post(
       '/login.do', {"name": this.username, "pwd": password_md5}).then(
       (data) => {
-        console.log("Response: ", data);
         if(this.remember_password || this.auto_login) {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
@@ -102,20 +103,21 @@ export class Login {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
         }
-        // this.native.stop_loading();
-        this.native.show_toast("请检查网络");
-        // this.nav_ctrl.push(BasisPage);
+        this.native.stop_loading();
+        // this.native.show_toast("请检查网络");
+        this.nav_ctrl.push(BasisPage);
         return true;
-      }).then(
-      (data) => {
-          return this.chat_service.login(this.username, this.password).then(
-            (data) => console.log("登录成功"),
-            (error) => console.log("登录失败"));
-        }).then(
-        () => {
-          this.native.stop_loading();
-          this.nav_ctrl.push(BasisPage);
-        });
+      })
+      // .then(
+      // (data) => {
+      //     this.chat_service.login(this.username, this.password).then(
+      //       (data) => {
+      //         this.native.stop_loading();
+      //         this.native.show_toast("登录成功");
+      //         this.nav_ctrl.push(BasisPage);                
+      //       },
+      //       (error) => console.log("登录失败"));
+      //   });
   }
 
   remember_password_change() {

@@ -7,7 +7,7 @@ declare let window;
 @Injectable()
 export class ChatService {
   public is_platform: boolean;
-  public message_count: number = 20;
+  public message_count: number = 10;
 
   constructor(
     public platform: Platform,

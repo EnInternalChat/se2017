@@ -196,3 +196,23 @@ page-chat-detail {
     }
   }
 }
+
+.image-actionsheet {
+  .action-sheet-button-ios {
+    padding: 4px 8px 4px 8px;
+    font-size: 1.8rem;
+    min-height: 5.0rem;
+    .action-sheet-icon {
+      padding-right: 1.4rem;
+    }
+  }
+
+  .action-sheet-button-md {
+    color: map-get($colors, primary_text);
+    min-height: 4.4rem;
+    .action-sheet-icon {
+      color: map-get($colors, third_text);
+    }
+  }
+}
+

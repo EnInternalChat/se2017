@@ -25,9 +25,9 @@ export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
   // root_page: any = TaskList;
-  // root_page: any = Personal;
+  root_page: any = Personal;
   // root_page: any = NotificationList;
-  root_page: any = ChatList;
+  // root_page: any = ChatList;
   pages: Array<{title: string, component: Component, icon_path: string}>;
 
   public job : string = "管理员";

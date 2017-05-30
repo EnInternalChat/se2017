@@ -7,6 +7,7 @@ import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { HTTPService } from '../../providers/http_helper';
+import { UIText, AppLanguage } from '../../providers/ui_text';
 
 /**
  * Generated class for the Personal page.
@@ -21,8 +22,7 @@ import { HTTPService } from '../../providers/http_helper';
 })
 export class Personal {
 
-  public language : string;
-  public language_options : Array<{value : string, text : string}>;
+  public language_options : Array<{value : AppLanguage, text : string}>;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -30,13 +30,13 @@ export class Personal {
               public native: NativeServiceHelper,
               public web_helper: HTTPService,
               public global_data: AppGlobal,
+              public ui: UIText,
               public storage: StorageHelper,
               public events: Events) {
     this.language_options = [
-      {"value": "zh_cn", "text": "简体中文"},
-      {"value": "en_us", "text": "English"},
+      {"value": AppLanguage.CN, "text": "简体中文"},
+      {"value": AppLanguage.EN, "text": "English"},
     ];
-    this.language = this.language_options[0].value;
   }
 
   log_out() {
@@ -117,4 +117,5 @@ export class Personal {
       return false;
     });
   }
+
 }

@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { StorageHelper } from './storage_helper';
 import { MD5 } from './secure_md5';
+import { UIText, AppLanguage } from './ui_text';
 
-export const enum AppLanguage {
-  CN = 1,
-  EN = 2
-}
 
 @Injectable()
 // storage some useful value 
@@ -16,34 +13,38 @@ export class AppGlobal {
   private _avator_no: number;
 
   public job : string = "管理员";
-
-  public is_debug: boolean = true;
-  public server_url: string = this.is_debug ? "" : "http://123.206.121.176:8888/EnInternalChat";
-  public language: AppLanguage = AppLanguage.CN;
+  private _language: AppLanguage;
 
   public constructor(
     private storage: StorageHelper,
-    private md5_helper: MD5) 
-  {
-    Promise.all([this.read_username(), this.read_avator_no()]).then(() => {
+    private md5_helper: MD5,
+    private ui: UIText) {
+    let p1 = this.storage.read_local_info("username", "ZhangSan").then(
+      (value) => {
+        return this._user_name = value;
+      });
+    let p2 = this.storage.read_local_info("avator_no", 3).then(
+      (value) => {
+        this._avator_no = value;
+        return this._avator_path = "assets/img/avator/" + value + ".png";
+      });
+    let p3 = this.storage.read_local_info("language", AppLanguage.CN).then(
+      (value) => this.language = <AppLanguage>value);
+    Promise.all([p1, p2, p3]).then(() => {
       console.log("In Global(avator): ", this._avator_path);
       console.log("In Global(username): ", this._user_name);
+      console.log("In Global(language): ", this.language);
     });
   }
 
-  private read_username() {
-    return this.storage.read_local_info("username", "ZhangSan").then((value) => 
-    {
-      return this._user_name = value;
-    });
+  set language(lan: AppLanguage) {
+    this._language = <AppLanguage>lan;
+    this.storage.storage_info("language", this._language);
+    this.ui.update_language(this._language);
   }
 
-  private read_avator_no() {
-    return this.storage.read_local_info("avator_no", 3).then((value) => 
-    {
-      this._avator_no = value;
-      return this._avator_path = "assets/img/avator/" + value + ".png";
-    });
+  get language(): AppLanguage {
+    return this._language;
   }
 
   public encrypt_pwd(password: string): string {

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
+import { UIText } from './ui_text';
+
 @Injectable()
 export class NativeServiceHelper {
   private load: Loading;
@@ -10,7 +12,8 @@ export class NativeServiceHelper {
     private platform: Platform, 
     private network: Network,
     private toastCtrl: ToastController,
-    private loadCtrl: LoadingController) {
+    private loadCtrl: LoadingController,
+    private ui: UIText) {
   }
 
   //网络类型: unknown, ethernet, wifi, 2g, 3g, 4g, cellular, none
@@ -28,13 +31,15 @@ export class NativeServiceHelper {
       }).present();
   }
 
-  public loading(message: string = '请稍候...') {
+  public loading(message ?: string) {
+    if(message == null)
+      message = this.ui.loading;
     if(this.load != null) {
-      this.load.dismiss();
-      this.load = null;
+      return;
     }
     this.load = this.loadCtrl.create({ content: message });
     this.load.present();
+    setTimeout(() => this.stop_loading(), 10000);
   }
 
   public stop_loading() {

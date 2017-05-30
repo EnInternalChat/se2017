@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title class="toolbar-title">账户设置</ion-title>
+    <ion-title class="toolbar-title">{{ui.PersonalPage.title}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="log_out()">
         <ion-icon name="log-out"></ion-icon>
@@ -24,36 +24,36 @@
 <ion-content class="setting-content">
   <div class="avator" (click)="show_avator_slector()">
     <img src="{{global_data.avator_path}}">
-    <div>点击更换头像</div>
+    <div>{{ui.PersonalPage.avator}}</div>
   </div>
   <ion-list class="setting-list">
     <ion-item>
-    <ion-label>用户名</ion-label>
+    <ion-label>{{ui.PersonalPage.username}}</ion-label>
     <ion-label class="setting-item-value">{{global_data.user_name}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>职位</ion-label>
+      <ion-label>{{ui.PersonalPage.position}}</ion-label>
       <ion-label class="setting-item-value">{{global_data.job}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>性别</ion-label>
+      <ion-label>{{ui.PersonalPage.gender}}</ion-label>
       <ion-label class="setting-item-value">男</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>系统语言</ion-label>
-      <ion-select interface="action-sheet" cancelText="取消" okText="确认" [(ngModel)]="language" >
+      <ion-label>{{ui.PersonalPage.language}}</ion-label>
+      <ion-select interface="action-sheet" cancelText="{{ui.PersonalPage.cancel}}" okText="{{ui.PersonalPage.ok}}" [(ngModel)]="global_data.language">
         <ion-option *ngFor="let item of language_options" value="{{item.value}}">
           {{item.text}}
         </ion-option>
       </ion-select> 
     </ion-item>
     <ion-item>
-      <ion-label>开启通知栏提醒</ion-label>
+      <ion-label>{{ui.PersonalPage.notice}}</ion-label>
       <ion-toggle class="setting-item-value"></ion-toggle>
     </ion-item>
     <ion-item>
       <button ion-button class="change-password-button" (click)="show_password_prompt();">
-        修改密码
+        {{ui.PersonalPage.change_pwd}}
       </button>
     </ion-item>
     </ion-list>

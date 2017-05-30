@@ -29,6 +29,7 @@ import { ChatService } from '../providers/chats_service';
 import { StorageHelper } from '../providers/storage_helper';
 import { MD5 } from '../providers/secure_md5';
 import { AppGlobal } from '../providers/global_data';
+import { UIText } from '../providers/ui_text'; 
 import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
 
 @NgModule({
@@ -55,7 +56,7 @@ import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
     FormsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
-      name: '__mydb',
+      name: 'chat__mydb',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpModule,
@@ -84,10 +85,11 @@ import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NativeServiceHelper,
     HTTPService,
-    ChatService,
     StorageHelper,
     AppGlobal,
-    MD5
+    UIText,
+    MD5,
+    ChatService
   ]
 })
 export class AppModule {}
