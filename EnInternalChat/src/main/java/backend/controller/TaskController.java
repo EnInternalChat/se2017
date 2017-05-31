@@ -3,6 +3,8 @@ package backend.controller;
 import backend.mdoel.Employee;
 import backend.service.ActivitiService;
 import backend.service.DatabaseService;
+import backend.util.ResponseJsonObj;
+import org.activiti.engine.impl.util.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,10 +87,14 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void start() {
-        activitiService.test();
+    @RequestMapping(value = "/start", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void process(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                        @RequestParam("processKey") String processKey,
+                        @RequestParam(value = "content", required = false) Collection<Map<String,String>> content) {
+        //TODO content
+        long id=(long) httpServletRequest.getSession().getAttribute("user");
+        Employee starter=databaseService.activeUserById(id);
+        JSONObject jsonObject=activitiService.processStart(processKey,content,starter);
+        ResponseJsonObj.write(httpServletResponse,jsonObject);
     }
-
-
 }

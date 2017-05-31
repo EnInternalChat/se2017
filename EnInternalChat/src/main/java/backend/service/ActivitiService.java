@@ -1,7 +1,10 @@
 package backend.service;
 
+import backend.mdoel.Employee;
+import backend.mdoel.InstanceOfProcess;
 import org.activiti.bpmn.exceptions.XMLException;
 import org.activiti.engine.*;
+import org.activiti.engine.impl.util.json.JSONObject;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -11,6 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,11 +43,38 @@ public class ActivitiService {
         this.runtimeService=runtimeService;
     }
 
+    private JSONObject ok(String proId) {
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("done",true);
+        jsonObject.put("info","启动成功，流程ID: "+proId);
+        return jsonObject;
+    }
+
     public void test() {
-        ProcessInstance processInstance=runtimeService.startProcessInstanceByKey("dispatch");
+        ProcessInstance processInstance=runtimeService.startProcessInstanceByKey("timerExample");
         String proId=processInstance.getId();
         System.out.println("def id: "+proId);
+        processInstance=runtimeService.startProcessInstanceByKey("leave");
+        proId=processInstance.getId();
+        System.out.println("def id: "+proId);
     }
+
+    //TODO role comfirm
+    public JSONObject processStart(String processKey, Collection<Map<String,String>> content, Employee starter) {
+        System.out.println("employee: "+starter.hashCode());
+        ProcessInstance processInstance=runtimeService.startProcessInstanceByKey(processKey);
+        String proId=processInstance.getId();
+        System.out.println("def id: "+proId);
+        InstanceOfProcess instanceOfProcess=new InstanceOfProcess(processKey,proId,processInstance.getName(),starter);
+        databaseService.saveProcessInstance(instanceOfProcess);
+        starter.addTask(instanceOfProcess);
+        databaseService.saveEmployee(starter);
+        return ok(proId);
+    }
+
+//    public JSONObject processOperation(String processKey, String processID, String operationID, Employee operator) {
+//
+//    }
 
     public Map<String, Object> deployProcess(CommonsMultipartFile file, long companyId) {
         Map<String, Object> result=new HashMap<>();

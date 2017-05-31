@@ -1,6 +1,7 @@
 package backend.mdoel;
 
 import backend.serial.SectionSerializer;
+import backend.util.IdManager;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -23,7 +24,6 @@ public class Section {
     private long companyID;
     @DBRef
     private Employee leader;
-    //private long parrentSectionID;
     @DBRef
     private Collection<Employee> members;
     @DBRef
@@ -32,6 +32,7 @@ public class Section {
     private String note;
 
     public Section() {
+        ID=IdManager.IdForSection++;
         members=new HashSet<>();
         childrenSections=new HashSet<>();
     }

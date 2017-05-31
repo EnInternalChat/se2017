@@ -1,5 +1,6 @@
 package backend.mdoel;
 
+import backend.util.IdManager;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document
-public class Process {
+public class DeployOfProcess {
     @Id
     private long ID;
     private long companyID;
@@ -18,7 +19,14 @@ public class Process {
     private long updateTime;
     private long count;
 
-    public Process(long companyID, String name, String path, long uploadTime, long updateTime, long count) {
+    public DeployOfProcess() {
+        companyID=IdManager.IdForDeployOfProcess++;
+        name="leave";
+        uploadTime=System.currentTimeMillis();
+        updateTime=System.currentTimeMillis();
+    }
+
+    public DeployOfProcess(long companyID, String name, String path, long uploadTime, long updateTime, long count) {
         this.companyID = companyID;
         this.name = name;
         this.path = path;
