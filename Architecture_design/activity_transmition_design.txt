@@ -1,43 +1,18 @@
 启动任务：
 front ===> back:
 {
-	task_type:1,
-	start_person:222,
-	content:"请假",
-	operation:"reportBack"
+	processKey:"leave",
+	content:{note:"请假"}
 }
 back ==> front:
 {
-	done:true//false ======> 前端自行更新刷新从数据库再取数据，无需后端判断节点信息
+	done:true//false
 }
 
 处理任务：
 {
-	activityID:"leaderAudit",
-	content:"领导审批",
-	finishTime:
-	person:["张三","李四","caochun"],
-	exclusiveGateway:[
-		{yesDestinationActivityID: "reportBack", yesDestinationActivityName:"汇报"}
-		{noDestinationActivityID: "modifyApply", noDestinationActivityName:"修正"}
-	]
+	processKey:"leave",
+	processID:2333,
+	operationID:"hrAudit"
+	content:{}
 }
-
-[
-	{
-		activityID:"leaderAudit",
-		content:"领导审批",
-		finishTime:
-		person:["张三","李四","caochun"],
-		exclusiveGateway:[
-			{yesDestinationActivityID: "reportBack", yesDestinationActivityName:"汇报"}
-			{noDestinationActivityID: "modifyApply", noDestinationActivityName:"修正"}
-		]
-	},
-	{
-		activityID:"leaderAudit",
-		content:"领导审批",
-		finishTime:
-		person:["张三","李四","caochun"],
-	},
-]

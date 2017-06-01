@@ -1,6 +1,7 @@
 {
-	"taskID": 344,
-	"taskName":"场内调度流程",
+	"processKey":"schedular",
+	"processID": 344,
+	"processName":"场内调度流程",
 	"startPerson": ["张三"],
 	"over":true,
 	"stages":[

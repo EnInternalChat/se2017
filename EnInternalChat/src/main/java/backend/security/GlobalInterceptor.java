@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by lenovo on 2017/5/25.
@@ -16,7 +17,8 @@ public class GlobalInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         System.out.println(httpServletRequest.getMethod()+"|"+httpServletRequest.getPathInfo()+"|"+httpServletRequest.getHeader("x-auth-token"));
-        if(httpServletRequest.isRequestedSessionIdValid()) {
+        HttpSession httpSession=httpServletRequest.getSession(false);
+        if(httpSession != null) {
             if(httpServletRequest.getPathInfo().equals("/login") && httpServletRequest.getMethod() == "POST") {
                 httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                 JSONObject jsonObject=new JSONObject();
@@ -35,7 +37,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 //            httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 //            JSONObject jsonObject=new JSONObject();
 //            jsonObject.put("status",false);
-//            jsonObject.put("info","您尚未登录，请登录后再操作");
+//            jsonObject.put("info","您尚未登录，或登录操作已经超时，请登录后再操作");
 //            httpServletResponse.getWriter().write(jsonObject.toString());
 //            return false;
             //TODO now close, open later

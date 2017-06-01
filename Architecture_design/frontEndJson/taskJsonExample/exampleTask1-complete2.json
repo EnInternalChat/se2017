@@ -1,6 +1,7 @@
 {
-	"taskID": 23344,
-	"taskName":"请假流程-邮件任务",
+	"processKey":"leave",
+	"processID": 23344,
+	"processName":"请假流程-邮件任务",
 	"startPerson": ["张三"],
 	"over":true,
 	"stages":[

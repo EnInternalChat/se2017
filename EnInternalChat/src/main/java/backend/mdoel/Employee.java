@@ -1,10 +1,10 @@
 package backend.mdoel;
 
+import backend.util.IdManager;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,35 +13,37 @@ import java.util.Collection;
  */
 
 @Document
-public class Employee implements Serializable {
+public class Employee {
     @Id
     private long ID;
     private long companyID;
-    private long sectionID;
+    @DBRef
+    private Section section;
     private int avatar;
     private String name;
     private String password;
     private String position;
     private Collection<String> phone;
     private Collection<String> email;
+    @DBRef
     private Collection<Chat> chats;
     private RoleType roleType;
     @DBRef
     private Collection<Notification> notifications;
-    @DBRef
-    private Collection<Process> processes;
+    private Collection<InstanceOfProcess> instanceOfProcesses;
     private boolean gender;
     private boolean active;
 
     public Employee() {
-        sectionID=companyID=233;
+        ID=IdManager.IdForEmployee++;
+        companyID=233;
         avatar=2;
         password=position=name="dfsgsdfhfgjdfj";
         phone=new ArrayList<>();
         email=new ArrayList<>();
         chats=new ArrayList<>();
         notifications=new ArrayList<>();
-        processes =new ArrayList<>();
+        instanceOfProcesses =new ArrayList<>();
     }
 
     public Employee(long ID) {
@@ -73,11 +75,7 @@ public class Employee implements Serializable {
     }
 
     public long getSectionID() {
-        return sectionID;
-    }
-
-    public void setSectionID(int sectionID) {
-        this.sectionID = sectionID;
+        return section.getID();
     }
 
     public int getAvatar() {
@@ -140,8 +138,8 @@ public class Employee implements Serializable {
         return notifications;
     }
 
-    public Collection<Process> getProcesses() {
-        return processes;
+    public Collection<InstanceOfProcess> getProcessDeploys() {
+        return instanceOfProcesses;
     }
 
     public boolean addChat(Chat newChat) {
@@ -154,8 +152,9 @@ public class Employee implements Serializable {
         return true;
     }
 
-    public boolean addTask(Process newProcess) {
-        processes.add(newProcess);
+    public boolean addTask(InstanceOfProcess newProcessDeploy) {
+        instanceOfProcesses.add(newProcessDeploy);
+        System.out.println(instanceOfProcesses.size());
         return true;
     }
 

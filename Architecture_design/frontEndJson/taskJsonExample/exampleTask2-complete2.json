@@ -1,7 +1,8 @@
 //流程实例ID：61734
 {
-	"taskID": 3441,
-	"taskName":"场内调度流程",
+	"processKey":"check",
+	"processID": 3441,
+	"processName":"场内调度流程",
 	"startPerson": ["张三"],
 	"over":true,//此处暂不确定
 	"stages":[
