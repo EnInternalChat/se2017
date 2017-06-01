@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Config, Events } from 'ionic-angular';
+import { NavController, NavParams, Config, Events } from 'ionic-angular';
 
 import { TaskDetail } from '../task-detail/task-detail';
 import { NewTask } from '../new-task/new-task';
@@ -12,7 +12,7 @@ import { Task } from '../../providers/task';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-task-list',
   templateUrl: 'task-list.html',

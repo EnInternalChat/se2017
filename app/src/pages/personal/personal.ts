@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, 
+import { NavController, NavParams, Events, 
          AlertController, LoadingController } from 'ionic-angular';
 
 import { AvatorSelector } from '../avator-selector/avator-selector';
@@ -15,7 +15,7 @@ import { UIText, AppLanguage } from '../../providers/ui_text';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-personal',
   templateUrl: 'personal.html',

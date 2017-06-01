@@ -31,8 +31,8 @@ export class ChatService {
   }
 
   public get_conversation_list(): Promise<any> {
-    if(!this.is_platform)
-      return this.http.get('assets/data/conversation_list.json', null);
+    // if(!this.is_platform)
+      // return this.http.get('assets/data/conversation_list.json', null);
     return new Promise((resolve, reject) =>
       window.JMessage.getConversationList(resolve, reject));
   }

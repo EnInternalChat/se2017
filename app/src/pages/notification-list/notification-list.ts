@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { NotificationDetail } from '../notification-detail/notification-detail';
 import { Notice } from '../../providers/notification';
@@ -12,7 +12,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-notification-list',
   templateUrl: 'notification-list.html',

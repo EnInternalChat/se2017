@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, Events } from 'ionic-angular';
+import { NavController, NavParams, Platform, Events } from 'ionic-angular';
 
 import { NewGroupChat } from '../new-group-chat/new-group-chat';
 import { NewSingleChat } from '../new-single-chat/new-single-chat';
@@ -14,7 +14,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-chat-list',
   templateUrl: 'chat-list.html',

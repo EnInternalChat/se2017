@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { BasisPage } from '../basis-page/basis-page';
 
@@ -17,7 +17,7 @@ import { MD5 } from '../../providers/secure_md5';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -94,6 +94,7 @@ export class Login {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
         }
+        this.global_data.user_name = this.username;
         // this.native.stop_loading();
         // this.nav_ctrl.push(BasisPage);
         return true;
@@ -103,21 +104,28 @@ export class Login {
           this.storage.storage_info("username", this.username);
           this.storage.storage_info("password", password_md5);
         }
-        this.native.stop_loading();
+        this.global_data.user_name = this.username;
+        if(this.username === 'testuser')
+          this.global_data.set_avator_no(3);
+        else if(this.username === 'testuser2')
+          this.global_data.set_avator_no(6);
+        else if(this.username === 'testuser3')
+          this.global_data.set_avator_no(2);
+        // this.native.stop_loading();
         // this.native.show_toast("请检查网络");
-        this.nav_ctrl.push(BasisPage);
+        // this.nav_ctrl.push(BasisPage);
         return true;
       })
-      // .then(
-      // (data) => {
-      //     this.chat_service.login(this.username, this.password).then(
-      //       (data) => {
-      //         this.native.stop_loading();
-      //         this.native.show_toast("登录成功");
-      //         this.nav_ctrl.push(BasisPage);                
-      //       },
-      //       (error) => console.log("登录失败"));
-      //   });
+      .then(
+      (data) => {
+          this.chat_service.login(this.username, '123456').then(
+            (data) => {
+              this.native.stop_loading();
+              this.native.show_toast("登录成功");
+              this.nav_ctrl.push(BasisPage);                
+            },
+            (error) => console.log("登录失败"));
+        });
   }
 
   remember_password_change() {

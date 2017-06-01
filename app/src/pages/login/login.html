@@ -5,11 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-content class="background">
-  <div class="avator">
-    <img src="{{global_data.avator_path}}">
-  </div>
 
   <form #loginForm="ngForm" (ngSubmit)="on_login()" novalidate>
+    <div class="avator">
+      <img src="{{global_data.avator_path}}">
+    </div>
     <ion-list class="input-area">
       <ion-item class="input-text">
         <ion-label floating color="primary">{{ui.Login.username}}</ion-label>

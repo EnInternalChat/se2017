@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { HTTPService } from '../../providers/http_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
@@ -11,7 +11,7 @@ import { Section } from '../../providers/section';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-new-group-chat',
   templateUrl: 'new-group-chat.html',

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, 
+import { NavController, NavParams, Content, 
          ActionSheetController } from 'ionic-angular';
 
 import { ChatService } from '../../providers/chats_service';
@@ -13,7 +13,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-chat-detail',
   templateUrl: 'chat-detail.html',
@@ -68,7 +68,7 @@ export class ChatDetail {
   }
 
   public on_receive_message(msg: any) {
-    this.con.msg_list.unshift(new Message(msg, this.global_data.user_name));
+    this.msg_list.unshift(new Message(msg, this.global_data.user_name));
     this.changeDetect.detectChanges();
   }
 

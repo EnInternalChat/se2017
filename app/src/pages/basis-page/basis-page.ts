@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController, NavParams, Events, MenuController } from 'ionic-angular';
+import { Nav, NavController, NavParams, Events, MenuController } from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
 import { ChatService } from '../../providers/chats_service';
@@ -16,7 +16,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-basis-page',
   templateUrl: 'basis-page.html',
@@ -25,9 +25,9 @@ export class BasisPage {
   @ViewChild(Nav) nav: Nav;
 
   // root_page: any = TaskList;
-  root_page: any = Personal;
+  // root_page: any = Personal;
   // root_page: any = NotificationList;
-  // root_page: any = ChatList;
+  root_page: any = ChatList;
   pages: Array<{title: string, component: Component, icon_path: string}>;
 
   public job : string = "管理员";
