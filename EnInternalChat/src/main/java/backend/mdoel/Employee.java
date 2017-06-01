@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,7 +13,7 @@ import java.util.Collection;
  */
 
 @Document
-public class Employee implements Serializable {
+public class Employee {
     @Id
     private long ID;
     private long companyID;
@@ -26,11 +25,11 @@ public class Employee implements Serializable {
     private String position;
     private Collection<String> phone;
     private Collection<String> email;
+    @DBRef
     private Collection<Chat> chats;
     private RoleType roleType;
     @DBRef
     private Collection<Notification> notifications;
-    @DBRef
     private Collection<InstanceOfProcess> instanceOfProcesses;
     private boolean gender;
     private boolean active;
@@ -155,6 +154,7 @@ public class Employee implements Serializable {
 
     public boolean addTask(InstanceOfProcess newProcessDeploy) {
         instanceOfProcesses.add(newProcessDeploy);
+        System.out.println(instanceOfProcesses.size());
         return true;
     }
 

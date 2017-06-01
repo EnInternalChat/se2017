@@ -28,4 +28,8 @@ public class Chat {
         membersID=new ArrayList<>();
         messageList=new ArrayList<>();
     }
+
+    public long getID() {
+        return ID;
+    }
 }

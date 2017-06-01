@@ -67,8 +67,7 @@ public class ActivitiService {
         System.out.println("def id: "+proId);
         InstanceOfProcess instanceOfProcess=new InstanceOfProcess(processKey,proId,processInstance.getName(),starter);
         databaseService.saveProcessInstance(instanceOfProcess);
-        starter.addTask(instanceOfProcess);
-        databaseService.saveEmployee(starter);
+        databaseService.updateEmployeeCollectionData(starter,instanceOfProcess);
         return ok(proId);
     }
 

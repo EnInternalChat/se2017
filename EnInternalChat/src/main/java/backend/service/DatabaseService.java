@@ -3,9 +3,16 @@ package backend.service;
 import backend.mdoel.*;
 import backend.repository.*;
 import backend.util.IdManager;
+import com.mongodb.DBRef;
 import org.activiti.engine.impl.util.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.mapping.BasicMongoPersistentEntity;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.util.ClassTypeInformation;
 import org.springframework.session.SessionRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +35,7 @@ public class DatabaseService {
     private final SessionRepository sessionRepository;
     private final TaskStageRepository taskStageRepository;
     private final InstanceOfProcessRepository instanceOfProcessRepository;
+    private final MongoTemplate mongoTemplate;
 
     private final Map<Long,Employee> userActive;
 
@@ -36,7 +44,8 @@ public class DatabaseService {
                            DeployOfProcessRepository deployOfProcessRepository, ChatRepository chatRepository,
                            CompanyRepository companyRepository, SectionRepository sectionRepository,
                            SessionRepository sessionRepository, TaskStageRepository taskStageRepository,
-                           InstanceOfProcessRepository instanceOfProcessRepository) {
+                           InstanceOfProcessRepository instanceOfProcessRepository,
+                           MongoTemplate mongoTemplate) {
         userActive=new HashMap<>();
         this.employeeRepository = employeeRepository;
         this.notificationRepository = notificationRepository;
@@ -47,6 +56,7 @@ public class DatabaseService {
         this.sessionRepository=sessionRepository;
         this.taskStageRepository=taskStageRepository;
         this.instanceOfProcessRepository=instanceOfProcessRepository;
+        this.mongoTemplate=mongoTemplate;
         IdManager.IdForChat=chatRepository.findAll().size();
         IdManager.IdForCompanty=companyRepository.findAll().size();
         IdManager.IdForInstanceOfProcess=instanceOfProcessRepository.findAll().size();
@@ -57,8 +67,14 @@ public class DatabaseService {
         IdManager.IdForSection=sectionRepository.findAll().size();
     }
 
-    public void saveEmployee(Employee employee) {
-        employeeRepository.insert(employee);
+    public void updateEmployeeCollectionData(Employee employee, InstanceOfProcess instanceOfProcess) {
+        employee.addTask(instanceOfProcess);
+        String colName=new BasicMongoPersistentEntity<>(ClassTypeInformation.from(InstanceOfProcess.class)).getCollection();
+        DBRef instanceOfProcessRef=new DBRef(mongoTemplate.getDb(),colName,instanceOfProcess.getID());
+        Query query=Query.query(Criteria.where("_id").is(employee.getID()));
+        Update update=new Update();
+        update.push("instanceOfProcesses",instanceOfProcessRef);
+        mongoTemplate.updateFirst(query,update,Employee.class);
     }
 
     public void saveProcessInstance(InstanceOfProcess instanceOfProcess) {
@@ -160,18 +176,15 @@ public class DatabaseService {
         company.setName("google");
         company.setIntroduction("nihao");
         Employee employee=new Employee();
+        employee.setName("dog");
+        employee.setPassword("dog");
+        employee.setCompanyID(1);
         Section section1=new Section(0,employee,"ass","note");
-        section1.setID(0);
         Section section2=new Section(0,employee,"fsdf","note");
-        section2.setID(1);
         Section section3=new Section(0,employee,"afsfs","note");
-        section3.setID(2);
         Section section4=new Section(0,employee,"dsfsss","note");
-        section4.setID(3);
         Section section5=new Section(0,employee,"aeyys","note");
-        section5.setID(4);
         Section section6=new Section(0,employee,"asyqq","note");
-        section6.setID(5);
         company.setHeadSec(section1);
         section1.addChildSec(section2);
         section1.addChildSec(section3);
@@ -179,14 +192,20 @@ public class DatabaseService {
         section3.addChildSec(section5);
         section3.addChildSec(section6);
         employeeRepository.insert(employee);
-        employeeRepository.insert(new Employee(1));
-        employeeRepository.insert(new Employee(2));
-        employeeRepository.insert(new Employee(3));
-        employeeRepository.insert(new Employee(4));
-        employeeRepository.insert(new Employee(5));
-        employeeRepository.insert(new Employee(6));
-        employeeRepository.insert(new Employee(7));
-        employeeRepository.insert(new Employee(8));
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employeeRepository.insert(new Employee());
+        employee.addTask(new InstanceOfProcess());
+        employee.addChat(new Chat());
+        employee.addMail("ss");
+        employee.addPhone("s");
+        employee.addNotification(new Notification());
+        employeeRepository.save(employee);
         sectionRepository.insert(section2);
         sectionRepository.insert(section1);
         sectionRepository.insert(section3);
@@ -197,7 +216,7 @@ public class DatabaseService {
         instanceOfProcessRepository.save(new InstanceOfProcess());
         deployOfProcessRepository.save(new DeployOfProcess());
         taskStageRepository.save(new TaskStage());
-        Company result=companyRepository.findOne((long) 0);
+        Company result=companyRepository.findOne((long) 1);
         System.out.println(result.getHeadSec().getChildrenSections().size());
     }
 }

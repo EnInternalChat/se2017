@@ -43,4 +43,8 @@ public class InstanceOfProcess {
         stages.add(taskStage);
         return true;
     }
+
+    public long getID() {
+        return ID;
+    }
 }
