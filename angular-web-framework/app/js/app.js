@@ -5,11 +5,11 @@ var app = angular.module('internalChat',
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/home', {
-    templateUrl: 'templates/home.html', 
+    templateUrl: 'templates/home.html',
     controller: 'HomeCtrl'
   })
   .when('/login', {
-    templateUrl: 'templates/login.html', 
+    templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
   })
   .otherwise({

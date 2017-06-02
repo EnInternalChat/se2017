@@ -1,7 +1,46 @@
 <div class="tab-content">
     <!-- 资源管理模块 -->
 
-    <!-- 用户管理模块 -->
+    <!-- 用户管理模块
+    还要将"添加用户"部分，改为两边各五个选项;
+    左侧栏“用户管理”变高亮，不显示的形式，再加个用户查看的侧边栏。
+    组织结构里部门后面的“操作”里，点击“用户”，直接跳转到这个界面。
+    加了左侧栏后，还是和左侧栏有部分重合。
+
+     -->
+
+    <div class="leftMeun" id="leftMeun">
+        <div id="logoDiv">
+            <p id="logoP"><img id="logo" alt="用户" src="images/head_120.png"><span>用户</span></p>
+        </div>
+        <div id="personInfor">
+            <p id="userName">管理员</p>
+            <p><span>yangxp@qq.com</span></p>
+            <p>
+                <a>退出登录</a>
+            </p>
+        </div>
+        <div class="meun-title">账号管理</div>
+        <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="images/icon_source.png">组织结构管理</div>
+
+        <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">用户管理</div>
+        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="images/icon_change_grey.png">修改信息</div>
+
+        <!--  预计要取消部门管理
+        <div class="meun-title">部门管理</div>
+        <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="images/icon_house_grey.png">部门管理</div>
+
+    -->
+
+        <div class="meun-title">任务管理</div>
+        <div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务流程</div>
+        <div class="meun-title">通知管理</div>
+        <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">通知查看</div>
+    </div>
+
+
+
+
 <div role="tabpanel" class="tab-pane" id="user">
     <div class="check-div form-inline">
         <div class="col-xs-3">
@@ -29,10 +68,13 @@
                 用户ID
             </div>
             <div class="col-xs-2">
-                部门
+                真实姓名
             </div>
             <div class="col-xs-2">
-                真实姓名
+                所属部门
+            </div>
+            <div class="col-xs-2">
+                级别
             </div>
             <div class="col-xs-2">
                 电话
@@ -51,16 +93,19 @@
                     goodmoning
                 </div>
                 <div class="col-xs-2">
+                    程序员2
+                </div>
+                <div class="col-xs-2">
                     程序部
                 </div>
                 <div class="col-xs-2">
-                    李四
+                    部员
                 </div>
                 <div class="col-xs-2">
                     13688889999
                 </div>
                 <div class="col-xs-2">
-                    状态
+                    启用
                 </div>
                 <div class="col-xs-2">
                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
@@ -115,48 +160,75 @@
                     <div class="container-fluid">
                         <form class="form-horizontal">
                             <div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">用户ID：</label>
+                                <label for="sYhID" class="col-xs-3 control-label">用户ID：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                    <input type="email" class="form-control input-sm duiqi" id="sYhID" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
+                                <label for="sName" class="col-xs-3 control-label">真实姓名：</label>
                                 <div class="col-xs-8 ">
-                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                    <input type="" class="form-control input-sm duiqi" id="sName" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                <label for="sMima" class="col-xs-3 control-label">初始密码：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="" class="form-control input-sm duiqi" id="sMima" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">电话：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                <label for="sQuer" class="col-xs-3 control-label">确认密码：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="" class="form-control input-sm duiqi" id="sQuer" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">部门：</label>
+                                <label for="sEmai" class="col-xs-3 control-label">电子邮箱：</label>
                                 <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sEmai" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sTell" class="col-xs-3 control-label">电话：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sTell" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sXing" class="col-xs-3 control-label">性别：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sXing" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sBume" class="col-xs-3 control-label">部门：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sBume" placeholder="">
+                                    <!--
                                     <select class=" form-control select-duiqi">
                                         <option value="">程序部</option>
                                         <option value="">人力资源部</option>
                                         <option value="">行政部</option>
                                     </select>
+                                    -->
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">权限：</label>
-                                <div class="col-xs-8">
+                                <label for="sPowe" class="col-xs-3 control-label">权限：</label>
+                                    <div class="col-xs-8">
+                                        <label class="control-label" for="anniu">
+                                            <input type="radio" name="situation" id="normal">部长</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label class="control-label" for="meun">
+                                            <input type="radio" name="situation" id="forbid"> 部员</label>
+                                    </div>
+                                    <!--
                                     <select class=" form-control select-duiqi">
-                                        <option value="">管理员</option>
+
                                         <option value="">部长</option>
                                         <option value="">部员</option>
                                     </select>
-                                </div>
+                                    -->
                             </div>
                             <div class="form-group">
                                 <label for="situation" class="col-xs-3 control-label">状态：</label>
@@ -172,7 +244,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -225,7 +297,15 @@
                             <div class="form-group">
                                 <label for="sKnot" class="col-xs-3 control-label">权限：</label>
                                 <div class="col-xs-8">
+                                    <div class="col-xs-8">
+                                        <label class="control-label" for="anniu">
+                                            <input type="radio" name="situation" id="normal">部长</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label class="control-label" for="meun">
+                                            <input type="radio" name="situation" id="forbid"> 部员</label>
+                                    </div>
+                                    <!--
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                    -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -242,7 +322,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -266,7 +346,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn  btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn  btn-xs btn-danger">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
