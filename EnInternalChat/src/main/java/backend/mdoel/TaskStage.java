@@ -22,12 +22,18 @@ public class TaskStage {
     private long finishTime;
     @DBRef
     private Collection<Employee> person;
-    private Collection<Map<String,String>> stages;
+    private Collection<Map<String,String>> choices;
 
     public TaskStage() {
         ID=IdManager.IdForTaskStage++;
         person=new ArrayList<>();
-        stages=new ArrayList<>();
+        choices=new ArrayList<>();
     }
 
+    public TaskStage(String activityID, long startTime, Collection<Map<String, String>> choices) {
+        this();
+        this.activityID = activityID;
+        this.startTime = startTime;
+        this.choices = choices;
+    }
 }

@@ -67,13 +67,27 @@ public class DatabaseService {
         IdManager.IdForSection=sectionRepository.findAll().size();
     }
 
+    public void updateEmployeeCollectionData(Employee employee, Chat chat) {
+        //TODO
+    }
+
+    public void updateEmployeeCollectionData(Employee employee, Notification notification) {
+        employee.addNotification(notification);
+        String colName=new BasicMongoPersistentEntity<>(ClassTypeInformation.from(Notification.class)).getCollection();
+        DBRef notificationRef=new DBRef(mongoTemplate.getDb(),colName,notification.getID());
+        Query query=Query.query(Criteria.where("_id").is(employee.getID()));
+        Update update=new Update();
+        update.addToSet("notifications",notificationRef);
+        mongoTemplate.updateFirst(query,update,Employee.class);
+    }
+
     public void updateEmployeeCollectionData(Employee employee, InstanceOfProcess instanceOfProcess) {
         employee.addTask(instanceOfProcess);
         String colName=new BasicMongoPersistentEntity<>(ClassTypeInformation.from(InstanceOfProcess.class)).getCollection();
         DBRef instanceOfProcessRef=new DBRef(mongoTemplate.getDb(),colName,instanceOfProcess.getID());
         Query query=Query.query(Criteria.where("_id").is(employee.getID()));
         Update update=new Update();
-        update.push("instanceOfProcesses",instanceOfProcessRef);
+        update.addToSet("instanceOfProcesses",instanceOfProcessRef);
         mongoTemplate.updateFirst(query,update,Employee.class);
     }
 
@@ -216,7 +230,7 @@ public class DatabaseService {
         instanceOfProcessRepository.save(new InstanceOfProcess());
         deployOfProcessRepository.save(new DeployOfProcess());
         taskStageRepository.save(new TaskStage());
-        Company result=companyRepository.findOne((long) 1);
+        Company result=companyRepository.findOne((long) 0);
         System.out.println(result.getHeadSec().getChildrenSections().size());
     }
 }

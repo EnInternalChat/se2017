@@ -30,6 +30,7 @@ public class Employee {
     private RoleType roleType;
     @DBRef
     private Collection<Notification> notifications;
+    @DBRef
     private Collection<InstanceOfProcess> instanceOfProcesses;
     private boolean gender;
     private boolean active;

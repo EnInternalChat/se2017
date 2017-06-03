@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lenovo on 2017/5/31.
@@ -18,8 +20,7 @@ public class InstanceOfProcess {
     private String processKey;
     private String processID;
     private String processName;
-    @DBRef
-    private Collection<Employee> startPerson;
+    private Collection<Map<String, Object>> startPerson;
     private boolean over;
     @DBRef
     private Collection<TaskStage> stages;
@@ -36,7 +37,10 @@ public class InstanceOfProcess {
         this.processKey = processKey;
         this.processID = processID;
         this.processName = processName;
-        startPerson.add(starter);
+        HashMap<String,Object> starterMap=new HashMap<>();
+        starterMap.put("ID",starter.getID());
+        starterMap.put("name",starter.getName());
+        startPerson.add(starterMap);
     }
 
     public boolean addStage(TaskStage taskStage) {
