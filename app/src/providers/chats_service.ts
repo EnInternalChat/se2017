@@ -7,17 +7,24 @@ declare let window;
 @Injectable()
 export class ChatService {
   public is_platform: boolean;
+  public is_android: boolean;
   public message_count: number = 10;
 
   constructor(
     public platform: Platform,
     public http: HTTPService) {
     if((this.platform.is('android') || this.platform.is('ios'))
-      && this.platform.userAgent().indexOf('Linux x86_64') == -1)
+      && this.platform.userAgent().indexOf('Linux x86_64') == -1) {
       this.is_platform = true;
+      if(this.platform.is('android')) {
+        this.is_android = true;
+      }      
+      else {
+        this.is_android = false;
+      }
+    }
     else 
       this.is_platform = false;
-    // this.is_platform = false;
   }
 
   public login(username, password): Promise<any> {
@@ -35,6 +42,7 @@ export class ChatService {
       window.JMessage.getConversationList(resolve, reject));
   }
 
+  // Android only
   public enter_conversation(is_single: boolean, target: string): Promise<any> {
     if(is_single) {
       return new Promise((resolve, reject) =>
@@ -46,16 +54,28 @@ export class ChatService {
     }
   }
 
-  public set_unread_msg(is_single: boolean, username: string, msg_count: number) {
-    if(is_single) {
-      return new Promise((resolve, reject) => 
-        window.JMessage.setSingleConversationUnreadMessageCount(
-          username, null, msg_count, resolve, reject));
+  public clear_unread_msg(is_single: boolean, username: string) {
+    if(this.is_platform && this.is_android) {
+      if(is_single) {
+        return new Promise((resolve, reject) => 
+          window.JMessage.setSingleConversationUnreadMessageCount(
+            username, null, 0, resolve, reject));
+      }
+      else {
+        return new Promise((resolve, reject) =>
+          window.JMessage.setGroupConversationUnreadMessageCount(
+            username, 0, resolve, reject));
+      }
     }
-    else {
-      return new Promise((resolve, reject) =>
-        window.JMessage.setGroupConversationUnreadMessageCount(
-          username, msg_count, resolve, reject));
+    else if(this.is_platform && !this.is_android) {
+      if(is_single) {
+        return new Promise((resolve, reject) =>
+          window.JMessage.clearSingleUnreadCount(username, resolve, reject));
+      }
+      else {
+        return new Promise((resolve, reject) => 
+          window.JMessage.clearGroupUnreadCount(username, resolve, reject));
+      }
     }
   }
 
@@ -70,6 +90,7 @@ export class ChatService {
         username, null, from, this.message_count, resolve, reject));
   }
 
+  // Android only
   public get_message_image(username: string, is_single: boolean, msg_id: number) {
     if(is_single) {
       return new Promise((resolve, reject) =>

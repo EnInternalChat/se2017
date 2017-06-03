@@ -111,6 +111,8 @@ export class Login {
           this.global_data.set_avator_no(6);
         else if(this.username === 'testuser3')
           this.global_data.set_avator_no(2);
+        else
+          this.global_data.set_avator_no(1);
         // this.native.stop_loading();
         // this.native.show_toast("请检查网络");
         // this.nav_ctrl.push(BasisPage);

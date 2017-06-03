@@ -1,14 +1,12 @@
 export class ImageMessage {
   public format: string;
-  public width: number;
-  public height: number;
   public local_path: string;
   public web_path: string;
   public origin_path: string;
   constructor(json) {
+    if(json == null)
+      return;
     this.format = json['format'];
-    this.width = json['width'];
-    this.height = json['height'];
     this.local_path = json['localThumbnailPath'];
     this.web_path = json['media_id'];
     if(json['local_path'])
@@ -27,6 +25,8 @@ export class Message {
   public create_time: string;
   public is_my_send: boolean;
   constructor(json, cur_username: string) {
+    if(json == null)
+      return;
     this.id = json['serverMessageId'];
     this.from_user = json['fromName'];
     this.from_user_avator = json['fromNickname'];
@@ -70,6 +70,8 @@ export class Conversation {
   }
 
   constructor(json) {
+    if(json == null)
+      return;
     this.id = json['id'];
     if(json['type'] === 'single') {
       this.is_single = true;

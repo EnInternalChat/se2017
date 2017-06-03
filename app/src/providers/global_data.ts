@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StorageHelper } from './storage_helper';
 import { MD5 } from './secure_md5';
 import { UIText, AppLanguage } from './ui_text';
+import { Conversation } from './chat';
 
 
 @Injectable()
@@ -14,6 +15,8 @@ export class AppGlobal {
 
   public job : string = "管理员";
   private _language: AppLanguage;
+
+  public conversation_list: Array<Conversation> = [];
 
   public constructor(
     private storage: StorageHelper,

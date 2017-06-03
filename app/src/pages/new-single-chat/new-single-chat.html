@@ -22,14 +22,11 @@
 
 
 <ion-content padding>
-  <ion-list class="employee-list" radio-group>
+  <ion-list class="employee-list" radio-group [(ngModel)]="select_person">
   <ion-item *ngFor="let item of employee_list">
-      <ion-avatar item-left>
-        <!-- <img src="assets/img/avator/{{item.avator}}.png"> -->
-        <img src="assets/img/avator/{{item}}.png">
-      </ion-avatar>
-      <ion-label>张三</ion-label>
-      <ion-radio></ion-radio>
+      <img src="assets/img/avator/{{item.no}}.png">
+      <ion-label>{{item.id}}</ion-label>
+      <ion-radio value="{{item.id}}"></ion-radio>
     </ion-item>
   </ion-list>
 </ion-content>

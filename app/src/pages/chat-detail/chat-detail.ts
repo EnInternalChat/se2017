@@ -47,7 +47,6 @@ export class ChatDetail {
       this.con_title = this.con.send_user_name;
     else
       this.con_title = this.con.group_name;
-    this.msg_list = this.con.msg_list;
     this.event_func = (msg: any) => this.onReceiveMsg(msg);
     this.chat_service.enter_conversation(this.con.is_single, 
       this.con.target_id).then(
@@ -71,8 +70,7 @@ export class ChatDetail {
   }
 
   public onReceiveMsg(msg: any) {
-    console.log(this);
-    this.msg_list.push(new Message(msg, this.global_data.user_name));
+    this.msg_list.unshift(new Message(msg, this.global_data.user_name));
     this.msg_from++;
     this.content.scrollToBottom(500);
     this.changeDetect.detectChanges();
@@ -209,8 +207,8 @@ export class ChatDetail {
 
   public go_back() {
     let promise_p = [];
-    promise_p.push(this.chat_service.set_unread_msg(
-      this.con.is_single, this.con.target_id, 0));
+    promise_p.push(this.chat_service.clear_unread_msg(
+      this.con.is_single, this.con.target_id));
     promise_p.push(this.chat_service.exit_conversation().then(
       () => {},
       (error) => this.native.show_toast('网络连接出现问题')));

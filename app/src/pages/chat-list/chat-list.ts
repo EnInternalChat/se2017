@@ -8,6 +8,7 @@ import { ChatDetail } from '../chat-detail/chat-detail';
 import { ChatService } from '../../providers/chats_service';
 import { Conversation } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
+import { AppGlobal } from '../../providers/global_data';
 /**
  * Generated class for the ChatList page.
  *
@@ -22,7 +23,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
 export class ChatList {
 
   public is_platform: boolean;
-  public conversation_list: Array<Conversation> = [];
+  public conversation_list: Array<Conversation>;
 
   public event_func: any;
 
@@ -32,10 +33,12 @@ export class ChatList {
       public navParams: NavParams,
       public events: Events,
       public native: NativeServiceHelper,
-      public chat_service: ChatService) {
+      public chat_service: ChatService,
+      public global_data: AppGlobal) {
   }
 
   ionViewDidLoad() {
+    this.conversation_list = this.global_data.conversation_list;
     this.event_func = (msg: any) => this.onReceiveMsg(msg);
   }
 
