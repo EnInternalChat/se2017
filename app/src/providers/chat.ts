@@ -11,7 +11,10 @@ export class ImageMessage {
     this.height = json['height'];
     this.local_path = json['localThumbnailPath'];
     this.web_path = json['media_id'];
-    this.origin_path = null;
+    if(json['local_path'])
+      this.origin_path = json['local_path'];
+    else
+      this.origin_path = null;
   }
 }
 

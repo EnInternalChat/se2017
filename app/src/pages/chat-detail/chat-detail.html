@@ -26,7 +26,49 @@
   </ion-refresher>
 
  <ion-list no-lines class="msg-list">
-  <ion-item *ngFor="let item of msg_list">
+  <ion-item *ngFor="let item of msg_list" [ngSwitch]="item.is_my_send">
+    <div *ngSwitchCase="false" class="msg-other">
+      <div class="sender-avator">
+        <img src="assets/img/avator/{{item.from_user_avator}}.png">
+      </div>
+      <div class="msg-info">
+        <div class="sender-person">{{item.from_user}}</div>
+        <div class="msg-detail">
+          <ion-card class="msg-text-content" *ngIf="!item.is_img">
+            <ion-card-content>{{item.content}}</ion-card-content>
+          </ion-card>
+          <ion-card class="msg-image-content" *ngIf="item.is_img" (click)="image_detail(item)">
+            <ion-card-content >
+              <img [src]="item.content.local_path">
+            </ion-card-content>
+          </ion-card>        
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="true" class="msg-my">
+      <div class="msg-my" *ngIf="item.is_my_send">   
+        <div class="msg-info">
+          <div class="msg-detail">
+            <ion-card class="msg-text-content" *ngIf="!item.is_img">
+              <ion-card-content>{{item.content}}</ion-card-content>
+            </ion-card>
+            <ion-card class="msg-image-content" *ngIf="item.is_img" (click)="image_detail(item)">
+              <ion-card-content >
+                <img [src]="item.content.local_path">
+              </ion-card-content>
+            </ion-card>       
+          </div>
+        </div>
+        <div class="sender-avator">
+          <img src="{{global_data.avator_path}}">
+        </div>   
+      </div>
+    </div>
+  </ion-item>
+
+
+
+<!--     <ion-item *ngFor="let item of msg_list">
     <div class="msg-other" *ngIf="!item.is_my_send">
       <div class="sender-avator">
         <img src="assets/img/avator/{{item.from_user_avator}}.png">
@@ -62,12 +104,12 @@
         <img src="{{global_data.avator_path}}">
       </div>   
     </div>
-  </ion-item>
+  </ion-item> -->
 <!--   <ion-item>
     <div class="msg-my">   
       <div class="msg-info">
         <div class="msg-detail">
-          <ion-card class="msg-content">
+          <ion-card class="msg-text-content">
             <ion-card-content>测试信息测试信测试信</ion-card-content>
           </ion-card>        
         </div>
@@ -85,7 +127,7 @@
     <div class="msg-info">
       <div class="sender-person">张三</div>
       <div class="msg-detail">
-        <ion-card class="msg-content">
+        <ion-card class="msg-text-content">
           <ion-card-content>测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信</ion-card-content>
         </ion-card>        
       </div>
@@ -100,7 +142,7 @@
     <div class="msg-info">
       <div class="sender-person">张三</div>
       <div class="msg-detail">
-        <ion-card class="msg-content">
+        <ion-card class="msg-text-content">
           <ion-card-content>测试信测试信测试信测试信测</ion-card-content>
         </ion-card>        
       </div>
@@ -111,7 +153,7 @@
     <div class="msg-my">   
       <div class="msg-info">
         <div class="msg-detail">
-          <ion-card class="msg-content">
+          <ion-card class="msg-text-content">
             <ion-card-content>测试信息测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信</ion-card-content>
           </ion-card>        
         </div>
@@ -127,7 +169,7 @@
 
 <ion-footer class="msg-input-bar">
   <div>
-    <button ion-button class="msg-add-img" large>
+    <button ion-button class="msg-add-img" large (click)="get_img_msg()">
       <ion-icon name="md-add"></ion-icon>
     </button>
     <ion-input class="msg-input" [(ngModel)]="input_msg" name="input_msg"></ion-input>

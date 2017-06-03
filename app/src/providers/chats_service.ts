@@ -87,11 +87,26 @@ export class ChatService {
   public send_text_message(target: string, content: string, is_single: boolean) {
     if(is_single) {
       return new Promise((resolve, reject) =>
-        window.JMessage.sendSingleTextMessage(target, content, null, resolve, reject));
+        window.JMessage.sendSingleTextMessage(
+          target, content, null, resolve, reject));
     }
     else {
       return new Promise((resolve, reject) =>
-        window.JMessage.sendGroupTextMessage(target, content, resolve, reject));
+        window.JMessage.sendGroupTextMessage(
+          target, content, resolve, reject));
+    }
+  }
+
+  public send_image_message(target: string, image: string, is_single: boolean) {
+    if(is_single) {
+      return new Promise((resolve, reject) => 
+        window.JMessage.sendSingleImageMessage(
+          target, image, null, resolve, reject));
+    }
+    else {
+      return new Promise((resolve, reject) =>
+        window.JMessage.sendGroupImageMessage(
+          target, image, resolve, reject));
     }
   }
 

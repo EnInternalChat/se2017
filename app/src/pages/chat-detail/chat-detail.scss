@@ -65,7 +65,7 @@ page-chat-detail {
             line-height: 1.4;
             color: map-get($colors, primary_text);
             word-wrap:break-word; 
-            word-break:normal;
+            word-break: break-all;
             white-space: normal;
             &:after {
               content: '\A';
@@ -129,7 +129,7 @@ page-chat-detail {
             line-height: 1.4;
             color: map-get($colors, primary_text);
             word-wrap:break-word; 
-            word-break:normal;
+            word-break: break-all;
             white-space: normal;
             &:after {
               content: '\A';

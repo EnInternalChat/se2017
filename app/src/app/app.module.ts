@@ -6,6 +6,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
@@ -91,6 +93,8 @@ import { SharedModule } from '../components/shared.module';
     NativeServiceHelper,
     HTTPService,
     StorageHelper,
+    ImagePicker,
+    Camera,
     AppGlobal,
     UIText,
     MD5,

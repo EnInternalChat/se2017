@@ -58,11 +58,10 @@ export class ChatDetail {
         this.get_history_message();
         document.addEventListener("jmessage.onReceiveMessage",
           this.event_func);
-        this.content.scrollToBottom(500);
       },
       (error) => {
         this.native.show_toast('无法开始会话');
-        // this.go_back();
+        this.go_back();
       });
   }
 
@@ -75,6 +74,7 @@ export class ChatDetail {
     console.log(this);
     this.msg_list.push(new Message(msg, this.global_data.user_name));
     this.msg_from++;
+    this.content.scrollToBottom(500);
     this.changeDetect.detectChanges();
   }
 
@@ -94,6 +94,7 @@ export class ChatDetail {
         new_messages.reverse();
         this.msg_from += new_messages.length;
         this.msg_list = new_messages.concat(this.msg_list);
+        this.content.scrollToBottom(500);
         return true;
       },
       (error) => this.native.show_toast('获取聊天记录失败'));
@@ -124,14 +125,38 @@ export class ChatDetail {
         let new_msg = new Message(res, this.global_data.user_name);
         new_msg.from_user_avator = this.global_data.avator_no.toString();
         this.msg_list.push(new_msg);
+        this.msg_from++;
         this.input_msg = '';
         this.content.scrollToBottom(500);
+      },
+      (error) => {
+        this.native.stop_loading();
+        this.native.show_toast('发送文字信息失败，请检查网络');
       });
   }
 
   public send_img_msg(image_data) {
     if(image_data == null || image_data == '')
       return;
+    this.native.loading();
+    this.chat_service.send_image_message(
+      this.con.target_id, image_data, this.con.is_single).then(
+      (res: any) => {
+        if(res == null)
+          return;
+        res = JSON.parse(res);
+        res['fromName'] = res['fromID'];
+        let new_msg = new Message(res, this.global_data.user_name);
+        new_msg.from_user_avator = this.global_data.avator_no.toString();
+        this.msg_list.push(new_msg);
+        this.msg_from++;
+        this.native.stop_loading();
+        this.content.scrollToBottom(500);
+      },
+      (error) => {
+        this.native.stop_loading();
+        this.native.show_toast('发送图片信息失败，请检查网络');
+      })
   }
 
   public get_img_msg() {
@@ -146,11 +171,21 @@ export class ChatDetail {
   }
 
   public take_photo() {
-
+    this.native.take_photo().then(
+      (photo) => {
+        if(photo == null)
+          return;
+        this.send_img_msg(photo);
+      });
   }
 
   public pick_image() {
-
+    this.native.pick_image().then(
+      (result) => {
+        if(result.length === 0)
+          return;
+        this.send_img_msg(result[0]);
+      });
   }
 
   public image_detail(msg) {
@@ -170,7 +205,6 @@ export class ChatDetail {
         this.native.stop_loading();
         this.native.show_toast('获取原图失败');
       });
-    
   }
 
   public go_back() {

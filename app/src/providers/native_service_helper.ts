@@ -1,19 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { UIText } from './ui_text';
 
 @Injectable()
 export class NativeServiceHelper {
+  public is_platform: boolean;
   private load: Loading;
+  private camera_options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  };   
+  private image_picker_option: ImagePickerOptions = {
+    maximumImagesCount: 1,
+    quality: 20
+  };
 
   constructor(
     private platform: Platform, 
     private network: Network,
     private toastCtrl: ToastController,
     private loadCtrl: LoadingController,
+    private camera: Camera,
+    private imagePicker: ImagePicker,
     private ui: UIText) {
+    if(this.platform.is('android') || this.platform.is('ios'))
+      this.is_platform = true;
+    else
+      this.is_platform = false;
+  }
+
+  public take_photo() {
+    if(!this.is_platform)
+      return;
+    return this.camera.getPicture(this.camera_options);
+  }
+
+  public pick_image() {
+    if(!this.is_platform)
+      return;
+    return this.imagePicker.getPictures(this.image_picker_option);
   }
 
   //网络类型: unknown, ethernet, wifi, 2g, 3g, 4g, cellular, none
