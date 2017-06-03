@@ -28,6 +28,8 @@ export class ChatDetail {
   public msg_from: number;
   public input_msg: string;
 
+  public event_func: any;
+
   constructor(
     public actionCtrl: ActionSheetController,
     public changeDetect: ChangeDetectorRef,
@@ -46,6 +48,7 @@ export class ChatDetail {
     else
       this.con_title = this.con.group_name;
     this.msg_list = this.con.msg_list;
+    this.event_func = (msg: any) => this.onReceiveMsg(msg);
     this.chat_service.enter_conversation(this.con.is_single, 
       this.con.target_id).then(
       () => {
@@ -54,7 +57,7 @@ export class ChatDetail {
         this.msg_from = 0;
         this.get_history_message();
         document.addEventListener("jmessage.onReceiveMessage",
-        (msg: any) => this.on_receive_message(msg), false);
+          this.event_func);
         this.content.scrollToBottom(500);
       },
       (error) => {
@@ -64,10 +67,12 @@ export class ChatDetail {
   }
 
   ionViewWillUnload() {
-    document.removeEventListener('jmessage.onReceiveMessage', () => {}, false);
+    document.removeEventListener('jmessage.onReceiveMessage',
+      this.event_func);
   }
 
-  public on_receive_message(msg: any) {
+  public onReceiveMsg(msg: any) {
+    console.log(this);
     this.msg_list.push(new Message(msg, this.global_data.user_name));
     this.msg_from++;
     this.changeDetect.detectChanges();
@@ -149,11 +154,16 @@ export class ChatDetail {
   }
 
   public image_detail(msg) {
+    if(msg.content.origin_path != null) {
+      this.navCtrl.push(ImageViwer, { image_url: msg.content.origin_path });
+      return;
+    }
     this.native.loading();
     this.chat_service.get_message_image(
       this.con.target_id, this.con.is_single, msg.id).then(
       (path) => {
         this.native.stop_loading();
+        msg.content.origin_path = path;
         this.navCtrl.push(ImageViwer, { image_url: path });
       },
       (error) => {
@@ -164,9 +174,13 @@ export class ChatDetail {
   }
 
   public go_back() {
-    this.chat_service.exit_conversation().then(
+    let promise_p = [];
+    promise_p.push(this.chat_service.set_unread_msg(
+      this.con.is_single, this.con.target_id, 0));
+    promise_p.push(this.chat_service.exit_conversation().then(
       () => {},
-      (error) => this.native.show_toast('网络连接出现问题')).then(
+      (error) => this.native.show_toast('网络连接出现问题')));
+    Promise.all(promise_p).then(
       () => this.navCtrl.pop());
   }
 

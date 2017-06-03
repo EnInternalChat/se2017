@@ -4,12 +4,14 @@ export class ImageMessage {
   public height: number;
   public local_path: string;
   public web_path: string;
+  public origin_path: string;
   constructor(json) {
     this.format = json['format'];
     this.width = json['width'];
     this.height = json['height'];
     this.local_path = json['localThumbnailPath'];
     this.web_path = json['media_id'];
+    this.origin_path = null;
   }
 }
 

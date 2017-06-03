@@ -24,6 +24,8 @@ export class ChatList {
   public is_platform: boolean;
   public conversation_list: Array<Conversation> = [];
 
+  public event_func: any;
+
   constructor(
       public platform: Platform,
       public navCtrl: NavController,
@@ -34,10 +36,23 @@ export class ChatList {
   }
 
   ionViewDidLoad() {
+    this.event_func = (msg: any) => this.onReceiveMsg(msg);
   }
 
 
   ionViewWillEnter() {
+    this.update_conversation_list();
+    document.addEventListener("jmessage.onReceiveMessage", 
+      this.event_func);
+  }
+
+  ionViewWillLeave() {
+    document.removeEventListener('jmessage.onReceiveMessage', 
+      this.event_func);
+  }
+
+  public onReceiveMsg(msg: any) {
+    console.log(this);
     this.update_conversation_list();
   }
 

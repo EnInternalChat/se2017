@@ -31,8 +31,6 @@ export class ChatService {
   }
 
   public get_conversation_list(): Promise<any> {
-    // if(!this.is_platform)
-      // return this.http.get('assets/data/conversation_list.json', null);
     return new Promise((resolve, reject) =>
       window.JMessage.getConversationList(resolve, reject));
   }
@@ -45,6 +43,19 @@ export class ChatService {
     else {
       return new Promise((resolve, reject) =>
         window.JMessage.enterGroupConversation(target, resolve, reject));
+    }
+  }
+
+  public set_unread_msg(is_single: boolean, username: string, msg_count: number) {
+    if(is_single) {
+      return new Promise((resolve, reject) => 
+        window.JMessage.setSingleConversationUnreadMessageCount(
+          username, null, msg_count, resolve, reject));
+    }
+    else {
+      return new Promise((resolve, reject) =>
+        window.JMessage.setGroupConversationUnreadMessageCount(
+          username, msg_count, resolve, reject));
     }
   }
 

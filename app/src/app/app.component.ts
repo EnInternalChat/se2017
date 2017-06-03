@@ -5,6 +5,7 @@ import { Platform, MenuController, Nav, Keyboard, Events } from 'ionic-angular';
 import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { NativeServiceHelper } from '../providers/native_service_helper';
+import { ChatDetail } from '../pages/chat-detail/chat-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,6 +20,7 @@ export class MyApp {
 
   rootPage = Login;
   // rootPage = BasisPage;
+  // rootPage = ChatDetail;
   backPressed: boolean = false;
 
   constructor(
