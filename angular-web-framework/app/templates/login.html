@@ -5,13 +5,13 @@
 	<div class="signin-head"><img src="images/head_120.png" alt="" class="img-circle"></div>
 	<div>
 	</div>
-	<form action="index.html" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"><input type="hidden" name="did" value="0"/>
-	<form class="form-signin" role="form">
+
+	<form class="form-signin" role="form" ng-controller="loginCtrl">
 	<div>
-		<input type="text" class="form-control" placeholder="用户名" required autofocus id="login_username"/>
+		<input ng-model="username" type="text" class="form-control" placeholder="用户名" required autofocus id="login_username"/>
 	</div>
 	<div>
-		<input type="password" class="form-control" placeholder="密码" required id="login_pwd"/>
+		<input ng-model="userpassword" type="password" class="form-control" placeholder="密码" required id="login_pwd"/>
 	</div>
 		<label class="checkbox input-group">
 			<div class="input-group-addon">
@@ -24,7 +24,7 @@
 			</div>
 		</label>
 	<div>
-		<button class="btn btn-lg btn-warning btn-block" type="submit" id="login_submit">登录</button>
+		<button class="btn btn-lg btn-warning btn-block" ng-click="login_click()" type="submit" id="login_submit">登录</button>
 	</div>
 
 	</form>

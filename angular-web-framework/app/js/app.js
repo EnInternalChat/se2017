@@ -1,19 +1,31 @@
-var app = angular.module('internalChat', 
+var app = angular.module('myApp',
   ['internalChat.filters', 'internalChat.services', 
    'internalChat.directives', 'internalChat.controllers']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
-  .when('/home', {
-    templateUrl: 'templates/home.html',
-    controller: 'HomeCtrl'
-  })
   .when('/login', {
     templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
+    controller: 'loginCtrl'
+  })
+  .when('/notice', {
+    templateUrl: 'templates/notice.html',
+    controller: 'noticeCtrl'
+  })
+  .when('/setting',{
+    templateUrl:'templates/setting.html',
+    controller:'settingCtrl'
+  })
+  .when('/user',{
+      templateUrl:'templates/user.html',
+      controller:'userCtrl'
+  })
+  .when('/task',{
+         templateUrl:'templates/task.html',
+         controller:'taskCtrl'
   })
   .otherwise({
-    redirectTo: '/home'
+    redirectTo: '/login'
   });
 }]);
 
