@@ -32,6 +32,8 @@ import { AppGlobal } from '../providers/global_data';
 import { UIText } from '../providers/ui_text'; 
 import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
 
+import { SharedModule } from '../components/shared.module';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -54,12 +56,15 @@ import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
   imports: [
     BrowserModule,
     FormsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+        swipeBackEnabled: false
+    }),
     IonicStorageModule.forRoot({
       name: 'chat__mydb',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpModule,
+    SharedModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

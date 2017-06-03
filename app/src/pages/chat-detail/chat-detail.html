@@ -34,8 +34,13 @@
       <div class="msg-info">
         <div class="sender-person">{{item.from_user}}</div>
         <div class="msg-detail">
-          <ion-card class="msg-content">
+          <ion-card class="msg-text-content" *ngIf="!item.is_img">
             <ion-card-content>{{item.content}}</ion-card-content>
+          </ion-card>
+          <ion-card class="msg-image-content" *ngIf="item.is_img" (click)="image_detail(item)">
+            <ion-card-content >
+              <img [src]="item.content.local_path">
+            </ion-card-content>
           </ion-card>        
         </div>
       </div>
@@ -43,9 +48,14 @@
     <div class="msg-my" *ngIf="item.is_my_send">   
       <div class="msg-info">
         <div class="msg-detail">
-          <ion-card class="msg-content">
+          <ion-card class="msg-text-content" *ngIf="!item.is_img">
             <ion-card-content>{{item.content}}</ion-card-content>
-          </ion-card>        
+          </ion-card>
+          <ion-card class="msg-image-content" *ngIf="item.is_img" (click)="image_detail(item)">
+            <ion-card-content >
+              <img [src]="item.content.local_path">
+            </ion-card-content>
+          </ion-card>       
         </div>
       </div>
       <div class="sender-avator">

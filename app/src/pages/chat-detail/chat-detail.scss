@@ -55,7 +55,7 @@ page-chat-detail {
           border-left: 10px solid transparent;
           border-right: 10px solid map-get($colors, primary_light);
         }
-        .msg-content {
+        .msg-text-content {
           margin: 8px;
           padding: 6px 16px 6px 12px;
           background-color: map-get($colors, primary_light);
@@ -71,6 +71,16 @@ page-chat-detail {
               content: '\A';
               white-space: pre;
             }
+          }
+        }
+        .msg-image-content {
+          margin: 8px;
+          padding: 4px;
+          background-color: map-get($colors, primary_light);
+          .card-content {
+            padding: 0px;
+            max-width: 256px;
+            max-height: 256px;
           }
         }
 
@@ -107,7 +117,7 @@ page-chat-detail {
           border-left: 10px solid #ffddd2;
           border-right: 10px solid transparent;
         }
-        .msg-content {
+        .msg-text-content {
           z-index: 0;
           margin: 8px;
           width: calc(100% - 22px);
@@ -125,6 +135,18 @@ page-chat-detail {
               content: '\A';
               white-space: pre;
             }
+          }
+        }
+        .msg-image-content {
+          z-index: 0;
+          margin: 8px;
+          width: calc(100% - 22px);
+          padding: 4px;
+          background-color: #ffddd2;
+          .card-content {
+            padding: 0px;
+            max-width: 256px;
+            max-height: 256px;
           }
         }
 

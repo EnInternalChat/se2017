@@ -59,6 +59,20 @@ export class ChatService {
         username, null, from, this.message_count, resolve, reject));
   }
 
+  public get_message_image(username: string, is_single: boolean, msg_id: number) {
+    if(is_single) {
+      return new Promise((resolve, reject) =>
+        window.JMessage.getOriginImageInSingleConversation(
+          username, msg_id, resolve, reject));      
+    }
+    else {
+      return new Promise((resolve, reject) =>
+        window.JMessage.getOriginImageInGroupConversation(
+          username, msg_id, resolve, reject));
+    }
+
+  }
+
   public send_text_message(target: string, content: string, is_single: boolean) {
     if(is_single) {
       return new Promise((resolve, reject) =>

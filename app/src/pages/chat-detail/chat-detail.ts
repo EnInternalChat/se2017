@@ -6,7 +6,7 @@ import { ChatService } from '../../providers/chats_service';
 import { AppGlobal } from '../../providers/global_data';
 import { Conversation, Message } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
-
+import { ImageViwer } from '../../components/image-viwer/image-viwer';
 /**
  * Generated class for the ChatDetail page.
  *
@@ -68,7 +68,8 @@ export class ChatDetail {
   }
 
   public on_receive_message(msg: any) {
-    this.msg_list.unshift(new Message(msg, this.global_data.user_name));
+    this.msg_list.push(new Message(msg, this.global_data.user_name));
+    this.msg_from++;
     this.changeDetect.detectChanges();
   }
 
@@ -145,6 +146,21 @@ export class ChatDetail {
 
   public pick_image() {
 
+  }
+
+  public image_detail(msg) {
+    this.native.loading();
+    this.chat_service.get_message_image(
+      this.con.target_id, this.con.is_single, msg.id).then(
+      (path) => {
+        this.native.stop_loading();
+        this.navCtrl.push(ImageViwer, { image_url: path });
+      },
+      (error) => {
+        this.native.stop_loading();
+        this.native.show_toast('获取原图失败');
+      });
+    
   }
 
   public go_back() {
