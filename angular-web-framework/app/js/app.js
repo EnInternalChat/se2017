@@ -1,6 +1,6 @@
 var app = angular.module('myApp',
   ['internalChat.filters', 'internalChat.services', 
-   'internalChat.directives', 'internalChat.controllers']);
+  'internalChat.directives', 'internalChat.controllers']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -17,13 +17,17 @@ app.config(['$routeProvider', function($routeProvider) {
     controller:'settingCtrl'
   })
   .when('/user',{
-      templateUrl:'templates/user.html',
-      controller:'userCtrl'
+    templateUrl:'templates/user.html',
+    controller:'userCtrl'
   })
   .when('/task',{
-         templateUrl:'templates/task.html',
-         controller:'taskCtrl'
-  })
+    templateUrl:'templates/task.html',
+    controller:'taskCtrl'
+ })
+  .when('/test', {
+    templateUrl: 'templates/test.html',
+    controller: 'testCtrl'
+  }) 
   .otherwise({
     redirectTo: '/login'
   });

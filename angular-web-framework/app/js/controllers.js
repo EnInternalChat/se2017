@@ -11,7 +11,7 @@ angular.module('internalChat.controllers')
 //       });
     $scope.login_click = function(){
       //  if(username.equalTo(datausername) && userpassword.equalTo(datapassword))
-            $location.path('/setting');
+            $window.location.href = ('#/setting');
       //  else
       //      $window.alert("账号或密码错误！请重新输入");
     };
@@ -29,7 +29,7 @@ angular.module('internalChat.controllers')
 
 })
 
-.controller('settingCtrl',function($rootScop,$scope,$window){
-
+.controller('settingCtrl',function($rootScope ,$scope, $window){
+    $scope.text = "test";
 });
 
