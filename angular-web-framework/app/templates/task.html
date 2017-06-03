@@ -3,10 +3,10 @@
 
 
 <!--任务管理模块-->
-<div role="tabpanel" class="tab-pane" id="noti">
+<div role="tabpanel" class="tab-pane" id="task">
     <div class="check-div form-inline">
         <div class="col-xs-3">
-            <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addNoti">添加任务 </button>
+            <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addTask">添加任务 </button>
         </div>
         <div class="col-xs-4">
             <input type="text" class="form-control input-sm" placeholder="输入文字搜索">
@@ -29,6 +29,9 @@
             <div class="col-xs-2 ">
                 任务名
             </div>
+            <div class="col-xs-2 ">
+                创建人
+            </div>
             <div class="col-xs-2">
                 创建时间
             </div>
@@ -39,7 +42,7 @@
                 XML
             </div>
             <div class="col-xs-2">
-                状态
+                详情
             </div>
             <div class="col-xs-2">
                 操作
@@ -51,6 +54,9 @@
                 <div class="col-xs-2 ">
                     请假
                 </div>
+                <div class="col-xs-2 ">
+                    张三
+                </div>
                 <div class="col-xs-2">
                     2017-05-01
                 </div>
@@ -61,7 +67,7 @@
                     <a href="#" title="链接到...">链接到...</a>
                 </div>
                 <div class="col-xs-2">
-                    进行中
+                    <a href="#" title="链接到...">链接到...</a>
                 </div>
                 <div class="col-xs-2">
                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseNoti">修改</button>
@@ -105,7 +111,7 @@
     </footer>
 
     <!--弹出添加任务窗口-->
-    <div class="modal fade" id="addNoti" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="addTask" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,14 +148,14 @@
                                 <label for="sKnot" class="col-xs-3 control-label">等级：</label>
                                 <div class="col-xs-8">
                                     <select class=" form-control select-duiqi">
-                                        <option value="">管理员</option>
+
                                         <option value="">部长级</option>
                                         <option value="">部员级</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">状态：</label>
+                                <label for="situation" class="col-xs-3 control-label">详情：</label>
 
                                 <form>
                                     <input type="file" name="fileReader" id="fileReader"
@@ -171,7 +177,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -181,7 +187,7 @@
     <!-- /.modal -->
 
     <!--弹出修改任务窗口-->
-    <div class="modal fade" id="reviseNoti" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="reviseTask" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -217,20 +223,26 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">任务流程：</label>
+                                <label for="situation" class="col-xs-3 control-label">任务详情：</label>
+                                <form>
+                                    <input type="file" name="fileReader" id="fileReader"
+                                           onChange="fileReader_readAsText(this.files);"/><br>
+                                </form>
+                                <!--
                                 <div class="col-xs-8">
                                     <label class="control-label" for="anniu">
                                         <input type="radio" name="situation" id="normal">进行中</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <label class="control-label" for="meun">
                                         <input type="radio" name="situation" id="forbid"> 已结束</label>
                                 </div>
+                                -->
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn btn-xs btn-green">保 存</button>
+                    <button type="button" class="btn btn-xs btn-green">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -240,12 +252,12 @@
     <!-- /.modal -->
 
     <!--弹出删除任务警告窗口-->
-    <div class="modal fade" id="deleteNoti" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="deleteTask" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">警示：</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -254,7 +266,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                    <button type="button" class="btn  btn-xs btn-danger">保 存</button>
+                    <button type="button" class="btn  btn-xs btn-danger">确 定</button>
                 </div>
             </div>
             <!-- /.modal-content -->
