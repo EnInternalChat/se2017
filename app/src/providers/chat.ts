@@ -103,6 +103,8 @@ export class Conversation {
   }
 
   public update_last_msg(json) {
+    if(this.id == null && json['id'] != null)
+      this.id = json['id'];
     this.last_text = json['latestText'];  
     if(json['latestType'] === 'text')
       this.is_text_img = false;
@@ -119,9 +121,10 @@ export class Conversation {
     }
 
   }
+  
+}
 
-  public add_msg(json, is_single) {
 
-  }
+export class MessageList {
   
 }

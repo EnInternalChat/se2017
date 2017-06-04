@@ -7,10 +7,10 @@
 <ion-content class="background">
 
   <form #loginForm="ngForm" (ngSubmit)="on_login()" novalidate>
-    <div class="avator">
-      <img src="{{global_data.avator_path}}">
-    </div>
     <ion-list class="input-area">
+      <div class="avator">
+        <img src="{{global_data.avator_path}}">
+      </div>
       <ion-item class="input-text">
         <ion-label floating color="primary">{{ui.Login.username}}</ion-label>
         <ion-input type="text" clearInput="true" [(ngModel)]="username" name="username"></ion-input>

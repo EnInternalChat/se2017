@@ -17,9 +17,13 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="pull-to-refresh">
+    <ion-refresher-content pullingText="下拉刷新" refreshingText="刷新中...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-list class="conversation-list">
-    <ion-item *ngFor="let item of conversation_list" (click)="conversation_detail(item)">
+    <ion-item *ngFor="let item of con_list" (click)="conversation_detail(item)">
       <ion-avatar item-left>
         <img src="assets/img/avator/{{item.avator}}.png">
       </ion-avatar>   

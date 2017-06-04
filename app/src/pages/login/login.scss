@@ -1,62 +1,57 @@
 page-login {
-    .background {
-        background: map-get($colors, light)
-    }
+  .background {
+    background: map-get($colors, light)
+  }
+  .input-area {
     .avator {
-        position: absolute;
-        top: 10%;
-        left: 35%;
-        max-width: 35%;
+      width: 100%;
+      margin-top: 10%;
+      text-align: center;
     }
-    .input-area {
-        position: absolute;
-        top: 30%;
-        left: 0%;
-        right: 0%;
-        .item-block:first-child {
-            border-top: none;
-        }
-        .item-block:last-child {
-            border-bottom: none;
-        }
-        .item-block {
-            background-color: transparent;
-            border-top: none;
-            padding-left: 5%;
-            padding-right: 5%;
-            .item-inner {
-                border-width: 0px;
-                padding-right: 0%;
-                padding-left: 0%;
-            }
-        }
-        .input-text {
-            .item-inner{
-                border-width: 1px;
-                border-bottom-color: map-get($colors, divider); 
-            }
-        }
-        .label {
-            color: map-get($colors, third_text);
-            font-size: 2.2rem;
-            margin: 6px 0px 6px 0px;
-        }
-        .check-text {
-            font-size: 1.8rem;
-            color: map-get($colors, primary_text);
-        }
-        .text-input {
-            color: map-get($colors, primary_text);
-        }
-        .login-button {
-            background-color: map-get($colors, primary);
-            height: 36px;
-            font-size: 2.2rem;
-        }
-        .text-input-clear-icon {
-            background-color: transparent;
-            background-image: url(../assets/img/delete.svg)
-        }
+    .item-block:first-child {
+      border-top: none;
     }
+    .item-block:last-child {
+      border-bottom: none;
+    }
+    .item-block {
+      background-color: transparent;
+      border-top: none;
+      padding-left: 5%;
+      padding-right: 5%;
+      .item-inner {
+        border-width: 0px;
+        padding-right: 0%;
+        padding-left: 0%;
+      }
+    }
+    .input-text {
+      .item-inner{
+        border-width: 1px;
+        border-bottom-color: map-get($colors, divider); 
+      }
+    }
+    .label {
+      color: map-get($colors, third_text);
+      font-size: 2.2rem;
+      margin: 6px 0px 6px 0px;
+    }
+    .check-text {
+      font-size: 1.8rem;
+      color: map-get($colors, primary_text);
+    }
+    .text-input {
+      color: map-get($colors, primary_text);
+    }
+    .login-button {
+      background-color: map-get($colors, primary);
+      height: 36px;
+      font-size: 2.2rem;
+    }
+    .text-input-clear-icon {
+      background-color: transparent;
+      background-image: url(../assets/img/delete.svg)
+    }
+  }
 
 }

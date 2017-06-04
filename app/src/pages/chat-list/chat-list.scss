@@ -4,8 +4,9 @@ page-chat-list {
     color: map-get($colors, primary);
   }
 
-  .scroll-content {
+  .content .scroll-content {
     padding: 0px !important;
+    border-top: none;
   }
 
   .conversation-list {
@@ -64,6 +65,30 @@ page-chat-list {
   .button-in-fab {
     color: map-get($colors, light);
     background-color: map-get($colors, primary);
+  }
+
+  .pull-to-refresh {
+    .refresher-pulling {
+      .refresher-pulling-icon {
+        color: map-get($colors, primary_dark);
+      }
+      .refresher-pulling-text {
+        color: map-get($colors, third_text);
+      }
+    }
+    .refresher-refreshing {
+      .refresher-refreshing-icon .spinner svg {
+        circle {
+          stroke: map-get($colors, primary_dark);
+        }
+        line {
+          stroke: map-get($colors, primary_dark);
+        }
+      }
+      .refresher-refreshing-text {
+        color: map-get($colors, third_text);
+      }
+    }
   }
 
 }

@@ -21,7 +21,7 @@ import { Conversation } from '../../providers/chat';
 export class NewSingleChat {
 
   public employee_list: any = [];
-  public select_person: any;
+  public select_person: any = null;
 
   constructor(
     public navCtrl: NavController, 
@@ -44,6 +44,10 @@ export class NewSingleChat {
     }
   }
 
+  public update_select(item) {
+    this.select_person = item;
+  }
+
   public go_back() {
     this.navCtrl.pop();
   } 
@@ -51,17 +55,29 @@ export class NewSingleChat {
   public new_chat() {
     if(this.select_person == null)
       return;
-    let in_list = false;
-    this.global_data.conversation_list.forEach((item) => {
-      if(item.is_single && item.target_id === this.select_person) {
-        this.navCtrl.push(ChatDetail, {conversation: item});
+    let con_list = this.global_data.conversation_list;
+
+    for(let i = 0, n = con_list.length; i < n; i++) {
+      if(con_list[i].is_single 
+        && con_list[i].target_id === this.select_person.id) {
+        this.navCtrl.push(ChatDetail, {conversation: con_list[i]});
         return;
       }
-    })
+    }
+
     let new_con = new Conversation({
-      
+      type: 'single',
+      targetInfo: {
+        nickname: this.select_person.no,
+        userName: this.select_person.id,
+        userID: this.select_person.id
+      },
+      latestType: 'text',
+      unReadMsgCnt: 0,
+      lastMsgDate: new Date().toString()
     });
-    this.navCtrl.push(ChatDetail, {conversation:})
+    new_con.last_text = "";
+    this.navCtrl.push(ChatDetail, {conversation: new_con});
   }
 
 }

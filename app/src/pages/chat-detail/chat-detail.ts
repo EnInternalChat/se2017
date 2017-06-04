@@ -55,6 +55,7 @@ export class ChatDetail {
         this.msg_list = [];
         this.msg_from = 0;
         this.get_history_message();
+        this.content.scrollToBottom(500);
         document.addEventListener("jmessage.onReceiveMessage",
           this.event_func);
       },
@@ -70,7 +71,7 @@ export class ChatDetail {
   }
 
   public onReceiveMsg(msg: any) {
-    this.msg_list.unshift(new Message(msg, this.global_data.user_name));
+    this.msg_list.push(new Message(msg, this.global_data.user_name));
     this.msg_from++;
     this.content.scrollToBottom(500);
     this.changeDetect.detectChanges();
@@ -92,7 +93,6 @@ export class ChatDetail {
         new_messages.reverse();
         this.msg_from += new_messages.length;
         this.msg_list = new_messages.concat(this.msg_list);
-        this.content.scrollToBottom(500);
         return true;
       },
       (error) => this.native.show_toast('获取聊天记录失败'));
@@ -102,6 +102,7 @@ export class ChatDetail {
     let msg_count = this.msg_from;
     this.get_history_message().then(
       () => {
+        this.content.scrollToTop(500);
         if(this.msg_from === msg_count)
           this.native.show_toast('没有更多聊天记录');
         refresher.complete();
@@ -206,6 +207,10 @@ export class ChatDetail {
   }
 
   public go_back() {
+    if(this.msg_list.length === 0) {
+      this.navCtrl.pop();
+      return;
+    }
     let promise_p = [];
     promise_p.push(this.chat_service.clear_unread_msg(
       this.con.is_single, this.con.target_id));
