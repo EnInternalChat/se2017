@@ -32,7 +32,7 @@ import { StorageHelper } from '../providers/storage_helper';
 import { MD5 } from '../providers/secure_md5';
 import { AppGlobal } from '../providers/global_data';
 import { UIText } from '../providers/ui_text'; 
-import { MyTimeFormat, MarkDownParser } from '../providers/pipes';
+import { MyTimeFormat, MarkDownParser, MessageTimeFormat } from '../providers/pipes';
 
 import { SharedModule } from '../components/shared.module';
 
@@ -53,7 +53,8 @@ import { SharedModule } from '../components/shared.module';
     NotificationList,
     NotificationDetail,
     MyTimeFormat,
-    MarkDownParser
+    MarkDownParser,
+    MessageTimeFormat
   ],
   imports: [
     BrowserModule,

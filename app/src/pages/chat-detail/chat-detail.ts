@@ -4,7 +4,7 @@ import { NavController, NavParams, Content,
 
 import { ChatService } from '../../providers/chats_service';
 import { AppGlobal } from '../../providers/global_data';
-import { Conversation, Message } from '../../providers/chat';
+import { Conversation, Message, MessageList } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { ImageViwer } from '../../components/image-viwer/image-viwer';
 /**
@@ -24,11 +24,13 @@ export class ChatDetail {
   public con: Conversation;
   public is_single: boolean;
   public con_title: string;
-  public msg_list: any;
+  public msg_list: MessageList = new MessageList();
   public msg_from: number;
   public input_msg: string;
 
   public event_func: any;
+
+  public create_time: any = new Date();
 
   constructor(
     public actionCtrl: ActionSheetController,
@@ -52,8 +54,6 @@ export class ChatDetail {
       this.con.target_id).then(
       () => {
         this.con.unread_message_n = 0;
-        this.msg_list = [];
-        this.msg_from = 0;
         this.get_history_message();
         this.content.scrollToBottom(500);
         document.addEventListener("jmessage.onReceiveMessage",
@@ -72,14 +72,13 @@ export class ChatDetail {
 
   public onReceiveMsg(msg: any) {
     this.msg_list.push(new Message(msg, this.global_data.user_name));
-    this.msg_from++;
     this.content.scrollToBottom(500);
     this.changeDetect.detectChanges();
   }
 
   public get_history_message() {
     return this.chat_service.get_message(this.con.target_id, this.con.is_single, 
-      this.msg_from).then(
+      this.msg_list.from).then(
       (data: any) => {
         if(data == null || data == '')
           return;
@@ -88,22 +87,19 @@ export class ChatDetail {
         let new_messages = [];
         let username = this.global_data.user_name;
         for(let i = 0, n = data.length; i < n; i++) {
-          new_messages.push(new Message(data[i], username));
+          this.msg_list.unshift(new Message(data[i], username))
         }
-        new_messages.reverse();
-        this.msg_from += new_messages.length;
-        this.msg_list = new_messages.concat(this.msg_list);
         return true;
       },
       (error) => this.native.show_toast('获取聊天记录失败'));
   }
 
   public load_more(refresher) {
-    let msg_count = this.msg_from;
+    let msg_count = this.msg_list.from;
     this.get_history_message().then(
       () => {
         this.content.scrollToTop(500);
-        if(this.msg_from === msg_count)
+        if(this.msg_list.from === msg_count)
           this.native.show_toast('没有更多聊天记录');
         refresher.complete();
       },
@@ -124,7 +120,6 @@ export class ChatDetail {
         let new_msg = new Message(res, this.global_data.user_name);
         new_msg.from_user_avator = this.global_data.avator_no.toString();
         this.msg_list.push(new_msg);
-        this.msg_from++;
         this.input_msg = '';
         this.content.scrollToBottom(500);
       },
@@ -148,7 +143,6 @@ export class ChatDetail {
         let new_msg = new Message(res, this.global_data.user_name);
         new_msg.from_user_avator = this.global_data.avator_no.toString();
         this.msg_list.push(new_msg);
-        this.msg_from++;
         this.native.stop_loading();
         this.content.scrollToBottom(500);
       },
@@ -207,7 +201,7 @@ export class ChatDetail {
   }
 
   public go_back() {
-    if(this.msg_list.length === 0) {
+    if(this.msg_list.list.length === 0) {
       this.navCtrl.pop();
       return;
     }

@@ -8,7 +8,7 @@ page-chat-detail {
 
   .msg-list {
     .item-block {
-      padding-left: 12px;
+      padding-left: 0px;
       margin-top: 8px;
       margin-bottom: 8px;
       .item-inner {
@@ -18,9 +18,19 @@ page-chat-detail {
         }
       }
     }
+    .msg-time {
+      display: inline-block;
+      width: 100%;
+      color: map-get($colors, accent);
+      text-align: center;
+      padding-bottom: 12px;
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
   }
 
   .msg-other {
+    position: relative;
     min-height: 64px;
     .sender-avator {
       width: 64px;
@@ -36,7 +46,7 @@ page-chat-detail {
     .msg-info {
       max-width: calc(100% - 64px);
       display: inline-block;
-      margin-left: 64px;
+      margin-left: 74px;
       .sender-person {
         color: map-get($colors, primary_text);
         font-size: 1.4rem;
@@ -46,7 +56,7 @@ page-chat-detail {
         &:before {
           content: '';
           position: absolute;
-          top: 36px;
+          top: 32px;
           left: 64px;
           width: 0; 
           height: 0; 
@@ -89,6 +99,7 @@ page-chat-detail {
   }
 
   .msg-my {
+    position: relative;
     min-height: 64px;
     float: right;
     .sender-avator {
@@ -108,7 +119,7 @@ page-chat-detail {
         &:before {
           content: '';
           position: absolute;
-          top: 16px;
+          top: 12px;
           right: 64px;
           width: 0; 
           height: 0; 

@@ -22,8 +22,12 @@ export class Message {
   public from_user_avator: string;
   public is_img: boolean;
   public content: any;
-  public create_time: string;
   public is_my_send: boolean;
+
+  public show_time: boolean;
+  public create_time: string;
+  public create_time_ms: number;
+
   constructor(json, cur_username: string) {
     if(json == null)
       return;
@@ -34,7 +38,9 @@ export class Message {
       this.is_img = false;
     else
       this.is_img = true;
+    this.show_time = false;
     this.create_time = new Date(json['createTimeInMillis']).toString();
+    this.create_time_ms = json['createTimeInMillis'];
     let msg_content = json['content'];
     if(msg_content == null)
       return;
@@ -124,7 +130,64 @@ export class Conversation {
   
 }
 
+// 1 s = 1000 ms
+// 2 min = 120000 ms
+// 10 min = 600000 ms 
+const MSG_TIME_OFFSET = 120000;
+const MSG_TIME_SUM = 600000;
 
 export class MessageList {
-  
+  public list: Array<Message> = [];
+  public from: number;
+
+  public sum_first_time: number;
+  public sum_last_time: number;
+  public first_time: number;
+  public last_time: number;
+
+  constructor() {
+    this.from = 0;
+    this.sum_first_time = this.sum_last_time = 0;
+    this.first_time = this.last_time = new Date().getTime();
+  }
+
+  public push(msg: Message) {
+    if(this.list.length > 0) {
+      let offset = msg.create_time_ms - this.last_time;
+      if(offset < 0)
+        return;
+      if(offset > MSG_TIME_OFFSET 
+        || this.sum_last_time > MSG_TIME_SUM) {
+        this.sum_last_time = 0;
+        msg.show_time = true;
+      }      
+      else {
+        this.sum_last_time += offset;
+      }
+    }
+    this.list.push(msg);
+    this.last_time = msg.create_time_ms;
+    this.from++;
+  }
+
+  public unshift(msg: Message) {
+    if(this.list.length > 0) {
+      let offset = this.first_time - msg.create_time_ms;
+      if(offset < 0)
+        return;
+      if(offset > MSG_TIME_OFFSET 
+        || this.sum_first_time > MSG_TIME_SUM) {
+        this.sum_first_time = 0;
+        this.list[0].show_time = true;
+      }
+      else {
+        this.sum_first_time += offset;
+      }
+    }
+    this.list.unshift(msg);
+    this.first_time = msg.create_time_ms;
+    this.from++;
+  }
+
+
 }
