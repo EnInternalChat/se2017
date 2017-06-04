@@ -97,4 +97,17 @@ public class TaskController {
         JSONObject jsonObject=activitiService.processStart(processKey,content,starter);
         ResponseJsonObj.write(httpServletResponse,jsonObject);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/operate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void process(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                        @RequestParam("processKey") String processKey,
+                        @RequestParam("processID") Long processID,
+                        @RequestParam("operationID") String operationID,
+                        @RequestParam(value = "content", required = false) Collection<Map<String,String>> content
+                        ) {
+        long id=(long) httpServletRequest.getSession().getAttribute("user");
+        Employee operator=databaseService.activeUserById(id);
+        activitiService.processOperation(processKey,processID.toString(),operationID,operator);
+    }
 }
