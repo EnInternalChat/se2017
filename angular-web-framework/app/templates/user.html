@@ -20,27 +20,26 @@
                 <a>退出登录</a>
             </p>
         </div>
-        <div class="meun-title">账号管理</div>
+        <div class="meun-title">组织管理</div>
         <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="images/icon_source.png">组织结构管理</div>
-
         <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">用户管理</div>
-        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="images/icon_change_grey.png">修改信息</div>
-
-        <!--  预计要取消部门管理
+        <!-- 预计删除
         <div class="meun-title">部门管理</div>
         <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="images/icon_house_grey.png">部门管理</div>
-
-    -->
+        -->
 
         <div class="meun-title">任务管理</div>
-        <div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务流程</div>
+        <div class="meun-item" href="#task" aria-controls="task" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务管理</div>
         <div class="meun-title">通知管理</div>
-        <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">通知查看</div>
+        <div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">发布通知</div>
+        <div class="meun-item" href="#jdua" aria-controls="jdua" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">查看通知</div>
+        <div class="meun-title">设置管理</div>
+        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="images/icon_change_grey.png">个人设置</div>
     </div>
 
 
 
-
+<div id="rightContent">
 <div role="tabpanel" class="tab-pane" id="user">
     <div class="check-div form-inline">
         <div class="col-xs-3">
@@ -67,13 +66,13 @@
             <div class="col-xs-2 ">
                 用户ID
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 真实姓名
             </div>
             <div class="col-xs-2">
                 所属部门
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 级别
             </div>
             <div class="col-xs-2">
@@ -92,13 +91,13 @@
                 <div class="col-xs-2 ">
                     goodmoning
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     程序员2
                 </div>
                 <div class="col-xs-2">
                     程序部
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     部员
                 </div>
                 <div class="col-xs-2">
@@ -158,52 +157,56 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
+
                         <form class="form-horizontal">
+                            <fieldset>
                             <div class="form-group ">
-                                <label for="sYhID" class="col-xs-3 control-label">用户ID：</label>
-                                <div class="col-xs-8 ">
+                                <label for="sYhID" class="col-xs-2 control-label">用户ID：</label>
+                                <div class="col-xs-4 ">
                                     <input type="email" class="form-control input-sm duiqi" id="sYhID" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sName" class="col-xs-3 control-label">真实姓名：</label>
-                                <div class="col-xs-8 ">
+
+                                <label for="sName" class="col-xs-2 control-label">真实姓名：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sName" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sMima" class="col-xs-3 control-label">初始密码：</label>
-                                <div class="col-xs-8 ">
+                                <label for="sMima" class="col-xs-2 control-label">初始密码：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sMima" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sQuer" class="col-xs-3 control-label">确认密码：</label>
-                                <div class="col-xs-8 ">
+
+                                <label for="sQuer" class="col-xs-2 control-label">确认密码：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sQuer" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sEmai" class="col-xs-3 control-label">电子邮箱：</label>
-                                <div class="col-xs-8">
+                                <label for="sEmai" class="col-xs-2 control-label">电子邮箱：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sEmai" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sTell" class="col-xs-3 control-label">电话：</label>
-                                <div class="col-xs-8">
+
+                                <label for="sTell" class="col-xs-2 control-label">电话：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sTell" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sXing" class="col-xs-3 control-label">性别：</label>
-                                <div class="col-xs-8">
+                                <label for="sXing" class="col-xs-2 control-label">性别：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sXing" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sBume" class="col-xs-3 control-label">部门：</label>
-                                <div class="col-xs-8">
+
+                                <label for="sBume" class="col-xs-2 control-label">部门：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sBume" placeholder="">
                                     <!--
                                     <select class=" form-control select-duiqi">
@@ -214,14 +217,16 @@
                                     -->
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sPowe" class="col-xs-3 control-label">权限：</label>
-                                    <div class="col-xs-8">
+                                <label for="sPowe" class="col-xs-2 control-label">权限：</label>
+                                <div class="col-xs-4">
                                         <label class="control-label" for="anniu">
                                             <input type="radio" name="situation" id="normal">部长</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="control-label" for="meun">
                                             <input type="radio" name="situation" id="forbid"> 部员</label>
-                                    </div>
+                                </div>
                                     <!--
                                     <select class=" form-control select-duiqi">
 
@@ -229,16 +234,16 @@
                                         <option value="">部员</option>
                                     </select>
                                     -->
-                            </div>
-                            <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">状态：</label>
-                                <div class="col-xs-8">
+
+                                <label for="situation" class="col-xs-2 control-label">状态：</label>
+                                <div class="col-xs-4">
                                     <label class="control-label" for="anniu">
                                         <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <label class="control-label" for="meun">
                                         <input type="radio" name="situation" id="forbid"> 禁用</label>
                                 </div>
                             </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -264,40 +269,48 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form class="form-horizontal">
+                            <fieldset>
                             <div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">用户名：</label>
-                                <div class="col-xs-8 ">
+                                <label for="sName" class="col-xs-2 control-label">用户名：</label>
+                                <div class="col-xs-4 ">
                                     <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
-                                <div class="col-xs-8 ">
+
+                                <label for="sLink" class="col-xs-2 control-label">真实姓名：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
-                                <div class="col-xs-8">
+                                <label for="sOrd" class="col-xs-2 control-label">电子邮箱：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">电话：</label>
-                                <div class="col-xs-8">
+
+                                <label for="sKnot" class="col-xs-2 control-label">电话：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                                <fieldset>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">部门：</label>
-                                <div class="col-xs-8">
+                                <label for="sKnot" class="col-xs-2 control-label">部门：</label>
+                                <div class="col-xs-4">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                </div>
+                                <label for="sKnot" class="col-xs-2 control-label">性别：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">权限：</label>
-                                <div class="col-xs-8">
-                                    <div class="col-xs-8">
+                                </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                <label for="sKnot" class="col-xs-2 control-label">权限：</label>
+                                    <div class="col-xs-4">
                                         <label class="control-label" for="anniu">
                                             <input type="radio" name="situation" id="normal">部长</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="control-label" for="meun">
@@ -306,17 +319,17 @@
                                     <!--
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                     -->
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">状态：</label>
-                                <div class="col-xs-8">
+
+
+                                <label for="situation" class="col-xs-2 control-label">状态：</label>
+                                <div class="col-xs-4">
                                     <label class="control-label" for="anniu">
                                         <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <label class="control-label" for="meun">
                                         <input type="radio" name="situation" id="forbid"> 禁用</label>
                                 </div>
                             </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -355,5 +368,6 @@
     </div>
     <!-- /.modal -->
 
+</div>
 </div>
 </div>

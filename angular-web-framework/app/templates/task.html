@@ -1,7 +1,33 @@
 <div class="tab-content">
     <!-- 资源管理模块 -->
+    <div class="leftMeun" id="leftMeun">
+        <div id="logoDiv">
+            <p id="logoP"><img id="logo" alt="用户" src="images/head_120.png"><span>用户</span></p>
+        </div>
+        <div id="personInfor">
+            <p id="userName">管理员</p>
+            <p><span>yangxp@qq.com</span></p>
+            <p>
+                <a>退出登录</a>
+            </p>
+        </div>
+        <div class="meun-title">公司管理</div>
+        <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="images/icon_source.png">组织结构管理</div>
+        <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">用户管理</div>
+        <!-- 预计删除
+        <div class="meun-title">部门管理</div>
+        <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="images/icon_house_grey.png">部门管理</div>
+        -->
 
-
+        <div class="meun-title">任务管理</div>
+        <div class="meun-item" href="#task" aria-controls="task" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务管理</div>
+        <div class="meun-title">通知管理</div>
+        <div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">发布通知</div>
+        <div class="meun-item" href="#jdua" aria-controls="jdua" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">查看通知</div>
+        <div class="meun-title">设置管理</div>
+        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="images/icon_change_grey.png">个人设置</div>
+    </div>
+    <div id="rightContent">
 <!--任务管理模块-->
 <div role="tabpanel" class="tab-pane" id="task">
     <div class="check-div form-inline">
@@ -38,10 +64,10 @@
             <div class="col-xs-2">
                 更新时间
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 XML
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 详情
             </div>
             <div class="col-xs-2">
@@ -63,10 +89,10 @@
                 <div class="col-xs-2">
                     2017-05-02
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <a href="#" title="链接到...">链接到...</a>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <a href="#" title="链接到...">链接到...</a>
                 </div>
                 <div class="col-xs-2">
@@ -121,32 +147,32 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form class="form-horizontal">
+                            <fieldset>
                             <div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">任务名：</label>
-                                <div class="col-xs-8 ">
+                                <label for="sName" class="col-xs-2 control-label">任务名：</label>
+                                <div class="col-xs-4 ">
                                     <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">创建人：</label>
-                                <div class="col-xs-8 ">
+
+                                <label for="sLink" class="col-xs-2 control-label">创建人：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
                                 </div>
                             </div>
-
+                            </fieldset>
+                            <fieldset>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">部门：</label>
-                                <div class="col-xs-8">
+                                <label for="sKnot" class="col-xs-2 control-label">部门：</label>
+                                <div class="col-xs-4">
                                     <select class=" form-control select-duiqi">
                                         <option value="">程序部</option>
                                         <option value="">人力资源部</option>
                                         <option value="">行政部</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">等级：</label>
-                                <div class="col-xs-8">
+
+                                <label for="sKnot" class="col-xs-2 control-label">等级：</label>
+                                <div class="col-xs-4">
                                     <select class=" form-control select-duiqi">
 
                                         <option value="">部长级</option>
@@ -154,8 +180,9 @@
                                     </select>
                                 </div>
                             </div>
+                            </fieldset>
                             <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">详情：</label>
+                                <label for="situation" class="col-xs-5 control-label">XML详情：</label>
 
                                 <form>
                                     <input type="file" name="fileReader" id="fileReader"
@@ -187,7 +214,7 @@
     <!-- /.modal -->
 
     <!--弹出修改任务窗口-->
-    <div class="modal fade" id="reviseTask" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="reviseNoti" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,33 +224,34 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form class="form-horizontal">
+                            <fieldset>
                             <div class="form-group ">
-                                <label for="sName" class="col-xs-3 control-label">任务名：</label>
-                                <div class="col-xs-8 ">
+                                <label for="sName" class="col-xs-2 control-label">任务名：</label>
+                                <div class="col-xs-4 ">
                                     <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="sLink" class="col-xs-3 control-label">创建人：</label>
-                                <div class="col-xs-8 ">
+
+                                <label for="sLink" class="col-xs-2 control-label">创建人：</label>
+                                <div class="col-xs-4 ">
                                     <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
+                            <fieldset>
+                            <div class="form-group">
+                                <label for="sKnot" class="col-xs-2 control-label">部门：</label>
+                                <div class="col-xs-4">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                </div>
 
-                            <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">部门：</label>
-                                <div class="col-xs-8">
+                                <label for="sKnot" class="col-xs-2 control-label">等级：</label>
+                                <div class="col-xs-4">
                                     <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
                                 </div>
                             </div>
+                            </fieldset>
                             <div class="form-group">
-                                <label for="sKnot" class="col-xs-3 control-label">等级：</label>
-                                <div class="col-xs-8">
-                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="situation" class="col-xs-3 control-label">任务详情：</label>
+                                <label for="situation" class="col-xs-5 control-label">XML详情：</label>
                                 <form>
                                     <input type="file" name="fileReader" id="fileReader"
                                            onChange="fileReader_readAsText(this.files);"/><br>
@@ -252,12 +280,12 @@
     <!-- /.modal -->
 
     <!--弹出删除任务警告窗口-->
-    <div class="modal fade" id="deleteTask" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="deleteNoti" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">警示：</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -275,5 +303,6 @@
     </div>
     <!-- /.modal -->
 
+</div>
 </div>
 </div>
