@@ -13,31 +13,15 @@ import { AppGlobal } from './global_data';
 @Injectable()
 export class HTTPService {
 
-  private options: RequestOptions;
-  private options_token: RequestOptions;
-
   constructor(
-    private http: Http,
-    private global_data: AppGlobal) {
-    this.options = new RequestOptions({
-      headers: new Headers({
-        "Content-type": "application/x-www-form-urlencoded"
-      })
-    });
-    this.options_token = new RequestOptions({
-      headers: new Headers({
-        "Content-type": "application/x-www-form-urlencoded",
-        "x-auth-token": this.global_data.token
-      })
-    })
+    private http: Http) {
   }
 
-  public get(url: string, param: any, add_token: boolean = false):Promise<any> 
+  public get(url: string, param: any, options?: any):Promise<any> 
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.get(url + this.dict_to_query_str(param), 
-        add_token ? this.options_token : this.options)
+      this.http.get(url + this.dict_to_query_str(param), options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),
@@ -45,12 +29,11 @@ export class HTTPService {
     });
   }
 
-  public post(url: string, param: any, add_token: boolean = false): Promise<any>
+  public post(url: string, param: any, options?: any): Promise<any>
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.post(url, this.dict_to_query_str(param, false), 
-        add_token ? this.options_token : this.options)
+      this.http.post(url, this.dict_to_query_str(param, false), options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),

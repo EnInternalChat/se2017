@@ -101,6 +101,7 @@ export class Login {
           this.storage.storage_info("password", password_md5);
         }
         this.global_data.user_name = this.username;
+        this.api.update_token();
         // this.native.stop_loading();
         // this.nav_ctrl.push(BasisPage);
         return true;

@@ -35,6 +35,9 @@ export class UIText {
         "old_pwd": "旧密码",
         "new_pwd": "新密码",
         "check_pwd": "确认密码",
+        "change_contact": "修改联系方式",
+        "tel": "电话号码",
+        "mail": "邮箱",
         "ok": "确认",
         "cancel": "取消"
       },
@@ -80,6 +83,9 @@ export class UIText {
         "old_pwd": "old password",
         "new_pwd": "new password",
         "check_pwd": "new password",
+        "change_contact": "Change contact",
+        "tel": "telephone",
+        "mail": "mail",        
         "ok": "OK",
         "cancel": "Cancel"
       },
@@ -104,6 +110,9 @@ export class UIText {
   public BasisPage: any;
   public ChatDetailPage: any;
   public PersonalPage: any;
+  public LanguageOptions = [
+    {"value": AppLanguage.CN, "text": "简体中文"},
+    {"value": AppLanguage.EN, "text": "English"}];
 
   constructor() {
     this.update_language(AppLanguage.CN);

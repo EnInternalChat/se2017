@@ -6,7 +6,7 @@ import { AvatorSelector } from '../avator-selector/avator-selector';
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
-import { HTTPService } from '../../providers/http_helper';
+import { API } from '../../providers/api';
 import { UIText, AppLanguage } from '../../providers/ui_text';
 
 /**
@@ -22,62 +22,58 @@ import { UIText, AppLanguage } from '../../providers/ui_text';
 })
 export class Personal {
 
-  public language_options : Array<{value : AppLanguage, text : string}>;
+  public info: any = {};
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
               public loadCtrl: LoadingController,
               public native: NativeServiceHelper,
-              public web_helper: HTTPService,
+              public api: API,
               public global_data: AppGlobal,
               public ui: UIText,
               public storage: StorageHelper,
               public events: Events) {
-    this.language_options = [
-      {"value": AppLanguage.CN, "text": "简体中文"},
-      {"value": AppLanguage.EN, "text": "English"},
-    ];
+    this.info['gender'] = true;
   }
 
-  log_out() {
-    console.log(this.navCtrl);
-    console.log(this.navCtrl.length());
+  public log_out() {
     this.events.publish('logout');
   }
 
-  show_avator_slector() {
+  public show_avator_slector() {
     this.navCtrl.push(AvatorSelector);
   }
 
-  show_password_prompt() {
+  public show_password_prompt() {
     let password_prompt = this.alertCtrl.create(
     {
-      title: "修改密码",
+      title: this.ui.PersonalPage.change_pwd,
       cssClass: "password-alert",
       inputs: [
       {
         name: "pwd_old",
         type: "password",
-        placeholder: "旧密码"
+        placeholder: this.ui.PersonalPage.old_pwd
       },
       {
         name: "pwd_new",
         type: "password",
-        placeholder: "新密码"
+        placeholder: this.ui.PersonalPage.new_pwd
       },
       {
         name: "pwd_new_check",
         type: "password",
-        placeholder: "确认密码"
+        placeholder: this.ui.PersonalPage.check_pwd
       },
       ],
       buttons: [
       {
-        text: "取消",
+        text: this.ui.PersonalPage.cancel,
         role: "cancel",
       },
       {
-        text: "确认",
+        text: this.ui.PersonalPage.ok,
         handler: data => {
           if(data.pwd_old === '') 
             this.native.show_toast("旧密码不能为空");
@@ -102,9 +98,73 @@ export class Personal {
     password_prompt.present(); 
   }
 
-  change_password(pwd_old: string, pwd_new: string):Promise<any> {
+  public show_contact_prompt() {
+    let contact_prompt = this.alertCtrl.create(
+    {
+      title: this.ui.PersonalPage.change_contact,
+      cssClass: "password-alert",
+      inputs: [
+      {
+        name: "tel1",
+        type: "text",
+        placeholder: this.ui.PersonalPage.tel
+      },
+      {
+        name: "tel2",
+        type: "text",
+        placeholder: this.ui.PersonalPage.tel
+      },
+      {
+        name: "mail1",
+        type: "text",
+        placeholder: this.ui.PersonalPage.mail
+      },
+      {
+        name: "mail2",
+        type: "text",
+        placeholder: this.ui.PersonalPage.mail
+      },
+      ],
+      buttons: [
+      {
+        text: this.ui.PersonalPage.cancel,
+        role: "cancel",
+      },
+      {
+        text: this.ui.PersonalPage.ok,
+        handler: data => {
+          if(data.tel1 !== '' 
+            && !data.tel1.match(/^1[34578]\d{9}$/g)) 
+            this.native.show_toast("电话号码1格式错误");
+          else if(data.tel2 !== '' 
+            && !data.tel2.match(/^1[34578]\d{9}$/g))
+            this.native.show_toast("电话号码2格式错误");
+          else if(data.mail1 !== '' 
+            && !data.mail1.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g)) 
+            this.native.show_toast("邮箱1格式错误");
+          else if(data.mail2 !== '' 
+            && !data.mail2.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g))
+           this.native.show_toast("邮箱2格式错误");
+          else {
+            this.api.update_personal({}).then(
+              (result) => {
+                if(result)
+                  contact_prompt.dismiss().then(
+                    () => this.native.show_toast("修改联系方式成功"));
+                else
+                  this.native.show_toast("修改联系方式失败");
+              })
+          }
+          return false;
+        }
+      }]
+    });
+    contact_prompt.present(); 
+  }
+
+  public change_password(pwd_old: string, pwd_new: string):Promise<any> {
     this.native.loading();
-    return this.web_helper.post("/personal/update", {
+    return this.api.update_personal({
       "oldPwd": this.global_data.encrypt_pwd(pwd_old),
       "newPwd": this.global_data.encrypt_pwd(pwd_new)
     }).then(
