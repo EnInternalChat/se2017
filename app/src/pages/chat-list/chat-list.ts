@@ -9,6 +9,8 @@ import { ChatService } from '../../providers/chats_service';
 import { Conversation } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { AppGlobal } from '../../providers/global_data';
+import { UIText } from '../../providers/ui_text';
+
 /**
  * Generated class for the ChatList page.
  *
@@ -35,16 +37,13 @@ export class ChatList {
       public events: Events,
       public native: NativeServiceHelper,
       public chat_service: ChatService,
-      public global_data: AppGlobal) {
+      public global_data: AppGlobal,
+      public ui: UIText) {
   }
 
   ionViewDidLoad() {
     this.con_list = this.global_data.conversation_list;
     this.event_func = (msg: any) => this.onReceiveMsg(msg);
-  }
-
-
-  ionViewWillEnter() {
     this.native.loading();
     this.update_conversation_list().then(
       () => this.native.stop_loading()).catch(
@@ -53,8 +52,11 @@ export class ChatList {
         this.update_conversation_list().then(
           () => this.native.stop_loading());
       });
+  }
+
+  ionViewWillEnter() {
     document.addEventListener("jmessage.onReceiveMessage", 
-      this.event_func);
+      this.event_func);      
   }
 
   ionViewWillLeave() {
@@ -82,7 +84,7 @@ export class ChatList {
         }
         return true;
       },
-      (error) => this.native.show_toast("获取聊天列表失败"));
+      (error) => this.native.show_toast(this.ui.BasisPage.chat_toast));
   }
 
   public add_conversation_item(json) {

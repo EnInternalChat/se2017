@@ -12,6 +12,8 @@ export class UIText {
     "CN": 
     {
       "loading": "请稍候...",
+      "pullText": "下拉刷新",
+      "refreshText": "刷新中...",
       "LoginPage":
       {
         "username": "用户名",
@@ -35,12 +37,28 @@ export class UIText {
         "check_pwd": "确认密码",
         "ok": "确认",
         "cancel": "取消"
+      },
+      "BasisPage":
+      {
+        "chat": "聊天管理",
+        "chat_toast": "获取聊天列表失败",
+        "task": "任务管理",
+        "notice": "通知管理",
+        "personal": "账户设置"
+      },
+      "ChatDetailPage":
+      {
+        "start_fail": "无法开始会话",
+        "send_text_fail": "发送文字信息失败，请检查网络",
+        "send_img_fail": "发送图片信息失败，请检查网络"
       }
 
     },
     "EN":
     {
       "loading": "Waiting...",
+      "pullText": "Pull To Refresh",
+      "refreshText": "Refreshing...",
       "LoginPage":
       {
         "username": "Username",
@@ -64,6 +82,18 @@ export class UIText {
         "check_pwd": "new password",
         "ok": "OK",
         "cancel": "Cancel"
+      },
+      "BasisPage":
+      {
+        "chat": "Chat List",
+        "chat_toast": "Can not get chat data",
+        "task": "Task List",
+        "notice": "Notice List",
+        "personal": "Setting"
+      },
+      "ChatDetailPage":
+      {
+        "start_fail": "Can not start chat"
       }
 
     }
@@ -72,6 +102,7 @@ export class UIText {
   public loading: string;
   public Login: any;
   public BasisPage: any;
+  public ChatDetailPage: any;
   public PersonalPage: any;
 
   constructor() {
@@ -98,6 +129,8 @@ export class UIText {
       return;
     this.loading = data_lan.loading;
     this.Login = data_lan.LoginPage;
+    this.BasisPage = data_lan.BasisPage;
+    this.ChatDetailPage = data_lan.ChatDetailPage;
     this.PersonalPage = data_lan.PersonalPage;
 
   }

@@ -7,6 +7,8 @@ import { AppGlobal } from '../../providers/global_data';
 import { Conversation, Message, MessageList } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { ImageViwer } from '../../components/image-viwer/image-viwer';
+import { UIText } from '../../providers/ui_text';
+
 /**
  * Generated class for the ChatDetail page.
  *
@@ -39,7 +41,8 @@ export class ChatDetail {
     public navParams: NavParams,
     public global_data: AppGlobal,
     public native: NativeServiceHelper,
-    public chat_service: ChatService) {
+    public chat_service: ChatService,
+    public ui: UIText) {
   }
 
   ionViewDidLoad() {
@@ -60,7 +63,7 @@ export class ChatDetail {
           this.event_func);
       },
       (error) => {
-        this.native.show_toast('无法开始会话');
+        this.native.show_toast(this.ui.ChatDetailPage.start_fail);
         this.go_back();
       });
   }

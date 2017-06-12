@@ -7,8 +7,9 @@ import { ChatList } from '../chat-list/chat-list';
 import { TaskList } from '../task-list/task-list';
 import { Personal } from '../personal/personal';
 import { NotificationList } from '../notification-list/notification-list';
+import { UIText } from '../../providers/ui_text';
+import { API } from '../../providers/api';
 
-import { NativeServiceHelper } from '../../providers/native_service_helper';
 
 /**
  * Generated class for the BasisPage page.
@@ -38,12 +39,14 @@ export class BasisPage {
     public navParams: NavParams,
     public global_data: AppGlobal,
     public chat_service: ChatService,
-    public events: Events) {
+    public api: API,
+    public events: Events,
+    public ui: UIText) {
     this.pages = [
-      {title: "聊天管理", component: ChatList, icon_path: "assets/img/chat.png"},
-      {title: "任务管理", component: TaskList, icon_path: "assets/img/task.png"},
-      {title: "查看通知", component: NotificationList, icon_path: "assets/img/notification.png"},
-      {title: "账户设置", component: Personal, icon_path: "assets/img/setting.png"},
+      {title: this.ui.BasisPage.chat, component: ChatList, icon_path: "assets/img/chat.png"},
+      {title: this.ui.BasisPage.task, component: TaskList, icon_path: "assets/img/task.png"},
+      {title: this.ui.BasisPage.notice, component: NotificationList, icon_path: "assets/img/notification.png"},
+      {title: this.ui.BasisPage.personal, component: Personal, icon_path: "assets/img/setting.png"},
     ];
   }
 
@@ -59,9 +62,10 @@ export class BasisPage {
     // 注册全局注销事件
     this.events.subscribe('logout', 
       () => {
-        this.chat_service.logout().then(
+        let p1 = this.chat_service.logout().then(
           (data) => console.log("注销成功"),
-          (error) => console.log("注销失败")).then(
+          (error) => console.log("注销失败"));
+        Promise.all([p1, this.api.logout()]).then(
           () => this.navCtrl.pop());
       });
     // 注册全局切换页面事件

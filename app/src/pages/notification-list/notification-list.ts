@@ -30,7 +30,7 @@ export class NotificationList {
               public native: NativeServiceHelper) {
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.notice_list_read = [];
     this.notice_list_not_read = [];
     this.update_notice_list();

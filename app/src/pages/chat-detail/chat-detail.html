@@ -21,7 +21,7 @@
 
 <ion-content>
   <ion-refresher (ionRefresh)="load_more($event)" class="load-more">
-    <ion-refresher-content pullingText="下拉加载更多" refreshingText="加载中...">
+    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
     </ion-refresher-content>
   </ion-refresher>
 

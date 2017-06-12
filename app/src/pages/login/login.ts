@@ -7,7 +7,7 @@ import { UIText } from '../../providers/ui_text';
 import { AppGlobal } from '../../providers/global_data';
 import { StorageHelper } from '../../providers/storage_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
-import { HTTPService } from '../../providers/http_helper';
+import { API } from '../../providers/api';
 import { ChatService } from '../../providers/chats_service';
 import { MD5 } from '../../providers/secure_md5';
 
@@ -25,14 +25,23 @@ import { MD5 } from '../../providers/secure_md5';
 export class Login {
 
   username: string;
-  password: string;
+  private _password: string;
   remember_password: boolean;
   auto_login: boolean;
 
   password_is_md5: boolean;
 
+  set password(value: string) {
+    this.password_is_md5 = false;
+    this._password = value;
+  }
+
+  get password() {
+    return this._password;
+  }
+
   constructor(private native: NativeServiceHelper,
-              private web_helper: HTTPService,
+              private api: API,
               private nav_ctrl: NavController,
               private global_data: AppGlobal,
               private storage: StorageHelper,
@@ -48,6 +57,7 @@ export class Login {
       if(value){
         this.storage.read_local_info("password", "").then((value) => {
           this.password = value;
+          this.password_is_md5 = true;
           if(this.password == "")
             this.password_is_md5 = false;
           else
@@ -70,10 +80,6 @@ export class Login {
     console.log("password: " + this.password);
   }
 
-  password_change() {
-    this.password_is_md5 = false;
-  }
-
   on_login() {
     if(this.username == "" || this.password == "") {
       this.native.show_toast("用户名和密码不能为空", 2000, "bottom");
@@ -86,9 +92,9 @@ export class Login {
     }
     else
       password_md5 = this.password;
+    console.log("md5: ", password_md5);
     this.native.loading();
-    this.web_helper.post(
-      '/login.do', {"name": this.username, "pwd": password_md5}).then(
+    this.api.login(this.username, password_md5).then(
       (data) => {
         if(this.remember_password || this.auto_login) {
           this.storage.storage_info("username", this.username);

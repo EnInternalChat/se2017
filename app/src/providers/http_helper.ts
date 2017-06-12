@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { AppGlobal } from './global_data';
+
 /*
   Generated class for the LoginService provider.
 
@@ -11,24 +13,31 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HTTPService {
 
-  private request_options: RequestOptions;
-  private is_debug: boolean = true;
-  public base_url: string = this.is_debug ? "" : "http://123.206.121.176:8888/EnInternalChat";
+  private options: RequestOptions;
+  private options_token: RequestOptions;
 
   constructor(
-    public http: Http) {
-    this.request_options = new RequestOptions({
+    private http: Http,
+    private global_data: AppGlobal) {
+    this.options = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded"
       })
     });
+    this.options_token = new RequestOptions({
+      headers: new Headers({
+        "Content-type": "application/x-www-form-urlencoded",
+        "x-auth-token": this.global_data.token
+      })
+    })
   }
 
-  public get(url: string, param: any):Promise<any> 
+  public get(url: string, param: any, add_token: boolean = false):Promise<any> 
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.get(this.base_url + url + this.dict_to_query_str(param))
+      this.http.get(url + this.dict_to_query_str(param), 
+        add_token ? this.options_token : this.options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),
@@ -36,12 +45,12 @@ export class HTTPService {
     });
   }
 
-  public post(url: string, param: any): Promise<any>
+  public post(url: string, param: any, add_token: boolean = false): Promise<any>
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.post(this.base_url + url + this.dict_to_query_str(param),
-        null, this.request_options)
+      this.http.post(url, this.dict_to_query_str(param, false), 
+        add_token ? this.options_token : this.options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),
