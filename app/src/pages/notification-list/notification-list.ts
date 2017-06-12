@@ -5,6 +5,7 @@ import { NotificationDetail } from '../notification-detail/notification-detail';
 import { Notice } from '../../providers/notification';
 import { HTTPService } from '../../providers/http_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NotificationList page.
@@ -27,18 +28,20 @@ export class NotificationList {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public web_helper: HTTPService,
+              public ui: UIText,
               public native: NativeServiceHelper) {
   }
 
   ionViewDidLoad() {
     this.notice_list_read = [];
     this.notice_list_not_read = [];
-    this.update_notice_list();
+    this.native.loading();
+    this.update_notice_list().then(
+      () => this.native.stop_loading());
   }
 
   public update_notice_list(){
-    this.native.loading();
-    this.web_helper.get("assets/data/notices.json", null).then(
+    return this.web_helper.get("assets/data/notices.json", null).then(
       (res) => {
         let new_notice: Notice;
         for (let i = 0, n = res.length; i < n; i++) {
@@ -48,12 +51,8 @@ export class NotificationList {
           else
             this.notice_list_not_read.push(new_notice);
         }
-        this.native.stop_loading();
       },
-      (error) => {
-        this.native.stop_loading();
-        this.native.show_toast("获取通知信息失败");
-      });
+      (error) => this.native.show_toast("获取通知信息失败"));
   }
 
   public track_by_id(index: number, notice: Notice) {
@@ -72,8 +71,14 @@ export class NotificationList {
     this.navCtrl.push(NotificationDetail, { notice: notice });
   }
 
+  public doRefresh(refresher) {
+    this.notice_list_read = [];
+    this.notice_list_not_read = [];
+    this.update_notice_list().then(
+      () => refresher.complete());
+  }
 
-  swipe_event(event) {
+  public swipe_event(event) {
     if(event.direction == 2) {
       // 向左滑
       if(this.read_status_array.indexOf(this.read_status) == 0) {

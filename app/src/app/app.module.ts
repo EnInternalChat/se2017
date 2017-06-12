@@ -19,6 +19,7 @@ import { NewGroupChat } from '../pages/new-group-chat/new-group-chat';
 import { NewSingleChat } from '../pages/new-single-chat/new-single-chat';
 import { TaskList } from '../pages/task-list/task-list';
 import { TaskDetail } from '../pages/task-detail/task-detail';
+import { TaskForm } from '../pages/task-form/task-form';
 import { NewTask } from '../pages/new-task/new-task';
 import { Personal } from '../pages/personal/personal';
 import { AvatorSelector } from '../pages/avator-selector/avator-selector';
@@ -48,6 +49,7 @@ import { SharedModule } from '../components/shared.module';
     NewSingleChat,
     TaskList,
     TaskDetail,
+    TaskForm,
     NewTask,
     Personal,
     AvatorSelector,
@@ -81,6 +83,7 @@ import { SharedModule } from '../components/shared.module';
     NewGroupChat,
     TaskList,
     TaskDetail,
+    TaskForm,
     NewTask,
     Personal,
     AvatorSelector,
