@@ -18,8 +18,8 @@ declare let window;
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = Login;
-  // rootPage = BasisPage;
+  // rootPage = Login;
+  rootPage = BasisPage;
   // rootPage = ChatDetail;
   backPressed: boolean = false;
 

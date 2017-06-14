@@ -12,9 +12,10 @@ export class AppGlobal {
   private _user_name: string;
   private _avator_path: string;
   private _avator_no: number;
+  private _language: AppLanguage;
 
   public job : string = "管理员";
-  private _language: AppLanguage;
+  public token: string;
 
   public conversation_list: Array<Conversation> = [];
 
@@ -31,7 +32,7 @@ export class AppGlobal {
         this._avator_no = value;
         return this._avator_path = "assets/img/avator/" + value + ".png";
       });
-    let p3 = this.storage.read_local_info("language", AppLanguage.CN).then(
+    let p3 = this.storage.read_local_info("language", 1).then(
       (value) => this.language = <AppLanguage>value);
     Promise.all([p1, p2, p3]).then(() => {
       console.log("In Global(avator): ", this._avator_path);

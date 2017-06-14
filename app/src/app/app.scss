@@ -14,3 +14,36 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.pull-to-refresh {
+  .refresher-pulling {
+    .refresher-pulling-icon {
+      color: map-get($colors, primary_dark);
+    }
+    .refresher-pulling-text {
+      color: map-get($colors, third_text);
+    }
+  }
+  .refresher-refreshing {
+    .refresher-refreshing-icon .spinner svg {
+      circle {
+        stroke: map-get($colors, primary_dark);
+      }
+      line {
+        stroke: map-get($colors, primary_dark);
+      }
+    }
+    .refresher-refreshing-text {
+      color: map-get($colors, third_text);
+    }
+  }
+}
+
+.load-more .infinite-loading{
+  .infinite-loading-spinner .spinner svg circle {
+    fill: map-get($colors, primary_dark);
+  }
+  .infinite-loading-text {
+    color: map-get($colors, third_text);
+  }
+}

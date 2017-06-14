@@ -26,6 +26,10 @@
 
 
 <ion-content (swipe)="swipe_event($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="pull-to-refresh">
+    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
+    </ion-refresher-content>
+  </ion-refresher>
   <div [ngSwitch]="read_status">
     <ion-list *ngSwitchCase="'notice_not_read'" class="not-read-list">
       <ion-item *ngFor="let item of notice_list_not_read; trackBy: track_by_id" (click)="read_notice(item);notice_detail(item)">

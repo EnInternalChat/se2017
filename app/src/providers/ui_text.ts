@@ -12,6 +12,8 @@ export class UIText {
     "CN": 
     {
       "loading": "请稍候...",
+      "pullText": "下拉刷新",
+      "refreshText": "刷新中...",
       "LoginPage":
       {
         "username": "用户名",
@@ -33,14 +35,33 @@ export class UIText {
         "old_pwd": "旧密码",
         "new_pwd": "新密码",
         "check_pwd": "确认密码",
+        "change_contact": "修改联系方式",
+        "tel": "电话号码",
+        "mail": "邮箱",
         "ok": "确认",
         "cancel": "取消"
+      },
+      "BasisPage":
+      {
+        "chat": "聊天管理",
+        "chat_toast": "获取聊天列表失败",
+        "task": "任务管理",
+        "notice": "通知管理",
+        "personal": "账户设置"
+      },
+      "ChatDetailPage":
+      {
+        "start_fail": "无法开始会话",
+        "send_text_fail": "发送文字信息失败，请检查网络",
+        "send_img_fail": "发送图片信息失败，请检查网络"
       }
 
     },
     "EN":
     {
       "loading": "Waiting...",
+      "pullText": "Pull To Refresh",
+      "refreshText": "Refreshing...",
       "LoginPage":
       {
         "username": "Username",
@@ -62,8 +83,23 @@ export class UIText {
         "old_pwd": "old password",
         "new_pwd": "new password",
         "check_pwd": "new password",
+        "change_contact": "Change contact",
+        "tel": "telephone",
+        "mail": "mail",        
         "ok": "OK",
         "cancel": "Cancel"
+      },
+      "BasisPage":
+      {
+        "chat": "Chat List",
+        "chat_toast": "Can not get chat data",
+        "task": "Task List",
+        "notice": "Notice List",
+        "personal": "Setting"
+      },
+      "ChatDetailPage":
+      {
+        "start_fail": "Can not start chat"
       }
 
     }
@@ -72,7 +108,11 @@ export class UIText {
   public loading: string;
   public Login: any;
   public BasisPage: any;
+  public ChatDetailPage: any;
   public PersonalPage: any;
+  public LanguageOptions = [
+    {"value": AppLanguage.CN, "text": "简体中文"},
+    {"value": AppLanguage.EN, "text": "English"}];
 
   constructor() {
     this.update_language(AppLanguage.CN);
@@ -98,6 +138,8 @@ export class UIText {
       return;
     this.loading = data_lan.loading;
     this.Login = data_lan.LoginPage;
+    this.BasisPage = data_lan.BasisPage;
+    this.ChatDetailPage = data_lan.ChatDetailPage;
     this.PersonalPage = data_lan.PersonalPage;
 
   }

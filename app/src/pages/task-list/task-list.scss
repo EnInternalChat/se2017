@@ -28,6 +28,10 @@ page-task-list {
     color: map-get($colors, primary);
   }
 
+  .scroll-content {
+    border-top: none !important;
+  }
+
   .not-done-list {
     margin-top: 4px;
     .item-block:first-child {

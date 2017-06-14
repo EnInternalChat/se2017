@@ -69,8 +69,8 @@ export class TaskList {
     }
   }
 
-  // 再次返回页面或者初次进入页面时刷新列表数据
-  ionViewDidEnter() {
+
+  ionViewDidLoad() {
     this.config.set('ios', 'pageTransition', 'ios-transition');
     this.currentPage = 0;
     this.hasNextPage = true;

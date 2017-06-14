@@ -23,8 +23,12 @@
 
 <ion-content class="setting-content">
   <div class="avator" (click)="show_avator_slector()">
-    <img src="{{global_data.avator_path}}">
-    <div>{{ui.PersonalPage.avator}}</div>
+    <img class="avator-img" src="{{global_data.avator_path}}">
+    <div class="gender">
+      <img *ngIf="info.gender" src="assets/img/male.png">
+      <img *ngIf="!info.gender" src="assets/img/female.png">
+    </div>
+    <div class="update">{{ui.PersonalPage.avator}}</div>
   </div>
   <ion-list class="setting-list">
     <ion-item>
@@ -36,13 +40,9 @@
       <ion-label class="setting-item-value">{{global_data.job}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>{{ui.PersonalPage.gender}}</ion-label>
-      <ion-label class="setting-item-value">男</ion-label>
-    </ion-item>
-    <ion-item>
       <ion-label>{{ui.PersonalPage.language}}</ion-label>
       <ion-select interface="action-sheet" cancelText="{{ui.PersonalPage.cancel}}" okText="{{ui.PersonalPage.ok}}" [(ngModel)]="global_data.language">
-        <ion-option *ngFor="let item of language_options" value="{{item.value}}">
+        <ion-option *ngFor="let item of ui.LanguageOptions" value="{{item.value}}">
           {{item.text}}
         </ion-option>
       </ion-select> 
@@ -51,11 +51,12 @@
       <ion-label>{{ui.PersonalPage.notice}}</ion-label>
       <ion-toggle class="setting-item-value"></ion-toggle>
     </ion-item>
-    <ion-item>
-      <button ion-button class="change-password-button" (click)="show_password_prompt();">
-        {{ui.PersonalPage.change_pwd}}
-      </button>
-    </ion-item>
+    <button ion-button class="action-button" (click)="show_password_prompt();">
+      {{ui.PersonalPage.change_pwd}}
+    </button>
+    <button ion-button class="action-button" (click)="show_contact_prompt();">
+      {{ui.PersonalPage.change_contact}}
+    </button>
     </ion-list>
 
 </ion-content>

@@ -67,28 +67,4 @@ page-chat-list {
     background-color: map-get($colors, primary);
   }
 
-  .pull-to-refresh {
-    .refresher-pulling {
-      .refresher-pulling-icon {
-        color: map-get($colors, primary_dark);
-      }
-      .refresher-pulling-text {
-        color: map-get($colors, third_text);
-      }
-    }
-    .refresher-refreshing {
-      .refresher-refreshing-icon .spinner svg {
-        circle {
-          stroke: map-get($colors, primary_dark);
-        }
-        line {
-          stroke: map-get($colors, primary_dark);
-        }
-      }
-      .refresher-refreshing-text {
-        color: map-get($colors, third_text);
-      }
-    }
-  }
-
 }

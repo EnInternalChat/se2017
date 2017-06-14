@@ -30,6 +30,10 @@ page-notification-list {
     }
   }
 
+  .scroll-content {
+    border-top: none !important;
+  }
+
   .not-read-list {
     margin-top: 4px;
     .item-block:first-child {
