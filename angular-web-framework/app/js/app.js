@@ -8,6 +8,7 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
+
   .when('/notice', {
     templateUrl: 'templates/notice.html',
     controller: 'noticeCtrl'
@@ -16,6 +17,7 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl:'templates/setting.html',
     controller:'settingCtrl'
   })
+
   .when('/user',{
     templateUrl:'templates/user.html',
     controller:'userCtrl'
@@ -24,9 +26,35 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl:'templates/task.html',
     controller:'taskCtrl'
  })
+
   .otherwise({
     redirectTo: '/login'
   });
 }]);
 
 angular.module('internalChat.controllers', ['internalChat.services']);
+
+/*
+var app = angular.module('internalChat',
+    ['internalChat.filters', 'internalChat.services',
+        'internalChat.directives', 'internalChat.controllers']);
+
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/home', {
+            templateUrl: 'templates/setting.html',
+            controller: 'HomeCtrl'
+        })
+        .when('/login', {
+            templateUrl: 'templates/login.html',
+            controller: 'LoginCtrl'
+        })
+        .otherwise({
+            redirectTo: '/home'
+        });
+}]);
+
+angular.module('internalChat.controllers', ['internalChat.services']);
+*/
+
+
