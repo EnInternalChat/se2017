@@ -16,6 +16,7 @@ export class AppGlobal {
 
   public job : string = "管理员";
   public token: string;
+  public personal: any;
 
   public conversation_list: Array<Conversation> = [];
 

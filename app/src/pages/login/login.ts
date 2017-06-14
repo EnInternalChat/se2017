@@ -17,6 +17,7 @@ import { MD5 } from '../../providers/secure_md5';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+declare let window;
 
 @Component({
   selector: 'page-login',
@@ -127,6 +128,7 @@ export class Login {
       })
       .then(
       (data) => {
+          this.setAlias(this.username);
           this.chat_service.login(this.username, '123456').then(
             (data) => {
               this.native.stop_loading();
@@ -135,6 +137,15 @@ export class Login {
             },
             (error) => console.log("登录失败"));
         });
+  }
+
+
+  setAlias(alias) {
+    if (alias && alias.trim() != '') {
+      window.plugins.jPushPlugin.setAlias(alias);
+    }
+    else 
+      alert('Alias不能为空');
   }
 
   remember_password_change() {

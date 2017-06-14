@@ -33,7 +33,7 @@ export class HTTPService {
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.post(url, this.dict_to_query_str(param, false), options)
+      this.http.post(url, JSON.stringify(param), options)
       .map(res => res.json())
       .subscribe(
         data => resolve(data),

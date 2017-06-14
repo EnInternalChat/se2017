@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { markdown } from 'markdown';
 
+import { API } from '../../providers/api';
 import { Notice } from '../../providers/notification';
 
 /**
@@ -19,13 +20,17 @@ import { Notice } from '../../providers/notification';
 })
 export class NotificationDetail {
 
-  public notice: Notice;
+  public notice: any = {};
   public content: any;
   constructor(private sanitizer: DomSanitizer,
               public navCtrl: NavController, 
-              public navParams: NavParams) {
-    this.notice = navParams.data.notice;
-    this.content = markdown.toHTML(this.notice.content);
+              public navParams: NavParams,
+              public api: API) {
+  }
+
+  ionViewDidLoad() {
+    this.notice = this.navParams.get('notice');
+    this.content = markdown.toHTML(this.notice.content); 
   }
 
   public go_back() {

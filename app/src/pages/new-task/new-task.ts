@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
+import { API } from '../../providers/api';
+import { NativeServiceHelper } from '../../providers/native_service_helper';
+
 /**
  * Generated class for the NewTask page.
  *
@@ -19,23 +22,35 @@ export class NewTask {
   public job : string;
 
   public task_type : string;
-  public tasks_type_options : Array<{value : string, text : string}>;
+  public tasks_type_options : Array<{value : string, text : string}> = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private global_data: AppGlobal) {
-    // let global_data = AppGlobal.get_instance();
-    this.user_name = global_data.user_name;
-    this.job = global_data.job;
-    this.tasks_type_options = [
-      {"value": "leave", "text": "请假"},
-      {"value": "play", "text": "玩耍"}
-    ];
-    this.task_type = this.tasks_type_options[0].value;
+              private global_data: AppGlobal,
+              private native: NativeServiceHelper,
+              private api: API) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewTask');
+    this.user_name = this.global_data.user_name;
+    this.job = this.global_data.job;
+    this.api.get_tasks_type().then(
+      (tasks) => {
+        tasks = JSON.parse(tasks);
+        if(tasks.length === 0) {
+          this.native.show_toast("没有已部署的任务流程");
+          this.navCtrl.pop();
+          return;
+        }
+        tasks.forEach((item) => {
+          this.tasks_type_options.push({
+            value: item.id,
+            text: item.name
+          });
+        });
+        this.task_type = this.tasks_type_options[0].text;
+      },
+      (error) => this.native.show_toast("网络连接失败!"));   
   }
 
   add_task() {

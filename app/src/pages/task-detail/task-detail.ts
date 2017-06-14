@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Config } from 'ionic-angular';
+import { NavController, NavParams, Config, AlertController } from 'ionic-angular';
 
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the TaskDetail page.
@@ -20,7 +21,10 @@ export class TaskDetail {
   public task_info : Task;
   public user_name : string;
   public operation_options : Array<{value : string, text : string}> = [];
+  
   constructor(
+    public ui: UIText,
+    public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: Config,
@@ -36,6 +40,26 @@ export class TaskDetail {
         "text": item.operationName
       }));
     console.log("Options: ", this.operation_options);
+  }
+
+  public operation_form() {
+    let form = this.alertCtrl.create({
+      title: '',
+      cssClass: 'form-alert',
+      buttons: [
+      {
+        text: this.ui.cancel,
+        role: 'cancel'
+      },
+      {
+        text: this.ui.ok,
+        handler: data => {
+          
+        }
+      }
+      ]
+    });
+    form.addInput({});
   }
 
   go_back() {

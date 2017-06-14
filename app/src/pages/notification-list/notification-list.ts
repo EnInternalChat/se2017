@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { NotificationDetail } from '../notification-detail/notification-detail';
 import { Notice } from '../../providers/notification';
-import { HTTPService } from '../../providers/http_helper';
+import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { UIText } from '../../providers/ui_text';
 
@@ -27,7 +27,7 @@ export class NotificationList {
   public notice_list_read : Array<Notice> = [];
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public web_helper: HTTPService,
+              public api: API,
               public ui: UIText,
               public native: NativeServiceHelper) {
   }
@@ -41,7 +41,7 @@ export class NotificationList {
   }
 
   public update_notice_list(){
-    return this.web_helper.get("assets/data/notices.json", null).then(
+    return this.api.get_notice().then(
       (res) => {
         let new_notice: Notice;
         for (let i = 0, n = res.length; i < n; i++) {
@@ -51,8 +51,8 @@ export class NotificationList {
           else
             this.notice_list_not_read.push(new_notice);
         }
-      },
-      (error) => this.native.show_toast("获取通知信息失败"));
+      }).catch(
+      () => this.native.show_toast("网络连接失败"));
   }
 
   public track_by_id(index: number, notice: Notice) {
@@ -60,14 +60,15 @@ export class NotificationList {
   }
 
   public read_notice(notice : Notice) {
-    notice.is_read = true;
-    this.notice_list_read.push(notice);
-    let index = this.notice_list_not_read.findIndex(
-      (notice) => { return notice.is_read; });
-    this.notice_list_not_read.splice(index, 1);
-  }
-
-  public notice_detail(notice : Notice) {
+    if(notice.is_read) {
+      this.navCtrl.push(NotificationDetail, { notice: notice });
+      return;
+    }
+    this.api.read_notice(notice.id).then(
+      (res) => {
+        this.update_notice_list();        
+      }).catch(
+      () => this.native.show_toast("网络连接失败"));
     this.navCtrl.push(NotificationDetail, { notice: notice });
   }
 

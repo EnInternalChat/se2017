@@ -49,7 +49,7 @@ export class Personal {
     let password_prompt = this.alertCtrl.create(
     {
       title: this.ui.PersonalPage.change_pwd,
-      cssClass: "password-alert",
+      cssClass: "form-alert",
       inputs: [
       {
         name: "pwd_old",
@@ -69,11 +69,11 @@ export class Personal {
       ],
       buttons: [
       {
-        text: this.ui.PersonalPage.cancel,
+        text: this.ui.cancel,
         role: "cancel",
       },
       {
-        text: this.ui.PersonalPage.ok,
+        text: this.ui.ok,
         handler: data => {
           if(data.pwd_old === '') 
             this.native.show_toast("旧密码不能为空");
@@ -102,7 +102,7 @@ export class Personal {
     let contact_prompt = this.alertCtrl.create(
     {
       title: this.ui.PersonalPage.change_contact,
-      cssClass: "password-alert",
+      cssClass: "form-alert",
       inputs: [
       {
         name: "tel1",
@@ -127,11 +127,11 @@ export class Personal {
       ],
       buttons: [
       {
-        text: this.ui.PersonalPage.cancel,
+        text: this.ui.cancel,
         role: "cancel",
       },
       {
-        text: this.ui.PersonalPage.ok,
+        text: this.ui.ok,
         handler: data => {
           if(data.tel1 !== '' 
             && !data.tel1.match(/^1[34578]\d{9}$/g)) 

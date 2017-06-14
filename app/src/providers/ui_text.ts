@@ -14,6 +14,8 @@ export class UIText {
       "loading": "请稍候...",
       "pullText": "下拉刷新",
       "refreshText": "刷新中...",
+      "ok": "确认",
+      "cancel": "取消",
       "LoginPage":
       {
         "username": "用户名",
@@ -62,6 +64,8 @@ export class UIText {
       "loading": "Waiting...",
       "pullText": "Pull To Refresh",
       "refreshText": "Refreshing...",
+      "ok": "OK",
+      "cancel": "Cancel",
       "LoginPage":
       {
         "username": "Username",
@@ -106,6 +110,11 @@ export class UIText {
   };
 
   public loading: string;
+  public pullText: string;
+  public refreshText: string;
+  public ok: string;
+  public cancel: string;
+  
   public Login: any;
   public BasisPage: any;
   public ChatDetailPage: any;
@@ -137,6 +146,10 @@ export class UIText {
     if(data_lan == null)
       return;
     this.loading = data_lan.loading;
+    this.pullText = data_lan.pullText;
+    this.refreshText = data_lan.refreshText;
+    this.ok = data_lan.ok;
+    this.cancel = data_lan.cancel;
     this.Login = data_lan.LoginPage;
     this.BasisPage = data_lan.BasisPage;
     this.ChatDetailPage = data_lan.ChatDetailPage;

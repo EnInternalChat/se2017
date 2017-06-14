@@ -18,8 +18,8 @@ declare let window;
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // rootPage = Login;
-  rootPage = BasisPage;
+  rootPage = Login;
+  // rootPage = BasisPage;
   // rootPage = ChatDetail;
   backPressed: boolean = false;
 
@@ -80,15 +80,6 @@ export class MyApp {
           return true;
         }, false);
     }
-  }
-
-  setAlias() {
-    //设置Alias
-    // if (this.alias && this.alias.trim() != '') {
-    //   window.plugins.jPushPlugin.setAlias(this.alias);
-    // }
-    // else 
-    //   alert('Alias不能为空');
   }
 
   public show_exit_toast() {
