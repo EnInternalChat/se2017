@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" ng-app="internalChat">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="lib/indexcss/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="lib/indexcss/common.css"/>
+  <link rel="stylesheet" href="lib/indexcss/slide.css"/>
+  <link rel="stylesheet" href="lib/indexcss/flat-ui.min.css"/>
+  <link rel="stylesheet" href="lib/indexcss/jquery.nouislider.css"/>
+</head>
+<body>
+  <ul class="menu">
+    <li><a href="#/home">view1</a></li>
+    <li><a href="#/login">view2</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+  -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/epiceditor/js/epiceditor.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+
+  <!--添加的index.html的JS-->
+  <script src="lib/indexjs/jquery.min.js"></script>
+  <script src="lib/indexjs/bootstrap.min.js"></script>
+  <script src="lib/indexjs/respond.min.js"></script>
+  <script src="lib/indexjs/jquery.nouislider.js"></script>
+
+  <!--index.html里head后定义的script-->
+  <script>
+      $(function() {
+          $(".meun-item").click(function() {
+              $(".meun-item").removeClass("meun-item-active");
+              $(this).addClass("meun-item-active");
+              var itmeObj = $(".meun-item").find("img");
+              itmeObj.each(function() {
+                  var items = $(this).attr("src");
+                  items = items.replace("_grey.png", ".png");
+                  items = items.replace(".png", "_grey.png")
+                  $(this).attr("src", items);
+              });
+              var attrObj = $(this).find("img").attr("src");;
+              attrObj = attrObj.replace("_grey.png", ".png");
+              $(this).find("img").attr("src", attrObj);
+          });
+          $("#topAD").click(function() {
+              $("#topA").toggleClass(" glyphicon-triangle-right");
+              $("#topA").toggleClass(" glyphicon-triangle-bottom");
+          });
+          $("#topBD").click(function() {
+              $("#topB").toggleClass(" glyphicon-triangle-right");
+              $("#topB").toggleClass(" glyphicon-triangle-bottom");
+          });
+          $("#topCD").click(function() {
+              $("#topC").toggleClass(" glyphicon-triangle-right");
+              $("#topC").toggleClass(" glyphicon-triangle-bottom");
+          });
+          $("#topED").click(function() {
+              $("#topE").toggleClass(" glyphicon-triangle-right");
+              $("#topE").toggleClass(" glyphicon-triangle-bottom");
+          });
+          $("#topFD").click(function() {
+              $("#topF").toggleClass(" glyphicon-triangle-right");
+              $("#topF").toggleClass(" glyphicon-triangle-bottom");
+          });
+          $(".toggle-btn").click(function() {
+              $("#leftMeun").toggleClass("show");
+              $("#rightContent").toggleClass("pd0px");
+          })
+      })
+  </script>
+
+  <!--index.html尾部定义的-->
+  <!-- this page specific inline scripts -->
+  <script>
+      //min/max slider
+      function huadong(my, unit, def,max) {
+          $(my).noUiSlider({
+              range: [0, max],
+              start: [def],
+              handles: 1,
+              connect: 'upper',
+              slide: function() {
+                  var val =Math.floor($(this).val());
+                  $(this).find(".noUi-handle").text(
+                      val + unit
+                  );
+                  console.log($(this).find(".noUi-handle").parent().parent().html());
+              },
+              set: function() {
+                  var val =Math.floor($(this).val());
+                  $(this).find(".noUi-handle").text(
+                      val + unit
+                  );
+              }
+          });
+          $(my).val(def, true);
+      }
+      huadong('.slider-minmax1', "分钟", "5",30);
+      huadong('.slider-minmax2', "分钟", "6",15);
+      huadong('.slider-minmax3', "分钟", "10",60);
+      huadong('.slider-minmax4', "次", "2",10);
+      huadong('.slider-minmax5', "天", "3",7);
+      huadong('.slider-minmax6', "天", "8",10);
+  </script>
+
+
+
+
+</body>
+</html>

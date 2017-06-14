@@ -1,0 +1,519 @@
+<div class="tab-content">
+        <!-- 资源管理模块 -->
+
+        <!-- 用户管理模块
+        还要将"添加用户"部分，改为两边各五个选项;
+        左侧栏“用户管理”变高亮，不显示的形式，再加个用户查看的侧边栏。
+        组织结构里部门后面的“操作”里，点击“用户”，直接跳转到这个界面。
+        加了左侧栏后，还是和左侧栏有部分重合。
+
+         -->
+
+        <div class="leftMeun" id="leftMeun">
+            <div id="logoDiv">
+                <p id="logoP"><img id="logo" alt="用户" src="images/head_120.png"><span>用户</span></p>
+            </div>
+            <div id="personInfor">
+                <p id="userName">管理员</p>
+                <p><span>yangxp@qq.com</span></p>
+                <p>
+                    <a>退出登录</a>
+                </p>
+            </div>
+            <div class="meun-title">组织管理</div>
+            <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="images/icon_source.png">组织结构管理</div>
+            <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">用户管理</div>
+            <!-- 预计删除
+            <div class="meun-title">部门管理</div>
+            <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="images/icon_house_grey.png">部门管理</div>
+            -->
+
+            <div class="meun-title">任务管理</div>
+            <div class="meun-item" href="#task" aria-controls="task" role="tab" data-toggle="tab"><img src="images/icon_user_grey.png">任务管理</div>
+            <div class="meun-title">通知管理</div>
+            <div class="meun-item" href="#noti" aria-controls="noti" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">发布通知</div>
+            <div class="meun-item" href="#jdua" aria-controls="jdua" role="tab" data-toggle="tab"><img src="images/icon_char_grey.png">查看通知</div>
+            <div class="meun-title">设置管理</div>
+            <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="images/icon_change_grey.png">个人设置</div>
+        </div>
+
+<div id="rightContent">
+<!-- 修改组织结构管理模块 -->
+<div role="tabpanel" class="tab-pane active" id="sour">
+    <div class="check-div form-inline">
+        <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">组织结构管理</button>
+    </div>
+    <div class="data-div">
+        <div class="row tableHeader">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                部门ID
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                名称
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                所属部门
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                部长
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                操作
+            </div>
+        </div>
+        <div class="tablebody">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    1
+                </div>
+                <div id="topAD" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSystem" aria-expanded="true" aria-controls="collapseOne">
+                    <span id="topA" class="glyphicon  glyphicon-triangle-bottom  "></span> <span>XXX公司</span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    XXX公司
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    某某1
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                </div>
+            </div>
+
+            <!--系统管理折叠狂-->
+
+            <div id="collapseSystem" class="collapse in" aria-expanded="true">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2 ">
+                        2
+                    </div>
+                    <div id="topBD" onClick="changeA()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseAccount" aria-expanded="true" aria-controls="collapseOne">
+                        <span onClick="changeB()" id="topB" class="glyphicon glyphicon-triangle-bottom"></span> <span>行政部</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        XXX公司
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        某某2
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                    </div>
+                </div>
+                <!--用户管理折叠狂-->
+                <div id="collapseAccount" class="collapse in" aria-expanded="true">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl3 ">
+                            1
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            <span class=""> &nbsp;</span><span>行政部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /行政部
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某3
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3 ">
+                            2
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            <span></span><span>财务部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                           /行政部
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某4
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2 ">
+                        3
+                    </div>
+                    <div id="topCD" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSchool" aria-expanded="true" aria-controls="collapseOne">
+                        <span id="topC" onClick="changeC()" class="glyphicon glyphicon-triangle-bottom"></span><span> 市场部门</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        /admin/system
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        某某5
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                    </div>
+                </div>
+                <!--地区管理折叠狂-->
+                <div id="collapseSchool" class="collapse in" aria-expanded="true">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            1
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   levl3">
+                            <span></span><span>企划部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某6
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl3">
+                            2
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            <span></span><span>营销部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某7
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs " data-toggle="modal " data-target="#changeSource ">修改</button>
+                            <button class="btn btn-danger btn-xs " data-toggle="modal " data-target="#deleteSource ">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl3 ">
+                            3
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl3">
+                            <span></span><span>策划部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某8
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   levl3">
+                            4
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            <span></span><span>开发部</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某9
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2 ">
+                        4
+                    </div>
+                    <div id="topED" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo" aria-expanded="true" aria-controls="collapseOne">
+                        <span id="topE" onClick="changeE()" class="glyphicon glyphicon-triangle-bottom"></span><span> 人事部</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        /admin/system
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        某某10
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                    </div>
+                </div>
+                <div id="collapsetwo" class="collapse in" aria-expanded="true">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            1
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   levl3">
+                            <span></span><span>人事部门</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某11
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2 ">
+                        5
+                    </div>
+                    <div id="topFD" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 levl2" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsethree" aria-expanded="true" aria-controls="collapseOne">
+                        <span id="topF" onClick="changeF()" class="glyphicon glyphicon-triangle-bottom"></span><span> 生产部</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        /admin/system
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        某某12
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                    </div>
+                </div>
+                <div id="collapsethree" class="collapse in" aria-expanded="true">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  levl3">
+                            1
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   levl3">
+                            <span></span><span>生产部门</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            /admin/system/userlist/software/
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            某某13
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#changeSource">修改</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSource">删除</button>
+                            <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#checkuser">部员</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页码块-->
+    <footer class="footer">
+        <ul class="pagination">
+            <li>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+                页
+            </li>
+            <li class="gray">
+                共20页
+            </li>
+            <li>
+                <i class="glyphicon glyphicon-menu-left">
+                </i>
+            </li>
+            <li>
+                <i class="glyphicon glyphicon-menu-right">
+                </i>
+            </li>
+        </ul>
+    </footer>
+    <!--弹出窗口 添加资源-->
+    <div class="modal fade" id="addSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">添加部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="form-group ">
+                                <label for="sName" class="col-xs-3 control-label">部门名称：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sLink" class="col-xs-3 control-label">部长：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                <label for="sOrd" class="col-xs-3 control-label">等级编码：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                </div>
+                            </div>
+                            -->
+                            <div class="form-group">
+                                <label for="sKnot" class="col-xs-3 control-label">父部门：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInput1" class="col-xs-3 control-label">侧栏类型：</label>
+                                <div class="col-xs-8">
+                                    <label class="control-label" for="anniu">
+                                        <input type="radio" name="leixing" id="anniu">菜单</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label class="control-label" for="meun">
+                                        <input type="radio" name="leixing" id="meun"> 按钮</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-xs btn-green">确 定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!--修改资源弹出窗口-->
+    <div class="modal fade" id="changeSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">修改部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form class="form-horizontal">
+                            <div class="form-group ">
+                                <label for="sName" class="col-xs-3 control-label">部门名称：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sLink" class="col-xs-3 control-label">部长：</label>
+                                <div class="col-xs-8 ">
+                                    <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                <label for="sOrd" class="col-xs-3 control-label">等级编码：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                </div>
+                            </div>
+                            -->
+                            <div class="form-group">
+                                <label for="sKnot" class="col-xs-3 control-label">父部门：</label>
+                                <div class="col-xs-8">
+                                    <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInput1" class="col-xs-3 control-label">侧栏类型：</label>
+                                <div class="col-xs-8">
+                                    <label class="control-label" for="anniu">
+                                        <input type="radio" name="leixing" id="anniu">菜单</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label class="control-label" for="meun">
+                                        <input type="radio" name="leixing" id="meun"> 按钮</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-green">确 定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!--弹出删除资源警告窗口-->
+    <div class="modal fade" id="deleteSource" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">警示：</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        确定要删除该部门？删除后不可恢复！
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-xs btn-danger">确 定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- 转到用户管理
+    <div>
+        <div class="modal fade" id="usercheck" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <li><a href="user.html" > </a></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+</div>
+</div>
+</div>

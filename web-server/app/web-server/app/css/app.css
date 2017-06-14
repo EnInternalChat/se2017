@@ -1,0 +1,117 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.signin-background {
+	background:url(../images/login_bg_0.jpg) #f8f6e9;
+	width:100%;
+	height:100%;
+}
+
+.signin {
+	width: 30%;
+	height: 70%;
+	/*background:url(../images/login_bg.png) no-repeat;*/
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    margin:0 auto;
+	
+	/*position:absolute;*/
+	top:15%;
+	left:35%;
+}
+.signin-head {
+	margin:0 auto;
+	padding-top:30px;
+	width:120px;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 43px 15px 15px 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+    margin-bottom: 10px;
+    font-weight: normal;
+    background: transparent;
+    border: none;
+}
+.checkbox .input-group-addon {
+    border: none !important;
+    background: transparent;
+}
+
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: 14px;
+  border-radius: 0;
+  background: url(../images/login_user.png) 0 0 #bdbdbd no-repeat;
+  padding-left:60px;
+  color:#FFFFFF;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 0;
+  background: url(../images/login_pas.png) 0 0 #bdbdbd no-repeat;
+  padding-left:60px;
+  color:#FFFFFF;
+}
+.form-signin button {
+  border-radius: 0;
+}
+
+#login_form #login_username {
+    margin: 2% 5% 2% 5%;
+    /*margin: 5% 0 5% 0;*/
+    width: 90%;
+    border-radius: 0;
+}
+
+#login_form #login_pwd {
+    margin: 2% 5% 2% 5%;
+    width: 90%;
+    border-radius: 0;
+}
+
+#login_submit {
+    margin: 5% 5% 5% 5%;
+    width: 90%;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
