@@ -12,19 +12,19 @@
       <div class="form-group">
         <label class="col-lg-2 control-label">To:</label>
         <div class="col-lg-8">
-          <select ui-jq="chosen" data-placeholder="Choose email" class="form-control" multiple ng-model="mail.to">
+          <select ui-jq="chosen" data-placeholder="选择部门" class="form-control" multiple ng-model="mail.to">
             <option ng-repeat="list in tolist" value="{{list.email}}">{{list.name}} <{{list.email}}></option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Subject:</label>
+        <label class="col-lg-2 control-label">主题:</label>
         <div class="col-lg-8">
           <input type="text" class="form-control" ng-model="mail.subject">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Content</label>
+        <label class="col-sm-2 control-label">内容</label>
         <div class="col-sm-10">
           <div class="btn-toolbar m-b-sm btn-editor" data-role="editor-toolbar" data-target="#editor">
             <div class="btn-group dropdown">
@@ -62,13 +62,13 @@
             </div>
           </div>
           <div ui-jq="wysiwyg" class="form-control h-auto" style="min-height:200px;">
-            Go ahead&hellip;
+           开始&hellip;
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="col-lg-8 col-lg-offset-2">
-          <button class="btn btn-info w-xs">Send</button>
+          <button class="btn btn-info w-xs">发送</button>
         </div>
       </div>
     </form>

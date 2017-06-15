@@ -1,18 +1,16 @@
 app.controller('MailCtrl', ['$scope', function($scope) {
   $scope.folds = [
     {name: 'Inbox', filter:''},
-    {name: 'Starred', filter:'starred'},
-    {name: 'Sent', filter:'sent'},
-    {name: 'Important', filter:'important'},
-    {name: 'Draft', filter:'draft'},
-    {name: 'Trash', filter:'trash'}
+    {name: 'Accept', filter:'accept'},
+    {name: 'Sent', filter:'sent'}
   ];
 
   $scope.labels = [
-    {name: 'Angular', filter:'angular', color:'#23b7e5'},
-    {name: 'Bootstrap', filter:'bootstrap', color:'#7266ba'},
-    {name: 'Client', filter:'client', color:'#fad733'},
-    {name: 'Work', filter:'work', color:'#27c24c'}
+    {name: '程序部', filter:'程序部', color:'#23b7e5'},
+    {name: '财政部', filter:'财政部', color:'#7266ba'},
+    {name: '业务部', filter:'业务部', color:'#fad733'},
+    {name: '开发部', filter:'开发部', color:'#27c24c'},
+    {name: '客服部', filter:'客服部', color:''}
   ];
 
   $scope.addLabel = function(){
@@ -28,10 +26,10 @@ app.controller('MailCtrl', ['$scope', function($scope) {
 
   $scope.labelClass = function(label) {
     return {
-      'b-l-info': angular.lowercase(label) === 'angular',
-      'b-l-primary': angular.lowercase(label) === 'bootstrap',
-      'b-l-warning': angular.lowercase(label) === 'client',
-      'b-l-success': angular.lowercase(label) === 'work'      
+      'b-l-info': angular.lowercase(label) === '程序部',
+      'b-l-primary': angular.lowercase(label) === '财政部',
+      'b-l-warning': angular.lowercase(label) === '业务部',
+      'b-l-success': angular.lowercase(label) === '客服部'
     };
   };
 
@@ -57,9 +55,9 @@ app.controller('MailNewCtrl', ['$scope', function($scope) {
     content: ''
   }
   $scope.tolist = [
-    {name: 'James', email:'james@gmail.com'},
-    {name: 'Luoris Kiso', email:'luoris.kiso@hotmail.com'},
-    {name: 'Lucy Yokes', email:'lucy.yokes@gmail.com'}
+    {name:'程序部',labels:'程序部'},
+    {name: '业务部', labels:'业务部'},
+    {name: '客服部', labels:'客服部'}
   ];
 }]);
 
