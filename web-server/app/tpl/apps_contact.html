@@ -37,7 +37,7 @@
       <div class="wrapper-xs b-b">
         <div class="input-group m-b-xxs">
           <span class="input-group-addon input-sm no-border no-bg"><i class="icon-magnifier text-md m-t-xxs"></i></span>
-          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search {{group.name ? group.name : 'All Contacts'}}" ng-model="query">
+          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="查看 {{group.name ? group.name : '所有'}}" ng-model="query">
         </div>
       </div>
       <div class="row-row">
@@ -48,12 +48,12 @@
                 <a ng-repeat="item in items | filter:{group:filter} | filter:query | orderBy:'first'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
                   <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }">
                     {{ item.first }} <strong>{{ item.last }}</strong>
-                    <span ng-hide="item.first || item.last">No Name</span>
+                    <span ng-hide="item.first || item.last">未定义姓名</span>
                   </span>
                 </a>
               </div>
             </div>
-            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">No Contacts</div>
+            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">无用户</div>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 app.controller('MailCtrl', ['$scope', function($scope) {
   $scope.folds = [
-    {name: 'Inbox', filter:''},
-    {name: 'Accept', filter:'accept'},
-    {name: 'Sent', filter:'sent'}
+    {name: '所有', filter:''},
+    {name: '接收', filter:'接收'},
+    {name: '发送', filter:'发送'}
   ];
 
   $scope.labels = [

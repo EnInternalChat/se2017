@@ -7,15 +7,17 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
 
   $scope.filter = '';
   $scope.groups = [
-    {name: 'Coworkers'}, 
-    {name: 'Family'}, 
-    {name: 'Friends'}, 
-    {name: 'Partners'}, 
-    {name: 'Group'}
+    {name: '管理员'},
+    {name: '总经理'},
+    {name: '程序部'},
+    {name: '财务部'},
+    {name: '业务部'},
+    {name: '市场部'},
+    {name: '开发部'}
   ];
 
   $scope.createGroup = function(){
-    var group = {name: 'New Group'};
+    var group = {name: '新部门'};
     group.name = $scope.checkItem(group, $scope.groups, 'name');
     $scope.groups.push(group);
   };
