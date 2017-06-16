@@ -1,6 +1,3 @@
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3">Validation</h1>
-</div>
 <div class="wrapper-md">
   <div ng-controller="FormDemoCtrl">
     <div class="row">
@@ -11,38 +8,48 @@
               <span class="h4">更改设置</span>
             </div>
             <div class="panel-body">
-              <p class="text-muted">必要信息</p>
               <div class="form-group">
-                <label>用户名 <em class="text-muted">(allow 'a-zA-Z0-9', 4-10 length)</em></label>
+                <label>用户名 <em class="text-muted">(允许：'a-zA-Z0-9', 长度 4-10 )</em></label>
                 <input type="text" class="form-control" placeholder="张三" ng-model="user.name" ng-pattern="/^[a-zA-Z0-9]{4,10}$/" required >
               </div>
               <div class="form-group">
                 <label>邮箱</label>
                 <input type="email" class="form-control" placeholder="张三@mail.com" ng-model="user.email" required >
               </div>
+              <div class="form-group">
+                <label>备用邮箱</label>
+                <input type="email" class="form-control" placeholder="张三@mail.com" ng-model="user.email_bak" required >
+              </div>
               <div class="form-group pull-in clearfix">
                 <div class="col-sm-6">
                   <label>输入密码</label>
-                  <input type="password" class="form-control" placeholder="*********" name="password" ng-model="password" required >
+                <input type="password" class="form-control" name="password" ng-model="password" required >
                 </div>
                 <div class="col-sm-6">
                   <label>确认密码</label>
                   <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' ">
-                  <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
+                  <span ng-show='form.confirm_password.$error.validator'>确认密码不一致</span>
                 </div>
               </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" placeholder="(XXX) XXXX XXX" ng-model="phone" ng-pattern="/\([0-9]{3}\) ([0-9]{3}) ([0-9]{3})$/" required >
+              <div class="form-group pull-in clearfix">
+                <div class="col-sm-6">
+                  <label>联系方式</label>
+                  <input type="text" class="form-control" placeholder="XXX XXXX XXXX" ng-model="phone" ng-pattern="/^1[34578]\d{9}$/g" required >
+                </div>
+                <div class="col-sm-6">
+                  <label>备用联系方式</label>
+                  <input type="text" class="form-control" placeholder="XXX XXXX XXXX" ng-model="phone_bak" ng-pattern="/^1[34578]\d{9}$/g" required >
+                </div>
+                <!--<label>联系方式</label>-->
+                <!--<input type="text" class="form-control" placeholder="XXX XXXX XXXX" ng-model="phone" ng-pattern="/^1[34578]\d{9}$/g" required >-->
               </div>
-              <div class="checkbox">
-                <label class="i-checks">
-                  <input type="checkbox" ng-model="agree" required><i></i>保存修改 <a href class="text-info"></a>
-                </label>
-              </div>
+              <!--<div class="form-group">-->
+                <!--<label>备用联系方式</label>-->
+                <!--<input type="text" class="form-control" placeholder="XXX XXXX XXXX" ng-model="phone_bak" ng-pattern="/^1[34578]\d{9}$/g" required >-->
+              <!--</div>-->
             </div>
             <footer class="panel-footer text-right bg-light lter">
-              <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">确定提交</button>
+              <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">保存修改</button>
             </footer>
           </div>
         </form>

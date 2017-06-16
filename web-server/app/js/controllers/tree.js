@@ -2,13 +2,13 @@ app.controller('AbnTestController', function($scope, $timeout) {
     var apple_selected, tree, treedata_avm, treedata_geography;
     $scope.my_tree_handler = function(branch) {
       var _ref;
-      $scope.output = "You selected: " + branch.label;
+      $scope.output = "此处 " + branch.label;
       if ((_ref = branch.data) != null ? _ref.description : void 0) {
         return $scope.output += '(' + branch.data.description + ')';
       }
     };
     apple_selected = function(branch) {
-      return $scope.output = "APPLE! : " + branch.label;
+      return $scope.output = " " + branch.label;
     };
     treedata_avm = [
       {
@@ -17,17 +17,17 @@ app.controller('AbnTestController', function($scope, $timeout) {
           {
             label: '程序部',
             data: {
-              description: "man's best friend"
+              description: ""
             }
           }, {
             label: '设计部',
             data: {
-              description: "Felis catus"
+              description: ""
             }
           }, {
             label: '财政部',
             data: {
-              description: "hungry, hungry"
+              description: ""
             }
           }, {
             label: '业务部',
@@ -37,11 +37,11 @@ app.controller('AbnTestController', function($scope, $timeout) {
       }, {
         label: '第二分公司',
         data: {
-          definition: "A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean.",
+          definition: "第二分公司",
           data_can_contain_anything: true
         },
         onSelect: function(branch) {
-          return $scope.output = "Vegetable: " + branch.data.definition;
+          return $scope.output = " " + branch.data.definition;
         },
         children: [
           {
@@ -123,7 +123,7 @@ app.controller('AbnTestController', function($scope, $timeout) {
       var b;
       b = tree.get_selected_branch();
       return tree.add_branch(b, {
-        label: '新建部门',
+        label: $scope.new_name,
         data: {
           something: 42,
           "else": 43

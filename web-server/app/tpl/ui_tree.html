@@ -22,8 +22,21 @@
         <button ng-click="my_tree.expand_all()" class="btn btn-default btn-sm">展开全部</button>
         <button ng-click="my_tree.collapse_all()" class="btn btn-default btn-sm">回缩全部</button>
       </div>
+
+      <div class="wrapper">
+        <form name="label">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" ng-model="new_name " placeholder="新部门" required>
+            <span class="input-group-btn">
+              <button class="btn btn-success btn-sm" type="button" ng-click="try_adding_a_branch()" ng-disabled="label.$invalid">添加分支</button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <!--
       <div class="line b-b line-lg"></div>
       <button ng-click="try_adding_a_branch()" class="btn btn-success btn-sm"><i class="fa fa-fw m-r-xs fa-plus"></i> 添加分支</button>
+    -->
     </div>
   </div>
   <div class="col">
