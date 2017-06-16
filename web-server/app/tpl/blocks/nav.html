@@ -34,11 +34,11 @@
   <li ui-sref-active="active">
     <a ui-sref="app.ui.timeline">
       <i class="glyphicon glyphicon-signal"></i>
-      <span>时间线</span>
+      <span>任务</span>
     </a>
   </li>
 
-
+<!--
   <li ng-class="{active:$state.includes('app.table')}">
     <a href class="auto">
       <span class="pull-right text-muted">
@@ -72,14 +72,21 @@
       </li>
     </ul>
   </li>
-
+-->
   <li ui-sref-active="active">
     <a ui-sref="app.form.validation">
       <i class="glyphicon glyphicon-edit"></i>
       <span>验证</span>
     </a>
-  </li>
+  </li ui-sref-active="active">
 
+  <li>
+    <a ui-sref="lockme">
+      <i class="glyphicon glyphicon-file icon"></i>
+      <span>锁屏</span>
+    </a>
+  </li>
+  <!--
   <li ng-class="{active:$state.includes('app.page')}">
     <a href class="auto">
       <span class="pull-right text-muted">
@@ -95,19 +102,17 @@
           <span >其他</span>
         </a>
       </li>
+      <!--
       <li ui-sref-active="active">
         <a ui-sref="app.page.profile">
           <span>个人设置</span>
         </a>
       </li>
-
       <li ui-sref-active="active">
-        <a ui-sref="app.page.search">
-          <span>查找</span>
+        <a ui-sref="app.form.validation">
+          <span>个人设置</span>
         </a>
       </li>
-
-
       <li>
         <a ui-sref="lockme">
           <span>锁屏</span>
@@ -119,22 +124,24 @@
         </a>
       </li>
 
-      <li>
-        <a ui-sref="access.forgotpwd">
-          <span>忘记密码</span>
-        </a>
-      </li>
-
     </ul>
   </li>
-
+-->
   <li class="line dk hidden-folded"></li>
 
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">          
-    <span translate="aside.nav.your_stuff.YOUR_STUFF">Your Stuff</span>
-  </li>  
+    <span translate="aside.nav.your_stuff.YOUR_STUFF"></span>
+  </li>
+  <!--
   <li>
     <a ui-sref="app.page.profile">
+      <i class="icon-user icon text-success-lter"></i>
+      <span>个人设置</span>
+    </a>
+  </li>
+  -->
+  <li ui-sref-active="active">
+    <a ui-sref="app.form.validation">
       <i class="icon-user icon text-success-lter"></i>
       <span>个人设置</span>
     </a>
