@@ -5,10 +5,6 @@
       "subject": "管理员",
       "from": "张三",
       "content":"有关周末加班安排",
-      "attach":[
-        {"name":"c1.jpg", "url":"img/c1.jpg"},
-        {"name":"c3.jpg", "url":"img/c3.jpg"}
-      ],
       "date":"2017-05-07T08:50+08:00",
       "label":"管理员",
       "fold":"发送",

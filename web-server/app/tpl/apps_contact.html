@@ -25,7 +25,6 @@
         </div>
       </div>
       <div class="wrapper b-t">
-        <span tooltip="Double click to Edit" class="pull-right text-muted inline wrapper-xs m-r-sm"><i class="fa fa-question"></i></span>
         <a href class="btn btn-sm btn-default" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新建部门</a>
       </div>
     </div>
@@ -105,7 +104,7 @@
                   <label class="col-sm-3 control-label">部门</label>
                   <div class="col-sm-9">
                     <p class="form-control-static" ng-hide="item.editing">{{item.home}}</p>
-                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="item.home" >
+                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="item.home" disabled>
                   </div>
                 </div>
                 <div class="form-group m-b-sm" ng-hide="!item.work && !item.editing">
@@ -122,13 +121,20 @@
                     <input type="text" placeholder="部长/部员" class="form-control" ng-show="item.editing" ng-model="item.company" >
                   </div>
                 </div>
-                <div class="form-group m-b-sm" ng-hide="!item.note && !item.editing">
-                  <label class="col-sm-3 control-label">备注</label>
+                <div class="form-group m-b-sm" ng-hide="!item.editing">
+                  <label class="col-sm-3 control-label">状态</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>
-                    <textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5"></textarea>
+                    <input type="radio" value="激活">激活
+                  <input type="radio" value="禁用">禁用
                   </div>
                 </div>
+                <!--<div class="form-group m-b-sm" ng-hide="!item.note && !item.editing">-->
+                  <!--<label class="col-sm-3 control-label">备注</label>-->
+                  <!--<div class="col-sm-9">-->
+                    <!--<p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>-->
+                    <!--<textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5"></textarea>-->
+                  <!--</div>-->
+                <!--</div>-->
               </div>
               <!-- / fields -->
             </div>
