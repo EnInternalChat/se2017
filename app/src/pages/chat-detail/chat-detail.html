@@ -15,6 +15,11 @@
     <ion-title>
       <div>{{con_title}}</div>
     </ion-title> 
+    <ion-buttons end *ngIf="!is_single">
+      <button ion-button icon-only (click)="group_person()">
+        <ion-icon name="ios-people"></ion-icon>
+      </button>      
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>

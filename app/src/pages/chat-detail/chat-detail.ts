@@ -8,6 +8,7 @@ import { Conversation, Message, MessageList } from '../../providers/chat';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { ImageViwer } from '../../components/image-viwer/image-viwer';
 import { UIText } from '../../providers/ui_text';
+import { NewSingleChat } from '../../pages/new-single-chat/new-single-chat';
 
 /**
  * Generated class for the ChatDetail page.
@@ -201,6 +202,11 @@ export class ChatDetail {
         this.native.stop_loading();
         this.native.show_toast('获取原图失败');
       });
+  }
+
+  public group_person()
+  {
+    this.navCtrl.push(NewSingleChat, { group_id: this.con.target_id });
   }
 
   public go_back() {

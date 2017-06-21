@@ -17,7 +17,6 @@
       <button ion-button clear>确认</button>
     </ion-buttons>    
   </ion-toolbar>
-
 </ion-header>
 
 
@@ -31,4 +30,8 @@
       <ion-radio value="{{item.id}}" (ionSelect)="update_select(item)"></ion-radio>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll [(enabled)]="hasNextPage" (ionInfinite)="loadMore($event)" class="load-more">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多数据...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

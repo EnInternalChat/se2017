@@ -44,6 +44,8 @@ export class ChatList {
   ionViewDidLoad() {
     this.con_list = this.global_data.conversation_list;
     this.event_func = (msg: any) => this.onReceiveMsg(msg);
+    if(!this.navParams.get('need_load'))
+      return;
     this.native.loading();
     this.update_conversation_list().then(
       () => this.native.stop_loading()).catch(

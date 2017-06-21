@@ -33,6 +33,8 @@ export class NotificationList {
   }
 
   ionViewDidLoad() {
+    if(!this.navParams.get('need_load'))
+      return;
     this.notice_list_read = [];
     this.notice_list_not_read = [];
     this.native.loading();

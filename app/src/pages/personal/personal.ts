@@ -35,6 +35,8 @@ export class Personal {
               public storage: StorageHelper,
               public events: Events) {
     this.info['gender'] = true;
+    this.info['mail'] = 'test@outlook.com';
+    this.info['tel'] = '15923677645';
   }
 
   public log_out() {

@@ -29,7 +29,8 @@ export class BasisPage {
   root_page: any = Personal;
   // root_page: any = NotificationList;
   // root_page: any = ChatList;
-  pages: Array<{title: string, component: Component, icon_path: string}>;
+  pages: Array<{
+    title: string, component: Component, icon_path: string, has_load: boolean}>;
 
   public job : string = "管理员";
 
@@ -43,15 +44,26 @@ export class BasisPage {
     public events: Events,
     public ui: UIText) {
     this.pages = [
-      {title: this.ui.BasisPage.chat, component: ChatList, icon_path: "assets/img/chat.png"},
-      {title: this.ui.BasisPage.task, component: TaskList, icon_path: "assets/img/task.png"},
-      {title: this.ui.BasisPage.notice, component: NotificationList, icon_path: "assets/img/notification.png"},
-      {title: this.ui.BasisPage.personal, component: Personal, icon_path: "assets/img/setting.png"},
+      {title: this.ui.BasisPage.chat, component: ChatList, 
+        icon_path: "assets/img/chat.png", has_load: false},
+      {title: this.ui.BasisPage.task, component: TaskList, 
+        icon_path: "assets/img/task.png", has_load: false},
+      {title: this.ui.BasisPage.notice, component: NotificationList, 
+        icon_path: "assets/img/notification.png", has_load: false},
+      {title: this.ui.BasisPage.personal, component: Personal, 
+        icon_path: "assets/img/setting.png", has_load: false},
     ];
   }
 
   public open_page(page) {
-    this.nav.setRoot(page.component);
+    if(page.has_load) {
+      this.nav.setRoot(page.component, { need_load: false });
+    }
+    else {
+      page.has_load = true;
+      this.nav.setRoot(page.component, { need_load: true });
+    }
+
   }
 
   public open_notification_info() {

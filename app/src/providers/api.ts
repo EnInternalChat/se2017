@@ -97,4 +97,13 @@ export class API {
     return this.http.post(this.base_url + '/employees/' + this.global_data.user_name, 
       info, this.options_token_json);
   }
+
+  public get_all_employees(page, limit) {
+      return this.http.get(this.base_url + '/employees/' 
+        + this.global_data.personal.company_id, {
+          page: page,
+          limit: limit
+        })
+  }
+
 }

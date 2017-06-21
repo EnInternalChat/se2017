@@ -34,6 +34,8 @@ export class Message {
     this.id = json['serverMessageId'];
     this.from_user = json['fromName'];
     this.from_user_avator = json['fromNickname'];
+    if(this.from_user_avator == null || this.from_user_avator == "")
+      this.from_user_avator = "1";
     if(json['contentType'] === 'text')
       this.is_img = false;
     else
@@ -135,6 +137,7 @@ export class Conversation {
 // 10 min = 600000 ms 
 const MSG_TIME_OFFSET = 120000;
 const MSG_TIME_SUM = 600000;
+const MSG_COUNT = 8;
 
 export class MessageList {
   public list: Array<Message> = [];
@@ -142,12 +145,14 @@ export class MessageList {
 
   public sum_first_time: number;
   public sum_last_time: number;
+  public sum_count: number;
   public first_time: number;
   public last_time: number;
 
   constructor() {
     this.from = 0;
     this.sum_first_time = this.sum_last_time = 0;
+    this.sum_count = 0;
     this.first_time = this.last_time = new Date().getTime();
   }
 
@@ -157,8 +162,10 @@ export class MessageList {
       if(offset < 0)
         return;
       if(offset > MSG_TIME_OFFSET 
-        || this.sum_last_time > MSG_TIME_SUM) {
+        || this.sum_last_time > MSG_TIME_SUM
+        || this.sum_count > MSG_COUNT) {
         this.sum_last_time = 0;
+        this.sum_count = 0;
         msg.show_time = true;
       }      
       else {

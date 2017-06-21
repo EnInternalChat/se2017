@@ -19,15 +19,15 @@ import { Task } from '../../providers/task';
 })
 export class TaskList {
 
-  task_status_array: Array<string>;
-  task_status : string;
+  task_status_array: Array<string> = ['tasks_not_done', 'tasks_done'];
+  task_status : string = this.task_status_array[0];
 
-  tasks_list_not_done : Array<Task>;
-  tasks_list_done: Array<Task>;
+  tasks_list_not_done : Array<Task> = [];
+  tasks_list_done: Array<Task> = [];
 
-  currentPage: number;
-  limit: number;
-  hasNextPage: boolean;
+  currentPage: number = 0;
+  limit: number = 10;
+  hasNextPage: boolean = true;
 
   constructor(public changeDetect: ChangeDetectorRef,
               public navCtrl: NavController,
@@ -36,13 +36,22 @@ export class TaskList {
               public events: Events,
               public web_helper: HTTPService,
               public native: NativeServiceHelper) {
-    this.task_status_array = ['tasks_not_done', 'tasks_done'];
-    this.task_status = this.task_status_array[0];
-    this.tasks_list_done = [];
-    this.tasks_list_not_done = [];
+  }
+
+  ionViewDidLoad() {
+    if(!this.navParams.get('need_load'))
+      return;
     this.currentPage = 0;
-    this.limit = 10;
     this.hasNextPage = true;
+    this.tasks_list_not_done = [];
+    this.tasks_list_done = [];
+    this.native.loading("请稍候...");
+    this.loadList("tasks_not_done").then(
+      () => this.native.stop_loading());
+  }
+
+  ionViewDidEnter() {
+    this.config.set('ios', 'pageTransition', 'ios-transition');    
   }
 
   new_task() {
@@ -69,17 +78,6 @@ export class TaskList {
     }
   }
 
-
-  ionViewDidLoad() {
-    this.config.set('ios', 'pageTransition', 'ios-transition');
-    this.currentPage = 0;
-    this.hasNextPage = true;
-    this.tasks_list_not_done = [];
-    this.tasks_list_done = [];
-    this.native.loading("请稍候...");
-    this.loadList("tasks_not_done").then(
-      () => this.native.stop_loading());
-  }
 
   public loadList(which_list: string): Promise<any> {
     return this.web_helper.get("assets/data/tasks.json", null).then(

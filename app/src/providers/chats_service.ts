@@ -131,5 +131,16 @@ export class ChatService {
     }
   }
 
+  public get_group_member(group_id) {
+    if(this.is_platform && this.is_android) {
+      return new Promise((resolve, reject) =>
+        window.JMessage.getGroupMembers(group_id, resolve, reject));
+    }
+    else if(this.is_platform && !this.is_android) {
+      return new Promise((resolve, reject) =>
+        window.JMessage.memberArray(group_id, resolve, reject));
+    }
+  }
+
 
 }
