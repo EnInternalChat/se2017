@@ -2,84 +2,84 @@ app.controller('AbnTestController', function($scope, $timeout) {
     var apple_selected, tree, treedata_avm, treedata_geography;
     $scope.my_tree_handler = function(branch) {
       var _ref;
-      $scope.output = "You selected: " + branch.label;
+      $scope.output = "此处 " + branch.label;
       if ((_ref = branch.data) != null ? _ref.description : void 0) {
         return $scope.output += '(' + branch.data.description + ')';
       }
     };
     apple_selected = function(branch) {
-      return $scope.output = "APPLE! : " + branch.label;
+      return $scope.output = " " + branch.label;
     };
     treedata_avm = [
       {
-        label: 'Animal',
+        label: '第一分公司',
         children: [
           {
-            label: 'Dog',
+            label: '程序部',
             data: {
-              description: "man's best friend"
+              description: ""
             }
           }, {
-            label: 'Cat',
+            label: '设计部',
             data: {
-              description: "Felis catus"
+              description: ""
             }
           }, {
-            label: 'Hippopotamus',
+            label: '财政部',
             data: {
-              description: "hungry, hungry"
+              description: ""
             }
           }, {
-            label: 'Chicken',
-            children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
+            label: '业务部',
+            children: ['技术部', '开发部', '客服部']
           }
         ]
       }, {
-        label: 'Vegetable',
+        label: '第二分公司',
         data: {
-          definition: "A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean.",
+          definition: "第二分公司",
           data_can_contain_anything: true
         },
         onSelect: function(branch) {
-          return $scope.output = "Vegetable: " + branch.data.definition;
+          return $scope.output = " " + branch.data.definition;
         },
         children: [
           {
-            label: 'Oranges'
+            label: '程序部'
           }, {
-            label: 'Apples',
+            label: '财政部',
             children: [
               {
-                label: 'Granny Smith',
+                label: '财务部',
                 onSelect: apple_selected
               }, {
-                label: 'Red Delicous',
+                label: '行政部',
                 onSelect: apple_selected
               }, {
-                label: 'Fuji',
+                label: '人力资源部',
                 onSelect: apple_selected
               }
             ]
           }
         ]
       }, {
-        label: 'Mineral',
+        label: '第三分公司',
         children: [
           {
-            label: 'Rock',
-            children: ['Igneous', 'Sedimentary', 'Metamorphic']
+            label: '业务部',
+            children: ['开发部', '网络部', 'APP部']
           }, {
-            label: 'Metal',
-            children: ['Aluminum', 'Steel', 'Copper']
+            label: '行政部',
+            children: ['财务部', '人力资源部', '行政部']
           }, {
-            label: 'Plastic',
+            label: '市场部',
             children: [
               {
-                label: 'Thermoplastic',
-                children: ['polyethylene', 'polypropylene', 'polystyrene', ' polyvinyl chloride']
+                label: '客服部',
+                children: ['在线', '人工', '语音', '智能']
               }, {
-                label: 'Thermosetting Polymer',
-                children: ['polyester', 'polyurethane', 'vulcanized rubber', 'bakelite', 'urea-formaldehyde']
+                label: '服务部',
+                children: ['修理部', '保修处', '人工服务', '智能服务部', '赔偿处']
               }
             ]
           }
@@ -88,31 +88,11 @@ app.controller('AbnTestController', function($scope, $timeout) {
     ];
     treedata_geography = [
       {
-        label: 'North America',
+        label: '公司',
         children: [
           {
-            label: 'Canada',
-            children: ['Toronto', 'Vancouver']
-          }, {
-            label: 'USA',
-            children: ['New York', 'Los Angeles']
-          }, {
-            label: 'Mexico',
-            children: ['Mexico City', 'Guadalajara']
-          }
-        ]
-      }, {
-        label: 'South America',
-        children: [
-          {
-            label: 'Venezuela',
-            children: ['Caracas', 'Maracaibo']
-          }, {
-            label: 'Brazil',
-            children: ['Sao Paulo', 'Rio de Janeiro']
-          }, {
-            label: 'Argentina',
-            children: ['Buenos Aires', 'Cordoba']
+            label: '部门',
+            children: ['部门1', '部门2']
           }
         ]
       }
@@ -143,7 +123,7 @@ app.controller('AbnTestController', function($scope, $timeout) {
       var b;
       b = tree.get_selected_branch();
       return tree.add_branch(b, {
-        label: 'New Branch',
+        label: $scope.new_name,
         data: {
           something: 42,
           "else": 43

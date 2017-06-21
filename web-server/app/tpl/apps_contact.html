@@ -14,18 +14,17 @@
         <div class="cell scrollable hover">
           <div class="cell-inner">
             <div class="list-group no-radius no-border no-bg m-b-none">
-              <a class="list-group-item b-b" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">所有用户</a>
-              <a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
+              <a class="list-group-item b-b" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">部门列表</a>
+              <a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l b-a no-select" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
                 <span ng-click='deleteGroup(item)' class="pull-right text-muted hover-action"><i class="fa fa-times"></i></span>
                 <span class="block m-l-n" ng-class="{'m-n': item.selected }">{{ item.name ? item.name : 'Untitled' }}</span>
-                <input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditing(item)" ng-model="item.name" style="top:3px;left:2px;width:98%" ui-focus="item.editing">
+                <!--<input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditing(item)" ng-model="item.name" style="top:3px;left:2px;width:98%" ui-focus="item.editing">-->
               </a>
             </div>
           </div>
         </div>
       </div>
       <div class="wrapper b-t">
-        <span tooltip="Double click to Edit" class="pull-right text-muted inline wrapper-xs m-r-sm"><i class="fa fa-question"></i></span>
         <a href class="btn btn-sm btn-default" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新建部门</a>
       </div>
     </div>
@@ -37,7 +36,7 @@
       <div class="wrapper-xs b-b">
         <div class="input-group m-b-xxs">
           <span class="input-group-addon input-sm no-border no-bg"><i class="icon-magnifier text-md m-t-xxs"></i></span>
-          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search {{group.name ? group.name : 'All Contacts'}}" ng-model="query">
+          <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="查看 {{group.name ? group.name : '所有'}}" ng-model="query">
         </div>
       </div>
       <div class="row-row">
@@ -48,12 +47,12 @@
                 <a ng-repeat="item in items | filter:{group:filter} | filter:query | orderBy:'first'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
                   <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }">
                     {{ item.first }} <strong>{{ item.last }}</strong>
-                    <span ng-hide="item.first || item.last">No Name</span>
+                    <span ng-hide="item.first || item.last">未定义姓名</span>
                   </span>
                 </a>
               </div>
             </div>
-            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">No Contacts</div>
+            <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">无用户</div>
           </div>
         </div>
       </div>
@@ -105,7 +104,7 @@
                   <label class="col-sm-3 control-label">部门</label>
                   <div class="col-sm-9">
                     <p class="form-control-static" ng-hide="item.editing">{{item.home}}</p>
-                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="item.home" >
+                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="item.home" disabled>
                   </div>
                 </div>
                 <div class="form-group m-b-sm" ng-hide="!item.work && !item.editing">
@@ -122,13 +121,20 @@
                     <input type="text" placeholder="部长/部员" class="form-control" ng-show="item.editing" ng-model="item.company" >
                   </div>
                 </div>
-                <div class="form-group m-b-sm" ng-hide="!item.note && !item.editing">
-                  <label class="col-sm-3 control-label">备注</label>
+                <div class="form-group m-b-sm" ng-hide="!item.editing">
+                  <label class="col-sm-3 control-label">状态</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>
-                    <textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5"></textarea>
+                    <input type="radio" value="激活">激活
+                  <input type="radio" value="禁用">禁用
                   </div>
                 </div>
+                <!--<div class="form-group m-b-sm" ng-hide="!item.note && !item.editing">-->
+                  <!--<label class="col-sm-3 control-label">备注</label>-->
+                  <!--<div class="col-sm-9">-->
+                    <!--<p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>-->
+                    <!--<textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5"></textarea>-->
+                  <!--</div>-->
+                <!--</div>-->
               </div>
               <!-- / fields -->
             </div>
