@@ -13,7 +13,7 @@
       </button>
     </ion-buttons>
     <ion-title>开始新任务</ion-title>
-    <ion-buttons right (click)="add_task()">
+    <ion-buttons right (click)="start_task()">
       <button ion-button clear>确认</button>
     </ion-buttons>    
   </ion-toolbar>
@@ -35,7 +35,7 @@
     </ion-item>
     <ion-item>
       <ion-label fixed>备注</ion-label>
-      <ion-textarea type="text" clearInput="true" rows="5"></ion-textarea>
+      <ion-textarea type="text" clearInput="true" rows="5" [(ngModel)]="comment"></ion-textarea>
     </ion-item>
   </ion-list>
 

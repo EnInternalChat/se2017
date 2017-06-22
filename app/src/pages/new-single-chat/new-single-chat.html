@@ -27,7 +27,7 @@
         <img src="assets/img/avator/{{item.no}}.png">
       </ion-avatar>
       <ion-label>{{item.id}}</ion-label>
-      <ion-radio value="{{item.id}}" (ionSelect)="update_select(item)"></ion-radio>
+      <ion-radio value="{{item.id}}" (ionSelect)="update_select(item)" [disabled]="item.id===global_data.user_name"></ion-radio>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll [(enabled)]="hasNextPage" (ionInfinite)="loadMore($event)" class="load-more">

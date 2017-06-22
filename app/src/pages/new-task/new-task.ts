@@ -20,6 +20,7 @@ export class NewTask {
 
   public user_name : string;
   public job : string;
+  public comment: string;
 
   public task_type : string;
   public tasks_type_options : Array<{value : string, text : string}> = [];
@@ -53,11 +54,11 @@ export class NewTask {
       (error) => this.native.show_toast("网络连接失败!"));   
   }
 
-  add_task() {
-
+  public start_task() {
+    this.api.start_task(this.task_type, this.comment);
   }
 
-  go_back() {
+  public go_back() {
       this.navCtrl.pop();
   }
 

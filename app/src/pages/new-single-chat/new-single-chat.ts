@@ -41,12 +41,7 @@ export class NewSingleChat {
     this.native.loading();
     this.get_employee_list(this.navParams.get('group_id')).then(
       () => this.native.stop_loading());
-    for(let i = 0, n = this.employee_list.length; i < n; i++) {
-      if(this.employee_list[i].id == this.global_data.user_name) {
-        this.employee_list.splice(i, 1);
-        break;
-      }
-    }
+
   }
 
   public get_employee_list(group_id, list_is_empty: boolean = true): Promise<any>
@@ -54,7 +49,6 @@ export class NewSingleChat {
     if(group_id == null) {
       return this.api.get_all_employees(this.currentPage, this.limit).then(
         (employees) => {
-          employees = JSON.parse(employees);
           employees.forEach((item) => {
             if(item['avator'] == 0)
               item['avator'] = Math.floor(Math.random()*8 + 1);

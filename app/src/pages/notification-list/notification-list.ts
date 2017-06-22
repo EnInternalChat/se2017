@@ -41,14 +41,14 @@ export class NotificationList {
   }
 
   public update_notice_list(update_all: boolean){
-    let p_unread = this.api.get_notice(true).then(
+    let p_unread = this.api.get_notices(true).then(
       (res) => {
         res = JSON.parse(res);
         res.forEach((item) => {
           this.notice_list_not_read.push(new Notice(item));
         });
       });
-    let p_read = this.api.get_notice(false).then(
+    let p_read = this.api.get_notices(false).then(
       (res) => {
         res = JSON.parse(res);
         res.forEach((item) => {

@@ -35,8 +35,8 @@ export class Personal {
               public storage: StorageHelper,
               public events: Events) {
     this.info['gender'] = true;
-    this.info['mail'] = ['test@outlook.com'];
-    this.info['tel'] = ['15923677645'];
+    this.info['email'] = ['test@outlook.com'];
+    this.info['phone'] = ['15923677645'];
   }
 
   public log_out() {
@@ -104,7 +104,7 @@ export class Personal {
     let contact_prompt = this.alertCtrl.create(
     {
       title: this.ui.PersonalPage.change_contact,
-      cssClass: "form-alert",
+      cssClass: "form-alert alert-large",
       inputs: [
       {
         name: "tel1",

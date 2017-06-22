@@ -61,7 +61,7 @@ export class API {
       this.options_token_json);
   }
 
-  public get_notice(not_read: boolean) {
+  public get_notices(not_read: boolean) {
     if(this.is_debug)
       return this.http.get(this.base_url + 'assets/data/notices.json', null);
     return this.http.get(this.base_url + '/notifications/received/' 
@@ -100,7 +100,7 @@ export class API {
   }
 
   public get_all_employees(page, limit) {
-    return this.http.get(this.base_url + '/testEmployee', {
+    return this.http.get("https://ice.garenfeather.cn/EnInternalChat/testEmployee", {
         page: page,
         limit: limit
       }, this.options_token);
@@ -109,6 +109,10 @@ export class API {
       //     page: page,
       //     limit: limit
       //   }, this.options_token);
+  }
+
+  public get_tasks(is_doing: boolean) {
+    return this.http.get(this.base_url + '/tasks/doing', {}, this.options_token);
   }
 
 }

@@ -4,6 +4,7 @@ import { NavController, NavParams, Config, AlertController } from 'ionic-angular
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
 import { UIText } from '../../providers/ui_text';
+import { API } from '../../providers/api';
 
 /**
  * Generated class for the TaskDetail page.
@@ -28,7 +29,8 @@ export class TaskDetail {
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: Config,
-    private global_data: AppGlobal) {
+    private global_data: AppGlobal,
+    public api: API) {
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
     if(this.task_info.over)
@@ -60,6 +62,10 @@ export class TaskDetail {
       ]
     });
     form.addInput({});
+  }
+
+  public gateway_operate(operate_id) {
+    this.api.operate_task(this.task_info.type, this.task_info.activity_id, operate_id);
   }
 
   go_back() {

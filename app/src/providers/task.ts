@@ -27,6 +27,7 @@ export class TaskStage {
 
 export class Task {
   public activity_id : string;
+  public type: string;
   public content : string;
   public start_person : string;
   public start_time : string;
