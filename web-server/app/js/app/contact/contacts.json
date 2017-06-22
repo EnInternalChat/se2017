@@ -9,7 +9,7 @@
       "home": "程序部",
       "work": "张三@mail.com",
       "notes": "",
-      "avatar": "img/a3.jpg"
+      "avatar": "img/4.png"
     },
     {
       "group" : "管理员",
@@ -20,7 +20,7 @@
       "home": "管理员",
       "work": "张峰@mail.com",
       "notes": "",
-      "avatar": "img/a3.jpg"
+      "avatar": "img/4.png"
     },
     {
       "group" : "总经理",
@@ -31,7 +31,7 @@
       "home": "总经理",
       "work": "肖奈@mail.com",
       "notes": "",
-      "avatar": "img/a3.jpg"
+      "avatar": "img/4.png"
     },
     {
       "group" : "财务部",
@@ -42,7 +42,7 @@
       "home": "财务部",
       "work": "王五@mail.com",
       "notes": "",
-      "avatar": "img/a0.jpg"
+      "avatar": "img/1.png"
     },
     {
        "group" : "财务部",
@@ -53,7 +53,7 @@
       "home": "财务部",
       "work": "王二@mail.com",
       "notes": "",
-      "avatar": "img/a1.jpg"
+      "avatar": "img/2.png"
     },
     {
       "group" : "业务部",
@@ -64,7 +64,7 @@
       "home": "业务部",
       "work": "李四@mail.com",
       "notes": "",
-      "avatar": "img/a2.jpg"
+      "avatar": "img/3.png"
     },
     {
       "group" : "开发部",
@@ -75,7 +75,7 @@
       "home": "开发部",
       "work": "李华@mail.com",
       "notes": "",
-      "avatar": "img/a4.jpg"
+      "avatar": "img/5.png"
     },
     {
       "group" : "开发部",
@@ -86,7 +86,7 @@
       "home": "开发部",
       "work": "敖特曼@mail.com",
       "notes": "",
-      "avatar": "img/a5.jpg"
+      "avatar": "img/5.png"
     },
     {
       "group" : "市场部",
@@ -97,7 +97,7 @@
       "home": "市场部",
       "work": "李浩@mail.com",
       "notes": "",
-      "avatar": "img/a6.jpg"
+      "avatar": "img/7.png"
     },
     {
       "group" : "程序部",
@@ -108,7 +108,7 @@
       "home": "程序部",
       "work": "程序员AA@mail.com",
       "notes": "",
-      "avatar": "img/a7.jpg"
+      "avatar": "img/8.png"
     },
     {
       "group" : "市场部",
@@ -119,7 +119,7 @@
       "home": "市场部",
       "work": "李四@mail.com",
       "notes": "",
-      "avatar": "img/a8.jpg"
+      "avatar": "img/6.png"
     },
     {
       "group" : "业务部",
@@ -130,7 +130,7 @@
       "home": "业务部",
       "work": "陈业@mail.com",
       "notes": "",
-      "avatar": "img/a9.jpg"
+      "avatar": "img/6.png"
     },
     {
       "group" : "业务部",
@@ -141,7 +141,7 @@
       "home": "业务部",
       "work": "泷雪@mail.com",
       "notes": "",
-      "avatar": "img/a8.jpg"
+      "avatar": "img/6.png"
     },
     {
       "group" : "开发部",
@@ -152,7 +152,7 @@
       "home": "开发部",
       "work": "于半珊@mail.com",
       "notes": "",
-      "avatar": "img/a8.jpg"
+      "avatar": "img/6.png"
     },
     {
       "group" : "程序部",
@@ -163,7 +163,7 @@
       "home": "程序部",
       "work": "郝眉@mail.com",
       "notes": "",
-      "avatar": "img/a8.jpg"
+      "avatar": "img/6.png"
     }
   ]
 }

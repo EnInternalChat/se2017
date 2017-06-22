@@ -59,6 +59,13 @@ app.controller('MailNewCtrl', ['$scope', function($scope) {
     {name: '业务部', labels:'业务部'},
     {name: '客服部', labels:'客服部'}
   ];
+  $scope.markdown_editor = new SimpleMDE({ 
+    element: document.getElementById('markdown-editor'),
+    toolbar: [
+      "bold", "italic", "strikethrough", "|", 
+      "heading-1", "heading-2", "heading-3", "|", 
+      "code", "quote", "unordered-list", "ordered-list", "image", "table", "|",
+      "preview"] })
 }]);
 
 angular.module('app').directive('labelColor', function(){
