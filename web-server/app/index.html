@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
+
 </head>
 <body ng-controller="AppCtrl">
   <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
@@ -57,6 +58,85 @@
   <script src="js/directives/ui-toggleclass.js"></script>
   <script src="js/directives/ui-validate.js"></script>
   <script src="js/controllers/bootstrap.js"></script>
-  <!-- Lazy loading -->
+  <!-- editor -->
+
+  <script src="epiceditor/js/epiceditor.js"></script>
+  <script src="epiceditor/js/epiceditor.min.js"></script>
+  <script>
+
+      var opts = {
+          container: 'epiceditor',
+          basePath: 'EpicEditor',
+          clientSideStorage: true,
+          localStorageName: 'epiceditor',
+          useNativeFullsreen: true,
+          parser: marked,
+          file: {
+              name: 'epiceditor',
+              defaultContent: '',
+              autoSave: 100
+          },
+          theme: {
+              base: '/themes/base/epiceditor.css',
+              preview: '/themes/preview/bartik.css',
+              editor: '/themes/editor/epic-dark.css'
+          },
+          focusOnLoad: false,
+          shortcut: {
+              modifier: 18,
+              fullscreen: 70,
+              preview: 80
+          }
+      }
+      var editor = new EpicEditor(opts).load();
+      $('#Show').click(function () {
+          alert(editor.getElement('previewer').body.innerHTML);
+          alert(editor.getElement('editor').body.innerHTML);
+      });
+
+      $('#export').click(function  () {
+          var theContent = editor.exportFile();
+
+          alert(theContent);
+      });
+      $('#open').click(function  () {
+
+
+          editor.importFile('a.md');
+
+      });
+  </script>
+  <!-- editor -->
+  <!-- 预览图片 -->
+  <style type="text/css">
+    li {
+      list-style-type: none; /*去除列表符号*/
+      position: relative; /*配合子标签使用*/
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      display: block; /*图片保持显示状态*/
+    }
+
+    /*设置关联属性*/
+    #div_02 {
+      display: none; /*初始不显示*/
+      position: absolute; /*使图片脱离流*/
+      left: 80px;
+      top: 40px;
+    }
+
+    #div_02 img {
+      display: block; /*一直显示*/
+    }
+
+    li:HOVER #div_02 {
+      display: block; /*当鼠标悬停时，显示图片 */
+    }
+  </style>
+  <!-- 预览图片 -->
+
 </body>
 </html>
