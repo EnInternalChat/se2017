@@ -1,20 +1,56 @@
 app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
-  $http.get('js/app/contact/contacts.json').then(function (resp) {
-    $scope.items = resp.data.items;
-    $scope.item = $filter('orderBy')($scope.items, 'first')[0];
-    $scope.item.selected = true;
-  });
+  // $http.get('js/app/contact/contacts.json').then(function (resp) {
+  //   $scope.items = resp.data.items;
+  //   $scope.item = $filter('orderBy')($scope.items, 'first')[0];
+  //   $scope.item.selected = true;
+  // });
 
   $scope.filter = '';
-  $scope.groups = [
-    {name: '管理员'},
-    {name: '总经理'},
-    {name: '程序部'},
-    {name: '财务部'},
-    {name: '业务部'},
-    {name: '市场部'},
-    {name: '开发部'}
-  ];
+  $scope.groups = [];
+  $scope.group_hash = new Array();
+  $scope.items = [];
+
+
+  $http.get('https://ice.garenfeather.cn/EnInternalChat/company/0').then(function(res) {
+    var root_section = res.data.organization;
+    $scope.group_hash[root_section['ID']] = root_section['name'];
+    $scope.groups.push({
+      name: root_section['name'],
+      id: root_section['ID']
+    });
+    $scope.findGroupInTree(root_section['childrenSections']);
+  });
+
+  $http.get('https://ice.garenfeather.cn/EnInternalChat/employees/0').then(function(res) {
+    res.data.forEach((item) => {
+      $scope.items.push({
+        group_id: item['sectionID'],
+        group_name: "",
+        name: item['name'],
+        avatar: "img/" + (item['avatar'] + 1) + ".png",
+        phone: item['phone'][0],
+        email: item['email'][0],
+        leader: item['leader'],
+        status: item['status']
+      })
+    })
+  })
+
+
+  $scope.findGroupInTree = function(children) {
+    if(children.length === 0)
+      return;
+    else {
+      children.forEach((item) => {
+        $scope.group_hash[item['ID']] = item['name'];
+        $scope.groups.push({
+          name: item['name'],
+          id: item['ID']
+        });
+        $scope.findGroupInTree(item['childrenSections']);
+      });
+    }
+  };
 
   $scope.createGroup = function(){
     var group = {name: '新部门'};
@@ -42,16 +78,16 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
   };
 
   $scope.selectGroup = function(item){    
-    angular.forEach($scope.groups, function(item) {
+    $scope.groups.forEach((item) => {
       item.selected = false;
     });
     $scope.group = item;
     $scope.group.selected = true;
-    $scope.filter = item.name;
+    $scope.filter = item.id;
   };
 
   $scope.selectItem = function(item){    
-    angular.forEach($scope.items, function(item) {
+    $scope.items.forEach((item) => {
       item.selected = false;
       item.editing = false;
     });
@@ -68,7 +104,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
   $scope.createItem = function(){
     var item = {
       group: 'Friends',
-      avatar:'img/a0.jpg'
+      avatar:'img/1.png'
     };
     $scope.items.push(item);
     $scope.selectItem(item);
