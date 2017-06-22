@@ -10,7 +10,7 @@ export class API {
   private options_token_json: RequestOptions;
 
   private is_debug: boolean = true;
-  public base_url: string = this.is_debug ? "" : "http://http://118.89.110.77:8080/EnInternalChat";
+  public base_url: string = this.is_debug ? "" : "https://ice.garenfeather.cn/EnInternalChat";
 
   constructor(
     private http: HTTPService,
@@ -61,11 +61,12 @@ export class API {
       this.options_token_json);
   }
 
-  public get_notice() {
+  public get_notice(not_read: boolean) {
     if(this.is_debug)
       return this.http.get(this.base_url + 'assets/data/notices.json', null);
     return this.http.get(this.base_url + '/notifications/received/' 
-      + this.global_data.user_name, null, this.options_token);
+      + not_read ? 'unread/' : 'read/' + this.global_data.user_name,
+      null, this.options_token);
   }
 
   public read_notice(notice_id) {
@@ -99,11 +100,15 @@ export class API {
   }
 
   public get_all_employees(page, limit) {
-      return this.http.get(this.base_url + '/employees/' 
-        + this.global_data.personal.company_id, {
-          page: page,
-          limit: limit
-        })
+    return this.http.get(this.base_url + '/testEmployee', {
+        page: page,
+        limit: limit
+      }, this.options_token);
+      // return this.http.get(this.base_url + '/employees/' 
+      //   + this.global_data.personal.company_id, {
+      //     page: page,
+      //     limit: limit
+      //   }, this.options_token);
   }
 
 }

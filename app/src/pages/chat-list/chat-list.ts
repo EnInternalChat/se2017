@@ -50,7 +50,6 @@ export class ChatList {
     this.update_conversation_list().then(
       () => this.native.stop_loading()).catch(
       () => {
-        console.log('Has some error');
         this.update_conversation_list().then(
           () => this.native.stop_loading());
       });

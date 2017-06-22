@@ -47,13 +47,13 @@
         </ion-option>
       </ion-select> 
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="info.phone[0]">
       <ion-label>{{ui.PersonalPage.tel}}</ion-label>
-      <ion-label class="setting-item-value">{{info.tel}}</ion-label>
+      <ion-label class="setting-item-value">{{info.phone[0]}}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="info.email[0]">
       <ion-label>{{ui.PersonalPage.mail}}</ion-label>
-      <ion-label class="setting-item-value">{{info.mail}}</ion-label>
+      <ion-label class="setting-item-value">{{info.email[0]}}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>{{ui.PersonalPage.notice}}</ion-label>

@@ -38,11 +38,9 @@ export class NewSingleChat {
   }
 
   ionViewDidLoad() {
-    this.get_employee_list(this.navParams.get('group_id'));
-    // this.employee_list.push({ id: 'admin', no: 1 });
-    // this.employee_list.push({ id: 'testuser3', no: 2 });
-    // this.employee_list.push({ id: 'testuser2', no: 6 });
-    // this.employee_list.push({ id: 'testuser', no: 3 });
+    this.native.loading();
+    this.get_employee_list(this.navParams.get('group_id')).then(
+      () => this.native.stop_loading());
     for(let i = 0, n = this.employee_list.length; i < n; i++) {
       if(this.employee_list[i].id == this.global_data.user_name) {
         this.employee_list.splice(i, 1);
@@ -56,7 +54,15 @@ export class NewSingleChat {
     if(group_id == null) {
       return this.api.get_all_employees(this.currentPage, this.limit).then(
         (employees) => {
-
+          employees = JSON.parse(employees);
+          employees.forEach((item) => {
+            if(item['avator'] == 0)
+              item['avator'] = Math.floor(Math.random()*8 + 1);
+            this.employee_list.push({
+              id: item['name'],
+              no: item['avator']
+            });
+          })
         });
     }
     else {

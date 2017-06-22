@@ -20,8 +20,8 @@ import { UIText } from '../../providers/ui_text';
 })
 export class NotificationList {
 
-  read_status_array = ['notice_not_read', 'notice_old'];
-  read_status : string = this.read_status_array[0];
+  status_array = ['notice_not_read', 'notice_old'];
+  read_status : string = this.status_array[0];
 
   public notice_list_not_read : Array<Notice> = [];
   public notice_list_read : Array<Notice> = [];
@@ -35,26 +35,38 @@ export class NotificationList {
   ionViewDidLoad() {
     if(!this.navParams.get('need_load'))
       return;
-    this.notice_list_read = [];
-    this.notice_list_not_read = [];
     this.native.loading();
-    this.update_notice_list().then(
+    this.update_notice_list(true).then(
       () => this.native.stop_loading());
   }
 
-  public update_notice_list(){
-    return this.api.get_notice().then(
+  public update_notice_list(update_all: boolean){
+    let p_unread = this.api.get_notice(true).then(
       (res) => {
-        let new_notice: Notice;
-        for (let i = 0, n = res.length; i < n; i++) {
-          new_notice = new Notice(res[i]);
-          if(new_notice.is_read)
-            this.notice_list_read.push(new_notice);
-          else
-            this.notice_list_not_read.push(new_notice);
-        }
-      }).catch(
-      () => this.native.show_toast("网络连接失败"));
+        res = JSON.parse(res);
+        res.forEach((item) => {
+          this.notice_list_not_read.push(new Notice(item));
+        });
+      });
+    let p_read = this.api.get_notice(false).then(
+      (res) => {
+        res = JSON.parse(res);
+        res.forEach((item) => {
+          this.notice_list_read.push(new Notice(item));
+        });
+      })
+    if(update_all) {
+      return Promise.all([p_read, p_unread]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
+    else if(this.read_status === this.status_array[0]) {
+      return Promise.all([p_unread]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
+    else {
+      return Promise.all([p_read]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
   }
 
   public track_by_id(index: number, notice: Notice) {
@@ -68,30 +80,28 @@ export class NotificationList {
     }
     this.api.read_notice(notice.id).then(
       (res) => {
-        this.update_notice_list();        
+        this.update_notice_list(false);        
       }).catch(
       () => this.native.show_toast("网络连接失败"));
     this.navCtrl.push(NotificationDetail, { notice: notice });
   }
 
   public doRefresh(refresher) {
-    this.notice_list_read = [];
-    this.notice_list_not_read = [];
-    this.update_notice_list().then(
+    this.update_notice_list(false).then(
       () => refresher.complete());
   }
 
   public swipe_event(event) {
     if(event.direction == 2) {
       // 向左滑
-      if(this.read_status_array.indexOf(this.read_status) == 0) {
-        this.read_status = this.read_status_array[1];
+      if(this.status_array.indexOf(this.read_status) == 0) {
+        this.read_status = this.status_array[1];
       }
     }
     else if(event.direction == 4) {
       // 向右滑
-      if(this.read_status_array.indexOf(this.read_status) == 1) {
-        this.read_status = this.read_status_array[0];
+      if(this.status_array.indexOf(this.read_status) == 1) {
+        this.read_status = this.status_array[0];
       }
     }
   }
