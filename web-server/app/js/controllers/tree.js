@@ -90,10 +90,10 @@ app.controller('AbnTestController', function($scope, $timeout) {
       {
         label: '公司',
         children: [
-          {
-            label: '部门',
-            children: ['部门1', '部门2']
-          }
+          // {
+          //   label: '部门',
+          //   children: ['部门1', '部门2']
+          // }
         ]
       }
     ];

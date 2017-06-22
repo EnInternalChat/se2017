@@ -392,6 +392,11 @@ angular.module('app')
                   templateUrl: 'tpl/mail.new.html'
               })
 
+              .state('ui_.new', {
+                  url: '/new',
+                  templateUrl: 'tpl/task.new.html'
+              })
+
               .state('layout', {
                   abstract: true,
                   url: '/layout',
