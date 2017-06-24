@@ -13,7 +13,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter',
 
 
   API.get_company_info().then(function(res) {
-    var root_section = res.data.organization;
+    var root_section = res.organization;
     $scope.group_hash[root_section['ID']] = root_section['name'];
     $scope.groups.push({
       name: root_section['name'],
@@ -23,7 +23,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter',
   });
 
   API.get_all_employees().then(function(res) {
-    res.data.forEach((item) => {
+    res.forEach((item) => {
       $scope.items.push({
         group_id: item['sectionID'],
         group_name: "",

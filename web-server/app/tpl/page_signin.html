@@ -18,7 +18,7 @@
            <input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required>
         </div>
       </div>
-      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>登录</button>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login(user.username, user.password, true)" ng-disabled='form.$invalid'>登录</button>
     </form>
   </div>
   <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>

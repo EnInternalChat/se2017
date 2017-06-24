@@ -6,6 +6,7 @@ angular.module('API.Services', [])
   var has_token = false;
   var loading_dom = null;
   var base_url = "https://ice.garenfeather.cn/EnInternalChat";
+  var user = {};
 
   var obj2param = function(obj) {
     if(!obj)
@@ -80,6 +81,10 @@ angular.module('API.Services', [])
     return deffered.promise;    
   }
 
+  this.user_info = function() {
+    return user;
+  }
+
   this.loading = function() {
     if(!loading_dom) 
       loading_dom = angular.element(document.querySelector('#loading-bg'));
@@ -104,9 +109,12 @@ angular.module('API.Services', [])
         }
       else {
         $localStorage.authenticated = true;
+        has_token = true;
         $localStorage.token = res.headers['x-auth-token'];
         $localStorage.username = username;
         $localStorage.password = pwd;
+        user = res.body;
+        user['username'] = username;
         return { status: true }        
       }
     },
@@ -119,15 +127,23 @@ angular.module('API.Services', [])
   }
 
   this.logout = function() {
-    return post(base_url + '/logout', null);
+    return post(base_url + '/logout', null).then(
+      function(res) {
+        $localStorage.authenticated = false;
+        has_token = false;
+        return true;
+      },
+      function(error) {
+        return true;
+      });
   }
 
   this.get_company_info = function() {
-    return get(base_url + '/company/' + this.user.companyID, null);
+    return get(base_url + '/company/' + user.companyID, null);
   }
 
   this.get_all_employees = function() {
-    return get(base_url + '/employees/' + this.user.companyID, null);
+    return get(base_url + '/employees/' + user.companyID, null);
   }
 
 

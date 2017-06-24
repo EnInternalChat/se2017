@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
-    function(              $scope,   $translate,   $localStorage,   $window ) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$state', 'API',
+    function(              $scope,   $translate,   $localStorage,   $window, $state, API) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -37,6 +37,8 @@ angular.module('app')
           container: false
         }
       }
+
+      $scope.username = "张三";
 
       // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
@@ -73,6 +75,28 @@ angular.module('app')
           return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
       }
 
-      $state.go(access.signin);
+      if($localStorage.authenticated) {
+        API.loading();
+        API.login($localStorage.username, $localStorage.password).then(
+          function(res) {
+            API.stop_loading();
+            if(!res.status)
+              $state.go('access.signin');
+            else
+              $scope.username = $localStorage.username;
+          })
+      }
+      else {
+        $state.go('access.signin');
+      }
+
+      $scope.logout = function() {
+        $localStorage.authenticated = false;
+        API.logout().then(
+          function(res) {
+            if(res)
+              $state.go('access.signin');
+          });
+      }
 
   }]);
