@@ -39,6 +39,7 @@ angular.module('app')
       }
 
       $scope.username = "张三";
+      $scope.avator = 3;
 
       // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {

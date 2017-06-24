@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('API.Services', [])
-.service('API', ['$http', '$q', '$window', '$localStorage', 
+.service('API', ['$http', '$q', '$window', '$localStorage',
   function($http, $q, $window, $localStorage){
   var has_token = false;
   var loading_dom = null;
