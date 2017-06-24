@@ -1,4 +1,5 @@
-app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+app.controller('ContactCtrl', ['$scope', 'API', '$filter', 
+  function($scope, API, $filter) {
   // $http.get('js/app/contact/contacts.json').then(function (resp) {
   //   $scope.items = resp.data.items;
   //   $scope.item = $filter('orderBy')($scope.items, 'first')[0];
@@ -11,7 +12,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
   $scope.items = [];
 
 
-  $http.get('https://ice.garenfeather.cn/EnInternalChat/company/0').then(function(res) {
+  API.get_company_info().then(function(res) {
     var root_section = res.data.organization;
     $scope.group_hash[root_section['ID']] = root_section['name'];
     $scope.groups.push({
@@ -21,7 +22,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
     $scope.findGroupInTree(root_section['childrenSections']);
   });
 
-  $http.get('https://ice.garenfeather.cn/EnInternalChat/employees/0').then(function(res) {
+  API.get_all_employees().then(function(res) {
     res.data.forEach((item) => {
       $scope.items.push({
         group_id: item['sectionID'],
