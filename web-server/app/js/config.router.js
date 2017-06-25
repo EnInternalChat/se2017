@@ -450,7 +450,7 @@ angular.module('app')
                   }
               })
               .state('apps.contact', {
-                  url: '/contact',
+                  url: '/contact?selected_section',
                   templateUrl: 'tpl/apps_contact.html',
                   resolve: {
                       deps: ['uiLoad',

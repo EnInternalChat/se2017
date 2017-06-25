@@ -1,4 +1,4 @@
-app.controller('AbnTestController', function($scope, $timeout, API) {
+app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   var apple_selected, tree;
   $scope.my_data = [];
   $scope.my_tree = tree = {};
@@ -21,11 +21,9 @@ app.controller('AbnTestController', function($scope, $timeout, API) {
   }
 
   $scope.my_tree_handler = function(branch) {
-    var _ref;
-    $scope.output = "此处 " + branch.label;
-    if ((_ref = branch.data) != null ? _ref.description : void 0) {
-      return $scope.output += '(' + branch.data.description + ')';
-    }
+    $scope.item = branch;
+    $scope.get_section_members($scope.item);
+    console.log(branch);
   };
 
   $scope.get_tree_data = function() {
@@ -56,6 +54,7 @@ app.controller('AbnTestController', function($scope, $timeout, API) {
     // }, 1000);
   };
   $scope.try_adding_a_branch = function() {
+    // $state.go('apps.contact', { 'selected_section': 2 });
     var b;
     b = tree.get_selected_branch();
     return tree.add_branch(b, {
@@ -66,6 +65,27 @@ app.controller('AbnTestController', function($scope, $timeout, API) {
       }
     });
   };
+  $scope.get_section_members = function(item) {
+    if(item.is_root) {
+      API.get_all_employees().then(
+        function(res) {
+          item.members_count = res.length;
+        })
+    }
+    else {
+      API.get_section_members(item.ID).then(
+        function(res) {
+          item['members'] = res;
+          for(var i = 0, n = item['members'].length; i < n; i++) {
+            if(item['members'][i].ID === item.leaderID) {
+              item['leader'] = item['members'][i];
+              return;
+            }
+          }
+        });      
+    }
+  }
+  
 
   $scope.get_tree_data();
 

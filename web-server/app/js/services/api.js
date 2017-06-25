@@ -146,5 +146,9 @@ angular.module('API.Services', [])
     return get(base_url + '/employees/' + user.companyID, null);
   }
 
+  this.get_section_members = function(section_id) {
+    return get(base_url + '/employees/' + user.companyID + '/' + section_id, null);
+  }
+
 
 }]);

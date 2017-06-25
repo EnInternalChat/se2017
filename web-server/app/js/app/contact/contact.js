@@ -1,5 +1,5 @@
-app.controller('ContactCtrl', ['$scope', 'API', '$filter', 
-  function($scope, API, $filter) {
+app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
+  function($scope, API, $filter, $stateParams) {
   // $http.get('js/app/contact/contacts.json').then(function (resp) {
   //   $scope.items = resp.data.items;
   //   $scope.item = $filter('orderBy')($scope.items, 'first')[0];
@@ -20,6 +20,10 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter',
       id: root_section['ID']
     });
     $scope.findGroupInTree(root_section['childrenSections']);
+    if($stateParams['selected_section']) {
+      $scope.selectGroup($scope.findGroupInList(
+        parseInt($stateParams.selected_section)));
+    }
   });
 
   API.get_all_employees().then(function(res) {
@@ -53,6 +57,14 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter',
     }
   };
 
+  $scope.findGroupInList = function(id) {
+    for(var i = 0, n = $scope.groups.length; i < n; i++) {
+      if($scope.groups[i].id === id)
+        return $scope.groups[i];
+    }
+    return $scope.groups[0];
+  }
+
   $scope.createGroup = function(){
     var group = {name: '新部门'};
     group.name = $scope.checkItem(group, $scope.groups, 'name');
@@ -78,7 +90,8 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter',
     $scope.groups.splice($scope.groups.indexOf(item), 1);
   };
 
-  $scope.selectGroup = function(item){    
+  $scope.selectGroup = function(item){  
+    console.log(item);  
     $scope.groups.forEach((item) => {
       item.selected = false;
     });
