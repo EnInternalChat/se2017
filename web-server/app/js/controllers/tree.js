@@ -3,6 +3,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   $scope.my_data = [];
   $scope.my_tree = tree = {};
   $scope.editing = false;
+  $scope.members = [{name: 'asd'}, {name: '123'}, {name: 'qwe'}];
 
   apple_selected = function(branch) {
     return $scope.output = " " + branch.label;
@@ -89,6 +90,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   }
   $scope.done_editing = function(item) {
     $scope.editing = false;
+    item.leaderID = item.leader.ID;
   }
 
 

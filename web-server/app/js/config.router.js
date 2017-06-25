@@ -88,7 +88,10 @@ angular.module('app')
                         function( $ocLazyLoad ){
                           return $ocLazyLoad.load('angularBootstrapNavTree').then(
                               function(){
-                                 return $ocLazyLoad.load('js/controllers/tree.js');
+                                return $ocLazyLoad.load('ui.select').then(
+                                  function() {
+                                    return $ocLazyLoad.load('js/controllers/tree.js');
+                                  })
                               }
                           );
                         }
