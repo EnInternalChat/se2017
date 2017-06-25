@@ -48,7 +48,8 @@ app.controller('MailDetailCtrl', ['$scope', 'mails', '$stateParams', function($s
   })
 }]);
 
-app.controller('MailNewCtrl', ['$scope', 'API',function($scope, API) {
+app.controller('MailNewCtrl', ['$scope', 'API',
+  function($scope, API) {
   $scope.title = "";
   $scope.to_list = { data:[] };
   $scope.sections_list = [];
@@ -86,7 +87,8 @@ app.controller('MailNewCtrl', ['$scope', 'API',function($scope, API) {
 
   $scope.send_notice = function() {
     if($scope.to_list.data.length === 0){
-      alert('接收部门不能为空');
+      API.alert('接收部门不能为空', $scope);
+      // alert('接收部门不能为空');
       return;
     }
     else if(!$scope.title || $scope.title === "") {
@@ -100,7 +102,10 @@ app.controller('MailNewCtrl', ['$scope', 'API',function($scope, API) {
     console.log(receivers);
     console.log($scope.title);
     console.log($scope.markdown_editor.value());
-    API.send_notice(receivers, $scope.title, $scope.markdown_editor.value());
+    API.send_notice(receivers, $scope.title, $scope.markdown_editor.value()).then(
+      function(res) {
+        console.log("res: ", res);
+      })
   }
 
   $scope.get_receive_sections();

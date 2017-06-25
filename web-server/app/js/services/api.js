@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('API.Services', [])
-.service('API', ['$http', '$q', '$window', '$localStorage',
-  function($http, $q, $window, $localStorage){
+.service('API', ['$http', '$q', '$window', '$localStorage', '$ngConfirm',
+  function($http, $q, $window, $localStorage, $ngConfirm){
   var has_token = false;
   var loading_dom = null;
   var base_url = "https://ice.garenfeather.cn/EnInternalChat";
@@ -85,6 +85,10 @@ angular.module('API.Services', [])
     return user;
   }
 
+  this.alert = function(text, scope) {
+    $ngConfirm(text, scope);
+  }
+
   this.loading = function() {
     if(!loading_dom) 
       loading_dom = angular.element(document.querySelector('#loading-bg'));
@@ -154,7 +158,7 @@ angular.module('API.Services', [])
     return post(base_url + '/notifications', {
       receivers: receivers,
       title: title,
-      content
+      content: content
     });
   }
 

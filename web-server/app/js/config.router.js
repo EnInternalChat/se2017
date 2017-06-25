@@ -382,7 +382,12 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
-                          return $ocLazyLoad.load('ui.select');
+                          return $ocLazyLoad.load([
+                            'vendor/jquery/simplemde/simplemde.min.css',
+                            'vendor/jquery/simplemde/simplemde.min.js']).then(
+                            function () {
+                              return $ocLazyLoad.load('ui.select');
+                            });
                         }
                       ]
                   }

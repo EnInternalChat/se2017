@@ -2,6 +2,7 @@
 
 
 angular.module('app', [
+    'cp.ngConfirm',
     'ngAnimate',
     'ngCookies',
     'ngResource',
