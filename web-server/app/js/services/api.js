@@ -86,7 +86,19 @@ angular.module('API.Services', [])
   }
 
   this.alert = function(text, scope) {
-    $ngConfirm(text, scope);
+    $ngConfirm({
+      theme: 'material',
+      animation: 'RotateX',
+      closeAnimation: 'RotateXR',
+      animationSpeed: 300,
+      title: text,
+      content: '',
+      scope: scope,
+      buttons: {
+        '确认': function(scope, button) {
+        }
+      }
+    });
   }
 
   this.loading = function() {

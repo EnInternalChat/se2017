@@ -5101,3 +5101,14 @@ a.text-#000000:hover {
     background-color: #7266ba;
   }
 }
+
+.ng-confirm-title-c {
+  text-align: center;
+}
+.ng-confirm-title {
+  color: #434343;
+  font-size: 2.4rem !important;
+}
+.ng-confirm-btn-text {
+  font-size: 1.7rem !important;
+}

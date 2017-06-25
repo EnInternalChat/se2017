@@ -92,7 +92,7 @@ app.controller('MailNewCtrl', ['$scope', 'API',
       return;
     }
     else if(!$scope.title || $scope.title === "") {
-      alert('通知标题不能为空');
+      API.alert('通知标题不能为空');
       return;
     }
     var receivers = [];
