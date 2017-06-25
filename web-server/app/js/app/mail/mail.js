@@ -48,24 +48,62 @@ app.controller('MailDetailCtrl', ['$scope', 'mails', '$stateParams', function($s
   })
 }]);
 
-app.controller('MailNewCtrl', ['$scope', function($scope) {
-  $scope.mail = {
-    to: '',
-    subject: '',
-    content: ''
-  }
-  $scope.tolist = [
-    {name:'程序部',labels:'程序部'},
-    {name: '业务部', labels:'业务部'},
-    {name: '客服部', labels:'客服部'}
-  ];
+app.controller('MailNewCtrl', ['$scope', 'API',function($scope, API) {
+  $scope.title = "";
+  $scope.to_list = { data:[] };
+  $scope.sections_list = [];
+
   $scope.markdown_editor = new SimpleMDE({ 
     element: document.getElementById('markdown-editor'),
     toolbar: [
       "bold", "italic", "strikethrough", "|", 
       "heading-1", "heading-2", "heading-3", "|", 
       "code", "quote", "unordered-list", "ordered-list", "image", "table", "|",
-      "preview"] })
+      "preview"] });
+
+  $scope.tree2list = function(tree) {
+    $scope.sections_list.push({
+      name: tree.name,
+      id: tree.ID
+    })
+    if(tree['childrenSections'].length === 0)
+      return;
+    else {
+      for(var i = 0, n = tree['childrenSections'].length; i < n; i++) {
+        $scope.tree2list(tree['childrenSections'][i]);
+      }
+    }
+  }
+  
+  $scope.get_receive_sections = function() {
+    API.loading();
+    API.get_company_info().then(
+      function(res) {
+        $scope.tree2list(res.organization);
+        API.stop_loading();
+      })
+  };
+
+  $scope.send_notice = function() {
+    if($scope.to_list.data.length === 0){
+      alert('接收部门不能为空');
+      return;
+    }
+    else if(!$scope.title || $scope.title === "") {
+      alert('通知标题不能为空');
+      return;
+    }
+    var receivers = [];
+    $scope.to_list.data.forEach(function(item) {
+      receivers.push(item.id);
+    });
+    console.log(receivers);
+    console.log($scope.title);
+    console.log($scope.markdown_editor.value());
+    API.send_notice(receivers, $scope.title, $scope.markdown_editor.value());
+  }
+
+  $scope.get_receive_sections();
 }]);
 
 angular.module('app').directive('labelColor', function(){

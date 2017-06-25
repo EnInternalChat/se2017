@@ -378,7 +378,14 @@ angular.module('app')
               })
               .state('app.mail.compose', {
                   url: '/compose',
-                  templateUrl: 'tpl/mail.new.html'
+                  templateUrl: 'tpl/mail.new.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load('ui.select');
+                        }
+                      ]
+                  }
               })
 
               .state('ui_.new', {

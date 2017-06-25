@@ -2,7 +2,7 @@
   <!-- header -->
   <div class="wrapper bg-light lter b-b">
     <a ui-sref="app.mail.list" class="btn btn-sm btn-danger w-xs font-bold">返回</a>
-    <a class="btn btn-sm btn-info w-xs font-bold" style="position: absolute;right: 16px">发送</a>
+    <a class="btn btn-sm btn-info w-xs font-bold" style="position: absolute;right: 16px" ng-click="send_notice()">发送</a>
   </div>
   <!-- / header -->
   <div class="wrapper">
@@ -10,15 +10,20 @@
       <div class="form-group">
         <label class="col-lg-2 control-label">接收:</label>
         <div class="col-lg-8">
-          <select ui-jq="chosen" data-placeholder="选择部门" class="form-control" multiple ng-model="mail.to">
-            <option ng-repeat="list in tolist" value="{{list.email}}">{{list.name}} <{{list.email}}></option>
-          </select>
+          <ui-select ng-model="to_list.data" multiple>
+            <ui-select-match placeholder="选择部门">
+              {{$item.name}}
+            </ui-select-match>
+            <ui-select-choices repeat="option in sections_list">
+              <span ng-bind="option.name"></span>
+            </ui-select-choices>
+          </ui-select>
         </div>
       </div>
       <div class="form-group">
         <label class="col-lg-2 control-label">主题:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" ng-model="mail.subject">
+          <input type="text" class="form-control" ng-model="title">
         </div>
       </div>
       <div class="form-group">

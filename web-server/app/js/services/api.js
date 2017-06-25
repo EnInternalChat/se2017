@@ -150,5 +150,13 @@ angular.module('API.Services', [])
     return get(base_url + '/employees/' + user.companyID + '/' + section_id, null);
   }
 
+  this.send_notice = function(receivers, title, content) {
+    return post(base_url + '/notifications', {
+      receivers: receivers,
+      title: title,
+      content
+    });
+  }
+
 
 }]);
