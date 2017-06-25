@@ -55,11 +55,11 @@
 </div>
 <div class="col">
     <div class="vbox">
-      <div class="wrapper-sm b-b" ng-hide="item.is_root">
-        <div class="m-t-n-xxs m-b-n-xxs m-l-xs">
-          <a class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
-          <a class="btn btn-xs btn-default" ng-hide="item.editing" ng-click="editItem(item)">编辑</a>
-          <a class="btn btn-xs btn-default" ng-show="item.editing" ng-click="doneEditing(item)">确定</a>
+      <div class="wrapper-sm b-b" ng-hide="!item || item.is_root">
+        <div class="m-t-n-xxm m-b-n-xxm m-l-xm">
+          <a class="btn btn-xm btn-default pull-right" ng-click="delete_item(item)"><i class="fa fa-times"></i></a>
+          <a class="btn btn-xm btn-default" ng-hide="editing" ng-click="edit_item(item)">编辑</a>
+          <a class="btn btn-xm btn-default" ng-show="editing" ng-click="done_editing(item)">确定</a>
         </div>
       </div>
       <div class="row-row">
@@ -75,44 +75,47 @@
               </div>
               <!-- fields -->
               <div class="form-horizontal" style="font-size: 1.7rem;">
-                <div class="form-group m-b-sm" ng-hide="!item.leader && !item.editing">
+                <div class="form-group m-b-sm" ng-hide="!item.leader && !editing">
                   <label class="col-sm-3 control-label">部长</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.leader.name}}</p>
-                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="item.leaderID" >
+                    <p class="form-control-static" ng-hide="editing">{{item.leader.name}}</p>
+                    <input type="text" placeholder="必填" class="form-control" ng-show="editing" ng-model="item.leaderID" >
                   </div>
                 </div>
-                <div class="form-group m-b-sm" ng-hide="(!item && !item.editing) || item.is_root">
+                <div class="form-group m-b-sm" ng-hide="!item || item.is_root">
                   <label class="col-sm-3 control-label">成员人数</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.membersID.length}}</p>
+                    <p class="form-control-static">{{item.membersID.length}}</p>
                   </div>
                 </div>
-                <div class="form-group m-b-sm" ng-hide="(!item && !item.editing) || item.is_root">
+                <div class="form-group m-b-sm" ng-hide="!item || item.is_root">
                   <label class="col-sm-3 control-label">子部门数</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.children.length}}</p>
+                    <p class="form-control-static">{{item.children.length}}</p>
                   </div>
                 </div>
-                <div class="form-group m-b-sm" ng-hide="(!item && !item.editing) || item.is_root">
+                <div class="form-group m-b-sm" ng-hide="(!item && !editing) || item.is_root">
                   <label class="col-sm-3 control-label">描述</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>
-                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="group_hash[item.group_id]" disabled>
+                    <p class="form-control-static" ng-hide="editing">{{item.note}}</p>
+                    <input type="text" placeholder="必填" class="form-control" ng-show="editing" ng-model="item.note">
                   </div>
                 </div>
                 <div class="form-group m-b-sm" ng-show="item.is_root">
                   <label class="col-sm-3 control-label">公司介绍</label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" ng-hide="item.editing">{{item.introduction}}</p>
+                    <p class="form-control-static" ng-hide="editing">{{item.introduction}}</p>
                 </div>              
               </div>
               <div class="form-group m-b-sm" ng-show="item.is_root">
                 <label class="col-sm-3 control-label">公司人数</label>
                 <div class="col-sm-9">
-                  <p class="form-control-static" ng-hide="item.editing">{{item.members_count}}</p>
+                  <p class="form-control-static" ng-hide="editing">{{item.members_count}}</p>
                 </div>              
-              </div>              
+              </div>
+              <div class="input-group-btn" ng-hide="!item || item.is_root" style="text-align: center;padding: 16px 0px 0px 16px;">
+                <button class="btn btn-success btn-lg" type="button" ng-click="section_detail(item)">查看部门详情</button>
+              </div>             
             </div>
           </div>
         </div>

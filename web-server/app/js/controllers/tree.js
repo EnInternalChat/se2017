@@ -2,12 +2,14 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   var apple_selected, tree;
   $scope.my_data = [];
   $scope.my_tree = tree = {};
+  $scope.editing = false;
 
   apple_selected = function(branch) {
     return $scope.output = " " + branch.label;
   };
 
   format_tree_data = function(children) {
+    $scope.editing = false;
     children['label'] = children['name'];
     children['children'] = children['childrenSections'];
     if(children['children'].length === 0) {
@@ -43,18 +45,9 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   $scope.try_async_load = function() {
     $scope.my_data = [];
     $scope.doing_async = true;
-    // return $timeout(function() {
-    //   if (Math.random() < 0.5) {
-    //     $scope.my_data = treedata_avm;
-    //   } else {
-    //     $scope.my_data = treedata_geography;
-    //   }
-    //   $scope.doing_async = false;
-    //   return tree.expand_all();
-    // }, 1000);
+    $scope.doing_async = false;
   };
   $scope.try_adding_a_branch = function() {
-    // $state.go('apps.contact', { 'selected_section': 2 });
     var b;
     b = tree.get_selected_branch();
     return tree.add_branch(b, {
@@ -84,8 +77,20 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
           }
         });      
     }
+  };
+  $scope.section_detail = function(item) {
+    $state.go('apps.contact', { 'selected_section': item.ID });
+  };
+  $scope.delete_item = function(item) {
+
   }
-  
+  $scope.edit_item = function(item) {
+    $scope.editing = true;
+  }
+  $scope.done_editing = function(item) {
+    $scope.editing = false;
+  }
+
 
   $scope.get_tree_data();
 
