@@ -222,6 +222,11 @@ angular.module('API.Services', [])
       + section_id);
   }
 
+  this.update_section_info = function(section_id, info) {
+    return post(base_url + '/company/sections/' + user.companyID + '/'
+      + section_id, info);
+  }
+
   this.get_all_employees = function() {
     return get(base_url + '/employees/' + user.companyID, null);
   }

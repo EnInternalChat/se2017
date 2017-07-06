@@ -48,16 +48,20 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
     $scope.doing_async = true;
     $scope.doing_async = false;
   };
-  $scope.try_adding_a_branch = function() {
-    var b;
-    b = tree.get_selected_branch();
-    return tree.add_branch(b, {
-      label: $scope.new_name,
-      data: {
-        something: 42,
-        "else": 43
-      }
-    });
+  $scope.add_section = function() {
+    var parent = tree.get_selected_branch();
+    if(!parent || parent.is_root)
+      API.alert('请先选中该部门的所属部门', $scope, function(){});
+    else {
+      API.loading();
+      API.new_section(parent.ID, $scope.new_name, '').then(function(res) {
+        API.stop_loading();
+        tree.add_branch(parent, {
+          label: $scope.new_name,
+          data: res.body
+        })
+      })
+    }
   };
   $scope.get_section_members = function(item) {
     if(item.is_root) {
@@ -84,12 +88,12 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   };
   $scope.delete_item = function(item) {
     if(item.children.length > 0 || item.membersID.length > 0) {
-      API.alert('子部门或成员不为空，无法删除该部门');
+      API.alert('子部门或成员不为空\n无法删除该部门', $scope, function(){});
     }
     else {
       API.alert('确认删除该部门？', $scope, function() {
         API.delete_section().then(function(res) {
-          
+
         })
       })
     }
@@ -98,8 +102,17 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
     $scope.editing = true;
   }
   $scope.done_editing = function(item) {
-    $scope.editing = false;
-    item.leaderID = item.leader.ID;
+    API.alert('确认保存修改？', $scope, function() {
+      API.loading();
+      API.update_section_info(item.ID, {
+        name: item.name,
+        description: item.note,
+        leaderID: item.leader.ID
+      }).then(function(res) {
+        $scope.editing = false;
+        item.leaderID = item.leader.ID;
+      })
+    })
   }
 
 

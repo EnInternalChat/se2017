@@ -29,7 +29,7 @@
           <div class="input-group">
             <input type="text" class="form-control input-sm" ng-model="new_name" placeholder="新部门" required>
             <span class="input-group-btn">
-              <button class="btn btn-success btn-sm" type="button" ng-click="try_adding_a_branch()" ng-disabled="label.$invalid">添加部门</button>
+              <button class="btn btn-success btn-sm" type="button" ng-click="add_section()" ng-disabled="label.$invalid">添加部门</button>
             </span>
           </div>
         </form>
@@ -67,10 +67,9 @@
           <div class="cell-inner">
             <div class="wrapper-lg">
               <div class="hbox h-auto m-b-lg">
-                <div class="col text-center w-sm">
-                </div>
-                <div class="col v-middle h1 font-thin">
-                  <div>{{item.name}}</div>
+                <div class="col v-middle h1 font-thin" style="text-align: center;">
+                  <div ng-hide="editing">{{item.name}}</div>
+                  <input type="text" placeholder="必填" class="form-control" ng-show="editing" ng-model="item.name" style="height: 48px;width: 50%;font-size: 2.0rem;display: inline-block;text-align: center;">
                 </div>
               </div>
               <!-- fields -->
