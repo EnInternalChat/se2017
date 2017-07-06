@@ -23,9 +23,6 @@
           </div>
         </div>
       </div>
-      <div class="wrapper b-t">
-        <a href class="btn btn-sm btn-default" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新建部门</a>
-      </div>
     </div>
   </div>
   <!-- /column -->
@@ -91,7 +88,14 @@
                   <label class="col-sm-3 control-label">部门</label>
                   <div class="col-sm-9">
                     <p class="form-control-static" ng-hide="item.editing">{{group_hash[item.group_id]}}</p>
-                    <input type="text" placeholder="必填" class="form-control" ng-show="item.editing" ng-model="group_hash[item.group_id]" disabled>
+                    <ui-select ng-model="item.group_id" ng-show="item.editing">
+                      <ui-select-match placeholder="选择所属部门">
+                        <span ng-bind="$select.selected.name"></span>
+                      </ui-select-match>
+                      <ui-select-choices repeat="option.id as option in groups">
+                        <span ng-bind="option.name"></span>
+                      </ui-select-choices>
+                    </ui-select>
                   </div>
                 </div>
                 <div class="form-group m-b-sm" ng-hide="!item.phone && !item.editing">

@@ -468,9 +468,11 @@ angular.module('app')
                   url: '/contact?selected_section',
                   templateUrl: 'tpl/apps_contact.html',
                   resolve: {
-                      deps: ['uiLoad',
-                        function( uiLoad ){
-                          return uiLoad.load( ['js/app/contact/contact.js'] );
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load([
+                            'js/app/contact/contact.js', 
+                            'ui.select'] );
                       }]
                   }
               })

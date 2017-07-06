@@ -29,6 +29,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
   API.get_all_employees().then(function(res) {
     res.forEach((item) => {
       $scope.items.push({
+        id: item['ID'],
         group_id: item['sectionID'],
         group_name: "",
         name: item['name'],
@@ -65,12 +66,6 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
     return $scope.groups[0];
   }
 
-  $scope.createGroup = function(){
-    var group = {name: '新部门'};
-    group.name = $scope.checkItem(group, $scope.groups, 'name');
-    $scope.groups.push(group);
-  };
-
   $scope.checkItem = function(obj, arr, key){
     var i=0;
     angular.forEach(arr, function(item) {
@@ -91,7 +86,6 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
   };
 
   $scope.selectGroup = function(item){  
-    console.log(item);  
     $scope.groups.forEach((item) => {
       item.selected = false;
     });
@@ -110,19 +104,32 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
   };
 
   $scope.deleteItem = function(item){
-    $scope.items.splice($scope.items.indexOf(item), 1);
-    $scope.item = $filter('orderBy')($scope.items, 'first')[0];
-    if($scope.item) $scope.item.selected = true;
+    API.alert('确认删除该用户吗？', $scope, function() {
+      API.delete_employee($scope.group.id, item.id).then(function(res) {
+        console.log(res);
+      })
+      // $scope.items.splice($scope.items.indexOf(item), 1);
+      // $scope.item = $filter('orderBy')($scope.items, 'first')[0];
+      // if($scope.item) {
+      //   $scope.item.selected = true;
+      // }
+    })
   };
 
   $scope.createItem = function(){
-    var item = {
-      group: 'Friends',
-      avatar:'img/1.png'
-    };
-    $scope.items.push(item);
-    $scope.selectItem(item);
-    $scope.item.editing = true;
+    API.alert_prompt('新建用户', '用户姓名', function(name) {
+      API.new_employee($scope.group.id, name, "部员").then(function(res){
+        console.log(res);
+      })
+      // var item = {
+      //   name: name
+      //   group_id: $scope.group.id,
+      //   avatar:'img/1.png'
+      // };
+      // $scope.items.push(item);
+      // $scope.selectItem(item);
+      // $scope.item.editing = true;
+    })
   };
 
   $scope.editItem = function(item){
@@ -132,7 +139,17 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
   };
 
   $scope.doneEditing = function(item){
-    item.editing = false;
+    API.alert('确认保存修改?', $scope, function() {
+      API.loading();
+      API.update_employee_info($scope.group.id, item.id, {
+        email1: item.email,
+        phone1: item.phone,
+        newSectionID: item.group_id
+      }).then(function(res) {
+        API.stop_loading();
+        item.editing = false;
+      });      
+    });
   };
 
 }]);

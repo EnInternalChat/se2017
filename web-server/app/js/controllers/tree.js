@@ -44,7 +44,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   }
 
   $scope.try_async_load = function() {
-    $scope.my_data = [];
+    // $scope.my_data = [];
     $scope.doing_async = true;
     $scope.doing_async = false;
   };
@@ -83,7 +83,16 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
     $state.go('apps.contact', { 'selected_section': item.ID });
   };
   $scope.delete_item = function(item) {
-
+    if(item.children.length > 0 || item.membersID.length > 0) {
+      API.alert('子部门或成员不为空，无法删除该部门');
+    }
+    else {
+      API.alert('确认删除该部门？', $scope, function() {
+        API.delete_section().then(function(res) {
+          
+        })
+      })
+    }
   }
   $scope.edit_item = function(item) {
     $scope.editing = true;
