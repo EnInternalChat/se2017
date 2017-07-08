@@ -16,7 +16,7 @@ export class API {
 
   constructor(
     private http: HTTPService,
-    private global_data: AppGlobal) {
+    private data: AppGlobal) {
     this.options = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded",
@@ -32,14 +32,14 @@ export class API {
     this.options_token = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded",
-        "x-auth-token": this.global_data.token,
+        "x-auth-token": this.data.token,
         "Access-Control-Allow-Origin": "*"
       })
     });  
     this.options_token_json = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/json",
-        "x-auth-token": this.global_data.token,
+        "x-auth-token": this.data.token,
         "Access-Control-Allow-Origin": "*"
       })
     }); 
@@ -49,14 +49,14 @@ export class API {
     this.options_token = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded",
-        "x-auth-token": this.global_data.token,
+        "x-auth-token": this.data.token,
         "Access-Control-Allow-Origin": "*"
       })
     });
     this.options_token_json = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/json",
-        "x-auth-token": this.global_data.token,
+        "x-auth-token": this.data.token,
         "Access-Control-Allow-Origin": "*"
       })
     }); 
@@ -75,16 +75,16 @@ export class API {
   }
 
   public signin(user, token) {
-    this.global_data.set_avator_no(user['avatar']);
-    this.global_data.user_name = user['username'];
-    this.global_data.user_id = user['ID'];
-    this.global_data.company_id = user['companyID'];
-    this.global_data.section_id = user['sectionID'];
-    this.global_data.token = token;
+    this.data.set_avator_no(user['avatar']);
+    this.data.user_name = user['username'];
+    this.data.user_id = user['ID'];
+    this.data.company_id = user['companyID'];
+    this.data.section_id = user['sectionID'];
+    this.data.token = token;
     this.update_token();
     this.get_personal_info().then((res) => {
-      this.global_data.personal = res;
-      this.global_data.job = (res.leader ? '部长' : '部员');
+      this.data.personal = res;
+      this.data.job = (res.leader ? '部长' : '部员');
     })
   }
 
@@ -93,11 +93,11 @@ export class API {
       // return this.http.get(this.base_url + 'assets/data/notices.json', null);
     if(not_read) {
       return this.http.get(this.base_url + '/notifications/received/unread/' 
-        + this.global_data.user_id, null, this.options_token);
+        + this.data.user_id, null, this.options_token);
     }
     else {
       return this.http.get(this.base_url + '/notifications/received/read/' 
-        + this.global_data.user_id, null, this.options_token);      
+        + this.data.user_id, null, this.options_token);      
     }
   }
 
@@ -106,9 +106,20 @@ export class API {
       null, this.options_token);
   }
 
+  public get_tasks(is_doing: boolean) {
+    if(is_doing) {
+      return this.http.get(this.base_url + '/tasks/working/' + 
+        this.data.company_id + '/' + this.data.user_id, null, this.options_token);      
+    }
+    else {
+      return this.http.get(this.base_url + '/tasks/over/' +
+        this.data.company_id + '/' + this.data.user_id, null, this.options_token);
+    }
+  }
+
   public get_tasks_type() {
     return this.http.get(this.base_url + '/tasks/all/' 
-      + this.global_data.personal.company_id, null, this.options_token);
+      + this.data.personal.company_id, null, this.options_token);
   }
 
   public start_task(task_id, comment) {
@@ -127,27 +138,29 @@ export class API {
   }
 
   public get_personal_info() {
-    return this.http.get(this.base_url + '/employees/' + this.global_data.company_id
-      + '/' + this.global_data.section_id + '/' + this.global_data.user_id, 
+    return this.http.get(this.base_url + '/employees/' + this.data.company_id
+      + '/' + this.data.section_id + '/' + this.data.user_id, 
       null, this.options_token);
   }
 
   public update_personal(info) {
-    return this.http.post(this.base_url + '/employees/' + this.global_data.company_id
-      + '/' + this.global_data.section_id + '/' + this.global_data.user_id, 
+    return this.http.post(this.base_url + '/employees/' + this.data.company_id
+      + '/' + this.data.section_id + '/' + this.data.user_id, 
       info, this.options_token);
   }
 
   public get_all_employees(page, limit) {
       return this.http.get(this.base_url + '/employees/' 
-        + this.global_data.company_id, {
+        + this.data.company_id, {
           page: page,
           limit: limit
         }, this.options_token);
   }
 
-  public get_tasks(is_doing: boolean) {
-    return this.http.get(this.base_url + '/tasks/doing', {}, this.options_token);
+  public get_group_sections() {
+    return this.http.get(this.base_url + '/company/sections/0/0', null, this.options_token);
   }
+
+
 
 }

@@ -3,7 +3,7 @@ import { NavController, NavParams, Config, Events } from 'ionic-angular';
 
 import { TaskDetail } from '../task-detail/task-detail';
 import { NewTask } from '../new-task/new-task';
-import { HTTPService } from '../../providers/http_helper';
+import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
@@ -36,15 +36,15 @@ export class TaskList {
               public navParams: NavParams,
               public config: Config,
               public events: Events,
-              public web_helper: HTTPService,
+              public api: API,
               public native: NativeServiceHelper,
-              public global_data: AppGlobal) {
+              public data: AppGlobal) {
   }
 
   ionViewDidLoad() {
     if(!this.navParams.get('need_load')) {
-      this.copy_list(this.global_data.task_cache['list_not_done'], this.tasks_list_not_done);
-      this.copy_list(this.global_data.task_cache['list_done'], this.tasks_list_done);
+      this.copy_list(this.data.task_cache['list_not_done'], this.tasks_list_not_done);
+      this.copy_list(this.data.task_cache['list_done'], this.tasks_list_done);
       return;
     }
     this.currentPage = 0;
@@ -52,15 +52,15 @@ export class TaskList {
     this.tasks_list_not_done = [];
     this.tasks_list_done = [];
     this.native.loading("请稍候...");
-    this.loadList("tasks_not_done").then(
+    this.update_tasks_list(true).then(
       () => this.native.stop_loading());
   }
 
   ionViewWillUnload() {
-    this.global_data.task_cache['list_not_done'] = [];
-    this.global_data.task_cache['list_done'] = [];
-    this.copy_list(this.tasks_list_not_done, this.global_data.task_cache['list_not_done']);
-    this.copy_list(this.tasks_list_done, this.global_data.task_cache['list_done']);
+    this.data.task_cache['list_not_done'] = [];
+    this.data.task_cache['list_done'] = [];
+    this.copy_list(this.tasks_list_not_done, this.data.task_cache['list_not_done']);
+    this.copy_list(this.tasks_list_done, this.data.task_cache['list_done']);
   }
 
   ionViewDidEnter() {
@@ -97,26 +97,31 @@ export class TaskList {
     }
   }
 
-
-  public loadList(which_list: string): Promise<any> {
-    return this.web_helper.get("assets/data/tasks.json", null).then(
+  public update_tasks_list(update_all: boolean) {
+    let p_not_done = this.api.get_tasks(true).then(
+      (res) =>  {
+        res.forEach((item) => {
+          this.tasks_list_not_done.push(new Task(item));
+        })
+      });
+    let p_done = this.api.get_tasks(false).then(
       (res) => {
-        this.hasNextPage = (res.length >= this.limit);
-        if(this.hasNextPage)
-          this.currentPage++;
-        for (let i = 0, n = res.length; i < n; i++) {
-          let new_task = new Task(res[i]);
-          if(new_task.over)
-            this.tasks_list_done.push(new_task);
-          else
-            this.tasks_list_not_done.push(new_task);
-        }
-        console.log("list_not_done: ", this.tasks_list_not_done);
-        console.log("list_done: ", this.tasks_list_done);
-        return true;
-      },
-      (error) => this.native.show_toast("网络连接异常！"));
-
+        res.forEach((item) => {
+          this.tasks_list_done.push(new Task(item));
+        })
+      });
+    if(update_all) {
+      return Promise.all([p_done, p_not_done]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
+    else if(this.task_status === this.task_status_array[0]) {
+      return Promise.all([p_not_done]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
+    else {
+      return Promise.all([p_done]).catch(
+        () => this.native.show_toast("网络连接失败"));
+    }
   }
 
   public doRefresh(refresher) {
@@ -124,18 +129,9 @@ export class TaskList {
     this.hasNextPage = true;
     this.tasks_list_done = [];
     this.tasks_list_not_done = [];
-    this.loadList("tasks_not_done").then(
+    this.update_tasks_list(false).then(
       () => refresher.complete());
-    setTimeout(() => refresher.complete(), 10000);
-  }
-
-  public loadMore(infiniteScroll) {
-    if(!this.hasNextPage) {
-      infiniteScroll.complete();
-      return;
-    }
-    this.loadList("tasks_not_done").then(
-      () => infiniteScroll.complete());
+    setTimeout(() => refresher.complete(), 5000);
   }
 
 }

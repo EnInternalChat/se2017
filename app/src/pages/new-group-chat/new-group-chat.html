@@ -23,12 +23,9 @@
 <ion-content>
 
   <ion-list class="sections-list">
-    <ion-list-header class="company-name">
-    {{company_name}}
-    </ion-list-header>
-    <ion-item *ngFor="let item of sections; index as i;" class="section-item">
+    <ion-item *ngFor="let item of sections" class="section-item">
       <ion-label class="section-depth-{{item.depth}}">{{item.name}}</ion-label>
-      <ion-checkbox color="primary" [(ngModel)]="item.checked" (click)="check_change(item, i)" [disabled]="item.checked && i !== choose_index"></ion-checkbox>
+      <ion-checkbox color="primary" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
   </ion-list>
 

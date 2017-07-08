@@ -17,17 +17,6 @@ page-new-group-chat {
     .item-block:last-child {
       border-bottom: none;
     }
-    .company-name {
-      margin-bottom: 0px;
-      padding-left: 16px;
-      min-height: 4.5rem;
-      border: none;
-      font-size: 2.4rem;
-      color: map-get($colors, primary_dark);
-      text-transform: none;
-      font-weight: 400;
-      letter-spacing: 0.1rem;
-    }
   }
 
   .section-item {
