@@ -8,11 +8,10 @@ export class Notice {
   public is_read: boolean;
 
   constructor(json: any) {
-    this.id = json["notificationID"];
-    this.send_person = json["sendPerson"];
-    this.send_time = json["sendTime"];
+    this.id = json["ID"];
+    this.send_person = json["senderName"];
+    this.send_time = json["sentTime"];
     this.title = json["title"];
     this.content = json["content"];
-    this.is_read = <boolean>json["read"];  
   }
 }

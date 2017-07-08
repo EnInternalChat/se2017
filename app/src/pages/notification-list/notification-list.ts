@@ -87,10 +87,6 @@ export class NotificationList {
     }
   }
 
-  public track_by_id(index: number, notice: Notice) {
-    return notice.id;
-  }
-
   public read_notice(notice : Notice) {
     if(notice.is_read) {
       this.navCtrl.push(NotificationDetail, { notice: notice });

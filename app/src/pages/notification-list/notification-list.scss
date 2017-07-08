@@ -47,13 +47,13 @@ page-notification-list {
     }
     .notice-info {
       width: 95%;
-      padding-right: 4%;
+      padding: 6px 4% 6px 0;
       display: inline-block;
       .notice-person {
         width: 30%;
         display: inline-block;
         color: map-get($colors, primary_text);
-        font-size: 1.4rem;
+        font-size: 1.6rem;
       }
       .notice-time {
         width: 70%;
@@ -64,6 +64,7 @@ page-notification-list {
       }
       .notice-content {
         color: map-get($colors, third_text);
+        padding-top: 4px;
         font-size: 1.6rem;
         text-overflow: ellipsis; // 让超出的用...实现
         white-space: nowrap; // 禁止换行
@@ -74,7 +75,7 @@ page-notification-list {
       width: 5%;
       display: inline-block;
       position: absolute;
-      top: 20%;
+      top: 25%;
     }
   }
 

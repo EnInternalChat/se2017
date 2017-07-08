@@ -91,9 +91,14 @@ export class API {
   public get_notices(not_read: boolean) {
     // if(this.is_debug)
       // return this.http.get(this.base_url + 'assets/data/notices.json', null);
-    return this.http.get(this.base_url + '/notifications/received/' 
-      + not_read ? 'unread/' : 'read/' + this.global_data.user_id,
-      null, this.options_token);
+    if(not_read) {
+      return this.http.get(this.base_url + '/notifications/received/unread/' 
+        + this.global_data.user_id, null, this.options_token);
+    }
+    else {
+      return this.http.get(this.base_url + '/notifications/received/read/' 
+        + this.global_data.user_id, null, this.options_token);      
+    }
   }
 
   public read_notice(notice_id) {
