@@ -6,6 +6,7 @@ import { Notice } from '../../providers/notification';
 import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { UIText } from '../../providers/ui_text';
+import { AppGlobal } from '../../providers/global_data';
 
 /**
  * Generated class for the NotificationList page.
@@ -29,28 +30,45 @@ export class NotificationList {
               public navParams: NavParams,
               public api: API,
               public ui: UIText,
-              public native: NativeServiceHelper) {
+              public native: NativeServiceHelper,
+              public global_data: AppGlobal) {
   }
 
   ionViewDidLoad() {
-    if(!this.navParams.get('need_load'))
+    if(!this.navParams.get('need_load')) {
+      this.copy_list(this.global_data.notice_cache['not_read'], this.notice_list_not_read);
+      this.copy_list(this.global_data.notice_cache['read'], this.notice_list_read);
       return;
+    }
     this.native.loading();
     this.update_notice_list(true).then(
       () => this.native.stop_loading());
   }
 
+  ionViewWillUnload() {
+    this.global_data.notice_cache['not_read'] = [];
+    this.global_data.notice_cache['read'] = [];
+    this.copy_list(this.notice_list_not_read, this.global_data.notice_cache['not_read']);
+    this.copy_list(this.notice_list_read, this.global_data.notice_cache['read']);
+  }
+
+  public copy_list(source, dst) {
+    source.forEach((item) => {
+      dst.push(item);
+    });
+  }
+
   public update_notice_list(update_all: boolean){
     let p_unread = this.api.get_notices(true).then(
       (res) => {
-        res = JSON.parse(res);
+        // res = JSON.parse(res);
         res.forEach((item) => {
           this.notice_list_not_read.push(new Notice(item));
         });
       });
     let p_read = this.api.get_notices(false).then(
       (res) => {
-        res = JSON.parse(res);
+        // res = JSON.parse(res);
         res.forEach((item) => {
           this.notice_list_read.push(new Notice(item));
         });
@@ -87,8 +105,11 @@ export class NotificationList {
   }
 
   public doRefresh(refresher) {
+    this.notice_list_read = [];
+    this.notice_list_not_read = [];
     this.update_notice_list(false).then(
       () => refresher.complete());
+    setTimeout(() => refresher.complete(), 5000);
   }
 
   public swipe_event(event) {

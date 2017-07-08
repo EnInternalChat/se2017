@@ -15,10 +15,16 @@ export class AppGlobal {
   private _language: AppLanguage;
 
   public job : string = "管理员";
+  public user_id: string;
+  public company_id: string;
+  public section_id: string;
+  public password: string;
   public token: string;
+  
   public personal: any;
-
   public conversation_list: Array<Conversation> = [];
+  public task_cache: any = {};
+  public notice_cache: any = {};
 
   public constructor(
     private storage: StorageHelper,

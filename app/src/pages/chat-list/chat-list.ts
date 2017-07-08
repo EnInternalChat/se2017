@@ -42,6 +42,10 @@ export class ChatList {
   }
 
   ionViewDidLoad() {
+    if(!this.navParams.get('need_load')) {
+      this.con_list = this.global_data.conversation_list;
+      return;
+    }
     this.con_list = this.global_data.conversation_list;
     this.event_func = (msg: any) => this.onReceiveMsg(msg);
     if(!this.navParams.get('need_load'))
@@ -105,6 +109,7 @@ export class ChatList {
   public doRefresh(refresher) {
     this.update_conversation_list().then(
       () => refresher.complete());
+    setTimeout(() => refresher.complete(), 10000);
   }
 
   public conversation_detail(conversation) {

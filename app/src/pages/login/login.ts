@@ -65,24 +65,20 @@ export class Login {
             this.password_is_md5 = true;
         });
       }
-      this.username = this.global_data.user_name;        
+      this.username = this.global_data.user_name;
+      return true;        
+    }).then(() => {
+      this.storage.read_local_info("auto_login", false).then((value) => {
+        this.auto_login = value;
+        if(this.auto_login)
+          this.on_login();
+      });      
     });
-    this.storage.read_local_info("auto_login", false).then((value) => {
-      this.auto_login = value;
-      if(this.auto_login)
-        this.on_login();
-    });
-  }
-
-  print_value() {
-    console.log("remember_pass: " + this.remember_password);
-    console.log("auto_login: " + this.auto_login);
-    console.log("username: " + this.username);
-    console.log("password: " + this.password);
   }
 
   on_login() {
-    if(this.username == "" || this.password == "") {
+    if(!this.username || !this.password 
+      || this.username == "" || this.password == "") {
       this.native.show_toast("用户名和密码不能为空", 2000, "bottom");
       return;  
     }
@@ -96,15 +92,23 @@ export class Login {
     console.log("md5: ", password_md5);
     this.native.loading();
     this.api.login(this.username, password_md5).then(
-      (data) => {
-        if(this.remember_password || this.auto_login) {
-          this.storage.storage_info("username", this.username);
-          this.storage.storage_info("password", password_md5);
+      (res) => {
+        if(!res.body.status) {
+          this.native.stop_loading();
+          this.native.show_toast(res.body.info);
+          return true;
         }
-        this.global_data.user_name = this.username;
-        this.api.update_token();
-        // this.native.stop_loading();
-        // this.nav_ctrl.push(BasisPage);
+        else {
+          if(this.remember_password || this.auto_login) {
+            this.storage.storage_info("username", this.username);
+            this.storage.storage_info("password", password_md5);
+          }
+          this.global_data.password = password_md5;
+          res.body['username'] = this.username;
+          this.api.signin(res.body, res.headers.get('x-auth-token'));
+        }
+        this.native.stop_loading();
+        this.nav_ctrl.push(BasisPage);
         return true;
       },
       (error) => {
@@ -128,7 +132,7 @@ export class Login {
       })
       .then(
       (data) => {
-          this.setAlias(this.username);
+          this.chat_service.set_alias(this.username);
           this.chat_service.login(this.username, '123456').then(
             (data) => {
               this.native.stop_loading();
@@ -137,15 +141,6 @@ export class Login {
             },
             (error) => console.log("登录失败"));
         });
-  }
-
-
-  setAlias(alias) {
-    if (alias && alias.trim() != '') {
-      window.plugins.jPushPlugin.setAlias(alias);
-    }
-    else 
-      alert('Alias不能为空');
   }
 
   remember_password_change() {

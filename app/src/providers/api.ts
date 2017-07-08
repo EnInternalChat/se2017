@@ -5,31 +5,42 @@ import { Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class API {
-  private options_json: RequestOptions;
+
+  private options: RequestOptions;
   private options_token: RequestOptions;
+  private options_json: RequestOptions;  
   private options_token_json: RequestOptions;
 
-  private is_debug: boolean = true;
-  public base_url: string = this.is_debug ? "" : "https://ice.garenfeather.cn/EnInternalChat";
+  private is_debug: boolean = false;
+  public base_url: string = this.is_debug ? "" : "https://t.garenfeather.cn/EnInternalChat";
 
   constructor(
     private http: HTTPService,
     private global_data: AppGlobal) {
+    this.options = new RequestOptions({
+      headers: new Headers({
+        "Content-type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*"
+      })
+    });
     this.options_json = new RequestOptions({
       headers: new Headers({
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       })
     });
     this.options_token = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded",
-        "x-auth-token": this.global_data.token
+        "x-auth-token": this.global_data.token,
+        "Access-Control-Allow-Origin": "*"
       })
     });  
     this.options_token_json = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/json",
-        "x-auth-token": this.global_data.token
+        "x-auth-token": this.global_data.token,
+        "Access-Control-Allow-Origin": "*"
       })
     }); 
   }
@@ -38,13 +49,15 @@ export class API {
     this.options_token = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/x-www-form-urlencoded",
-        "x-auth-token": this.global_data.token
+        "x-auth-token": this.global_data.token,
+        "Access-Control-Allow-Origin": "*"
       })
     });
     this.options_token_json = new RequestOptions({
       headers: new Headers({
         "Content-type": "application/json",
-        "x-auth-token": this.global_data.token
+        "x-auth-token": this.global_data.token,
+        "Access-Control-Allow-Origin": "*"
       })
     }); 
   }
@@ -53,19 +66,33 @@ export class API {
     return this.http.post(this.base_url + '/login', {
       name: username,
       password: password
-    }, this.options_json);
+    }, this.options);
   }
 
   public logout() {
     return this.http.post(this.base_url + '/logout', null, 
-      this.options_token_json);
+      this.options_token);
+  }
+
+  public signin(user, token) {
+    this.global_data.set_avator_no(user['avatar']);
+    this.global_data.user_name = user['username'];
+    this.global_data.user_id = user['ID'];
+    this.global_data.company_id = user['companyID'];
+    this.global_data.section_id = user['sectionID'];
+    this.global_data.token = token;
+    this.update_token();
+    this.get_personal_info().then((res) => {
+      this.global_data.personal = res;
+      this.global_data.job = (res.leader ? '部长' : '部员');
+    })
   }
 
   public get_notices(not_read: boolean) {
-    if(this.is_debug)
-      return this.http.get(this.base_url + 'assets/data/notices.json', null);
+    // if(this.is_debug)
+      // return this.http.get(this.base_url + 'assets/data/notices.json', null);
     return this.http.get(this.base_url + '/notifications/received/' 
-      + not_read ? 'unread/' : 'read/' + this.global_data.user_name,
+      + not_read ? 'unread/' : 'read/' + this.global_data.user_id,
       null, this.options_token);
   }
 
@@ -82,7 +109,7 @@ export class API {
   public start_task(task_id, comment) {
     return this.http.post(this.base_url + '/tasks/start/' + task_id, {
       comment: comment
-    }, this.options_token_json);
+    }, this.options_token);
   }
 
   public operate_task(task_type, task_id, operation_id, other?) {
@@ -91,24 +118,27 @@ export class API {
       processID: task_id,
       operationID: operation_id,
       content: other
-    }, this.options_token_json);
+    }, this.options_token);
+  }
+
+  public get_personal_info() {
+    return this.http.get(this.base_url + '/employees/' + this.global_data.company_id
+      + '/' + this.global_data.section_id + '/' + this.global_data.user_id, 
+      null, this.options_token);
   }
 
   public update_personal(info) {
-    return this.http.post(this.base_url + '/employees/' + this.global_data.user_name, 
-      info, this.options_token_json);
+    return this.http.post(this.base_url + '/employees/' + this.global_data.company_id
+      + '/' + this.global_data.section_id + '/' + this.global_data.user_id, 
+      info, this.options_token);
   }
 
   public get_all_employees(page, limit) {
-    return this.http.get("https://ice.garenfeather.cn/EnInternalChat/testEmployee", {
-        page: page,
-        limit: limit
-      }, this.options_token);
-      // return this.http.get(this.base_url + '/employees/' 
-      //   + this.global_data.personal.company_id, {
-      //     page: page,
-      //     limit: limit
-      //   }, this.options_token);
+      return this.http.get(this.base_url + '/employees/' 
+        + this.global_data.company_id, {
+          page: page,
+          limit: limit
+        }, this.options_token);
   }
 
   public get_tasks(is_doing: boolean) {

@@ -33,8 +33,14 @@ export class HTTPService {
   {
     return new Promise((resolve, reject) => 
     {
-      this.http.post(url, JSON.stringify(param), options)
-      .map(res => res.json())
+      this.http.post(url, this.dict_to_query_str(param, false), options)
+      .map(res => {
+        // console.log(res);
+        return {
+          body: res.json(),
+          headers: res.headers
+        }
+      })
       .subscribe(
         data => resolve(data),
         error => reject(error))

@@ -6,6 +6,8 @@ import { NewTask } from '../new-task/new-task';
 import { HTTPService } from '../../providers/http_helper';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { Task } from '../../providers/task';
+import { AppGlobal } from '../../providers/global_data';
+
 /**
  * Generated class for the TaskList page.
  *
@@ -35,12 +37,16 @@ export class TaskList {
               public config: Config,
               public events: Events,
               public web_helper: HTTPService,
-              public native: NativeServiceHelper) {
+              public native: NativeServiceHelper,
+              public global_data: AppGlobal) {
   }
 
   ionViewDidLoad() {
-    if(!this.navParams.get('need_load'))
+    if(!this.navParams.get('need_load')) {
+      this.copy_list(this.global_data.task_cache['list_not_done'], this.tasks_list_not_done);
+      this.copy_list(this.global_data.task_cache['list_done'], this.tasks_list_done);
       return;
+    }
     this.currentPage = 0;
     this.hasNextPage = true;
     this.tasks_list_not_done = [];
@@ -50,20 +56,33 @@ export class TaskList {
       () => this.native.stop_loading());
   }
 
+  ionViewWillUnload() {
+    this.global_data.task_cache['list_not_done'] = [];
+    this.global_data.task_cache['list_done'] = [];
+    this.copy_list(this.tasks_list_not_done, this.global_data.task_cache['list_not_done']);
+    this.copy_list(this.tasks_list_done, this.global_data.task_cache['list_done']);
+  }
+
   ionViewDidEnter() {
     this.config.set('ios', 'pageTransition', 'ios-transition');    
   }
 
-  new_task() {
+  public copy_list(source, dst) {
+    source.forEach((item) => {
+      dst.push(item);
+    });
+  }
+
+  public new_task() {
     this.navCtrl.push(NewTask);
   }
 
-  task_detail(task) {
+  public task_detail(task) {
     this.config.set('ios', 'pageTransition', 'md-transition');
     this.navCtrl.push(TaskDetail, { task: task });
   }
 
-  swipe_event(event) {
+  public swipe_event(event) {
     if(event.direction == 2) {
       // 向左滑
       if(this.task_status_array.indexOf(this.task_status) == 0) {
@@ -107,6 +126,7 @@ export class TaskList {
     this.tasks_list_not_done = [];
     this.loadList("tasks_not_done").then(
       () => refresher.complete());
+    setTimeout(() => refresher.complete(), 10000);
   }
 
   public loadMore(infiniteScroll) {

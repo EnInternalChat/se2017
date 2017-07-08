@@ -34,9 +34,10 @@ export class Personal {
               public ui: UIText,
               public storage: StorageHelper,
               public events: Events) {
-    this.info['gender'] = true;
-    this.info['email'] = ['test@outlook.com'];
-    this.info['phone'] = ['15923677645'];
+  }
+
+  public ionViewDidEnter() {
+    this.info = this.global_data.personal;
   }
 
   public log_out() {
@@ -109,21 +110,25 @@ export class Personal {
       {
         name: "tel1",
         type: "text",
+        value: this.info.phone[0],
         placeholder: this.ui.PersonalPage.tel
       },
       {
         name: "tel2",
         type: "text",
+        value: this.info.phone[1],
         placeholder: this.ui.PersonalPage.tel
       },
       {
         name: "mail1",
         type: "text",
+        value: this.info.email[0],
         placeholder: this.ui.PersonalPage.mail
       },
       {
         name: "mail2",
         type: "text",
+        value: this.info.email[1],
         placeholder: this.ui.PersonalPage.mail
       },
       ],
@@ -148,11 +153,19 @@ export class Personal {
             && !data.mail2.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g))
            this.native.show_toast("邮箱2格式错误");
           else {
-            this.api.update_personal({}).then(
+            this.api.update_personal({
+              "email1": data.mail1,
+              "email2": data.mail2,
+              "phone1": data.tel1,
+              "phone2": data.tel2
+            }).then(
               (result) => {
-                if(result)
+                if(result) {
+                  this.global_data.personal.phone = [data.tel1, data.tel2];
+                  this.global_data.personal.email = [data.mail1, data.mail2];
                   contact_prompt.dismiss().then(
                     () => this.native.show_toast("修改联系方式成功"));
+                }
                 else
                   this.native.show_toast("修改联系方式失败");
               })
@@ -165,9 +178,11 @@ export class Personal {
   }
 
   public change_password(pwd_old: string, pwd_new: string):Promise<any> {
+    if(this.global_data.encrypt_pwd(pwd_old) !== this.global_data.password) {
+      return Promise.resolve(false);
+    }
     this.native.loading();
     return this.api.update_personal({
-      "oldPwd": this.global_data.encrypt_pwd(pwd_old),
       "newPwd": this.global_data.encrypt_pwd(pwd_new)
     }).then(
     (data) => {

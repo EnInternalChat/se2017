@@ -37,6 +37,16 @@ export class ChatService {
       window.JMessage.logout(resolve, reject));
   }
 
+  public set_alias(alias) {
+    if(!this.is_platform)
+      return;
+    if (alias && alias.trim() != '') {
+      window.plugins.jPushPlugin.setAlias(alias);
+    }
+    else 
+      alert('Alias不能为空');
+  }
+
   public get_conversation_list(): Promise<any> {
     return new Promise((resolve, reject) =>
       window.JMessage.getConversationList(resolve, reject));

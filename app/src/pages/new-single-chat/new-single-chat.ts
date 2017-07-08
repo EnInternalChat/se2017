@@ -49,12 +49,15 @@ export class NewSingleChat {
     if(group_id == null) {
       return this.api.get_all_employees(this.currentPage, this.limit).then(
         (employees) => {
+          this.hasNextPage = (employees.length >= this.limit);
+          if(this.hasNextPage)
+            this.currentPage++;
           employees.forEach((item) => {
-            if(item['avator'] == 0)
-              item['avator'] = Math.floor(Math.random()*8 + 1);
+            if(item['avatar'] == 0)
+              item['avatar'] = Math.floor(Math.random()*8 + 1);
             this.employee_list.push({
               id: item['name'],
-              no: item['avator']
+              no: item['avatar']
             });
           })
         });
@@ -74,6 +77,11 @@ export class NewSingleChat {
           console.log(members);
         })
     }
+  }
+
+  public loadMore(scroll) {
+    this.get_employee_list(this.navParams.get('group_id'), false).then(
+      () => scroll.complete());
   }
 
   public update_select(item) {
@@ -105,6 +113,7 @@ export class NewSingleChat {
       lastMsgDate: new Date().toString()
     });
     new_con.last_text = "";
+    this.navCtrl.pop();
     this.navCtrl.push(ChatDetail, {conversation: new_con});
   }
 
