@@ -1,5 +1,5 @@
-// A RESTful factory for retreiving mails from 'mails.json'
-app.factory('mails', ['API', function (API) {
+angular.module('Factories', [])
+.factory('mails', ['API', function(API){
   var mails = [];
 
   var get_read_notice = function() {
@@ -73,4 +73,8 @@ app.factory('mails', ['API', function (API) {
     return mails[0];
   };
   return factory;
-}]);
+}])
+.factory('tasks', ['API', function(API){
+    var factory = {};
+    return factory;
+}])
