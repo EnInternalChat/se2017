@@ -11,6 +11,7 @@ angular.module('app', [
     'ngStorage',
     'MD5.Services',
     'API.Services',
+    'Factories',
     'ui.router',
     'ui.bootstrap',
     'ui.load',

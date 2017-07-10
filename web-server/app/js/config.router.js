@@ -355,7 +355,6 @@ angular.module('app')
                       deps: ['uiLoad',
                         function( uiLoad ){
                           return uiLoad.load( ['js/app/mail/mail.js',
-                                               'js/app/mail/mail-service.js',
                                                'vendor/libs/moment.min.js'] );
                       }]
                   }

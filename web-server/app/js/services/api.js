@@ -6,7 +6,8 @@ angular.module('API.Services', [])
   var has_token = false;
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
-  var base_url = "https://118.89.110.77/EnInternalChat";
+  // var base_url = "https://118.89.110.77/EnInternalChat";
+  var base_url = "http://10.42.0.186";
   var user = {};
 
   var obj2param = function(obj) {
@@ -45,10 +46,12 @@ angular.module('API.Services', [])
       method: 'GET',
       url: url + '?' + obj2param(param),
       headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Origin": "*",
+        "Accept": "*/*",
+        // "Accept-Language" : "zh-cn,zh;q=0.5",
+        // "Content-Language": "en,zh",
+        "Content-Type": "application/x-www-form-urlencoded",
         "x-auth-token": has_token ? $localStorage.token : "",
-        "From": "web"
+        "Platform": "web"
       }
     }).success(function(res) {
       deffered.resolve(res);
@@ -64,10 +67,10 @@ angular.module('API.Services', [])
       method: 'POST',
       url: url,
       headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Origin": "*",
+        "Accept": "*/*",
+        "Content-Type": "application/x-www-form-urlencoded",
         "x-auth-token": has_token ? $localStorage.token : "",
-        "From": "web"
+        "Platform": "web"
       },
       data: body,
       transformRequest: function(obj) {
@@ -93,7 +96,7 @@ angular.module('API.Services', [])
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
         "x-auth-token": has_token ? $localStorage.token : "",
-        "From": "web"
+        "Platform": "web"
       }
     }).success(function(res) {
       deffered.resolve(res);
@@ -173,7 +176,7 @@ angular.module('API.Services', [])
     return post(base_url + '/login', {
       name: username,
       password: pwd
-    }).then(function(res) {
+    }).then(function(res, status, headers, config) {
       if(!res.body.status)
         return {
           status: false,
@@ -186,6 +189,7 @@ angular.module('API.Services', [])
         $localStorage.username = username;
         $localStorage.password = pwd;
         user = res.body;
+        $localStorage.avatar = user['avatar'];
         user['username'] = username;
         user['admin'] = (user['sectionID'] == -1);
         return { status: true }        

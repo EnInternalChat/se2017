@@ -16,13 +16,13 @@
 
   <!-- list -->
   <ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
-    <li ng-repeat="mail in mails | filter:fold" ng-class="labelClass(mail.label)" class="list-group-item clearfix b-l-3x">
+    <li ng-repeat="mail in mails | filter:fold" ng-class="{'b-l-info': mail.fold === 'read', 'b-l-warning': mail.fold === 'unread', 'b-l-success': mail.fold == 'send'}" class="list-group-item clearfix b-l-5x">
       <div class="pull-right text-sm text-muted">
         <span class="hidden-xs">{{ mail.sentTime | fromNow }}</span>
       </div>
       <div class="clear">
-        <div><a ui-sref="app.mail.detail({mailID:mail.ID})" class="text-lg">{{mail.senderName}}</a><span class="label bg-light m-l-sm">{{mail.label}}</span></div>
-        <div class="text-ellipsis m-t-xs">{{mail.content | limitTo:100}}</div>
+        <div><a ui-sref="app.mail.detail({mailID:mail.ID})" class="text-lg">{{mail.senderName}}</a></div>
+        <div class="text-ellipsis m-t-xs">{{mail.title | limitTo:100}}</div>
       </div>      
     </li>
   </ul>

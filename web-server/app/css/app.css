@@ -4240,15 +4240,15 @@ a.text-#000000:hover {
 }
 
 .b-l-success {
-  border-left-color: #27c24c;
+  border-left-color: #27c24c !important;
 }
 
 .b-l-info {
-  border-left-color: #23b7e5;
+  border-left-color: #23b7e5 !important;
 }
 
 .b-l-warning {
-  border-left-color: #fad733;
+  border-left-color: #fad733 !important;
 }
 
 .b-l-danger {
@@ -4662,7 +4662,7 @@ a.text-#000000:hover {
 }
 
 .avatar i.on {
-  background-color: #27c24c;
+  background-color: #23b7e5;
 }
 
 .avatar i.off {
@@ -4670,11 +4670,11 @@ a.text-#000000:hover {
 }
 
 .avatar i.busy {
-  background-color: #f05050;
+  background-color: #fad733;
 }
 
 .avatar i.away {
-  background-color: #fad733;
+  background-color: #27c24c;
 }
 
 .avatar.thumb-md i {

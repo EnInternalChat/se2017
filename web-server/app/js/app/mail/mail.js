@@ -7,21 +7,10 @@ app.controller('MailCtrl', ['$scope', function($scope) {
   ];
 
   $scope.labels = [
-    {name: '程序部', filter:'程序部', color:'#23b7e5'},
-    {name: '财政部', filter:'财政部', color:'#7266ba'},
-    {name: '业务部', filter:'业务部', color:'#fad733'},
-    {name: '开发部', filter:'开发部', color:'#27c24c'},
-    {name: '客服部', filter:'客服部', color:''}
+    {name: '程序部', filter:'read', color:'#23b7e5'},
+    {name: '财政部', filter:'unread', color:'#7266ba'},
+    {name: '业务部', filter:'send', color:'#fad733'}
   ];
-
-  $scope.labelClass = function(label) {
-    return {
-      'b-l-info': angular.lowercase(label) === '程序部',
-      'b-l-primary': angular.lowercase(label) === '财政部',
-      'b-l-warning': angular.lowercase(label) === '业务部',
-      'b-l-success': angular.lowercase(label) === '客服部'
-    };
-  };
 
 }]);
 

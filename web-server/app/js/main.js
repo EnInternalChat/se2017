@@ -39,7 +39,7 @@ angular.module('app')
       }
 
       $scope.username = $localStorage.username;
-      $scope.avator = 3;
+      $scope.avatar = $localStorage.avatar;
 
       // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
