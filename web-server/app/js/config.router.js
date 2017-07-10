@@ -373,7 +373,7 @@ angular.module('app')
                   templateUrl: 'tpl/mail.list.html'
               })
               .state('app.mail.detail', {
-                  url: '/{mailId:[0-9]{1,4}}',
+                  url: '/{mailID}',
                   templateUrl: 'tpl/mail.detail.html'
               })
               .state('app.mail.compose', {

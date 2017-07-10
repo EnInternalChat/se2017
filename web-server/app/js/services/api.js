@@ -5,7 +5,8 @@ angular.module('API.Services', [])
   function($http, $q, $window, $localStorage, $ngConfirm){
   var has_token = false;
   var loading_dom = null;
-  var base_url = "https://t.garenfeather.cn/EnInternalChat";
+  // var base_url = "https://t.garenfeather.cn/EnInternalChat";
+  var base_url = "https://118.89.110.77/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
@@ -46,7 +47,8 @@ angular.module('API.Services', [])
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
-        "x-auth-token": has_token ? $localStorage.token : ""
+        "x-auth-token": has_token ? $localStorage.token : "",
+        "From": "web"
       }
     }).success(function(res) {
       deffered.resolve(res);
@@ -64,7 +66,8 @@ angular.module('API.Services', [])
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
-        "x-auth-token": has_token ? $localStorage.token : ""
+        "x-auth-token": has_token ? $localStorage.token : "",
+        "From": "web"
       },
       data: body,
       transformRequest: function(obj) {
@@ -89,7 +92,8 @@ angular.module('API.Services', [])
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
-        "x-auth-token": has_token ? $localStorage.token : ""
+        "x-auth-token": has_token ? $localStorage.token : "",
+        "From": "web"
       }
     }).success(function(res) {
       deffered.resolve(res);
@@ -156,6 +160,7 @@ angular.module('API.Services', [])
     if(!loading_dom) 
       loading_dom = angular.element(document.querySelector('#loading-bg'));
     loading_dom.css('display', 'flex');
+    setTimeout(this.stop_loading(), 5000);
   }
 
   this.stop_loading = function() {
@@ -182,13 +187,14 @@ angular.module('API.Services', [])
         $localStorage.password = pwd;
         user = res.body;
         user['username'] = username;
+        user['admin'] = (user['sectionID'] == -1);
         return { status: true }        
       }
     },
     function(error) {
       return {
         status: false,
-        info: error.toString()
+        info: error
       }
     });
   }
@@ -252,6 +258,19 @@ angular.module('API.Services', [])
   this.update_employee_info = function(section_id, user_id, info) {
     return post(base_url + '/employees/' + user.companyID + '/' + 
       section_id + '/' + user_id, info);
+  }
+
+  this.get_receive_notice = function(is_read) {
+    if(is_read) {
+      return get(base_url + '/notifications/received/read/' + user.ID, null);
+    }
+    else {
+      return get(base_url + '/notifications/received/unread/' + user.ID, null);
+    }
+  }
+
+  this.get_send_notice = function() {
+    return get(base_url + '/notifications/sent/' + user.ID, null);
   }
 
   this.send_notice = function(receivers, title, content) {

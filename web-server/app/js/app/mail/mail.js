@@ -1,8 +1,9 @@
 app.controller('MailCtrl', ['$scope', function($scope) {
   $scope.folds = [
-    {name: '所有', filter:''},
-    {name: '接收', filter:'接收'},
-    {name: '发送', filter:'发送'}
+    {name: '所有', filter: ''},
+    {name: '已读', filter: 'read'},
+    {name: '未读', filter: 'unread'},
+    {name: '发送', filter: 'send'}
   ];
 
   $scope.labels = [
@@ -12,17 +13,6 @@ app.controller('MailCtrl', ['$scope', function($scope) {
     {name: '开发部', filter:'开发部', color:'#27c24c'},
     {name: '客服部', filter:'客服部', color:''}
   ];
-
-  $scope.addLabel = function(){
-    $scope.labels.push(
-      {
-        name: $scope.newLabel.name,
-        filter: angular.lowercase($scope.newLabel.name),
-        color: '#ccc'
-      }
-    );
-    $scope.newLabel.name = '';
-  }
 
   $scope.labelClass = function(label) {
     return {
@@ -37,15 +27,23 @@ app.controller('MailCtrl', ['$scope', function($scope) {
 
 app.controller('MailListCtrl', ['$scope', 'mails', '$stateParams', function($scope, mails, $stateParams) {
   $scope.fold = $stateParams.fold;
-  mails.all().then(function(mails){
-    $scope.mails = mails;
-  });
+
+  $scope.get_mails = function() {
+    mails.get_mails($scope.fold).then(function(mails) {
+      $scope.mails = mails;
+      $scope.$apply();
+    });
+  }
+
+  $scope.refresh = function() {
+    $scope.get_mails();
+  }
+  $scope.get_mails();
 }]);
 
-app.controller('MailDetailCtrl', ['$scope', 'mails', '$stateParams', function($scope, mails, $stateParams) {
-  mails.get($stateParams.mailId).then(function(mail){
-    $scope.mail = mail;
-  })
+app.controller('MailDetailCtrl', ['$scope', 'mails', '$stateParams', 
+  function($scope, mails, $stateParams) {
+    $scope.mail = mails.get_detail($stateParams.mailID);
 }]);
 
 app.controller('MailNewCtrl', ['$scope', 'API',

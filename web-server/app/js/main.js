@@ -38,7 +38,7 @@ angular.module('app')
         }
       }
 
-      $scope.username = "张三";
+      $scope.username = $localStorage.username;
       $scope.avator = 3;
 
       // save settings to local storage
