@@ -163,7 +163,6 @@ angular.module('API.Services', [])
     if(!loading_dom) 
       loading_dom = angular.element(document.querySelector('#loading-bg'));
     loading_dom.css('display', 'flex');
-    setTimeout(this.stop_loading(), 5000);
   }
 
   this.stop_loading = function() {

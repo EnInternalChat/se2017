@@ -10,11 +10,11 @@
             <div class="panel-body">
               <div class="form-group">
                 <label>邮箱</label>
-                <input type="email" class="form-control" ng-model="email" ng-pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$">
+                <input type="email" class="form-control" ng-model="email" ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g">
               </div>
               <div class="form-group">
                 <label>备用邮箱</label>
-                <input type="email" class="form-control" ng-model="other_email" ng-pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$">
+                <input type="email" class="form-control" ng-model="other_email" ng-pattern="/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g">
               </div>
               <div class="form-group pull-in clearfix">
                 <div class="col-sm-6">
@@ -29,11 +29,11 @@
               <div class="form-group pull-in clearfix">
                 <div class="col-sm-6">
                   <label>输入密码</label>
-                <input type="password" class="form-control" name="password" ng-model="password" required >
+                <input type="password" class="form-control" name="password" ng-model="password">
                 </div>
                 <div class="col-sm-6">
                   <label>确认密码</label>
-                  <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' ">
+                  <input type="password" class="form-control" name="confirm_password" ng-model="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' ">
                   <span ng-show='form.confirm_password.$error.validator'>确认密码不一致</span>
                 </div>
               </div>

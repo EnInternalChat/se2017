@@ -15,13 +15,15 @@ app.controller('FormDemoCtrl', ['$scope', 'API', 'MD5',
 
     $scope.update_info = function() {
       API.loading();
-      API.update_employee_info(API.user_info().sectionID, API.user_info().ID, {
+      var info = {
         email1: $scope.email,
         email2: $scope.other_email,
         phone1: $scope.phone,
-        phone2: $scope.other_phone,
-        newPwd: MD5.encrypt($scope.password)
-      }).then(function(res) {
+        phone2: $scope.other_phone};
+      if($scope.password && $scope.password !== "")
+        info['newPwd'] = MD5.encrypt($scope.password);
+      API.update_employee_info(API.user_info().sectionID, API.user_info().ID, info)
+      .then(function(res) {
         API.stop_loading();        
       })
     }

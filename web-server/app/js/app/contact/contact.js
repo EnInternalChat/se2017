@@ -35,7 +35,9 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
         name: item['name'],
         avatar: "img/" + (item['avatar'] + 1) + ".png",
         phone: item['phone'][0],
+        other_phone: item['phone'][1],
         email: item['email'][0],
+        other_email: item['email'][1],
         leader: item['leader'],
         status: item['status']
       })
@@ -143,7 +145,9 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
       API.loading();
       API.update_employee_info($scope.group.id, item.id, {
         email1: item.email,
+        email2: item.other_email,
         phone1: item.phone,
+        phone2: item.other_phone,
         newSectionID: item.group_id
       }).then(function(res) {
         API.stop_loading();
