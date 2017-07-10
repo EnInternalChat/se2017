@@ -185,7 +185,7 @@ angular.module('API.Services', [])
       else {
         $localStorage.authenticated = true;
         has_token = true;
-        $localStorage.token = res.headers['x-auth-token'];
+        $localStorage.token = res.headers()['x-auth-token'];
         $localStorage.username = username;
         $localStorage.password = pwd;
         user = res.body;
@@ -252,6 +252,11 @@ angular.module('API.Services', [])
         name: name,
         position: position
       });
+  }
+
+  this.get_employee_info = function(section_id, id) {
+    return get(base_url + '/employees/' + user.companyID + '/' +
+      section_id + '/' + id, null);
   }
 
   this.delete_employee = function(section_id, user_id) {

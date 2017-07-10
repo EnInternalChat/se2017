@@ -76,9 +76,6 @@
             </div>
 
             <a herf class="list-group-item clearfix b-l-3x" ng-repeat="mail in mails" ng-class="{'b-l-info': mail.fold === 'read', 'b-l-warning': mail.fold === 'unread', 'b-l-success': mail.fold == 'send'}">
-              <span class="pull-left thumb-sm avatar m-r">
-                <i class="b-white right" ng-class="{'on': mail.fold === 'read', 'busy': mail.fold === 'unread', 'away': mail.fold === 'send'}"></i>
-              </span>
               <div class="pull-right text-sm text-muted">
                 <span class="hidden-xs">{{ mail.sentTime | fromNow }}</span>
               </div>
