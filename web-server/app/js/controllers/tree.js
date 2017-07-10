@@ -3,7 +3,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   $scope.my_data = [];
   $scope.my_tree = tree = {};
   $scope.editing = false;
-  $scope.members = [{name: 'asd'}, {name: '123'}, {name: 'qwe'}];
+  $scope.members = [];
 
   apple_selected = function(branch) {
     return $scope.output = " " + branch.label;
@@ -26,7 +26,6 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   $scope.my_tree_handler = function(branch) {
     $scope.item = branch;
     $scope.get_section_members($scope.item);
-    console.log(branch);
   };
 
   $scope.get_tree_data = function() {
@@ -39,13 +38,12 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
         $scope.my_data = [res];
         format_tree_data(res.organization);
         API.stop_loading();
-        console.log($scope.my_data);
       })
   }
 
   $scope.try_async_load = function() {
-    // $scope.my_data = [];
     $scope.doing_async = true;
+    $scope.get_tree_data();
     $scope.doing_async = false;
   };
   $scope.add_section = function() {
@@ -55,11 +53,16 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
     else {
       API.loading();
       API.new_section(parent.ID, $scope.new_name, '').then(function(res) {
+        if(res.body.info == '部门添加成功') {
+          API.get_section_info(parent.ID).then(function(res) {
+            console.log(res);
+          });
+          // tree.add_branch(parent, {
+          //   label: $scope.new_name,
+          //   data: res.body
+          // });          
+        }
         API.stop_loading();
-        tree.add_branch(parent, {
-          label: $scope.new_name,
-          data: res.body
-        })
       })
     }
   };
@@ -87,13 +90,19 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
     $state.go('apps.contact', { 'selected_section': item.ID });
   };
   $scope.delete_item = function(item) {
+    var parent = $scope.my_tree.select_parent_branch();
     if(item.children.length > 0 || item.membersID.length > 0) {
-      API.alert('子部门或成员不为空\n无法删除该部门', $scope, function(){});
+      API.alert('子部门或成员不为空,无法删除该部门', $scope, function(){});
     }
     else {
       API.alert('确认删除该部门？', $scope, function() {
-        API.delete_section().then(function(res) {
-
+        API.loading();
+        API.delete_section(item.ID).then(function(res) {
+          if(res.info === '删除成功' && parent.childrenSections) {
+            parent.childrenSections.splice(parent.childrenSections.indexOf(item), 1);
+            parent.children = parent.childrenSections;
+          }
+          API.stop_loading();
         })
       })
     }
@@ -109,6 +118,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
         description: item.note,
         leaderID: item.leader.ID
       }).then(function(res) {
+        API.stop_loading();
         $scope.editing = false;
         item.leaderID = item.leader.ID;
       })

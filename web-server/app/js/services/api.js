@@ -7,7 +7,8 @@ angular.module('API.Services', [])
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
   // var base_url = "https://118.89.110.77/EnInternalChat";
-  var base_url = "http://10.42.0.186";
+  // var base_url = "http://10.42.0.186";
+  var base_url = "https://106.15.186.180/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
@@ -47,8 +48,6 @@ angular.module('API.Services', [])
       url: url + '?' + obj2param(param),
       headers: { 
         "Accept": "*/*",
-        // "Accept-Language" : "zh-cn,zh;q=0.5",
-        // "Content-Language": "en,zh",
         "Content-Type": "application/x-www-form-urlencoded",
         "x-auth-token": has_token ? $localStorage.token : "",
         "Platform": "web"
@@ -227,13 +226,18 @@ angular.module('API.Services', [])
   }
 
   this.delete_section = function(section_id) {
-    return _delete(base_url + '/company/sections/' + user.companyID + '/' 
+    return _delete(base_url + '/company/' + user.companyID + '/sections/' 
       + section_id);
   }
 
   this.update_section_info = function(section_id, info) {
-    return post(base_url + '/company/sections/' + user.companyID + '/'
+    return post(base_url + '/company/' + user.companyID + '/sections/'
       + section_id, info);
+  }
+
+  this.get_section_info = function(section_id) {
+    return get(base_url + '/company/' + user.companyID + '/sections/'
+      + section_id, null);
   }
 
   this.get_all_employees = function() {
@@ -245,12 +249,9 @@ angular.module('API.Services', [])
       section_id, null);
   }
 
-  this.new_employee = function(section_id, name, position) {
+  this.new_employee = function(section_id, data) {
     return post(base_url + '/employees/' + user.companyID + '/' +
-      section_id, {
-        name: name,
-        position: position
-      });
+      section_id, data);
   }
 
   this.get_employee_info = function(section_id, id) {
@@ -288,6 +289,14 @@ angular.module('API.Services', [])
       content: content
     });
   }
+
+  this.get_tasks = function() {
+    return get(base_url + '/tasks/all/' + user.companyID, null);
+  }
+
+  // this.new_task = function(name, file) {
+  //   return post(base_url + '/tasks/upload/' + )
+  // }
 
 
 

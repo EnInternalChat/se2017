@@ -1,10 +1,5 @@
-app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
-  function($scope, API, $filter, $stateParams) {
-  // $http.get('js/app/contact/contacts.json').then(function (resp) {
-  //   $scope.items = resp.data.items;
-  //   $scope.item = $filter('orderBy')($scope.items, 'first')[0];
-  //   $scope.item.selected = true;
-  // });
+app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5',
+  function($scope, API, $filter, $stateParams, MD5) {
 
   $scope.filter = '';
   $scope.groups = [];
@@ -107,30 +102,48 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams',
 
   $scope.deleteItem = function(item){
     API.alert('确认删除该用户吗？', $scope, function() {
+      API.loading();
       API.delete_employee($scope.group.id, item.id).then(function(res) {
-        console.log(res);
+        if(res.info == '删除成功') {
+          $scope.items.splice($scope.items.indexOf(item), 1);
+          $scope.item = null;
+        }
+        API.stop_loading();
       })
-      // $scope.items.splice($scope.items.indexOf(item), 1);
-      // $scope.item = $filter('orderBy')($scope.items, 'first')[0];
-      // if($scope.item) {
-      //   $scope.item.selected = true;
-      // }
     })
   };
 
   $scope.createItem = function(){
     API.alert_prompt('新建用户', '用户姓名', function(name) {
-      API.new_employee($scope.group.id, name, "部员").then(function(res){
-        console.log(res);
+      API.new_employee($scope.group.id, {
+        name: name,
+        password: MD5.encrypt(name),
+        gender: true,
+        position: "部员"
+      }).then(function(res){
+        if(res.body.info === '员工添加成功') {
+          
+          API.get_employee_info($scope.group.id, res.body.id)
+          .then(function(res) {
+            var item = {
+              id: item['ID'],
+              group_id: item['sectionID'],
+              group_name: "",
+              name: item['name'],
+              avatar: "img/" + (item['avatar'] + 1) + ".png",
+              phone: item['phone'][0],
+              other_phone: item['phone'][1],
+              email: item['email'][0],
+              other_email: item['email'][1],
+              leader: item['leader'],
+              status: item['status']
+            }
+            $scope.items.push(item);
+            $scope.selectItem(item);
+            $scope.item.editing = false;
+          })
+        }
       })
-      // var item = {
-      //   name: name
-      //   group_id: $scope.group.id,
-      //   avatar:'img/1.png'
-      // };
-      // $scope.items.push(item);
-      // $scope.selectItem(item);
-      // $scope.item.editing = true;
     })
   };
 

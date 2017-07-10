@@ -75,6 +75,10 @@ angular.module('Factories', [])
   return factory;
 }])
 .factory('tasks', ['API', function(API){
-    var factory = {};
-    return factory;
+  var tasks = [];
+  var factory = {};
+  factory.get_all = function() {
+    
+  }
+  return factory;
 }])
