@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { AppGlobal } from '../../providers/global_data';
 
+import { UIText } from '../../providers/ui_text';
+
 /**
  * Generated class for the AvatorSelector page.
  *
@@ -23,12 +25,13 @@ export class AvatorSelector {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public global_data: AppGlobal) {
+    public global_data: AppGlobal,
+    public ui: UIText) {
     for(let i = 1; i <= 4; i++) {
       this.avator_array.push({value: i, content: "男头像" + i.toString()});
     }
     for(let i = 1; i <= 4; i++) {
-      this.avator_array.push({value: i+4, content: "女头像" + i.toString()});     
+      this.avator_array.push({value: i+4, content: "女头像" + i.toString()});
     }
     // this.global_data = AppGlobal.get_instance();
     this.cur_avator = this.global_data.avator_no;

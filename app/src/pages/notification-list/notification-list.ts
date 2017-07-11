@@ -7,6 +7,7 @@ import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { UIText } from '../../providers/ui_text';
 import { AppGlobal } from '../../providers/global_data';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NotificationList page.
@@ -26,12 +27,13 @@ export class NotificationList {
 
   public notice_list_not_read : Array<Notice> = [];
   public notice_list_read : Array<Notice> = [];
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public api: API,
               public ui: UIText,
               public native: NativeServiceHelper,
-              public global_data: AppGlobal) {
+              public global_data: AppGlobal,
+              public ui: UIText) {
   }
 
   ionViewDidLoad() {
@@ -94,7 +96,7 @@ export class NotificationList {
     }
     this.api.read_notice(notice.id).then(
       (res) => {
-        this.update_notice_list(false);        
+        this.update_notice_list(false);
       }).catch(
       () => this.native.show_toast("网络连接失败"));
     this.navCtrl.push(NotificationDetail, { notice: notice });

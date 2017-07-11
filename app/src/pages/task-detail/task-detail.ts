@@ -22,7 +22,7 @@ export class TaskDetail {
   public task_info : Task;
   public user_name : string;
   public operation_options : Array<{value : string, text : string}> = [];
-  
+
   constructor(
     public ui: UIText,
     public alertCtrl: AlertController,
@@ -30,7 +30,8 @@ export class TaskDetail {
     public navParams: NavParams,
     public config: Config,
     private global_data: AppGlobal,
-    public api: API) {
+    public api: API,
+    public ui: UIText) {
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
     if(this.task_info.over)
@@ -56,7 +57,7 @@ export class TaskDetail {
       {
         text: this.ui.ok,
         handler: data => {
-          
+
         }
       }
       ]

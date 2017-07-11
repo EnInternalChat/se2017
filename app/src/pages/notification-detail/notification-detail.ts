@@ -5,6 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { markdown } from 'markdown';
 
 import { API } from '../../providers/api';
+import { UIText } from '../../providers/ui_text';
 import { Notice } from '../../providers/notification';
 
 /**
@@ -23,14 +24,15 @@ export class NotificationDetail {
   public notice: any = {};
   public content: any;
   constructor(private sanitizer: DomSanitizer,
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
               public navParams: NavParams,
-              public api: API) {
+              public api: API,
+              public ui: UIText) {
   }
 
   ionViewDidLoad() {
     this.notice = this.navParams.get('notice');
-    this.content = markdown.toHTML(this.notice.content); 
+    this.content = markdown.toHTML(this.notice.content);
   }
 
   public go_back() {
