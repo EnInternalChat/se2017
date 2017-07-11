@@ -12,35 +12,41 @@ export class API {
   private options_token_json: RequestOptions;
 
   private is_debug: boolean = false;
-  public base_url: string = this.is_debug ? "" : "https://t.garenfeather.cn/EnInternalChat";
+  public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "https://t.garenfeather.cn/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
     private http: HTTPService,
     private data: AppGlobal) {
     this.options = new RequestOptions({
       headers: new Headers({
-        "Content-type": "application/x-www-form-urlencoded",
-        "Access-Control-Allow-Origin": "*"
+        "Accept": "*/*",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Platform": "app"
       })
     });
     this.options_json = new RequestOptions({
       headers: new Headers({
+        "Accept": "*/*",
         "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Platform": "app"
       })
     });
     this.options_token = new RequestOptions({
       headers: new Headers({
+        "Accept": "*/*",
         "Content-type": "application/x-www-form-urlencoded",
         "x-auth-token": this.data.token,
-        "Access-Control-Allow-Origin": "*"
+        "Platform": "app"
       })
     });  
     this.options_token_json = new RequestOptions({
       headers: new Headers({
+        "Accept": "*/*",
         "Content-type": "application/json",
         "x-auth-token": this.data.token,
-        "Access-Control-Allow-Origin": "*"
+        "Platform": "app"
       })
     }); 
   }
@@ -48,16 +54,18 @@ export class API {
   public update_token() {
     this.options_token = new RequestOptions({
       headers: new Headers({
+        "Accept": "*/*",
         "Content-type": "application/x-www-form-urlencoded",
         "x-auth-token": this.data.token,
-        "Access-Control-Allow-Origin": "*"
+        "Platform": "app"
       })
     });
     this.options_token_json = new RequestOptions({
       headers: new Headers({
+        "Accept": "*/*",
         "Content-type": "application/json",
         "x-auth-token": this.data.token,
-        "Access-Control-Allow-Origin": "*"
+        "Platform": "app"
       })
     }); 
   }

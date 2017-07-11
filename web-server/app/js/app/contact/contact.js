@@ -28,7 +28,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
         group_id: item['sectionID'],
         group_name: "",
         name: item['name'],
-        avatar: "img/" + (item['avatar'] + 1) + ".png",
+        avatar: "img/" + item['avatar'] + ".png",
         phone: item['phone'][0],
         other_phone: item['phone'][1],
         email: item['email'][0],

@@ -74,21 +74,17 @@ app.controller('MailNewCtrl', ['$scope', 'API',
 
   $scope.send_notice = function() {
     if($scope.to_list.data.length === 0){
-      API.alert('接收部门不能为空', $scope);
-      // alert('接收部门不能为空');
+      API.alert('接收部门不能为空', $scope, function(){});
       return;
     }
     else if(!$scope.title || $scope.title === "") {
-      API.alert('通知标题不能为空');
+      API.alert('通知标题不能为空', $scope, function(){});
       return;
     }
     var receivers = [];
     $scope.to_list.data.forEach(function(item) {
       receivers.push(item.id);
     });
-    console.log(receivers);
-    console.log($scope.title);
-    console.log($scope.markdown_editor.value());
     API.send_notice(receivers, $scope.title, $scope.markdown_editor.value()).then(
       function(res) {
         console.log("res: ", res);
