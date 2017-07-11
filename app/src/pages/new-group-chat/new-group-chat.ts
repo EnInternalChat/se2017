@@ -44,11 +44,13 @@ export class NewGroupChat {
   }
 
   public new_chat() {
+    let group = [];
     this.sections.forEach(
       (item) => {
         if(item.checked)
-          console.log(item.name, ": ", item.checked);
-      })
+          group.push(item.id);
+      });
+    this.api.start_group_chat(group).then((res) => {})
   }
 
 

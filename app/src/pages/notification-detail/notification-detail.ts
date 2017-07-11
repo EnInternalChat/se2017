@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { markdown } from 'markdown';
+import * as marked from 'marked';
 
 import { API } from '../../providers/api';
 import { Notice } from '../../providers/notification';
@@ -30,7 +30,17 @@ export class NotificationDetail {
 
   ionViewDidLoad() {
     this.notice = this.navParams.get('notice');
-    this.content = markdown.toHTML(this.notice.content); 
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: true,
+      pedantic: true,
+      sanitize: true,
+      smartLists: true,
+      smartypants: true
+    });
+    this.content = marked(this.notice.content); 
   }
 
   public go_back() {

@@ -92,10 +92,7 @@ export class NotificationList {
       this.navCtrl.push(NotificationDetail, { notice: notice });
       return;
     }
-    this.api.read_notice(notice.id).then(
-      (res) => {
-        this.update_notice_list(false);        
-      }).catch(
+    this.api.read_notice(notice.id).catch(
       () => this.native.show_toast("网络连接失败"));
     this.navCtrl.push(NotificationDetail, { notice: notice });
   }

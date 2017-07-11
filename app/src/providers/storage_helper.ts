@@ -28,7 +28,12 @@ export class StorageHelper {
           return default_value;
         });
     });
+  }
 
+  public clear(): Promise<any> {
+    return this.storage.ready().then(() => {
+      return this.storage.clear();
+    })
   }
 
 }

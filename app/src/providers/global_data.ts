@@ -83,4 +83,8 @@ export class AppGlobal {
   get avator_no(): number {
     return this._avator_no;
   }
+
+  public clear_remember_data() {
+    return this.storage.clear();
+  }
 }

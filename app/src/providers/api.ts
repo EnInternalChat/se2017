@@ -12,9 +12,9 @@ export class API {
   private options_token_json: RequestOptions;
 
   private is_debug: boolean = false;
-  public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
   // public base_url: string = this.is_debug ? "" : "https://t.garenfeather.cn/EnInternalChat";
-  // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
+  public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
     private http: HTTPService,
@@ -78,6 +78,7 @@ export class API {
   }
 
   public logout() {
+    this.data.clear_remember_data();
     return this.http.post(this.base_url + '/logout', null, 
       this.options_token);
   }
@@ -110,19 +111,20 @@ export class API {
   }
 
   public read_notice(notice_id) {
-    return this.http.get(this.base_url + '/notifications/' + notice_id, 
-      null, this.options_token);
+    return this.http.get(this.base_url + '/notifications/' + this.data.user_id 
+      + '/' + notice_id, null, this.options_token);
   }
 
   public get_tasks(is_doing: boolean) {
-    if(is_doing) {
-      return this.http.get(this.base_url + '/tasks/working/' + 
-        this.data.company_id + '/' + this.data.user_id, null, this.options_token);      
-    }
-    else {
-      return this.http.get(this.base_url + '/tasks/over/' +
-        this.data.company_id + '/' + this.data.user_id, null, this.options_token);
-    }
+    return this.http.get('/assets/data/tasks.json', null, this.options_token);
+    // if(is_doing) {
+    //   return this.http.get(this.base_url + '/tasks/working/' + 
+    //     this.data.company_id + '/' + this.data.user_id, null, this.options_token);      
+    // }
+    // else {
+    //   return this.http.get(this.base_url + '/tasks/over/' +
+    //     this.data.company_id + '/' + this.data.user_id, null, this.options_token);
+    // }
   }
 
   public get_tasks_type() {
@@ -158,17 +160,22 @@ export class API {
   }
 
   public get_all_employees(page, limit) {
-      return this.http.get(this.base_url + '/employees/' 
-        + this.data.company_id, {
-          page: page,
-          limit: limit
-        }, this.options_token);
+    return this.http.get(this.base_url + '/employees/' 
+      + this.data.company_id, {
+        page: page,
+        limit: limit
+      }, this.options_token);
   }
 
   public get_group_sections() {
-    return this.http.get(this.base_url + '/company/sections/0/0', null, this.options_token);
+    return this.http.get(this.base_url + '/company/' + this.data.company_id 
+      + '/sections/' + this.data.section_id, null, this.options_token);
   }
 
-
+  public start_group_chat(group_list) {
+    return this.http.post(this.base_url + '/chats/group/' + this.data.company_id, {
+      groupIDList: group_list
+    }, this.options_token);
+  }
 
 }

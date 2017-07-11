@@ -25,7 +25,7 @@ export class NewSingleChat {
   public select_person: any = null;
 
   public currentPage: number = 0;
-  public limit: number = 8;
+  public limit: number = 12;
   public hasNextPage = true;
 
   constructor(
