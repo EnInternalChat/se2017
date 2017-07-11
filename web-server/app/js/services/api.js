@@ -7,8 +7,8 @@ angular.module('API.Services', [])
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
   // var base_url = "https://118.89.110.77/EnInternalChat";
-  // var base_url = "http://10.42.0.186";
-  var base_url = "https://106.15.186.180/EnInternalChat";
+  var base_url = "http://10.42.0.186";
+  // var base_url = "https://106.15.186.180/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
@@ -84,6 +84,38 @@ angular.module('API.Services', [])
       deffered.reject(error);
     });
     return deffered.promise;    
+  }
+
+  var post_file = function(url, body) {
+    var deffered = $q.defer();
+    $http({
+      method: 'POST',
+      url: url,
+      headers: {
+        "Accept": "*/*",
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": has_token ? $localStorage.token : "",
+        "Platform": "web"        
+      },
+      data: body,
+      transformRequest: function(data, headersGetter) {
+        var form_data = new FormData();
+        for(var key in data) {
+          form_data.append(key, data[key]);
+        }
+        var headers = headersGetter();
+        delete headers['Content-Type'];
+        return form_data;
+      }
+    }).success(function(data, status, headers) {
+      deffered.resolve({
+        body: data,
+        headers: headers
+      });
+    }).error(function(error) {
+      deffered.reject(error);
+    });
+    return deffered.promise; 
   }
 
   var _delete = function(url) {
@@ -306,9 +338,22 @@ angular.module('API.Services', [])
     return get(base_url + '/tasks/all/' + user.companyID, null);
   }
 
-  // this.new_task = function(name, file) {
-  //   return post(base_url + '/tasks/upload/' + )
-  // }
+  this.delete_task = function(id) {
+    return _delete(base_url + '/tasks/' + id);
+  }
+
+  this.update_task = function(id, name) {
+    return post(base_url + '/tasks/' + id, {
+      newName: name
+    });
+  }
+
+  this.new_task = function(name, file) {
+    return post_file(base_url + '/tasks/upload/' + user.companyID, {
+      name: name,
+      file: file
+    })
+  }
 
 
 

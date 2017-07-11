@@ -1,15 +1,11 @@
 app.controller('AbnTestController', function($scope, $timeout, API, $state) {
-  var apple_selected, tree;
+  var tree;
   $scope.my_data = [];
   $scope.my_tree = tree = {};
   $scope.editing = false;
   $scope.members = [];
 
-  apple_selected = function(branch) {
-    return $scope.output = " " + branch.label;
-  };
-
-  format_tree_data = function(children) {
+  var format_tree_data = function(children) {
     $scope.editing = false;
     children['label'] = children['name'];
     children['children'] = children['childrenSections'];

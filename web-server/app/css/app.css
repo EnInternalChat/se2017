@@ -4723,6 +4723,10 @@ a.text-#000000:hover {
   width: 360px;
 }
 
+.w-xxxl {
+  width: 420px;
+}
+
 .w-full {
   width: 100%;
 }

@@ -6,39 +6,49 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
   $scope.group_hash = new Array();
   $scope.items = [];
 
-
-  API.get_company_info().then(function(res) {
-    var root_section = res.organization;
-    $scope.group_hash[root_section['ID']] = root_section['name'];
-    $scope.groups.push({
-      name: root_section['name'],
-      id: root_section['ID']
-    });
-    $scope.findGroupInTree(root_section['childrenSections']);
-    if($stateParams['selected_section']) {
-      $scope.selectGroup($scope.findGroupInList(
-        parseInt($stateParams.selected_section)));
-    }
-  });
-
-  API.get_all_employees().then(function(res) {
-    res.forEach((item) => {
-      $scope.items.push({
-        id: item['ID'],
-        group_id: item['sectionID'],
-        group_name: "",
-        name: item['name'],
-        avatar: "img/" + item['avatar'] + ".png",
-        phone: item['phone'][0],
-        other_phone: item['phone'][1],
-        email: item['email'][0],
-        other_email: item['email'][1],
-        leader: item['leader'],
-        status: item['status']
-      })
+  $scope.init_data = function() {
+    API.loading();
+    Promise.all([$scope.get_company_info(), $scope.get_all_employees()])
+    .then(function(res) {
+      API.stop_loading();
     })
-  })
+  }
 
+  $scope.get_company_info = function() {
+    return API.get_company_info().then(function(res) {
+      var root_section = res.organization;
+      $scope.group_hash[root_section['ID']] = root_section['name'];
+      $scope.groups.push({
+        name: root_section['name'],
+        id: root_section['ID']
+      });
+      $scope.findGroupInTree(root_section['childrenSections']);
+      if($stateParams['selected_section']) {
+        $scope.selectGroup($scope.findGroupInList(
+          parseInt($stateParams.selected_section)));
+      }
+    });
+  }
+
+  $scope.get_all_employees = function() {
+    return API.get_all_employees().then(function(res) {
+      res.forEach((item) => {
+        $scope.items.push({
+          id: item['ID'],
+          group_id: item['sectionID'],
+          group_name: "",
+          name: item['name'],
+          avatar: "img/" + item['avatar'] + ".png",
+          phone: item['phone'][0],
+          other_phone: item['phone'][1],
+          email: item['email'][0],
+          other_email: item['email'][1],
+          leader: item['leader'],
+          status: item['status']
+        })
+      })
+    })    
+  }
 
   $scope.findGroupInTree = function(children) {
     if(children.length === 0)
@@ -168,5 +178,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
       });      
     });
   };
+
+  $scope.init_data();
 
 }]);

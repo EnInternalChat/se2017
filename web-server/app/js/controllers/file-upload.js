@@ -1,4 +1,32 @@
-app.controller('FileUploadCtrl', ['$scope', 'FileUploader', function($scope, FileUploader) {
+app.controller('FileUploadCtrl', ['$scope', 'FileUploader', 'tasks', 
+    function($scope, FileUploader, tasks) {
+    $scope.is_editing = false;
+    $scope.img_data = "data:image/png;base64,";
+    $scope.choose_task = function() {
+        console.log('choose');
+    }
+
+    $scope.edit_task = function() {
+        $scope.is_editing = true;
+    }
+
+    $scope.update_task = function() {
+        $scope.new_task();
+    }
+
+    $scope.new_task = function() {
+        var file = $scope.myFile;
+        console.log(file);
+        tasks.new_task('New', file)
+    }
+
+    $scope.delete_task = function(id) {
+        tasks.delete_task(id).then(function(res) {
+
+        })
+    }
+
+
     var uploader = $scope.uploader = new FileUploader({
         url: 'js/controllers/upload.php'
     });
@@ -50,3 +78,17 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader', function($scope, Fil
 
     console.info('uploader', uploader);
 }]);
+app.directive('file', function () {
+    return {
+        scope: {
+            file: '='
+        },
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var file = event.target.files[0];
+                scope.file = file ? file : undefined;
+                scope.$apply();
+            });
+        }
+    };
+});

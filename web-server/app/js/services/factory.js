@@ -91,13 +91,11 @@ angular.module('Factories', [])
     var i = find_notice(id);
     if(mails[i].fold === 'read' || mails[i].fold === 'unread') {
       return API.delete_received_notice(id).then(function(res) {
-        console.log(res);
         return res;
       })
     }
     else {
       return API.delete_send_notice(id).then(function(res) {
-        console.log(res);
         return res;
       })
     }
@@ -108,7 +106,24 @@ angular.module('Factories', [])
   var tasks = [];
   var factory = {};
   factory.get_all = function() {
-    
+    API.get_tasks().then(function(res) {
+
+    })
+  }
+  factory.delete_task = function(id) {
+    API.delete_task(id).then(function(res) {
+
+    })
+  }
+  factory.update_task = function(id, name) {
+    API.update_task(id, name).then(function(res) {
+
+    })
+  }
+  factory.new_task = function(name, file) {
+    API.new_task(name, file).then(function(res) {
+      
+    })
   }
   return factory;
 }])
