@@ -7,8 +7,8 @@ angular.module('API.Services', [])
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
   // var base_url = "https://118.89.110.77/EnInternalChat";
-  // var base_url = "http://10.42.0.186";
-  var base_url = "https://106.15.186.180/EnInternalChat";
+  var base_url = "http://10.42.0.186";
+  // var base_url = "https://106.15.186.180/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
@@ -20,7 +20,7 @@ angular.module('API.Services', [])
       if(value instanceof Array) {
         for(i = 0; i < value.length; i++) {
           subValue = value[i];
-          fullSubName = name + '[' + i + ']';
+          fullSubName = name;
           innerObj = {};
           innerObj[fullSubName] = subValue;
           query += obj2param(innerObj) + '&';
@@ -269,6 +269,10 @@ angular.module('API.Services', [])
       section_id + '/' + user_id, info);
   }
 
+  this.read_notice = function(notice_id) {
+    return get(base_url + '/notifications/' + user.ID + '/' + notice_id, null); 
+  }
+
   this.get_receive_notice = function(is_read) {
     if(is_read) {
       return get(base_url + '/notifications/received/read/' + user.ID, null);
@@ -282,8 +286,16 @@ angular.module('API.Services', [])
     return get(base_url + '/notifications/sent/' + user.ID, null);
   }
 
+  this.delete_received_notice = function(id) {
+    return _delete(base_url + '/notifications/received/' + user.ID + '/' + id);      
+  }
+
+  this.delete_send_notice = function(id) {
+    return _delete(base_url + '/notifications/sent/' + user.ID + '/' + id);
+  }
+
   this.send_notice = function(receivers, title, content) {
-    return post(base_url + '/notifications', {
+    return post(base_url + '/notifications/send/' + user.ID, {
       receivers: receivers,
       title: title,
       content: content

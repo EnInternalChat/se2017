@@ -30,6 +30,15 @@ angular.module('Factories', [])
     });
   }
 
+  var find_notice = function(id) {
+    for(var i = 0, n = mails.length; i < n; i++) {
+      if(mails[i].ID === parseInt(id)) {
+        break;
+      }
+    }
+    return i % mails.length;
+  }
+
   var factory = {};
   factory.get_mails = function (tag) {
     mails = [];
@@ -66,12 +75,33 @@ angular.module('Factories', [])
     }
   };
   factory.get_detail = function (id) {
-    for(var i = 0, n = mails.length; i < n; i++) {
-      if(mails[i].ID === parseInt(id))
+    var i = find_notice(id);
+    if(mails[i].fold === 'unread') {
+      return API.read_notice(mails[i].ID).then(function(res) {
+        console.log(res);
+        mails[i].fold = 'read';
         return mails[i];
+      });      
     }
-    return mails[0];
+    else {
+      return Promise.resolve(mails[i]);
+    }
   };
+  factory.delete_notice = function(id) {
+    var i = find_notice(id);
+    if(mails[i].fold === 'read' || mails[i].fold === 'unread') {
+      return API.delete_received_notice(id).then(function(res) {
+        console.log(res);
+        return res;
+      })
+    }
+    else {
+      return API.delete_send_notice(id).then(function(res) {
+        console.log(res);
+        return res;
+      })
+    }
+  }
   return factory;
 }])
 .factory('tasks', ['API', function(API){

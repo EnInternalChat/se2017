@@ -14,7 +14,8 @@ app.controller('MailCtrl', ['$scope', function($scope) {
 
 }]);
 
-app.controller('MailListCtrl', ['$scope', 'mails', '$stateParams', function($scope, mails, $stateParams) {
+app.controller('MailListCtrl', ['$scope', 'mails', '$stateParams', '$state', 
+  function($scope, mails, $stateParams, $state) {
   $scope.fold = $stateParams.fold;
 
   $scope.get_mails = function() {
@@ -27,12 +28,40 @@ app.controller('MailListCtrl', ['$scope', 'mails', '$stateParams', function($sco
   $scope.refresh = function() {
     $scope.get_mails();
   }
+
+  $scope.mail_detail = function(id) {
+    $state.go('app.mail.detail', { mailID: parseInt(id) });
+  }
   $scope.get_mails();
 }]);
 
-app.controller('MailDetailCtrl', ['$scope', 'mails', '$stateParams', 
-  function($scope, mails, $stateParams) {
-    $scope.mail = mails.get_detail($stateParams.mailID);
+app.controller('MailDetailCtrl', ['$state', '$scope', 'mails', '$stateParams', 'API', '$sce', 
+  function($state, $scope, mails, $stateParams, API, $sce) {
+    $scope.mail = {};
+    mails.get_detail($stateParams.mailID).then(function(mail) {
+      $scope.mail = mail;
+      API.loading();
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: true,
+        pedantic: true,
+        sanitize: true,
+        smartLists: true,
+        smartypants: true
+      });
+      $scope.md_content = $sce.trustAsHtml(marked(mail.content));
+      API.stop_loading();
+      $scope.$apply();
+    });
+    $scope.delete_notice = function(id) {
+      API.loading();
+      mails.delete_notice(id).then(function(res) {
+        API.stop_loading();
+        $state.go('app.mail.list');
+      })
+    }
 }]);
 
 app.controller('MailNewCtrl', ['$scope', 'API',
@@ -65,9 +94,9 @@ app.controller('MailNewCtrl', ['$scope', 'API',
   
   $scope.get_receive_sections = function() {
     API.loading();
-    API.get_company_info().then(
+    API.get_section_info(API.user_info().sectionID).then(
       function(res) {
-        $scope.tree2list(res.organization);
+        $scope.tree2list(res);
         API.stop_loading();
       })
   };
@@ -85,9 +114,11 @@ app.controller('MailNewCtrl', ['$scope', 'API',
     $scope.to_list.data.forEach(function(item) {
       receivers.push(item.id);
     });
+    API.loading();
     API.send_notice(receivers, $scope.title, $scope.markdown_editor.value()).then(
       function(res) {
-        console.log("res: ", res);
+        API.stop_loading();
+        API.alert(res.body.info, $scope, function(){});
       })
   }
 

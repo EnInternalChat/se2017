@@ -364,8 +364,14 @@ angular.module('app')
                   templateUrl: 'tpl/mail.list.html'
               })
               .state('app.mail.detail', {
-                  url: '/{mailID}',
-                  templateUrl: 'tpl/mail.detail.html'
+                  url: '/detail?mailID',
+                  templateUrl: 'tpl/mail.detail.html',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function($ocLazyLoad) {
+                        return $ocLazyLoad.load(['vendor/jquery/markdown/marked.js']);
+                      }]
+                  }
               })
               .state('app.mail.compose', {
                   url: '/compose',

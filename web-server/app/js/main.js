@@ -81,10 +81,10 @@ angular.module('app')
         API.login($localStorage.username, $localStorage.password).then(
           function(res) {
             API.stop_loading();
+            $scope.username = $localStorage.username;
+            $scope.avatar = $localStorage.avatar;
             if(!res.status)
               $state.go('access.signin');
-            else
-              $scope.username = $localStorage.username;
           })
       }
       else {

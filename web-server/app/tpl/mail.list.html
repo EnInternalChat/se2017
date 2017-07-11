@@ -21,8 +21,8 @@
         <span class="hidden-xs">{{ mail.sentTime | fromNow }}</span>
       </div>
       <div class="clear">
-        <div><a ui-sref="app.mail.detail({mailID:mail.ID})" class="text-lg">{{mail.senderName}}</a></div>
-        <div class="text-ellipsis m-t-xs">{{mail.title | limitTo:100}}</div>
+        <div><a class="text-lg" ng-click="mail_detail(mail.ID)">{{mail.senderName}}</a></div>
+        <div class="text-ellipsis m-t-xs">{{mail.title | limitTo:50}}</div>
       </div>      
     </li>
   </ul>
