@@ -7,7 +7,6 @@ import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { UIText } from '../../providers/ui_text';
 import { AppGlobal } from '../../providers/global_data';
-import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NotificationList page.
@@ -30,7 +29,6 @@ export class NotificationList {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public api: API,
-              public ui: UIText,
               public native: NativeServiceHelper,
               public global_data: AppGlobal,
               public ui: UIText) {

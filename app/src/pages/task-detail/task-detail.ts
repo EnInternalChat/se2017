@@ -24,7 +24,6 @@ export class TaskDetail {
   public operation_options : Array<{value : string, text : string}> = [];
 
   constructor(
-    public ui: UIText,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,

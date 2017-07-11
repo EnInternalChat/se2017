@@ -257,7 +257,7 @@ export class UIText {
     this.loading = data_lan.loading;
     this.pullText = data_lan.pullText;
     this.refreshText = data_lan.refreshText;
-    this.ok = data_lan.ok;2
+    this.ok = data_lan.ok;
     this.cancel = data_lan.cancel;
     this.Login = data_lan.LoginPage;
     this.BasisPage = data_lan.BasisPage;

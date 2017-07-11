@@ -98,6 +98,8 @@ export class ChatList {
     for(let i = 0, n = this.con_list.length; i < n; i++) {
       if(this.con_list[i].is_single === new_con.is_single
         && this.con_list[i].target_id === new_con.target_id) {
+        this.con_list[i].avator = 
+          (new_con.is_single ? json['targetInfo']['nickname'] : 'group_chat');
         this.con_list[i].update_last_msg(json);
         return;
       }

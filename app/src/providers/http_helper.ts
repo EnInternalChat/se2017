@@ -60,7 +60,7 @@ export class HTTPService {
         for(let i = 0, n = values.length; i < n; i++) {
           value_pair_array.push(this.to_query_pair(key, values[i]));
         }
-        str_array.concat(value_pair_array);
+        str_array = str_array.concat(value_pair_array);
       }
       else
         str_array.push(this.to_query_pair(key, values));
