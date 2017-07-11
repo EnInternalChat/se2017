@@ -7,6 +7,7 @@ import { AppGlobal } from '../../providers/global_data';
 import { ChatDetail } from '../chat-detail/chat-detail';
 import { Conversation } from '../../providers/chat';
 import { ChatService } from '../../providers/chats_service';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NewSingleChat page.
@@ -29,12 +30,13 @@ export class NewSingleChat {
   public hasNextPage = true;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
     public chat: ChatService,
     public native: NativeServiceHelper,
-    public global_data: AppGlobal) {
+    public global_data: AppGlobal,
+    public ui: UIText) {
   }
 
   ionViewDidLoad() {
@@ -94,7 +96,7 @@ export class NewSingleChat {
     let con_list = this.global_data.conversation_list;
 
     for(let i = 0, n = con_list.length; i < n; i++) {
-      if(con_list[i].is_single 
+      if(con_list[i].is_single
         && con_list[i].target_id === this.select_person.id) {
         this.navCtrl.push(ChatDetail, {conversation: con_list[i]});
         return;
@@ -119,6 +121,6 @@ export class NewSingleChat {
 
   public go_back() {
     this.navCtrl.pop();
-  } 
+  }
 
 }

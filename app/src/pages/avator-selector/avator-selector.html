@@ -8,14 +8,14 @@
 
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="go_back()"> 
+      <button ion-button icon-only (click)="go_back()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>更换头像</ion-title>
+    <ion-title>{{ui.AvatorSelectorPage.changeavator}}</ion-title>
     <ion-buttons right (click)="change_avator()">
-      <button ion-button clear>确认</button>
-    </ion-buttons>    
+      <button ion-button clear>{{ui.AvatorSelectorPage.confirm}}</button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>

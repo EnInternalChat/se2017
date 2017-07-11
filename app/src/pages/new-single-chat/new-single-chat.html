@@ -8,14 +8,14 @@
 
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="go_back()"> 
+      <button ion-button icon-only (click)="go_back()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>开启私聊</ion-title>
+    <ion-title>{{ui.NewSingleChatPage.start}}</ion-title>
     <ion-buttons right (click)="new_chat()">
-      <button ion-button clear>确认</button>
-    </ion-buttons>    
+      <button ion-button clear>{{ui.NewSingleChatPage.ok}}</button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -31,7 +31,7 @@
     </ion-item>
   </ion-list>
   <ion-infinite-scroll [(enabled)]="hasNextPage" (ionInfinite)="loadMore($event)" class="load-more">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载更多数据...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ui.NewSingleChatPage.loading}}">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

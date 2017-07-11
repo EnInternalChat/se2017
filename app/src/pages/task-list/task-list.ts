@@ -7,6 +7,7 @@ import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the TaskList page.
@@ -38,7 +39,8 @@ export class TaskList {
               public events: Events,
               public api: API,
               public native: NativeServiceHelper,
-              public data: AppGlobal) {
+              public data: AppGlobal,
+              public ui: UIText) {
   }
 
   ionViewDidLoad() {
@@ -64,7 +66,7 @@ export class TaskList {
   }
 
   ionViewDidEnter() {
-    this.config.set('ios', 'pageTransition', 'ios-transition');    
+    this.config.set('ios', 'pageTransition', 'ios-transition');
   }
 
   public copy_list(source, dst) {

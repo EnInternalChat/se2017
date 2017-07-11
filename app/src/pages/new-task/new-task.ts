@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AppGlobal } from '../../providers/global_data';
 import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NewTask page.
@@ -29,7 +30,8 @@ export class NewTask {
               public navParams: NavParams,
               private global_data: AppGlobal,
               private native: NativeServiceHelper,
-              private api: API) {
+              private api: API,
+              public ui: UIText) {
   }
 
   ionViewDidLoad() {
@@ -51,7 +53,7 @@ export class NewTask {
         });
         this.task_type = this.tasks_type_options[0].text;
       },
-      (error) => this.native.show_toast("网络连接失败!"));   
+      (error) => this.native.show_toast("网络连接失败!"));
   }
 
   public start_task() {

@@ -8,24 +8,24 @@
 
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="go_back()"> 
+      <button ion-button icon-only (click)="go_back()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>请假</ion-title>
+    <ion-title>{{ui.TaskDetailPage.askforleave}}</ion-title>
   </ion-toolbar>
   <div class="task-info-container">
     <ion-list class="task-info-list">
       <ion-item>
-        <ion-label>发起人</ion-label>
+        <ion-label>{{ui.TaskDetailPage.originator}}</ion-label>
         <ion-label style="text-align: right;">{{task_info.start_person}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>开始时间</ion-label>
+        <ion-label>{{ui.TaskDetailPage.starttime}}</ion-label>
         <ion-label style="text-align: right;">{{task_info.start_time | date: 'y/MM/dd HH:mm'}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>备注</ion-label>
+        <ion-label>{{ui.TaskDetailPage.note}}</ion-label>
         <ion-label style="text-align: right;">{{task_info.content}}</ion-label>
       </ion-item>
     </ion-list>
@@ -49,7 +49,7 @@
         <ion-card class="task-stage-content">
           <ion-card-header>{{stage.person_str}}</ion-card-header>
           <ion-card-content>{{stage.content}}</ion-card-content>
-          </ion-card>        
+          </ion-card>
       </div>
     </ion-item>
   </ion-list>
@@ -64,10 +64,10 @@
       <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[1].value)">{{operation_options[1].text}}</button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar class="footer-toolbar" *ngSwitchCase="1"> 
+  <ion-toolbar class="footer-toolbar" *ngSwitchCase="1">
     <ion-buttons style="text-align: center;">
       <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
     </ion-buttons>
   </ion-toolbar>
-    
+
 </ion-footer>

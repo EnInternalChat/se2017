@@ -8,14 +8,14 @@
 
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="go_back()"> 
+      <button ion-button icon-only (click)="go_back()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>开启群聊</ion-title>
+    <ion-title>{{ui.NewGroupChatPage.open}}</ion-title>
     <ion-buttons right (click)="new_chat()">
-      <button ion-button clear>确认</button>
-    </ion-buttons>    
+      <button ion-button clear>{{ui.NewGroupChatPage.ok}}</button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

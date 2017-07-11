@@ -8,14 +8,14 @@
 
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="go_back()"> 
+      <button ion-button icon-only (click)="go_back()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>开始新任务</ion-title>
+    <ion-title>{{ui.NewTaskPage.start}}</ion-title>
     <ion-buttons right (click)="start_task()">
-      <button ion-button clear>确认</button>
-    </ion-buttons>    
+      <button ion-button clear>{{ui.NewTaskPage.confirm}}</button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
@@ -24,17 +24,17 @@
 <ion-content>
   <ion-list class="new-task-info">
     <ion-item>
-      <ion-label>任务类型</ion-label>
-      <ion-select class="select-task-type" interface="action-sheet" cancelText="取消" okText="确认" [(ngModel)]="task_type">
+      <ion-label>{{ui.NewTaskPage.types}}</ion-label>
+      <ion-select class="select-task-type" interface="action-sheet" cancelText="{{ui.NewTaskPage.cancel}}" okText="{{ui.NewTaskPage.confirm}}" [(ngModel)]="task_type">
         <ion-option *ngFor="let option of tasks_type_options" value="{{option.value}}">{{option.text}}</ion-option>
-      </ion-select>  
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>发起人</ion-label>
+      <ion-label>{{ui.NewTaskPage.sponsor}}</ion-label>
       <ion-label>{{user_name}}({{job}})</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label fixed>备注</ion-label>
+      <ion-label fixed>{{ui.NewTaskPage.notes}}</ion-label>
       <ion-textarea type="text" clearInput="true" rows="5" [(ngModel)]="comment"></ion-textarea>
     </ion-item>
   </ion-list>

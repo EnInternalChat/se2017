@@ -9,7 +9,7 @@ export const enum AppLanguage {
 export class UIText {
 
   private data = {
-    "CN": 
+    "CN":
     {
       "loading": "请稍候...",
       "pullText": "下拉刷新",
@@ -56,7 +56,57 @@ export class UIText {
         "start_fail": "无法开始会话",
         "send_text_fail": "发送文字信息失败，请检查网络",
         "send_img_fail": "发送图片信息失败，请检查网络"
-      }
+      },
+      "NewTaskPage":
+        {
+          "start": "开始新任务",
+          "confirm": "确认",
+          "types": "任务类型",
+          "cancel": "取消",
+          "sponsor": "任务发起人",
+          "notes": "备注"
+        },
+      "AvatorSelectorPage":
+        {
+          "changeavator": "更换头像",
+          "confirm": "确认"
+        },
+      "NewGroupChatPage":
+        {
+          "open": "开启群聊",
+          "ok": "确认"
+        },
+      "NewSingleChatPage":
+        {
+          "start": "开启私聊",
+          "ok": "确认",
+          "loading": "加载更多数据..."
+        },
+      "NotificationDetailPage":
+        {
+          "detail": "通知详情"
+        },
+      "NotificationListPage":
+        {
+          "check": "查看通知",
+          "unread": "未读通知",
+          "old": "历史通知"
+        },
+      "TaskDetailPage":
+        {
+          "askforleave": "请假",
+          "originator": "发起人",
+          "starttime": "开始时间",
+          "note": "备注"
+        },
+      "TaskListPage":
+        {
+          "task": "任务管理",
+          "undone": "未完成任务",
+          "old": "历史任务",
+          "load": "下拉刷新",
+          "loading": "刷新中..."
+        }
 
     },
     "EN":
@@ -72,7 +122,7 @@ export class UIText {
         "pwd": "Password",
         "remember_pwd": "Remember me",
         "auto_login": "Auto login",
-        "login_submit": "Login"            
+        "login_submit": "Login"
       },
       "PersonalPage":
       {
@@ -89,7 +139,7 @@ export class UIText {
         "check_pwd": "new password",
         "change_contact": "Change contact",
         "tel": "telephone",
-        "mail": "mail",        
+        "mail": "mail",
         "ok": "OK",
         "cancel": "Cancel"
       },
@@ -104,7 +154,57 @@ export class UIText {
       "ChatDetailPage":
       {
         "start_fail": "Can not start chat"
-      }
+      },
+      "NewTaskPage":
+        {
+          "start": "Start new task",
+          "confirm": "Confirm",
+          "types": "Select task type",
+          "cancel": "Cancel",
+          "sponsor": "Task sponsor",
+          "notes": "Remark section"
+        },
+      "AvatorSelectorPage":
+        {
+          "changeavator": "Avator change",
+          "confirm": "Confirm"
+        },
+      "NewGroupChatPage":
+        {
+          "open": "New GroupChat",
+          "ok": "Confirm"
+        },
+      "NewSingleChatPage":
+        {
+          "start": "New SingleChat",
+          "ok": "Confirm",
+          "loading": "Loading more..."
+        },
+      "NotificationDetailPage":
+        {
+          "detail": "Detail of Notification"
+        },
+      "NotificationListPage":
+        {
+          "check": "Check notification",
+          "unread": "Notice no read",
+          "old": "History of notice"
+        },
+      "TaskDetailPage":
+        {
+          "askforleave": "Ask for leave",
+          "originator": "The originator",
+          "starttime": "The start time",
+          "note": "The note"
+        },
+      "TaskListPage":
+        {
+          "task": "Task manage",
+          "undone": "Task not done",
+          "old": "Task history",
+          "load": "Drop-down refresh",
+          "loading": "loading..."
+        }
 
     }
   };
@@ -114,11 +214,20 @@ export class UIText {
   public refreshText: string;
   public ok: string;
   public cancel: string;
-  
+
   public Login: any;
   public BasisPage: any;
   public ChatDetailPage: any;
   public PersonalPage: any;
+  public NewTaskPage: any;
+  public AvatorSelectorPage: any;
+  public NewGroupChatPage: any;
+  public NewSingleChatPage: any;
+  public NotificationDetailPage: any;
+  public NotificationListPage: any;
+  public TaskDetailPage: any;
+  public TaskListPage: any;
+
   public LanguageOptions = [
     {"value": AppLanguage.CN, "text": "简体中文"},
     {"value": AppLanguage.EN, "text": "English"}];
@@ -148,13 +257,20 @@ export class UIText {
     this.loading = data_lan.loading;
     this.pullText = data_lan.pullText;
     this.refreshText = data_lan.refreshText;
-    this.ok = data_lan.ok;
+    this.ok = data_lan.ok;2
     this.cancel = data_lan.cancel;
     this.Login = data_lan.LoginPage;
     this.BasisPage = data_lan.BasisPage;
     this.ChatDetailPage = data_lan.ChatDetailPage;
     this.PersonalPage = data_lan.PersonalPage;
-
+    this.NewTaskPage = data_lan.NewTaskPage;
+    this.AvatorSelectorPage = data_lan.AvatorSelectorPage;
+    this.NewGroupChatPage = data_lan.NewGroupChatPage;
+    this.NewSingleChatPage = data_lan.NewSingleChatPage;
+    this.NotificationDetailPage = data_lan.NotificationDetailPage;
+    this.NotificationListPage = data_lan.NotificationListPage;
+    this.TaskDetailPage = data_lan.TaskDetailPage;
+    this.TaskListPage = data_lan.TaskListPage
   }
 
 }

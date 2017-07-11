@@ -9,15 +9,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>查看通知</ion-title>
+    <ion-title>{{ui.NotificationListPage.check}}</ion-title>
   </ion-toolbar>
   <div class="read-slide-bar">
     <ion-segment [(ngModel)]="read_status">
       <ion-segment-button value="notice_not_read">
-        未读通知
+        {{ui.NotificationListPage.unread}}
       </ion-segment-button>
       <ion-segment-button value="notice_old">
-        历史通知
+        {{ui.NotificationListPage.old}}
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -45,7 +45,7 @@
         <div class="notice-detail-button">
           <button ion-button icon-only clear>
             <ion-icon name="ios-arrow-forward"></ion-icon>
-          </button>            
+          </button>
         </div>
       </ion-item>
     </ion-list>
@@ -63,7 +63,7 @@
         <div class="notice-detail-button">
           <button ion-button icon-only clear>
             <ion-icon name="ios-arrow-forward"></ion-icon>
-          </button>            
+          </button>
         </div>
       </ion-item>
     </ion-list>

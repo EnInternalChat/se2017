@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { API } from '../../providers/api';
 import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { Section } from '../../providers/section';
+import { UIText } from '../../providers/ui_text';
 
 /**
  * Generated class for the NewGroupChat page.
@@ -23,10 +24,11 @@ export class NewGroupChat {
 
   constructor(
     public changeDetect: ChangeDetectorRef,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
-    public native: NativeServiceHelper) {
+    public native: NativeServiceHelper,
+    public ui: UIText) {
   }
 
   ionViewDidLoad() {
