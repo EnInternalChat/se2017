@@ -42,9 +42,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      if(!this.native.is_network_connect()) {
-        this.native.show_toast("无网络连接", 2000);
-      }
       this.initJPush();
       this.platform.registerBackButtonAction(() => {
         if(this.keyBoard.isOpen()) {

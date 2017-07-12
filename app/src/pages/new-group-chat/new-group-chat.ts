@@ -64,13 +64,11 @@ export class NewGroupChat {
         this.native.show_toast('无法开启群组聊天');
         return;
       }
-      let con_id = res.body.chatID;
-
       let new_con = new Conversation({
         type: 'group',
         targetInfo: {
-          groupID: con_id,
-          groupName: con_id
+          groupID: res.body.chatID,
+          groupName: res.body.name
         },
         latestType: 'text',
         unReadMsgCnt: 0,

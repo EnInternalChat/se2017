@@ -113,12 +113,12 @@ export class API {
     if(not_read) {
       let url_key = this.base_url + '/notifications/received/unread/' 
         + this.data.user_id;
-      // return this.cache.getItem(url_key).catch(() => {
-      //     return this.http.get(url_key, null, this.options_token).then((res) => {
-      //       return this.cache.saveItem(url_key, res);
-      //     })
-      //   })
-      return this.http.get(url_key, null, this.options_token);
+      return this.cache.getItem(url_key).catch(() => {
+          return this.http.get(url_key, null, this.options_token).then((res) => {
+            return this.cache.saveItem(url_key, res);
+          })
+        })
+      // return this.http.get(url_key, null, this.options_token);
     }
     else {
       let url_key = this.base_url + '/notifications/received/read/'
