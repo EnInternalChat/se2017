@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HTTPService } from './http_helper';
 import { AppGlobal } from './global_data';
 import { Headers, RequestOptions } from '@angular/http';
+import { CacheService } from "ionic-cache";
+
+// class PageCache {
+//   private pages = [];
+//   public hit(page, )
+// }
 
 @Injectable()
 export class API {
@@ -18,7 +24,8 @@ export class API {
 
   constructor(
     private http: HTTPService,
-    private data: AppGlobal) {
+    private data: AppGlobal,
+    private cache: CacheService) {
     this.options = new RequestOptions({
       headers: new Headers({
         "Accept": "*/*",
@@ -50,6 +57,10 @@ export class API {
       })
     }); 
   }
+
+  // public do_refresh(page_name) {
+  //   this.
+  // }
 
   public update_token() {
     this.options_token = new RequestOptions({

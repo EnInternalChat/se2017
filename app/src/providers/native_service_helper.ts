@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Platform, ToastController, LoadingController, Loading } from 'ionic-angular';
-import { Network } from '@ionic-native/network';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -8,6 +7,7 @@ import { UIText } from './ui_text';
 
 @Injectable()
 export class NativeServiceHelper {
+  public is_offline: boolean = false;
   public is_platform: boolean;
   private load: Loading;
   private camera_options: CameraOptions = {
@@ -23,7 +23,6 @@ export class NativeServiceHelper {
 
   constructor(
     private platform: Platform, 
-    private network: Network,
     private toastCtrl: ToastController,
     private loadCtrl: LoadingController,
     private camera: Camera,
@@ -45,11 +44,6 @@ export class NativeServiceHelper {
     if(!this.is_platform)
       return;
     return this.imagePicker.getPictures(this.image_picker_option);
-  }
-
-  //网络类型: unknown, ethernet, wifi, 2g, 3g, 4g, cellular, none
-  public is_network_connect(): boolean {
-    return this.network.type != 'none';
   }
 
   public show_toast(words: string, time: number = 2000, pos: string = 'bottom'): void {

@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
+import { CacheModule } from "ionic-cache";
 
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
@@ -68,7 +69,8 @@ import { SharedModule } from '../components/shared.module';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpModule,
-    SharedModule
+    SharedModule,
+    CacheModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

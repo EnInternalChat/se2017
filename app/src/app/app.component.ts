@@ -9,6 +9,7 @@ import { ChatDetail } from '../pages/chat-detail/chat-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Network } from '@ionic-native/network';
 
 declare let window;
 
@@ -30,7 +31,8 @@ export class MyApp {
     private splashScreen: SplashScreen,
     private events: Events,
     private keyBoard: Keyboard,
-    private native: NativeServiceHelper) {
+    private native: NativeServiceHelper,
+    private network: Network) {
     this.initializeApp();
   }
 
@@ -53,6 +55,13 @@ export class MyApp {
         this.show_exit_toast();
         return;
       }, 1);
+      this.network.onDisconnect().subscribe(() => {
+        this.native.show_toast('网络连接断开');
+        this.native.is_offline = true;
+      });
+      this.network.onConnect().subscribe(() => {
+        this.native.is_offline = false;
+      })
     });
   }
 
