@@ -34,23 +34,29 @@ export class NotificationList {
               public ui: UIText) {
   }
 
-  ionViewDidLoad() {
-    if(!this.navParams.get('need_load')) {
-      this.copy_list(this.global_data.notice_cache['not_read'], this.notice_list_not_read);
-      this.copy_list(this.global_data.notice_cache['read'], this.notice_list_read);
-      return;
-    }
+  ionViewDidEnter() {
     this.native.loading();
     this.update_notice_list(true).then(
       () => this.native.stop_loading());
   }
 
-  ionViewWillUnload() {
-    this.global_data.notice_cache['not_read'] = [];
-    this.global_data.notice_cache['read'] = [];
-    this.copy_list(this.notice_list_not_read, this.global_data.notice_cache['not_read']);
-    this.copy_list(this.notice_list_read, this.global_data.notice_cache['read']);
-  }
+  // ionViewDidLoad() {
+  //   if(!this.navParams.get('need_load')) {
+  //     this.copy_list(this.global_data.notice_cache['not_read'], this.notice_list_not_read);
+  //     this.copy_list(this.global_data.notice_cache['read'], this.notice_list_read);
+  //     return;
+  //   }
+  //   this.native.loading();
+  //   this.update_notice_list(true).then(
+  //     () => this.native.stop_loading());
+  // }
+
+  // ionViewWillUnload() {
+  //   this.global_data.notice_cache['not_read'] = [];
+  //   this.global_data.notice_cache['read'] = [];
+  //   this.copy_list(this.notice_list_not_read, this.global_data.notice_cache['not_read']);
+  //   this.copy_list(this.notice_list_read, this.global_data.notice_cache['read']);
+  // }
 
   public copy_list(source, dst) {
     source.forEach((item) => {

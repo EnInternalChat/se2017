@@ -24,8 +24,7 @@ export class AppGlobal {
   public personal: any;
   public conversation_list: Array<Conversation> = [];
   public task_cache: any = {};
-  public notice_cache: any = {};
-
+  
   public constructor(
     private storage: StorageHelper,
     private md5_helper: MD5,
@@ -42,9 +41,9 @@ export class AppGlobal {
     let p3 = this.storage.read_local_info("language", 1).then(
       (value) => this.language = <AppLanguage>value);
     Promise.all([p1, p2, p3]).then(() => {
-      console.log("In Global(avator): ", this._avator_path);
-      console.log("In Global(username): ", this._user_name);
-      console.log("In Global(language): ", this.language);
+      // console.log("In Global(avator): ", this._avator_path);
+      // console.log("In Global(username): ", this._user_name);
+      // console.log("In Global(language): ", this.language);
     });
   }
 

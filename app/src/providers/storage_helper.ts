@@ -8,8 +8,8 @@ export class StorageHelper {
     this.storage.ready().then();
   }
 
-  public storage_info(key: any, value: any): void {
-    this.storage.set(key, value);
+  public storage_info(key: any, value: any) {
+    return this.storage.set(key, value);
   }
 
   public read_local_info(key: any, default_value: any): Promise<any> 

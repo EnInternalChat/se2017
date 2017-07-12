@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HTTPService } from './http_helper';
 import { AppGlobal } from './global_data';
 import { Headers, RequestOptions } from '@angular/http';
-import { CacheService } from "ionic-cache";
+import { HttpCache } from './cache';
 import { StorageHelper } from './storage_helper';
 
 // class PageCache {
@@ -20,15 +20,14 @@ export class API {
 
   private is_debug: boolean = false;
   // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
-  // public base_url: string = this.is_debug ? "" : "https://t.garenfeather.cn/EnInternalChat";
-  public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
+  public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
     private http: HTTPService,
     private data: AppGlobal,
-    private cache: CacheService,
-    private storage: StorageHelper) {
-    this.cache.setDefaultTTL(60 * 60);
+    private storage: StorageHelper,
+    private cache: HttpCache) {
     this.options = new RequestOptions({
       headers: new Headers({
         "Accept": "*/*",
@@ -61,10 +60,6 @@ export class API {
     }); 
   }
 
-  // public do_refresh(page_name) {
-  //   this.
-  // }
-
   public update_token() {
     this.options_token = new RequestOptions({
       headers: new Headers({
@@ -84,22 +79,8 @@ export class API {
     }); 
   }
 
-  public get_cache(key, group_key, param?) {
-    return this.cache.getItem(key).catch(() => {
-      return this.http.get(key, param, this.options_token).then((res) => {
-        return this.cache.saveItem(key, res, group_key);
-      })
-    })
-  }
-
   public clean_cache(group_key) {
-    let p_clean = [];
-    return this.storage.for_each((val, key) => {
-      if(val && val.groupKey === group_key)
-        p_clean.push(this.storage.remove(key));
-    }).then(() => {
-      return Promise.all(p_clean);
-    })
+    return this.cache.clean_group(group_key);
   }
 
   public login(username, password) {
@@ -133,22 +114,26 @@ export class API {
     let group_key = "notices";
     let url_key;
     if(not_read) {
-      url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
+      url_key = "/assets/data/notices.json";
+      // url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
     }
     else {
-      url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
+      url_key = "/assets/data/notices.json";
+      // url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
     }
-    return this.cache.getItem(url_key).then((res) => {
-      console.log("get: ", res);
-      return res;
-    }).catch(() => {
-      return this.http.get(url_key, null, this.options_token).then((res) => {
-        return this.cache.saveItem(url_key, res, group_key).then((res) => {
-          console.log("Not get: ", res);
-          return CacheService.decodeRawData(res);
-        });
-      })
-    })
+    // return this.cache.read(url_key).then((res) => {
+    //   console.log("get: ", res);
+    //   return res;
+    // }).catch(() => {
+    //   return this.http.get(url_key, null, this.options_token).then((res) => {
+    //     return this.cache.save(url_key, res, group_key).then((res) => {
+    //       console.log("Not get: ", res);
+    //       return res;
+    //     });
+    //   })
+    // })
+    return this.cache.get(url_key, group_key, 
+      this.http.get(url_key, null, this.options_token));
   }
 
   public read_notice(notice_id) {
