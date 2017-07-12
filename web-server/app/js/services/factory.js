@@ -105,14 +105,50 @@ angular.module('Factories', [])
 .factory('tasks', ['API', function(API){
   var tasks = [];
   var factory = {};
+  var find_task_index = function(id) {
+    for(var i = 0, n = tasks.length; i < n; i++) {
+      if(tasks[i].id === parseInt(id))
+        break;
+    }
+    return i;
+  }
+  factory.find_task = function(id) {
+    return tasks[find_task_index(id)];
+  }
+  factory.get_task_detail = function(id) {
+    return API.get_task_detail(id).then(function(res) {
+      if(res.data) {
+        tasks[find_task_index(id)].img_data = "data:image/png;base64," + res.data;
+        return "data:image/png;base64," + res.data;
+      }
+      else {
+        API.alert(res.info, null, function(){});
+        return "";
+      }
+    });
+  }
   factory.get_all = function() {
     return API.get_tasks().then(function(res) {
+      tasks.splice(0, tasks.length);
+      res.forEach(function(item) {
+        tasks.push({
+          id: item.ID,
+          name: item.name,
+          time: item.updateTime
+        })
+      })
       return tasks; 
     })
   }
   factory.delete_task = function(id) {
     return API.delete_task(id).then(function(res) {
-
+      console.log(res);
+      if(res.info === '删除成功') {
+        tasks.splice(find_task_index(id), 1);
+        return true;
+      }
+      else 
+        return false;
     })
   }
   factory.update_task = function(id, name) {
@@ -122,7 +158,16 @@ angular.module('Factories', [])
   }
   factory.new_task = function(name, file) {
     return API.new_task(name, file).then(function(res) {
-      
+      if(res.body.deploy && res.body.upload) {
+        var new_task = {
+          name: name,
+          img_data: "data:image/png;base64," + res.body.data,
+          time: new Date()          
+        }
+        tasks.push(new_task);
+        return new_task;
+      }
+      API.alert(res.body.info, null, function(){});
     })
   }
   return factory;

@@ -334,16 +334,20 @@ angular.module('API.Services', [])
     });
   }
 
+  this.get_task_detail = function(id) {
+    return get(base_url + '/tasks/' + user.companyID + '/' + id, null);
+  }
+
   this.get_tasks = function() {
     return get(base_url + '/tasks/all/' + user.companyID, null);
   }
 
   this.delete_task = function(id) {
-    return _delete(base_url + '/tasks/' + id);
+    return _delete(base_url + '/tasks/' + user.companyID + '/' + id);
   }
 
   this.update_task = function(id, name) {
-    return post(base_url + '/tasks/' + id, {
+    return post(base_url + '/tasks/' + user.companyID + '/' + id, {
       newName: name
     });
   }
@@ -351,7 +355,7 @@ angular.module('API.Services', [])
   this.new_task = function(name, file) {
     return post_file(base_url + '/tasks/upload/' + user.companyID, {
       name: name,
-      file: file
+      newTaskFile: file
     })
   }
 
