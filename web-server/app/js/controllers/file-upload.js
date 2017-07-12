@@ -18,23 +18,28 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader', 'tasks', 'API',
         $scope.is_editing = true;
         $scope.item = tasks.find_task(id);
         $scope.img_data = $scope.item.img_data;
+        if(!$scope.img_data) {
+            tasks.get_task_detail(id).then(function(res) {
+                $scope.img_data = res;
+            });
+        }
     }
 
     $scope.update_task = function() {
         if($scope.is_creating) {
             API.loading();
             var file = $scope.myFile;
-            tasks.new_task($scope.name, file).then(function(res) {
+            tasks.new_task($scope.item.name, file).then(function(res) {
                 if(res) {
                     $scope.img_data = res.img_data;
-                    $scope.is_creating = true;
+                    $scope.is_creating = false;
                 }
                 API.stop_loading();
             });            
         }
         else if($scope.is_editing) {
             API.loading();
-            tasks.update_task(item.id, item.name).then(function(res) {
+            tasks.update_task($scope.item.id, $scope.item.name).then(function(res) {
                 $scope.is_editing = false;
                 API.stop_loading();
             });
@@ -49,6 +54,7 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader', 'tasks', 'API',
     }
 
     $scope.delete_task = function(id) {
+        API.loading();
         tasks.delete_task(id).then(function(res) {
             if(res) {
                 $scope.item = {};
@@ -56,6 +62,7 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader', 'tasks', 'API',
                 $scope.is_creating = false;
                 $scope.img_data = undefined;
             }
+            API.stop_loading();
         })
     }
 

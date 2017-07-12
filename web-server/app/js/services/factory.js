@@ -160,6 +160,7 @@ angular.module('Factories', [])
     return API.new_task(name, file).then(function(res) {
       if(res.body.deploy && res.body.upload) {
         var new_task = {
+          id: res.body.ID,
           name: name,
           img_data: "data:image/png;base64," + res.body.data,
           time: new Date()          

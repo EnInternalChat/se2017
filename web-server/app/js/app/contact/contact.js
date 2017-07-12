@@ -5,6 +5,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
   $scope.groups = [];
   $scope.group_hash = new Array();
   $scope.items = [];
+  $scope.status_old;
 
   $scope.init_data = function() {
     API.loading();
@@ -108,6 +109,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
     });
     $scope.item = item;
     $scope.item.selected = true;
+    $scope.status_old = $scope.item.status;
   };
 
   $scope.deleteItem = function(item){
@@ -160,6 +162,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
   $scope.editItem = function(item){
     if(item && item.selected){
       item.editing = true;
+      $scope.status_old = item.status;
     }
   };
 
@@ -173,8 +176,16 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
         phone2: item.other_phone,
         newSectionID: item.group_id
       }).then(function(res) {
-        API.stop_loading();
-        item.editing = false;
+        if($scope.status_old != item.status) {
+          API.update_employee_status($scope.group.id, item.id).then(function(res) {
+            API.stop_loading();
+            item.editing = false;
+          })
+        }
+        else {
+          API.stop_loading();
+          item.editing = false;
+        }
       });      
     });
   };

@@ -301,6 +301,11 @@ angular.module('API.Services', [])
       section_id + '/' + user_id, info);
   }
 
+  this.update_employee_status = function(section_id, user_id) {
+    return get(base_url + '/employees/status/' + user.companyID + '/'
+      + section_id + '/' + user_id);
+  }
+
   this.read_notice = function(notice_id) {
     return get(base_url + '/notifications/' + user.ID + '/' + notice_id, null); 
   }
