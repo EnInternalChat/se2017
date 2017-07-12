@@ -28,8 +28,12 @@ export class ChatService {
   }
 
   public login(username, password): Promise<any> {
-    return new Promise((resolve, reject) => 
-      window.JMessage.login(username, password, resolve, reject));
+    if(!this.is_platform)
+      return Promise.resolve(true);
+    else {
+      return new Promise((resolve, reject) => 
+        window.JMessage.login(username, password, resolve, reject));      
+    }
   }
 
   public logout(): Promise<any> {

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Config, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Config, AlertController, 
+         ActionSheetController } from 'ionic-angular';
 
 import { Task } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
 import { UIText } from '../../providers/ui_text';
 import { API } from '../../providers/api';
+import { NativeServiceHelper } from '../../providers/native_service_helper';
 
 /**
  * Generated class for the TaskDetail page.
@@ -24,13 +26,15 @@ export class TaskDetail {
   public operation_options : Array<{value : string, text : string}> = [];
 
   constructor(
+    public actionCtrl: ActionSheetController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: Config,
     private global_data: AppGlobal,
     public api: API,
-    public ui: UIText) {
+    public ui: UIText,
+    public native: NativeServiceHelper) {
     this.task_info = navParams.data.task;
     this.user_name = global_data.user_name;
     if(this.task_info.over)
@@ -44,9 +48,15 @@ export class TaskDetail {
     console.log("Options: ", this.operation_options);
   }
 
-  public operation_form() {
-    let form = this.alertCtrl.create({
-      title: '',
+  public operation_form(operate_id) {
+    let alert = this.alertCtrl.create({
+      title: '备 注',
+      inputs: [
+        {
+          name: 'info',
+          placeholder: '备注'
+        }
+      ],
       cssClass: 'form-alert',
       buttons: [
       {
@@ -56,19 +66,46 @@ export class TaskDetail {
       {
         text: this.ui.ok,
         handler: data => {
-
+          this.native.loading();
+          this.api.operate_task(this.task_info.type, 
+            this.task_info.activity_id, operate_id, data.info).then((res) => {
+              this.native.stop_loading();
+            });
+          return true;
         }
       }
       ]
     });
-    form.addInput({});
+    alert.present();
   }
 
-  public gateway_operate(operate_id) {
-    this.api.operate_task(this.task_info.type, this.task_info.activity_id, operate_id);
+  public show_operate_list() {
+    let action = this.actionCtrl.create({
+      title: '选择操作'
+    });
+    this.operation_options.forEach((item) => {
+      action.addButton({
+        text: item.text,
+        handler: () => {
+          this.operation_form(item.value);
+          return true;
+        }
+      })
+    });
+    action.present();
   }
 
-  go_back() {
+  public stage_detail(stage) {
+    let detail_alert = this.alertCtrl.create({
+      title: stage.content,
+      message: stage.content,
+      buttons: ['确认'],
+      cssClass: 'form-alert'
+    });
+    detail_alert.present();
+  }
+
+  public go_back() {
     this.config.set('ios', 'pageTransition', 'md-transition');
     this.navCtrl.pop();
   }

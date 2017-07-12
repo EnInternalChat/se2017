@@ -121,6 +121,7 @@ export class Login {
       (error) => {
         this.native.stop_loading();
         this.native.show_toast("请检查网络");
+        this.nav_ctrl.push(BasisPage);                
         return false;
       });
   }

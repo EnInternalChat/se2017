@@ -141,10 +141,10 @@ export class Personal {
         text: this.ui.ok,
         handler: data => {
           if(data.tel1 !== '' 
-            && !data.tel1.match(/^1[34578]\d{9}$/g)) 
+            && !data.tel1.match(/^((0\d{2,3}-\d{8,9})|(1[3584]\d{9}))$/g)) 
             this.native.show_toast("电话号码1格式错误");
           else if(data.tel2 !== '' 
-            && !data.tel2.match(/^1[34578]\d{9}$/g))
+            && !data.tel2.match(/^((0\d{2,3}-\d{8,9})|(1[3584]\d{9}))$/g))
             this.native.show_toast("电话号码2格式错误");
           else if(data.mail1 !== '' 
             && !data.mail1.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g)) 
@@ -193,6 +193,17 @@ export class Personal {
       this.native.stop_loading();
       return false;
     });
+  }
+
+  public doRefresh(refresher) {
+    this.api.get_personal_info().then((res) => {
+      this.global_data.personal = res;
+      this.global_data.set_avator_no(res['avatar']);
+      this.global_data.section_id = res['sectionID'];
+      this.global_data.job = (res.leader ? '部长' : '部员');
+      this.info = this.global_data.personal;
+      refresher.complete();
+    })
   }
 
 }

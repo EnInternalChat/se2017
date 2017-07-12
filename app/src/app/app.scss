@@ -57,6 +57,9 @@
   .alert-button-group {
     padding: 0 0 0 0;
   }
+  .alert-message {
+    color: map-get($colors, primary_text);
+  }
   .alert-button {
     overflow: hidden;
     flex: 1 1 auto;

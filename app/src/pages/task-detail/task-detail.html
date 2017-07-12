@@ -46,7 +46,7 @@
         <img *ngIf="stage.status === 2" class="stage-img" src="assets/img/task_end.png"/>
       </div>
       <div class="task-stage-detail">
-        <ion-card class="task-stage-content">
+        <ion-card class="task-stage-content" (click)="stage_detail(stage)">
           <ion-card-header>{{stage.person_str}}</ion-card-header>
           <ion-card-content>{{stage.content}}</ion-card-content>
           </ion-card>
@@ -56,18 +56,23 @@
 </ion-content>
 
 <ion-footer *ngIf="!task_info.over" [ngSwitch]="operation_options.length">
-  <ion-toolbar class="footer-toolbar" *ngSwitchCase="2">
-    <ion-buttons left>
-      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
-    </ion-buttons>
-    <ion-buttons right>
-      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[1].value)">{{operation_options[1].text}}</button>
-    </ion-buttons>
-  </ion-toolbar>
   <ion-toolbar class="footer-toolbar" *ngSwitchCase="1">
     <ion-buttons style="text-align: center;">
-      <button ion-button clear class="operation-button" (click)="gateway_operate(operation_options[0].value)">{{operation_options[0].text}}</button>
+      <button ion-button clear class="operation-button" (click)="operation_form(operation_options[0].value)">{{operation_options[0].text}}</button>
     </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="footer-toolbar" *ngSwitchCase="2">
+    <ion-buttons left>
+      <button ion-button clear class="operation-button" (click)="operation_form(operation_options[0].value)">{{operation_options[0].text}}</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button clear class="operation-button" (click)="operation_form(operation_options[1].value)">{{operation_options[1].text}}</button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="footer-toolbar" *ngSwitchDefault>
+    <ion-buttons style="text-align: center;">
+      <button ion-button clear class="operation-button" (click)="show_operate_list()">处理任务</button>
+    </ion-buttons>    
   </ion-toolbar>
 
 </ion-footer>

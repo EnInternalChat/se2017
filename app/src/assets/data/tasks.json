@@ -103,6 +103,8 @@
                 "person":["caochun"],
                 "exclusiveGateway":[
                     {"operationID": "sendMailForApproved", "operationName":"同意"},
+                    {"operationID": "modifyApply", "operationName":"拒绝"},
+                    {"operationID": "sendMailForApproved", "operationName":"同意"},
                     {"operationID": "modifyApply", "operationName":"拒绝"}
                 ]
             }

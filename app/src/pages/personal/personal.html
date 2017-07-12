@@ -22,6 +22,10 @@
 
 
 <ion-content class="setting-content">
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="pull-to-refresh">
+    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
+    </ion-refresher-content>
+  </ion-refresher>
   <div class="avator" (click)="show_avator_slector()">
     <img class="avator-img" src="{{global_data.avator_path}}">
     <div class="gender">
