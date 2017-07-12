@@ -23,42 +23,24 @@
           <div class="panel no-border">
             <div class="panel-heading wrapper b-b b-light">
               <span class="text-xs text-muted pull-right">
-                <i class="fa fa-circle text-primary m-r-xs"></i> 6
+                <i class="fa fa-circle text-primary m-r-xs"></i>{{tasks.length}}
               </span>
               <h4 class="font-thin m-t-none m-b-none text-muted">任务列表</h4>
             </div>
             <ul class="list-group list-group-lg m-b-none">
-              <li class="list-group-item">
-                <a href class="thumb-sm m-r">
-
-                </a>
-                <span class="pull-right label bg-primary inline m-t-sm">程序部</span>
-                <a href>下班聚餐</a>
+              <li class="list-group-item" ng-repeat="task in tasks | limitTo:5">
+                <a class="thumb-sm m-r"></a>
+                <span class="pull-right label bg-primary inline m-t-sm">{{task.name}}</span>
+                <a>下班聚餐</a>
               </li>
               <li class="list-group-item">
                 <a href class="thumb-sm m-r">
-
                 </a>
                 <span class="pull-right label bg-info inline m-t-sm">市场部</span>
                 <a href>周末市场调研</a>
               </li>
-              <li class="list-group-item">
-                <a href class="thumb-sm m-r">
-
-                </a>
-                <span class="pull-right label bg-warning inline m-t-sm">行政部</span>
-                <a href>XX请假</a>
-              </li>
-              <li class="list-group-item">
-                <a href class="thumb-sm m-r">
-
-                </a>
-                <span class="pull-right label bg-warning inline m-t-sm">业务部</span>
-                <a href>三天后出差</a>
-              </li>
             </ul>
             <div class="panel-footer">
-              <span class="pull-right badge badge-bg m-t-xs">32</span>
               <a ui-sref="app.form.fileupload">
               <button class="btn btn-primary btn-addon btn-sm"><i class="fa fa-plus"></i>添加任务</button>
               </a>

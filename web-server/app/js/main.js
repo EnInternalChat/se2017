@@ -56,18 +56,6 @@ angular.module('app')
         $localStorage.settings = $scope.app.settings;
       }, true);
 
-      // angular translate
-      $scope.lang = { isopen: false };
-      $scope.langs = { ch:'中文',en:'English'};
-      $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "中文";
-      $scope.setLang = function(langKey, $event) {
-        // set the current lang
-        $scope.selectLang = $scope.langs[langKey];
-        // You can change the language during runtime
-        $translate.use(langKey);
-        $scope.lang.isopen = !$scope.lang.isopen;
-      };
-
       function isSmartDevice( $window )
       {
           // Adapted from http://www.detectmobilebrowsers.com

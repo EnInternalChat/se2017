@@ -7,7 +7,7 @@
           <i class="glyphicon glyphicon-align-justify"></i>
         </button>
         <!-- brand -->
-        <a href="#/" class="navbar-brand text-lt">
+        <a href="#/app/dashboard-v1" class="navbar-brand text-lt">
           <span class="hidden-folded m-l-xs">企业内部沟通交流</span>
         </a>
         <!-- / brand -->
@@ -27,28 +27,8 @@
         </div>
         <!-- / buttons -->
 
-        <!-- link and dropdown -->
-
-        <!-- / link and dropdown -->
-
-        <!-- search form -->
-
-        <!-- / search form -->
-
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown>
-            <a href class="dropdown-toggle" dropdown-toggle>
-              {{selectLang}} <b class="caret"></b>
-            </a>
-            <!-- dropdown -->
-            <ul class="dropdown-menu animated fadeInRight w">
-              <li ng-repeat="(langKey, label) in langs">
-                <a ng-click="setLang(langKey, $event)" href>{{label}}</a>
-              </li>
-            </ul>
-            <!-- / dropdown -->
-          </li>
           <li class="hidden-xs">
             <a ui-fullscreen></a>
           </li>

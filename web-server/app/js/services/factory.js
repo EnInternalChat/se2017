@@ -106,22 +106,22 @@ angular.module('Factories', [])
   var tasks = [];
   var factory = {};
   factory.get_all = function() {
-    API.get_tasks().then(function(res) {
-
+    return API.get_tasks().then(function(res) {
+      return tasks; 
     })
   }
   factory.delete_task = function(id) {
-    API.delete_task(id).then(function(res) {
+    return API.delete_task(id).then(function(res) {
 
     })
   }
   factory.update_task = function(id, name) {
-    API.update_task(id, name).then(function(res) {
+    return API.update_task(id, name).then(function(res) {
 
     })
   }
   factory.new_task = function(name, file) {
-    API.new_task(name, file).then(function(res) {
+    return API.new_task(name, file).then(function(res) {
       
     })
   }
