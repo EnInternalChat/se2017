@@ -27,6 +27,9 @@ page-new-task {
     .label-ios {
       color: map-get($colors, primary_text);
     }
+    .person-info {
+      text-align: right;
+    }
     .text-input {
       color: map-get($colors, primary_text);
       border-bottom: 1px solid map-get($colors, divider);

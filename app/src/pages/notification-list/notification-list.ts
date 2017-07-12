@@ -61,17 +61,17 @@ export class NotificationList {
   public update_notice_list(update_all: boolean){
     let p_unread = this.api.get_notices(true).then(
       (res) => {
-        // res = JSON.parse(res);
         res.forEach((item) => {
           this.notice_list_not_read.push(new Notice(item));
         });
+        return true;
       });
     let p_read = this.api.get_notices(false).then(
       (res) => {
-        // res = JSON.parse(res);
         res.forEach((item) => {
           this.notice_list_read.push(new Notice(item));
         });
+        return true;
       })
     if(update_all) {
       return Promise.all([p_read, p_unread]).catch(
@@ -101,8 +101,10 @@ export class NotificationList {
   public doRefresh(refresher) {
     this.notice_list_read = [];
     this.notice_list_not_read = [];
-    this.update_notice_list(false).then(
-      () => refresher.complete());
+    this.api.clean_cache("notices").then(() => {
+      this.update_notice_list(false).then(
+        () => refresher.complete());
+    })
     setTimeout(() => refresher.complete(), 5000);
   }
 

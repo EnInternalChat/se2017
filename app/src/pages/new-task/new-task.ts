@@ -39,7 +39,6 @@ export class NewTask {
     this.job = this.global_data.job;
     this.api.get_tasks_type().then(
       (tasks) => {
-        tasks = JSON.parse(tasks);
         if(tasks.length === 0) {
           this.native.show_toast("没有已部署的任务流程");
           this.navCtrl.pop();
@@ -47,16 +46,19 @@ export class NewTask {
         }
         tasks.forEach((item) => {
           this.tasks_type_options.push({
-            value: item.id,
+            value: item.processKey,
             text: item.name
           });
         });
-        this.task_type = this.tasks_type_options[0].text;
       },
       (error) => this.native.show_toast("网络连接失败!"));
   }
 
   public start_task() {
+    if(!this.task_type) {
+      this.native.show_toast('任务类型不能为空');
+      return;
+    }
     this.api.start_task(this.task_type, this.comment);
   }
 

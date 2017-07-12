@@ -30,6 +30,20 @@ export class StorageHelper {
     });
   }
 
+  public remove(key): Promise<any> {
+    return this.storage.ready().then(() => {
+      return this.storage.remove(key);
+    });
+  }
+
+  public for_each(resolve): Promise<any> {
+    return this.storage.ready().then(() => {
+      return this.storage.forEach((val, key) => {
+        return resolve(val, key);
+      });
+    })
+  }
+
   public clear(): Promise<any> {
     return this.storage.ready().then(() => {
       return this.storage.clear();

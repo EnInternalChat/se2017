@@ -3,6 +3,7 @@ import { HTTPService } from './http_helper';
 import { AppGlobal } from './global_data';
 import { Headers, RequestOptions } from '@angular/http';
 import { CacheService } from "ionic-cache";
+import { StorageHelper } from './storage_helper';
 
 // class PageCache {
 //   private pages = [];
@@ -25,7 +26,8 @@ export class API {
   constructor(
     private http: HTTPService,
     private data: AppGlobal,
-    private cache: CacheService) {
+    private cache: CacheService,
+    private storage: StorageHelper) {
     this.cache.setDefaultTTL(60 * 60);
     this.options = new RequestOptions({
       headers: new Headers({
@@ -82,6 +84,24 @@ export class API {
     }); 
   }
 
+  public get_cache(key, group_key, param?) {
+    return this.cache.getItem(key).catch(() => {
+      return this.http.get(key, param, this.options_token).then((res) => {
+        return this.cache.saveItem(key, res, group_key);
+      })
+    })
+  }
+
+  public clean_cache(group_key) {
+    let p_clean = [];
+    return this.storage.for_each((val, key) => {
+      if(val && val.groupKey === group_key)
+        p_clean.push(this.storage.remove(key));
+    }).then(() => {
+      return Promise.all(p_clean);
+    })
+  }
+
   public login(username, password) {
     return this.http.post(this.base_url + '/login', {
       name: username,
@@ -110,21 +130,25 @@ export class API {
   }
 
   public get_notices(not_read: boolean) {
+    let group_key = "notices";
+    let url_key;
     if(not_read) {
-      let url_key = this.base_url + '/notifications/received/unread/' 
-        + this.data.user_id;
-      // return this.cache.getItem(url_key).catch(() => {
-      //     return this.http.get(url_key, null, this.options_token).then((res) => {
-      //       return this.cache.saveItem(url_key, res);
-      //     })
-      //   })
-      return this.http.get(url_key, null, this.options_token);
+      url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
     }
     else {
-      let url_key = this.base_url + '/notifications/received/read/'
-        + this.data.user_id;
-      return this.http.get(url_key, null, this.options_token);      
+      url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
     }
+    return this.cache.getItem(url_key).then((res) => {
+      console.log("get: ", res);
+      return res;
+    }).catch(() => {
+      return this.http.get(url_key, null, this.options_token).then((res) => {
+        return this.cache.saveItem(url_key, res, group_key).then((res) => {
+          console.log("Not get: ", res);
+          return CacheService.decodeRawData(res);
+        });
+      })
+    })
   }
 
   public read_notice(notice_id) {
@@ -146,11 +170,11 @@ export class API {
 
   public get_tasks_type() {
     return this.http.get(this.base_url + '/tasks/all/' 
-      + this.data.personal.company_id, null, this.options_token);
+      + this.data.company_id, null, this.options_token);
   }
 
-  public start_task(task_id, comment) {
-    return this.http.post(this.base_url + '/tasks/start/' + task_id, {
+  public start_task(process_key, comment) {
+    return this.http.post(this.base_url + '/tasks/start/' + process_key, {
       comment: comment
     }, this.options_token);
   }
@@ -165,9 +189,15 @@ export class API {
   }
 
   public get_personal_info() {
-    return this.http.get(this.base_url + '/employees/' + this.data.company_id
-      + '/' + this.data.section_id + '/' + this.data.user_id, 
-      null, this.options_token);
+    let group_key = "personal";
+    let url_key = this.base_url + '/employees/' + this.data.company_id
+      + '/' + this.data.section_id + '/' + this.data.user_id;
+    // return this.cache.getItem(url_key).catch(() => {
+    //   return this.http.get(url_key, null, this.options_token).then((res) => {
+    //     return this.cache.saveItem(url_key, res, group_key);
+    //   })
+    // })
+    return this.http.get(url_key, null, this.options_token);
   }
 
   public update_personal(info) {
@@ -185,8 +215,9 @@ export class API {
   }
 
   public get_group_sections() {
-    return this.http.get(this.base_url + '/company/' + this.data.company_id 
-      + '/sections/' + this.data.section_id, null, this.options_token);
+    let url_key = this.base_url + '/company/' + this.data.company_id 
+      + '/sections/' + this.data.section_id;
+    return this.http.get(url_key, null, this.options_token);
   }
 
   public start_group_chat(group_list) {
