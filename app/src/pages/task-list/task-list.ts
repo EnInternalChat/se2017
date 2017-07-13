@@ -22,6 +22,8 @@ import { UIText } from '../../providers/ui_text';
 })
 export class TaskList {
 
+  private _name_ = "TaskList";
+
   task_status_array: Array<string> = ['tasks_not_done', 'tasks_done'];
   task_status : string = this.task_status_array[0];
 
@@ -44,36 +46,19 @@ export class TaskList {
   }
 
   ionViewDidLoad() {
-    if(!this.navParams.get('need_load')) {
-      this.copy_list(this.data.task_cache['list_not_done'], this.tasks_list_not_done);
-      this.copy_list(this.data.task_cache['list_done'], this.tasks_list_done);
-      return;
-    }
     this.currentPage = 0;
     this.hasNextPage = true;
     this.tasks_list_not_done = [];
     this.tasks_list_done = [];
     this.native.loading("请稍候...");
     this.update_tasks_list(true).then(
-      () => this.native.stop_loading());
-  }
-
-  ionViewWillUnload() {
-    this.data.task_cache['list_not_done'] = [];
-    this.data.task_cache['list_done'] = [];
-    this.copy_list(this.tasks_list_not_done, this.data.task_cache['list_not_done']);
-    this.copy_list(this.tasks_list_done, this.data.task_cache['list_done']);
+      () => this.native.stop_loading());    
   }
 
   ionViewDidEnter() {
     this.config.set('ios', 'pageTransition', 'ios-transition');
   }
 
-  public copy_list(source, dst) {
-    source.forEach((item) => {
-      dst.push(item);
-    });
-  }
 
   public new_task() {
     this.navCtrl.push(NewTask);
@@ -100,13 +85,13 @@ export class TaskList {
   }
 
   public update_tasks_list(update_all: boolean) {
-    let p_not_done = this.api.get_tasks(true).then(
+    let p_not_done = this.api.get_tasks(true, this._name_).then(
       (res) =>  {
         res.forEach((item) => {
           this.tasks_list_not_done.push(new Task(item));
         })
       });
-    let p_done = this.api.get_tasks(false).then(
+    let p_done = this.api.get_tasks(false, this._name_).then(
       (res) => {
         res.forEach((item) => {
           this.tasks_list_done.push(new Task(item));
@@ -131,8 +116,10 @@ export class TaskList {
     this.hasNextPage = true;
     this.tasks_list_done = [];
     this.tasks_list_not_done = [];
-    this.update_tasks_list(false).then(
-      () => refresher.complete());
+    this.api.clean_cache(this._name_).then(() => {
+      this.update_tasks_list(false).then(
+        () => refresher.complete());    
+    })
     setTimeout(() => refresher.complete(), 5000);
   }
 

@@ -19,6 +19,8 @@ import { UIText } from '../../providers/ui_text';
 })
 export class NewTask {
 
+  private _name_ = "NewTask";
+
   public user_name : string;
   public job : string;
   public comment: string;
@@ -37,7 +39,7 @@ export class NewTask {
   ionViewDidLoad() {
     this.user_name = this.global_data.user_name;
     this.job = this.global_data.job;
-    this.api.get_tasks_type().then(
+    this.api.get_tasks_type(this._name_).then(
       (tasks) => {
         if(tasks.length === 0) {
           this.native.show_toast("没有已部署的任务流程");
@@ -60,6 +62,11 @@ export class NewTask {
       return;
     }
     this.api.start_task(this.task_type, this.comment);
+  }
+
+  public doRefresh(refresher) {
+    this.api.clean_cache(this._name_).then(
+      () => refresher.complete());
   }
 
   public go_back() {

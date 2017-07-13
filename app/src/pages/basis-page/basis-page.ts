@@ -77,7 +77,7 @@ export class BasisPage {
         let p1 = this.chat_service.logout().then(
           (data) => console.log("注销成功"),
           (error) => console.log("注销失败"));
-        Promise.all([p1, this.api.logout()]).then(
+        Promise.all([p1, this.api.logout(), this.api.clean_cache('Personal')]).then(
           () => this.navCtrl.pop());
       });
     // 注册全局切换页面事件

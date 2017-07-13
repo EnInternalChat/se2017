@@ -47,7 +47,7 @@ export class HTTPService {
     });
   }
 
-  private dict_to_query_str(obj: any, is_param: boolean = true): string 
+  public dict_to_query_str(obj: any, is_param: boolean = true): string 
   {
     let str_array = [];
     for(let key in obj) 

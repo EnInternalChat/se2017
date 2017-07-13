@@ -21,6 +21,9 @@ import { Conversation } from '../../providers/chat';
   templateUrl: 'new-group-chat.html',
 })
 export class NewGroupChat {
+
+  private _name_ = "NewGroupChat";
+
   public sections: Array<Section> = [];
   public root_section: Section;
   public choose_index: number = -1;
@@ -35,15 +38,27 @@ export class NewGroupChat {
     public global_data: AppGlobal) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.native.loading();
-    this.api.get_group_sections().then(
+    this.api.get_group_sections(this._name_).then(
       (res) => {
         this.root_section = new Section(res, 0);
         this.sections.push(this.root_section);
         this.root_section.add_section(this.sections);
         this.native.stop_loading();
       })
+  }
+
+  public doRefresh(refresher) {
+    this.api.clean_cache(this._name_).then(() => {
+      this.api.get_group_sections(this._name_).then(
+        (res) => {
+          this.root_section = new Section(res, 0);
+          this.sections.push(this.root_section);
+          this.root_section.add_section(this.sections);
+          refresher.complete();
+        })
+    })
   }
 
   public go_back() {

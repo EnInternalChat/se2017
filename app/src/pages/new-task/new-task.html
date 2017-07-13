@@ -22,6 +22,10 @@
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="pull-to-refresh">
+    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list class="new-task-info">
     <ion-item>
       <ion-label>{{ui.NewTaskPage.types}}</ion-label>

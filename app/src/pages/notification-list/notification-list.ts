@@ -21,6 +21,8 @@ import { AppGlobal } from '../../providers/global_data';
 })
 export class NotificationList {
 
+  private _name_ = "NoticeList";
+
   status_array = ['notice_not_read', 'notice_old'];
   read_status : string = this.status_array[0];
 
@@ -34,45 +36,21 @@ export class NotificationList {
               public ui: UIText) {
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     this.native.loading();
     this.update_notice_list(true).then(
       () => this.native.stop_loading());
   }
 
-  // ionViewDidLoad() {
-  //   if(!this.navParams.get('need_load')) {
-  //     this.copy_list(this.global_data.notice_cache['not_read'], this.notice_list_not_read);
-  //     this.copy_list(this.global_data.notice_cache['read'], this.notice_list_read);
-  //     return;
-  //   }
-  //   this.native.loading();
-  //   this.update_notice_list(true).then(
-  //     () => this.native.stop_loading());
-  // }
-
-  // ionViewWillUnload() {
-  //   this.global_data.notice_cache['not_read'] = [];
-  //   this.global_data.notice_cache['read'] = [];
-  //   this.copy_list(this.notice_list_not_read, this.global_data.notice_cache['not_read']);
-  //   this.copy_list(this.notice_list_read, this.global_data.notice_cache['read']);
-  // }
-
-  public copy_list(source, dst) {
-    source.forEach((item) => {
-      dst.push(item);
-    });
-  }
-
   public update_notice_list(update_all: boolean){
-    let p_unread = this.api.get_notices(true).then(
+    let p_unread = this.api.get_notices(true, this._name_).then(
       (res) => {
         res.forEach((item) => {
           this.notice_list_not_read.push(new Notice(item));
         });
         return true;
       });
-    let p_read = this.api.get_notices(false).then(
+    let p_read = this.api.get_notices(false, this._name_).then(
       (res) => {
         res.forEach((item) => {
           this.notice_list_read.push(new Notice(item));
@@ -107,7 +85,7 @@ export class NotificationList {
   public doRefresh(refresher) {
     this.notice_list_read = [];
     this.notice_list_not_read = [];
-    this.api.clean_cache("notices").then(() => {
+    this.api.clean_cache(this._name_).then(() => {
       this.update_notice_list(false).then(
         () => refresher.complete());
     })

@@ -65,16 +65,6 @@ export class HttpCache {
     });
   }
 
-  public get_page(key, group, resolve, page, limit) {
-    return this.read(key).then((res) => {
-      return res.slice(page * limit, (page + 1) * limit);
-    }).catch(() => {
-      return resolve.then((res) => {
-        return this.append()
-      })
-    })
-  }
-
 
 
 }

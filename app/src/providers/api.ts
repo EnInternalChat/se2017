@@ -104,36 +104,23 @@ export class API {
     this.data.section_id = user['sectionID'];
     this.data.token = token;
     this.update_token();
-    this.get_personal_info().then((res) => {
-      this.data.personal = res;
+    this.get_personal_info("Personal").then((res) => {
       this.data.job = (res.leader ? '部长' : '部员');
     })
   }
 
-  public get_notices(not_read: boolean) {
-    let group_key = "notices";
+  public get_notices(not_read: boolean, group: string) {
     let url_key;
     if(not_read) {
-      url_key = "/assets/data/notices.json";
-      // url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
+      // url_key = "/assets/data/notices.json";
+      url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
+      return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
     }
     else {
-      url_key = "/assets/data/notices.json";
-      // url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
+      // url_key = "/assets/data/notices.json";
+      url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
+      return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
     }
-    // return this.cache.read(url_key).then((res) => {
-    //   console.log("get: ", res);
-    //   return res;
-    // }).catch(() => {
-    //   return this.http.get(url_key, null, this.options_token).then((res) => {
-    //     return this.cache.save(url_key, res, group_key).then((res) => {
-    //       console.log("Not get: ", res);
-    //       return res;
-    //     });
-    //   })
-    // })
-    return this.cache.get(url_key, group_key, 
-      this.http.get(url_key, null, this.options_token));
   }
 
   public read_notice(notice_id) {
@@ -141,21 +128,24 @@ export class API {
       + '/' + notice_id, null, this.options_token);
   }
 
-  public get_tasks(is_doing: boolean) {
+  public get_tasks(is_doing: boolean, group: string) {
     return this.http.get('/assets/data/tasks.json', null, this.options_token);
+    // let url_key;
     // if(is_doing) {
-    //   return this.http.get(this.base_url + '/tasks/working/' + 
-    //     this.data.company_id + '/' + this.data.user_id, null, this.options_token);      
+    //   url_key = this.base_url + '/tasks/working/' + this.data.company_id 
+    //     + '/' + this.data.user_id;
+    //   return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
     // }
     // else {
-    //   return this.http.get(this.base_url + '/tasks/over/' +
-    //     this.data.company_id + '/' + this.data.user_id, null, this.options_token);
+    //   url_key = this.base_url + '/tasks/over/' + this.data.company_id 
+    //     + '/' + this.data.user_id;
+    //   return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
     // }
   }
 
-  public get_tasks_type() {
-    return this.http.get(this.base_url + '/tasks/all/' 
-      + this.data.company_id, null, this.options_token);
+  public get_tasks_type(group: string) {
+    let url_key = this.base_url + '/tasks/all/' + this.data.company_id;
+    return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
   }
 
   public start_task(process_key, comment) {
@@ -173,16 +163,15 @@ export class API {
     }, this.options_token);
   }
 
-  public get_personal_info() {
-    let group_key = "personal";
+  public get_personal_info(group) {
     let url_key = this.base_url + '/employees/' + this.data.company_id
       + '/' + this.data.section_id + '/' + this.data.user_id;
+    return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
     // return this.cache.getItem(url_key).catch(() => {
     //   return this.http.get(url_key, null, this.options_token).then((res) => {
     //     return this.cache.saveItem(url_key, res, group_key);
     //   })
     // })
-    return this.http.get(url_key, null, this.options_token);
   }
 
   public update_personal(info) {
@@ -191,18 +180,27 @@ export class API {
       info, this.options_token);
   }
 
-  public get_all_employees(page, limit) {
-    return this.http.get(this.base_url + '/employees/' 
-      + this.data.company_id, {
-        page: page,
-        limit: limit
-      }, this.options_token);
+  public get_all_employees(page, limit, group) {
+    let page_obj = {
+      page: page,
+      limit: limit
+    };
+    let url_key = this.base_url + '/employees/' + this.data.company_id 
+      + this.http.dict_to_query_str(page_obj);
+    return this.cache.get(url_key, group, 
+      this.http.get(this.base_url + '/employees/' + this.data.company_id, page_obj, this.options_token));
+    // return this.http.get(this.base_url + '/employees/' 
+    //   + this.data.company_id, {
+    //     page: page,
+    //     limit: limit
+    //   }, this.options_token);
   }
 
-  public get_group_sections() {
+  public get_group_sections(group) {
     let url_key = this.base_url + '/company/' + this.data.company_id 
       + '/sections/' + this.data.section_id;
-    return this.http.get(url_key, null, this.options_token);
+    return this.cache.get(url_key, group, this.http.get(url_key, null,this.options_token));
+    // return this.http.get(url_key, null, this.options_token);
   }
 
   public start_group_chat(group_list) {

@@ -21,9 +21,7 @@ export class AppGlobal {
   public password: string;
   public token: string;
   
-  public personal: any;
   public conversation_list: Array<Conversation> = [];
-  public task_cache: any = {};
   
   public constructor(
     private storage: StorageHelper,

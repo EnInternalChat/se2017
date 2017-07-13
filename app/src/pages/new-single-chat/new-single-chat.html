@@ -21,6 +21,10 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="pull-to-refresh">
+    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list class="employee-list" radio-group>
     <ion-item *ngFor="let item of employee_list">
       <ion-avatar item-left>

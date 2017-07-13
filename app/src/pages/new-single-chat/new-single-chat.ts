@@ -22,6 +22,8 @@ import { UIText } from '../../providers/ui_text';
 })
 export class NewSingleChat {
 
+  private _name_ = "NewSingleChat";
+
   public employee_list: Array<{id: string, no: number}> = [];
   public select_person: any = null;
 
@@ -41,27 +43,32 @@ export class NewSingleChat {
 
   ionViewDidLoad() {
     this.native.loading();
+    this.currentPage = 0;
+    this.limit = 12;
+    this.hasNextPage = true;
     this.get_employee_list(this.navParams.get('group_id')).then(
       () => this.native.stop_loading());
-
   }
 
   public get_employee_list(group_id, list_is_empty: boolean = true): Promise<any>
   {
     if(group_id == null) {
-      return this.api.get_all_employees(this.currentPage, this.limit).then(
+      return this.api.get_all_employees(this.currentPage, this.limit, this._name_).then(
         (employees) => {
           this.hasNextPage = (employees.length >= this.limit);
           if(this.hasNextPage)
             this.currentPage++;
+          let temp_list = [];
           employees.forEach((item) => {
-            if(item['avatar'] == 0)
-              item['avatar'] = Math.floor(Math.random()*8 + 1);
-            this.employee_list.push({
+            temp_list.push({
               id: item['name'],
               no: item['avatar']
             });
           })
+          if(list_is_empty)
+            this.employee_list = temp_list;
+          else
+            this.employee_list = this.employee_list.concat(temp_list);
         });
     }
     else {
@@ -70,7 +77,7 @@ export class NewSingleChat {
           members = JSON.parse(members);
           members.forEach((item) => {
             if(item['nickname'] == null || item['nickname'] == '')
-              item['nickname'] = 1
+              item['nickname'] = 1;
             this.employee_list.push({
               id: item['userName'],
               no: item['nickname']
@@ -117,6 +124,16 @@ export class NewSingleChat {
     new_con.last_text = "";
     this.navCtrl.pop();
     this.navCtrl.push(ChatDetail, {conversation: new_con});
+  }
+
+  public doRefresh(refresher) {
+    this.currentPage = 0;
+    this.limit = 12;
+    this.hasNextPage = true;
+    this.api.clean_cache(this._name_).then(() => {
+      this.get_employee_list(this.navParams.get('group_id'))
+      .then(() => refresher.complete());
+    })
   }
 
   public go_back() {

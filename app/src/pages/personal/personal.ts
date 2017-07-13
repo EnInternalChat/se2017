@@ -22,6 +22,8 @@ import { UIText, AppLanguage } from '../../providers/ui_text';
 })
 export class Personal {
 
+  private _name_ = "Personal";
+
   public info: any = {};
 
   constructor(public navCtrl: NavController,
@@ -36,8 +38,15 @@ export class Personal {
               public events: Events) {
   }
 
-  public ionViewDidEnter() {
-    this.info = this.global_data.personal;
+  public ionViewDidLoad() {
+    this.native.loading();
+    this.api.get_personal_info(this._name_).then((res) => {
+      this.global_data.set_avator_no(res['avatar']);
+      this.global_data.section_id = res['sectionID'];
+      this.global_data.job = (res.leader ? '部长' : '部员');
+      this.info = res;
+      this.native.stop_loading();
+    })
   }
 
   public log_out() {
@@ -45,7 +54,7 @@ export class Personal {
   }
 
   public show_avator_slector() {
-    this.navCtrl.push(AvatorSelector);
+    this.navCtrl.push(AvatorSelector, {info: this.info});
   }
 
   public show_password_prompt() {
@@ -153,6 +162,7 @@ export class Personal {
             && !data.mail2.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g))
            this.native.show_toast("邮箱2格式错误");
           else {
+            this.native.loading();
             this.api.update_personal({
               "email1": data.mail1,
               "email2": data.mail2,
@@ -161,13 +171,18 @@ export class Personal {
             }).then(
               (result) => {
                 if(result) {
-                  this.global_data.personal.phone = [data.tel1, data.tel2];
-                  this.global_data.personal.email = [data.mail1, data.mail2];
-                  contact_prompt.dismiss().then(
-                    () => this.native.show_toast("修改联系方式成功"));
+                  this.info.phone = [data.tel1, data.tel2];
+                  this.info.email = [data.mail1, data.mail2];
+                  this.api.clean_cache(this._name_).then(() => {
+                    this.native.stop_loading();
+                    contact_prompt.dismiss().then(
+                      () => this.native.show_toast("修改联系方式成功"));                    
+                  })
                 }
-                else
+                else {
+                  this.native.stop_loading();
                   this.native.show_toast("修改联系方式失败");
+                }
               })
           }
           return false;
@@ -196,14 +211,16 @@ export class Personal {
   }
 
   public doRefresh(refresher) {
-    this.api.get_personal_info().then((res) => {
-      this.global_data.personal = res;
-      this.global_data.set_avator_no(res['avatar']);
-      this.global_data.section_id = res['sectionID'];
-      this.global_data.job = (res.leader ? '部长' : '部员');
-      this.info = this.global_data.personal;
-      refresher.complete();
+    this.api.clean_cache(this._name_).then(() => {
+      this.api.get_personal_info(this._name_).then((res) => {
+        this.global_data.set_avator_no(res['avatar']);
+        this.global_data.section_id = res['sectionID'];
+        this.global_data.job = (res.leader ? '部长' : '部员');
+        this.info = res;
+        refresher.complete();
+      })
     })
+    setTimeout(() => refresher.complete(), 5000);
   }
 
 }
