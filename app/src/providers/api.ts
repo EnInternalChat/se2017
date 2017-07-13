@@ -4,6 +4,7 @@ import { AppGlobal } from './global_data';
 import { Headers, RequestOptions } from '@angular/http';
 import { HttpCache } from './cache';
 import { StorageHelper } from './storage_helper';
+import { NativeServiceHelper } from './native_service_helper';
 
 
 @Injectable()
@@ -23,7 +24,8 @@ export class API {
     private http: HTTPService,
     private data: AppGlobal,
     private storage: StorageHelper,
-    private cache: HttpCache) {
+    private cache: HttpCache,
+    private native: NativeServiceHelper) {
     this.options = new RequestOptions({
       headers: new Headers({
         "Accept": "*/*",
@@ -57,6 +59,9 @@ export class API {
   }
 
   public get_cache(key, group, url, param, options) {
+    if(this.native.is_offline) {
+      return this.cache.read(key).catch(() => Promise.reject(''));
+    }
     return this.cache.read(key).then((res) => {
       console.log("Get Cache: ", res);
       return res;
@@ -90,6 +95,8 @@ export class API {
   }
 
   public clean_cache(group_key) {
+    if(this.native.is_offline)
+      return Promise.resolve(true);
     return this.cache.clean_group(group_key);
   }
 
