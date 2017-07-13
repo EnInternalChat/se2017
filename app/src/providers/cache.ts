@@ -20,24 +20,19 @@ export class HttpCache {
     }).then((res) => res.value);
   }
 
-  public append(key: string, value: any, group_key: string) {
-    return this.storage.read_local_info(key, []).then((data) => {
-      if(data.expires < new Date().getTime()) {
-        return Promise.reject('');
-      }
-    });
-  }
-
   public read(key) {
     return this.storage.read_local_info(key, null).then((data) => {
-      if(!data)
+      if(!data) {
         return Promise.reject('');
-      else {
-        if(data.expires < new Date().getTime()) {
-          return Promise.reject('');
-        }
-        return data.value;
       }
+      return data;
+    })
+    .catch(() => Promise.reject(''))
+    .then((data) => {
+      if(data.expires < new Date().getTime()) {
+        return Promise.reject('');
+      } 
+      return data.value;     
     });
   }
 
@@ -50,21 +45,6 @@ export class HttpCache {
       return Promise.all(p_clean);
     })
   }
-
-  public get(key, group, resolve) {
-    return this.read(key).then((res) => {
-      console.log("Get Cache: ", res);
-      return res;
-    }).catch(() => {
-      return resolve.then((res) => {
-        return this.save(key, res, group).then((res) => {
-          console.log("Request: ", res);
-          return res;
-        });
-      })
-    });
-  }
-
 
 
 }

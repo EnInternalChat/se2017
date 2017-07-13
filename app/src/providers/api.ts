@@ -5,10 +5,6 @@ import { Headers, RequestOptions } from '@angular/http';
 import { HttpCache } from './cache';
 import { StorageHelper } from './storage_helper';
 
-// class PageCache {
-//   private pages = [];
-//   public hit(page, )
-// }
 
 @Injectable()
 export class API {
@@ -58,6 +54,20 @@ export class API {
         "Platform": "app"
       })
     }); 
+  }
+
+  public get_cache(key, group, url, param, options) {
+    return this.cache.read(key).then((res) => {
+      console.log("Get Cache: ", res);
+      return res;
+    }).catch(() => {
+      return this.http.get(url, param, options).then((res) => {
+        return this.cache.save(key, res, group).then((res) => {
+          console.log("Request: ", res);
+          return res;
+        });
+      })
+    });
   }
 
   public update_token() {
@@ -114,12 +124,12 @@ export class API {
     if(not_read) {
       // url_key = "/assets/data/notices.json";
       url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
-      return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
+      return this.get_cache(url_key, group, url_key, null, this.options_token);
     }
     else {
       // url_key = "/assets/data/notices.json";
       url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
-      return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
+      return this.get_cache(url_key, group, url_key, null, this.options_token);
     }
   }
 
@@ -134,18 +144,18 @@ export class API {
     // if(is_doing) {
     //   url_key = this.base_url + '/tasks/working/' + this.data.company_id 
     //     + '/' + this.data.user_id;
-    //   return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
+    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
     // }
     // else {
     //   url_key = this.base_url + '/tasks/over/' + this.data.company_id 
     //     + '/' + this.data.user_id;
-    //   return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
+    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
     // }
   }
 
   public get_tasks_type(group: string) {
     let url_key = this.base_url + '/tasks/all/' + this.data.company_id;
-    return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
+    return this.get_cache(url_key, group, url_key, null, this.options_token);
   }
 
   public start_task(process_key, comment) {
@@ -166,8 +176,8 @@ export class API {
   public get_personal_info(group) {
     let url_key = this.base_url + '/employees/' + this.data.company_id
       + '/' + this.data.section_id + '/' + this.data.user_id;
-    return this.cache.get(url_key, group, this.http.get(url_key, null, this.options_token));
-    // return this.cache.getItem(url_key).catch(() => {
+    return this.get_cache(url_key, group, url_key, null, this.options_token);
+    // return this.get_cacheItem(url_key).catch(() => {
     //   return this.http.get(url_key, null, this.options_token).then((res) => {
     //     return this.cache.saveItem(url_key, res, group_key);
     //   })
@@ -187,8 +197,8 @@ export class API {
     };
     let url_key = this.base_url + '/employees/' + this.data.company_id 
       + this.http.dict_to_query_str(page_obj);
-    return this.cache.get(url_key, group, 
-      this.http.get(this.base_url + '/employees/' + this.data.company_id, page_obj, this.options_token));
+    return this.get_cache(url_key, group, 
+      this.base_url + '/employees/' + this.data.company_id, page_obj, this.options_token);
     // return this.http.get(this.base_url + '/employees/' 
     //   + this.data.company_id, {
     //     page: page,
@@ -199,7 +209,7 @@ export class API {
   public get_group_sections(group) {
     let url_key = this.base_url + '/company/' + this.data.company_id 
       + '/sections/' + this.data.section_id;
-    return this.cache.get(url_key, group, this.http.get(url_key, null,this.options_token));
+    return this.get_cache(url_key, group, url_key, null,this.options_token);
     // return this.http.get(url_key, null, this.options_token);
   }
 
