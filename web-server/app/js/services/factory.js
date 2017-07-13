@@ -133,7 +133,7 @@ angular.module('Factories', [])
       res.forEach(function(item) {
         tasks.push({
           id: item.ID,
-          name: item.name,
+          name: item.processKey,
           time: item.updateTime
         })
       })
