@@ -6,6 +6,7 @@ app.controller('SigninFormController', ['$scope', 'API', 'MD5', '$state', '$loca
   function($scope, API, MD5, $state, $localStorage) {
     $scope.user = {};
     $scope.authError = null;
+    $scope.avatar = $localStorage.avatar;
 
     $scope.login = function(username, password, need_encrypt) {
       API.loading();

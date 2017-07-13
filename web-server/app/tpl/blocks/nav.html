@@ -9,22 +9,21 @@
   </li>
 
 
-  <li ui-sref-active="active">
+  <li ui-sref-active="active" ng-show="{{user.admin}}">
     <a ui-sref="apps.contact">
       <i class="glyphicon glyphicon-th-large icon text-success"></i>
       <span>用户管理</span>
     </a>
   </li>
 
-  <li ui-sref-active="active">
+  <li ui-sref-active="active" ng-show="{{user.admin}}">
     <a ui-sref="app.ui.tree">
       <i class="glyphicon glyphicon-briefcase icon"></i>
       <span>部门结构</span>
     </a>
   </li>
 
-  <li ui-sref-active="active">
-    <!--<a ui-sref="app.ui.timeline">-->
+  <li ui-sref-active="active" ng-show="{{user.admin}}">
     <a ui-sref="app.form.fileupload">
       <i class="glyphicon glyphicon-signal"></i>
       <span>任务管理</span>

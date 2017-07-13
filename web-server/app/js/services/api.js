@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('API.Services', [])
-.service('API', ['$http', '$q', '$window', '$localStorage', '$ngConfirm',
-  function($http, $q, $window, $localStorage, $ngConfirm){
+.service('API', ['$http', '$q', '$window', '$localStorage', '$ngConfirm', '$rootScope',
+  function($http, $q, $window, $localStorage, $ngConfirm, $rootScope){
   var has_token = false;
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
@@ -222,6 +222,7 @@ angular.module('API.Services', [])
         $localStorage.avatar = user['avatar'];
         user['username'] = username;
         user['admin'] = (user['sectionID'] == -1);
+        $rootScope.user = user;
         return { status: true }        
       }
     },

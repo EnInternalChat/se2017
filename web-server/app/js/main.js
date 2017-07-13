@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$state', 'API',
-    function(              $scope,   $translate,   $localStorage,   $window, $state, API) {
+  .controller('AppCtrl', ['$scope', '$rootScope', '$translate', '$localStorage', '$window', '$state', 'API',
+    function($scope, $rootScope, $translate, $localStorage, $window, $state, API) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -38,9 +38,6 @@ angular.module('app')
         }
       }
 
-      $scope.username = $localStorage.username;
-      $scope.avatar = $localStorage.avatar;
-
       // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
         $scope.app.settings = $localStorage.settings;
@@ -69,8 +66,6 @@ angular.module('app')
         API.login($localStorage.username, $localStorage.password).then(
           function(res) {
             API.stop_loading();
-            $scope.username = $localStorage.username;
-            $scope.avatar = $localStorage.avatar;
             if(!res.status)
               $state.go('access.signin');
           })
