@@ -45,7 +45,10 @@ export class NewSingleChat {
     this.native.loading();
     this.currentPage = 0;
     this.limit = 12;
-    this.hasNextPage = true;
+    if(!this.navParams.get('group_id'))
+      this.hasNextPage = true;
+    else
+      this.hasNextPage = false;
     this.get_employee_list(this.navParams.get('group_id')).then(
       () => this.native.stop_loading());
   }
@@ -74,6 +77,7 @@ export class NewSingleChat {
     else {
       return this.chat.get_group_member(group_id).then(
         (members: any) => {
+          this.employee_list = [];
           members = JSON.parse(members);
           members.forEach((item) => {
             if(item['nickname'] == null || item['nickname'] == '')
@@ -83,7 +87,6 @@ export class NewSingleChat {
               no: item['nickname']
             })
           })
-          console.log(members);
         })
     }
   }
@@ -129,7 +132,10 @@ export class NewSingleChat {
   public doRefresh(refresher) {
     this.currentPage = 0;
     this.limit = 12;
-    this.hasNextPage = true;
+    if(!this.navParams.get('group_id'))
+      this.hasNextPage = true;
+    else
+      this.hasNextPage = false;
     this.api.clean_cache(this._name_).then(() => {
       this.get_employee_list(this.navParams.get('group_id'))
       .then(() => refresher.complete());

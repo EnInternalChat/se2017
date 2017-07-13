@@ -165,8 +165,9 @@ export class API {
     return this.get_cache(url_key, group, url_key, null, this.options_token);
   }
 
-  public start_task(process_key, comment) {
-    return this.http.post(this.base_url + '/tasks/start/' + process_key, {
+  public start_task(process_id, comment) {
+    return this.http.post(this.base_url + '/tasks/start/' + this.data.company_id 
+      + '/'+ this.data.user_id + '/' + process_id, {
       comment: comment
     }, this.options_token);
   }

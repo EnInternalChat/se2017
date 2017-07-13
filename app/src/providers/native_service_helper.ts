@@ -64,7 +64,7 @@ export class NativeServiceHelper {
     }
     this.load = this.loadCtrl.create({ content: message });
     this.load.present();
-    setTimeout(() => this.stop_loading(), 10000);
+    setTimeout(() => this.stop_loading(), 20000);
   }
 
   public stop_loading() {

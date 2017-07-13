@@ -50,7 +50,7 @@
       <button ion-fab class="button-in-fab" (click)="new_single_chat()">
         <ion-icon name="md-text"></ion-icon>
       </button>
-      <button ion-fab class="button-in-fab" (click)="new_group_chat()">
+      <button ion-fab class="button-in-fab" (click)="new_group_chat()" *ngIf="global_data.job === '部长'">
         <ion-icon name="ios-people"></ion-icon>
       </button>
     </ion-fab-list>

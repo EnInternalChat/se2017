@@ -48,7 +48,7 @@ export class NewTask {
         }
         tasks.forEach((item) => {
           this.tasks_type_options.push({
-            value: item.processKey,
+            value: item.ID,
             text: item.name
           });
         });
@@ -61,7 +61,15 @@ export class NewTask {
       this.native.show_toast('任务类型不能为空');
       return;
     }
-    this.api.start_task(this.task_type, this.comment);
+    this.native.loading();
+    this.api.start_task(this.task_type, this.comment).then((res) => {
+      this.native.stop_loading();
+      console.log(res);
+      if(!res.body.done)
+        this.native.show_toast(res.body.info);
+      else
+        this.navCtrl.pop();
+    });
   }
 
   public doRefresh(refresher) {

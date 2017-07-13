@@ -26,7 +26,7 @@
 
 <ion-content>
   <ion-refresher (ionRefresh)="load_more($event)" class="load-more">
-    <ion-refresher-content pullingText="{{ui.pullText}}" refreshingText="{{ui.refreshText}}">
+    <ion-refresher-content pullingText="下拉加载更多" refreshingText="请稍候">
     </ion-refresher-content>
   </ion-refresher>
 
@@ -71,78 +71,6 @@
       </div>   
     </div>
   </ion-item>
-
-<!--   <ion-item>
-    <div class="msg-time">
-      <div>
-      {{create_time | msg_time_format}}
-      </div>
-    </div>
-    <div class="msg-my">   
-      <div class="msg-info">
-        <div class="msg-detail">
-          <ion-card class="msg-text-content">
-            <ion-card-content>测试信息测试信测试信</ion-card-content>
-          </ion-card>        
-        </div>
-      </div>
-      <div class="sender-avator">
-        <img src="assets/img/avator/3.png">
-      </div>   
-    </div>
-  </ion-item>
-  <ion-item>
-   <div class="msg-other">
-    <div class="sender-avator">
-      <img src="assets/img/avator/3.png">
-    </div>
-    <div class="msg-info">
-      <div class="sender-person">张三</div>
-      <div class="msg-detail">
-        <ion-card class="msg-text-content">
-          <ion-card-content>测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信</ion-card-content>
-        </ion-card>        
-      </div>
-    </div>
-  </div>
-</ion-item>
-  <ion-item>
-    <div class="msg-time">
-      <div>
-        {{create_time | msg_time_format}}
-      </div>
-    </div>
-    <div>
-      <div class="msg-other">
-        <div class="sender-avator">
-          <img src="assets/img/avator/3.png">
-        </div>
-        <div class="msg-info">
-          <div class="sender-person">张三</div>
-          <div class="msg-detail">
-            <ion-card class="msg-text-content">
-              <ion-card-content>测试信测试信测试信测试信测</ion-card-content>
-            </ion-card>        
-          </div>
-        </div>
-      </div>      
-    </div>
-
-</ion-item>
-  <ion-item>
-    <div class="msg-my">   
-      <div class="msg-info">
-        <div class="msg-detail">
-          <ion-card class="msg-text-content">
-            <ion-card-content>测试信息测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信测试信</ion-card-content>
-          </ion-card>        
-        </div>
-      </div>
-      <div class="sender-avator">
-        <img src="assets/img/avator/3.png">
-      </div>   
-    </div>
-  </ion-item> -->
 </ion-list>
 
 </ion-content>
