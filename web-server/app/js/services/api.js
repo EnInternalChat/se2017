@@ -213,7 +213,6 @@ angular.module('API.Services', [])
         }
       else {
         $localStorage.authenticated = true;
-        has_token = true;
         $localStorage.token = res.headers()['x-auth-token'];
         $localStorage.username = username;
         $localStorage.password = pwd;
@@ -237,7 +236,7 @@ angular.module('API.Services', [])
     return post(base_url + '/logout', null).then(
       function(res) {
         $localStorage.authenticated = false;
-        has_token = false;
+        $localStorage.token = "";
         return true;
       },
       function(error) {
