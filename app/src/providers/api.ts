@@ -17,8 +17,8 @@ export class API {
 
   private is_debug: boolean = false;
   // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
-  // public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
-  public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
+  public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
     private http: HTTPService,
@@ -165,10 +165,9 @@ export class API {
     }, this.options_token);
   }
 
-  public operate_task(task_type, task_id, operation_id, other) {
-    return this.http.post(this.base_url + '/tasks/operate/' + task_id, {
-      processKey: task_type,
-      processID: task_id,
+  public operate_task(task_id, process_id, operation_id, other) {
+    return this.http.post(this.base_url + '/tasks/operate/' + this.data.company_id 
+      + '/' + this.data.user_id + '/' + task_id + '/' + process_id, {
       operationID: operation_id,
       content: other
     }, this.options_token);
