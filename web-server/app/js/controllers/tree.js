@@ -111,7 +111,8 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
   $scope.done_editing = function(item) {
     API.alert('确认保存修改？', $scope, function() {
       if(!item.leader) {
-        API.alert("部长为空", $scope, function(){})        
+        API.alert("部长为空!", $scope, function(){});
+        return;       
       }
       API.loading();
       API.update_section_info(item.ID, {
