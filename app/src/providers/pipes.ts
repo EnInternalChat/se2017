@@ -22,7 +22,7 @@ export class MyTimeFormat implements PipeTransform {
     }
     let time_array = value.split('T');
     if(time_array[0] == this.cur_date_str)
-      return time_array[1].split('+')[0];
+      return (new Date(value).toTimeString()).substr(0, 8);
     else {
       let date_array = time_array[0].split('-');
       return date_array[1] + '/' + date_array[2];

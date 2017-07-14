@@ -16,8 +16,8 @@ export class API {
   private options_token_json: RequestOptions;
 
   private is_debug: boolean = false;
-  // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
-  public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
+  public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
   // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
