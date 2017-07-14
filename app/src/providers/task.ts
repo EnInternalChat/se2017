@@ -1,44 +1,47 @@
 export class TaskStage {
   public activity_id: string;
   public content : string;
+  public title: string;
   public start_time: string;
   public finish_time : string;
-  public person : Array<string>;
+  public person : string;
+  public person_id : number;
   public exclusive_gateway: Array<{operationID: string, operationName: string}>;
 
-  public person_str : string;
   public status: number; // 0: pass, 1: doing, 2: end
   
   public constructor(json: any) {
     this.activity_id = json["activityID"];
     this.start_time = json["startTime"];
     this.finish_time = json["finishTime"];
-    this.person = json["person"];
+    this.person = json["person"]["name"];
+    this.person_id = json["person"]["ID"];
     this.content = json["content"];
+    this.title = json["title"];
     this.exclusive_gateway = json["exclusiveGateway"]
     this.status = 0;
-    if(this.person != undefined)
-      this.person_str = this.person.join(",");
-    else
-      this.person_str = " ";
   } 
 
 }
 
 export class Task {
-  public activity_id : string;
-  public type: string;
+  public activity_id : number;
+  public process_id: string;
   public content : string;
   public start_person : string;
+  public start_person_id: number;
   public start_time : string;
   public update_time : string;
   public over: boolean;
+  public operate_person_id: number;
   public stages : Array<TaskStage> = [];
 
   constructor(json: any) {
-    this.activity_id = json["taskID"];
-    this.content = json["taskName"];
-    this.start_person = json["startPerson"];
+    this.activity_id = json["processDefID"];
+    this.process_id = json["processID"];
+    this.content = json["processName"];
+    this.start_person = json["startPerson"]["name"];
+    this.start_person_id = json["startPerson"]["ID"];
     this.over = json["over"];
     let stages_json = json["stages"];
     for(let i = 0, n = stages_json.length; i < n; i++)
@@ -49,6 +52,7 @@ export class Task {
       this.stages[this.stages.length - 1].status = 2;
     else
       this.stages[this.stages.length - 1].status = 1;
+    this.operate_person_id = this.stages[this.stages.length - 1].person_id;
   }
 
 }

@@ -41,6 +41,7 @@ export class NewTask {
     this.job = this.global_data.job;
     this.api.get_tasks_type(this._name_).then(
       (tasks) => {
+        console.log(tasks);
         if(tasks.length === 0) {
           this.native.show_toast("没有已部署的任务流程");
           this.navCtrl.pop();
@@ -67,8 +68,10 @@ export class NewTask {
       console.log(res);
       if(!res.body.done)
         this.native.show_toast(res.body.info);
-      else
+      else {
+        this.native.show_toast("任务启动成功");
         this.navCtrl.pop();
+      }
     });
   }
 

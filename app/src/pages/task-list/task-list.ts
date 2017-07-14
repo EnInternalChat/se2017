@@ -89,7 +89,10 @@ export class TaskList {
       (res) => {
         console.log(res);
         res.forEach((item) => {
-          this.tasks_list_done.push(new Task(item));
+          if(item.over)
+            this.tasks_list_done.push(new Task(item));
+          else
+            this.tasks_list_not_done.push(new Task(item));
         })
       })
     .catch(() => this.native.show_toast("网络连接失败"));
