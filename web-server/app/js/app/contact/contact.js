@@ -127,6 +127,7 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
 
   $scope.createItem = function(){
     API.alert_prompt('新建用户', '用户姓名', function(name) {
+      API.loading();
       API.new_employee($scope.group.id, {
         name: name,
         password: MD5.encrypt(name),
@@ -134,27 +135,29 @@ app.controller('ContactCtrl', ['$scope', 'API', '$filter', '$stateParams', 'MD5'
         position: "部员"
       }).then(function(res){
         if(res.body.info === '员工添加成功') {
-          
-          API.get_employee_info($scope.group.id, res.body.id)
+          API.get_employee_info($scope.group.id, res.body.ID)
           .then(function(res) {
             var item = {
-              id: item['ID'],
-              group_id: item['sectionID'],
+              id: res['ID'],
+              group_id: res['sectionID'],
               group_name: "",
-              name: item['name'],
-              avatar: "img/" + (item['avatar'] + 1) + ".png",
-              phone: item['phone'][0],
-              other_phone: item['phone'][1],
-              email: item['email'][0],
-              other_email: item['email'][1],
-              leader: item['leader'],
-              status: item['status']
+              name: res['name'],
+              avatar: "img/" + res['avatar'] + ".png",
+              phone: res['phone'][0],
+              other_phone: res['phone'][1],
+              email: res['email'][0],
+              other_email: res['email'][1],
+              leader: res['leader'],
+              status: res['status']
             }
             $scope.items.push(item);
             $scope.selectItem(item);
             $scope.item.editing = false;
+            API.stop_loading();
           })
         }
+        else
+          API.stop_loading();
       })
     })
   };

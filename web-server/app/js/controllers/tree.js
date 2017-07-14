@@ -34,6 +34,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
         $scope.my_data = [res];
         format_tree_data(res.organization);
         API.stop_loading();
+        console.log($scope.my_data);
       })
   }
 
@@ -50,6 +51,7 @@ app.controller('AbnTestController', function($scope, $timeout, API, $state) {
       API.loading();
       API.new_section(parent.ID, $scope.new_name, '').then(function(res) {
         if(res.body.info == '部门添加成功') {
+          console.log(res);
           API.get_section_info(parent.ID).then(function(res) {
             console.log(res);
           });

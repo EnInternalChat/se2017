@@ -17,8 +17,8 @@ export class API {
 
   private is_debug: boolean = false;
   // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
-  public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
-  // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
+  // public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
+  public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
     private http: HTTPService,
@@ -145,19 +145,12 @@ export class API {
       + '/' + notice_id, null, this.options_token);
   }
 
-  public get_tasks(is_doing: boolean, group: string) {
-    return this.http.get('/assets/data/tasks.json', null, this.options_token);
-    // let url_key;
-    // if(is_doing) {
-    //   url_key = this.base_url + '/tasks/working/' + this.data.company_id 
-    //     + '/' + this.data.user_id;
-    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
-    // }
-    // else {
-    //   url_key = this.base_url + '/tasks/over/' + this.data.company_id 
-    //     + '/' + this.data.user_id;
-    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
-    // }
+  public get_tasks(group: string) {
+    // return this.http.get('/assets/data/tasks.json', null, this.options_token);
+    let url_key;
+    url_key = this.base_url + '/tasks/working/' + this.data.company_id 
+      + '/' + this.data.user_id;
+    return this.get_cache(url_key, group, url_key, null, this.options_token);
   }
 
   public get_tasks_type(group: string) {

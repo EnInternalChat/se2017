@@ -26,6 +26,10 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader', 'tasks', 'API',
     }
 
     $scope.update_task = function() {
+        if(!$scope.item.name || $scope.item.name == "") {
+            API.alert("名字不能为空");
+            return;
+        }
         if($scope.is_creating) {
             API.loading();
             var file = $scope.myFile;
