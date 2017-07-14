@@ -3,7 +3,6 @@
 angular.module('API.Services', [])
 .service('API', ['$http', '$q', '$window', '$localStorage', '$ngConfirm', '$rootScope',
   function($http, $q, $window, $localStorage, $ngConfirm, $rootScope){
-  var has_token = false;
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
   var base_url = "https://118.89.110.77/EnInternalChat";
@@ -49,7 +48,7 @@ angular.module('API.Services', [])
       headers: { 
         "Accept": "*/*",
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       }
     }).success(function(res) {
@@ -68,7 +67,7 @@ angular.module('API.Services', [])
       headers: { 
         "Accept": "*/*",
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       },
       data: body,
@@ -94,7 +93,7 @@ angular.module('API.Services', [])
       headers: {
         "Accept": "*/*",
         "Content-Type": "multipart/form-data",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"        
       },
       data: body,
@@ -126,7 +125,7 @@ angular.module('API.Services', [])
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       }
     }).success(function(res) {
