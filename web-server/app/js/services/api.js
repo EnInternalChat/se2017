@@ -5,9 +5,9 @@ angular.module('API.Services', [])
   function($http, $q, $window, $localStorage, $ngConfirm, $rootScope){
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
-  var base_url = "https://118.89.110.77/EnInternalChat";
+  // var base_url = "https://118.89.110.77/EnInternalChat";
   // var base_url = "http://10.42.0.186";
-  // var base_url = "https://106.15.186.180/EnInternalChat";
+  var base_url = "https://106.15.186.180/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
