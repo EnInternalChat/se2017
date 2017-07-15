@@ -1,4 +1,4 @@
-app.controller('MailCtrl', ['$scope', function($scope) {
+app.controller('MailCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
   $scope.folds = [
     {name: '所有', filter: ''},
     {name: '已读', filter: 'read'},

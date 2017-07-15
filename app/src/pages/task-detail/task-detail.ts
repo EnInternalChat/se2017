@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Config, AlertController, 
          ActionSheetController } from 'ionic-angular';
 
-import { Task } from '../../providers/task';
+import { Task, TaskStage } from '../../providers/task';
 import { AppGlobal } from '../../providers/global_data';
 import { UIText } from '../../providers/ui_text';
 import { API } from '../../providers/api';
@@ -31,12 +31,12 @@ export class TaskDetail {
     public navCtrl: NavController,
     public navParams: NavParams,
     public config: Config,
-    private global_data: AppGlobal,
+    private data: AppGlobal,
     public api: API,
     public ui: UIText,
     public native: NativeServiceHelper) {
-    this.task_info = navParams.data.task;
-    this.user_name = global_data.user_name;
+    this.task_info = this.navParams.get("task");
+    this.user_name = this.data.user_name;
     if(this.task_info.over)
       return;
     let gateways = this.task_info.stages[this.task_info.stages.length - 1].exclusive_gateway;
@@ -45,7 +45,10 @@ export class TaskDetail {
         "value": item.operationID,
         "text": item.operationName
       }));
-    console.log("Options: ", this.operation_options);
+  }
+
+  ionViewDidLoad() {
+
   }
 
   public operation_form(operate_id) {
@@ -67,8 +70,14 @@ export class TaskDetail {
         text: this.ui.ok,
         handler: data => {
           this.native.loading();
-          this.api.operate_task(this.task_info.type, 
-            this.task_info.activity_id, operate_id, data.info).then((res) => {
+          this.api.operate_task(this.task_info.activity_id, 
+            this.task_info.process_id, operate_id, data.info).then((res) => {
+              if(!res || !res.body.done)
+                this.native.show_toast(res.body.info)
+              else {
+                this.native.show_toast("操作成功");
+                this.navCtrl.pop();
+              }
               this.native.stop_loading();
             });
           return true;
@@ -97,7 +106,7 @@ export class TaskDetail {
 
   public stage_detail(stage) {
     let detail_alert = this.alertCtrl.create({
-      title: stage.content,
+      title: stage.title,
       message: stage.content,
       buttons: ['确认'],
       cssClass: 'form-alert'

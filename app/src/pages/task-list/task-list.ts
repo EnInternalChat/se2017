@@ -85,30 +85,17 @@ export class TaskList {
   }
 
   public update_tasks_list(update_all: boolean) {
-    let p_not_done = this.api.get_tasks(true, this._name_).then(
-      (res) =>  {
-        res.forEach((item) => {
-          this.tasks_list_not_done.push(new Task(item));
-        })
-      });
-    let p_done = this.api.get_tasks(false, this._name_).then(
+    return this.api.get_tasks(this._name_).then(
       (res) => {
+        console.log(res);
         res.forEach((item) => {
-          this.tasks_list_done.push(new Task(item));
+          if(item.over)
+            this.tasks_list_done.push(new Task(item));
+          else
+            this.tasks_list_not_done.push(new Task(item));
         })
-      });
-    if(update_all) {
-      return Promise.all([p_done, p_not_done]).catch(
-        () => this.native.show_toast("网络连接失败"));
-    }
-    else if(this.task_status === this.task_status_array[0]) {
-      return Promise.all([p_not_done]).catch(
-        () => this.native.show_toast("网络连接失败"));
-    }
-    else {
-      return Promise.all([p_done]).catch(
-        () => this.native.show_toast("网络连接失败"));
-    }
+      })
+    .catch(() => this.native.show_toast("网络连接失败"));
   }
 
   public doRefresh(refresher) {

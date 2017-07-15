@@ -16,8 +16,8 @@ export class API {
   private options_token_json: RequestOptions;
 
   private is_debug: boolean = false;
-  // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
-  public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
+  public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
+  // public base_url: string = this.is_debug ? "" : "https://106.15.186.180/EnInternalChat";
   // public base_url: string = this.is_debug ? "" : "http://10.42.0.186";
 
   constructor(
@@ -145,19 +145,12 @@ export class API {
       + '/' + notice_id, null, this.options_token);
   }
 
-  public get_tasks(is_doing: boolean, group: string) {
-    return this.http.get('/assets/data/tasks.json', null, this.options_token);
-    // let url_key;
-    // if(is_doing) {
-    //   url_key = this.base_url + '/tasks/working/' + this.data.company_id 
-    //     + '/' + this.data.user_id;
-    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
-    // }
-    // else {
-    //   url_key = this.base_url + '/tasks/over/' + this.data.company_id 
-    //     + '/' + this.data.user_id;
-    //   return this.get_cache(url_key, group, this.http.get(url_key, null, this.options_token));
-    // }
+  public get_tasks(group: string) {
+    // return this.http.get('/assets/data/tasks.json', null, this.options_token);
+    let url_key;
+    url_key = this.base_url + '/tasks/working/' + this.data.company_id 
+      + '/' + this.data.user_id;
+    return this.get_cache(url_key, group, url_key, null, this.options_token);
   }
 
   public get_tasks_type(group: string) {
@@ -172,10 +165,9 @@ export class API {
     }, this.options_token);
   }
 
-  public operate_task(task_type, task_id, operation_id, other) {
-    return this.http.post(this.base_url + '/tasks/operate/' + task_id, {
-      processKey: task_type,
-      processID: task_id,
+  public operate_task(task_id, process_id, operation_id, other) {
+    return this.http.post(this.base_url + '/tasks/operate/' + this.data.company_id 
+      + '/' + this.data.user_id + '/' + task_id + '/' + process_id, {
       operationID: operation_id,
       content: other
     }, this.options_token);

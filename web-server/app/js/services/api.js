@@ -3,12 +3,11 @@
 angular.module('API.Services', [])
 .service('API', ['$http', '$q', '$window', '$localStorage', '$ngConfirm', '$rootScope',
   function($http, $q, $window, $localStorage, $ngConfirm, $rootScope){
-  var has_token = false;
   var loading_dom = null;
   // var base_url = "https://t.garenfeather.cn/EnInternalChat";
-  // var base_url = "https://118.89.110.77/EnInternalChat";
+  var base_url = "https://118.89.110.77/EnInternalChat";
   // var base_url = "http://10.42.0.186";
-  var base_url = "https://106.15.186.180/EnInternalChat";
+  // var base_url = "https://106.15.186.180/EnInternalChat";
   var user = {};
 
   var obj2param = function(obj) {
@@ -49,7 +48,7 @@ angular.module('API.Services', [])
       headers: { 
         "Accept": "*/*",
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       }
     }).success(function(res) {
@@ -68,7 +67,7 @@ angular.module('API.Services', [])
       headers: { 
         "Accept": "*/*",
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       },
       data: body,
@@ -94,7 +93,7 @@ angular.module('API.Services', [])
       headers: {
         "Accept": "*/*",
         "Content-Type": "multipart/form-data",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"        
       },
       data: body,
@@ -126,7 +125,7 @@ angular.module('API.Services', [])
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*",
-        "x-auth-token": has_token ? $localStorage.token : "",
+        "x-auth-token": $localStorage.token,
         "Platform": "web"
       }
     }).success(function(res) {
@@ -214,7 +213,6 @@ angular.module('API.Services', [])
         }
       else {
         $localStorage.authenticated = true;
-        has_token = true;
         $localStorage.token = res.headers()['x-auth-token'];
         $localStorage.username = username;
         $localStorage.password = pwd;
@@ -238,7 +236,7 @@ angular.module('API.Services', [])
     return post(base_url + '/logout', null).then(
       function(res) {
         $localStorage.authenticated = false;
-        has_token = false;
+        $localStorage.token = "";
         return true;
       },
       function(error) {

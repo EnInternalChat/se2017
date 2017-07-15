@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-app.controller('DashboardCtrl', ['$scope', 'mails', 'tasks', '$state', 
-    function($scope, mails, tasks, $state) {
+app.controller('DashboardCtrl', ['$scope', '$rootScope', 'mails', 'tasks', '$state', 
+    function($scope, $rootScope, mails, tasks, $state) {
   mails.get_mails('').then(function(mails) {
     $scope.mails = mails;
   });

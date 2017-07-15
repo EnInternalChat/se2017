@@ -47,15 +47,15 @@
       </div>
       <div class="task-stage-detail">
         <ion-card class="task-stage-content" (click)="stage_detail(stage)">
-          <ion-card-header>{{stage.person_str}}</ion-card-header>
-          <ion-card-content>{{stage.content}}</ion-card-content>
+          <ion-card-header>{{stage.person}}</ion-card-header>
+          <ion-card-content>{{stage.title}}</ion-card-content>
           </ion-card>
       </div>
     </ion-item>
   </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="!task_info.over" [ngSwitch]="operation_options.length">
+<ion-footer *ngIf="!task_info.over && task_info.operate_person_id === data.user_id" [ngSwitch]="operation_options.length">
   <ion-toolbar class="footer-toolbar" *ngSwitchCase="1">
     <ion-buttons style="text-align: center;">
       <button ion-button clear class="operation-button" (click)="operation_form(operation_options[0].value)">{{operation_options[0].text}}</button>
