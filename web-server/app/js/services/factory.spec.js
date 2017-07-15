@@ -16,7 +16,7 @@ describe('Factories mails test', function() {
             {
                 ID: 0,
                 companyID: 0,
-                content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
+                content: "通知",
                 senderName: "caocun",
                 sentTime: "2017-06-21T11:45:36Z",
                 title: "老总带钱跑啦！",
@@ -25,7 +25,7 @@ describe('Factories mails test', function() {
             {
                 ID: 1,
                 companyID: 0,
-                content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
+                content: "通知",
                 senderName: "caocun",
                 sentTime: "2017-06-21T11:45:36Z",
                 title: "老总带钱跑啦！",
@@ -34,7 +34,7 @@ describe('Factories mails test', function() {
             {
                 ID: 2,
                 companyID: 0,
-                content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
+                content: "通知",
                 senderName: "caocun",
                 sentTime: "2017-06-21T11:45:36Z",
                 title: "老总带钱跑啦！",
@@ -126,31 +126,95 @@ describe("Factories tasks test", function() {
         var tasks = [
         {
             ID: 0,
-            companyID: 0,
-            content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
-            senderName: "caocun",
-            sentTime: "2017-06-21T11:45:36Z",
-            title: "老总带钱跑啦！",
-            fold: "read"
-        },
-        {
-            ID: 1,
-            companyID: 0,
-            content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
-            senderName: "caocun",
-            sentTime: "2017-06-21T11:45:36Z",
-            title: "老总带钱跑啦！",
-            fold: "unread"
-        },
-        {
-            ID: 2,
-            companyID: 0,
-            content: "这是一条公司破产程序员辞职了，策划被解雇，产品经理跑了的通知",
-            senderName: "caocun",
-            sentTime: "2017-06-21T11:45:36Z",
-            title: "老总带钱跑啦！",
-            fold: "send"
+            name: "请假",
+            updateTime: "2017-06-21T11:45:36Z",
         }
         ];
+
+        spyOn(api, 'get_task_detail').add.callFake(function(id) {
+            if(id === 0)
+                return {
+                    data: "1"
+                }
+            else
+                return {
+                    info: ""
+                }
+        });
+
+        spyOn(api, 'alert').add.callFake(function(text, scope, cb) {
+            return;
+        });
+
+        spyOn(api, 'get_tasks').add.callFake(function() {
+            return tasks;
+        })
+
+        spyOn(api, 'delete_task').add.callFake(function(id) {
+            tasks.splice(id, 1);
+            return {
+                info: "删除成功"
+            }
+        })
+
+        spyOn(api, 'update_task').add.callFake(function(id, name) {
+            if(id === 0) {
+                tasks[0].name = name;
+            }
+            return true;
+        })
+
+        spyOn(api, 'new_task').add.callFake(function(name, file) {
+            return {
+                body: {
+                    ID: 1,
+                    deploy: true,
+                    upload: true,
+                    data: "",
+                    info: "OK"
+                }
+            }
+        })
+
+        it('Should have function', function() {
+            expect(angular.isFunction(factory.find_task)).toBe(true);
+            expect(angular.isFunction(factory.get_task_detail)).toBe(true);
+            expect(angular.isFunction(factory.get_all)).toBe(true);
+            expect(angular.isFunction(factory.delete_task)).toBe(true);
+            expect(angular.isFunction(factory.update_task)).toBe(true);
+            expect(angular.isFunction(factory.new_task)).toBe(true);
+        })
+
+        it('Should find a task', function() {
+            var res = factory.find_task(0);
+            expect(res.name).toBe("请假");
+        })
+
+        it('Should get task detail', function() {
+            var res = factory.get_task_detail(0);
+            expect(res).toBe("data:image/png;base64,1");
+        })
+
+        it('Should not get task detail', function() {
+            var res = factory.get_task_detail(1);
+            expect(res).toBe("");
+        })
+
+        it('Should get all tasks', function() {
+            var res = factory.get_all();
+            expect(res.length).toBe(1);
+        })
+
+        it('Should add a task', function() {
+            var res = factory.new_task("玩耍", null);
+            expect(res.name).toBe("玩耍");
+        })
+
+        it('Should delete a task', function() {
+            factory.delete_task(1);
+            var res = factory.get_all();
+            expect(res.length).toBe(1);
+        })
+
     })
 })
