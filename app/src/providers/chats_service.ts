@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { HTTPService } from './http_helper';
+import { AppGlobal } from './global_data';
 
 declare let window;
+declare let JMessage: any;
+
 
 @Injectable()
 export class ChatService {
   public is_platform: boolean;
   public is_android: boolean;
   public message_count: number = 10;
+  private JIM: any;
 
   constructor(
     public platform: Platform,
+    public data: AppGlobal,
     public http: HTTPService) {
+    this.JIM = new JMessage();
     if((this.platform.is('android') || this.platform.is('ios'))
       && this.platform.userAgent().indexOf('Linux x86_64') == -1) {
       this.is_platform = true;
@@ -31,14 +37,41 @@ export class ChatService {
     if(!this.is_platform)
       return Promise.resolve(true);
     else {
-      return new Promise((resolve, reject) => 
-        window.JMessage.login(username, password, resolve, reject));      
+      // if(this.is_android) {
+        return new Promise((resolve, reject) => 
+          window.JMessage.login(username, password, resolve, reject));              
+      // }
+      // else {
+      //   return new Promise((resolve, reject) => {
+      //     return this.JIM.init(this.data.auth_payload)
+      //       .onSuccess((data) => { 
+      //         return this.JIM.login({
+      //           "username": username,
+      //           "password": password
+      //         }).onSuccess((data) => { 
+      //           return resolve(data); 
+      //         })
+      //         .onFail((data) => { 
+      //           return reject(data) 
+      //         });
+      //       })
+      //       .onFail((data) => { 
+      //         return reject(data); 
+      //       });
+      //   })
+      // }
     }
   }
 
   public logout(): Promise<any> {
-    return new Promise((resolve, reject) => 
-      window.JMessage.logout(resolve, reject));
+    // if(this.is_android) {
+      return new Promise((resolve, reject) => 
+        window.JMessage.logout(resolve, reject));      
+    // }
+    // else {
+    //   this.JIM.loginOut();
+    //   return Promise.resolve(true);
+    // }
   }
 
   public set_alias(alias) {
@@ -52,12 +85,28 @@ export class ChatService {
   }
 
   public get_conversation_list(): Promise<any> {
-    return new Promise((resolve, reject) =>
-      window.JMessage.getConversationList(resolve, reject));
+    // if(this.is_android) {
+      console.log(window.JMessage);
+      return new Promise((resolve, reject) =>
+        window.JMessage.getConversationList(resolve, reject));      
+    // }
+    // else {
+    //   return new Promise((resolve, reject) => {
+    //     return this.JIM.getConversation()
+    //       .onSuccess((data) => {
+    //         return resolve(data.conversations);
+    //       })
+    //       .onFail((data) => { 
+    //         return reject(data); 
+    //       })
+    //   });
+    // }
   }
 
   // Android only
   public enter_conversation(is_single: boolean, target: string): Promise<any> {
+    if(!this.is_android)
+      return Promise.resolve(true);
     if(is_single) {
       return new Promise((resolve, reject) =>
         window.JMessage.enterSingleConversation(target, null, resolve, reject));
@@ -94,6 +143,8 @@ export class ChatService {
   }
 
   public exit_conversation() {
+    if(!this.is_android)
+      return Promise.resolve(true);
     return new Promise((resolve, reject) =>
       window.JMessage.exitConversation(resolve, reject));
   }

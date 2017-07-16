@@ -31,6 +31,7 @@ import { HTTPService } from '../providers/http_helper';
 import { ChatService } from '../providers/chats_service';
 import { StorageHelper } from '../providers/storage_helper';
 import { MD5 } from '../providers/secure_md5';
+import { Base64 } from '../providers/base64';
 import { AppGlobal } from '../providers/global_data';
 import { UIText } from '../providers/ui_text'; 
 import { API } from '../providers/api';
@@ -104,6 +105,7 @@ import { SharedModule } from '../components/shared.module';
     AppGlobal,
     UIText,
     MD5,
+    Base64,
     API,
     ChatService
   ]

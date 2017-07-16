@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageHelper } from './storage_helper';
 import { MD5 } from './secure_md5';
+import { Base64 } from './base64';
 import { UIText, AppLanguage } from './ui_text';
 import { Conversation } from './chat';
 
@@ -13,6 +14,8 @@ export class AppGlobal {
   private _avator_path: string;
   private _avator_no: number;
   private _language: AppLanguage;
+  private _app_key: string = "f784911007eb5e69ef4a773f";
+  private _master_secret: string = "d4c4f6da868458e48f4de0e8";
 
   public job : string = "管理员";
   public user_id: string;
@@ -26,6 +29,7 @@ export class AppGlobal {
   public constructor(
     private storage: StorageHelper,
     private md5_helper: MD5,
+    private base64: Base64,
     private ui: UIText) {
     let p1 = this.storage.read_local_info("username", "ZhangSan").then(
       (value) => {
@@ -43,6 +47,18 @@ export class AppGlobal {
       // console.log("In Global(username): ", this._user_name);
       // console.log("In Global(language): ", this.language);
     });
+  }
+
+  get auth_payload() {
+    let time = new Date().getTime().toString();
+    return {
+      "appkey": this._app_key,
+      "random_str": "022cd9fd995849b58b3ef0e943421ed9",
+      "timestamp": time,
+      "signature": this.encrypt_pwd("appkey=" + this._app_key + "&timestamp=" 
+        + time + "&random_str=022cd9fd995849b58b3ef0e943421ed9&key=" + 
+        this._master_secret)
+    }
   }
 
   set language(lan: AppLanguage) {
