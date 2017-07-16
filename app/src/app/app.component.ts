@@ -6,6 +6,8 @@ import { Login } from '../pages/login/login';
 import { BasisPage } from '../pages/basis-page/basis-page';
 import { NativeServiceHelper } from '../providers/native_service_helper';
 import { ChatDetail } from '../pages/chat-detail/chat-detail';
+import { API } from '../providers/api';
+import { ChatService } from '../providers/chats_service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +27,8 @@ export class MyApp {
   backPressed: boolean = false;
 
   constructor(
+    public api: API,
+    public chat_service: ChatService,
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
@@ -90,7 +94,14 @@ export class MyApp {
 
   public show_exit_toast() {
     if(this.backPressed) {
-      this.platform.exitApp();
+      let p1 = this.api.logout();
+      let p2 = this.chat_service.logout();
+      this.native.loading();
+      Promise.all([p1, p2]).then(
+        () => {
+          this.native.stop_loading();
+          this.platform.exitApp();
+        });
     }
     else {
       this.native.show_toast("再按一次退出应用", 2000);

@@ -31,7 +31,7 @@
         <div>
           <div class="send-person" *ngIf="item.is_single">{{item.send_user_name}}</div>
           <div class="send-person" *ngIf="!item.is_single">{{item.group_name}}</div>
-          <div class="send-time">{{item.last_msg_date | date: 'y-MM-ddTHH:mm' | time_format}}</div>
+          <div class="send-time">{{item.last_msg_date | date: 'y-MM-dd HH:mm'}}</div>
         </div>
         <div class="content">
           <div class="msg-content" *ngIf="!item.is_text_img">{{item.send_user_name}}: {{item.last_text}}</div>

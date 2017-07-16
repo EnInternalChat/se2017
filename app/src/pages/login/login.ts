@@ -115,8 +115,8 @@ export class Login {
               this.nav_ctrl.push(BasisPage);                
             },
             (error) => this.native.show_toast("登录失败"));
+          return true;
         }
-        return true;
       },
       (error) => {
         this.native.stop_loading();
