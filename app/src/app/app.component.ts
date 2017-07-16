@@ -22,8 +22,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage = Login;
-  // rootPage = BasisPage;
-  // rootPage = ChatDetail;
   backPressed: boolean = false;
 
   constructor(
@@ -94,11 +92,16 @@ export class MyApp {
 
   public show_exit_toast() {
     if(this.backPressed) {
+      if(!this.api.is_login) {
+        this.platform.exitApp();
+        return;
+      }
       let p1 = this.api.logout();
       let p2 = this.chat_service.logout();
       this.native.loading();
       Promise.all([p1, p2]).then(
         () => {
+          this.api.is_login = false;
           this.native.stop_loading();
           this.platform.exitApp();
         });

@@ -15,6 +15,7 @@ export class API {
   private options_json: RequestOptions;  
   private options_token_json: RequestOptions;
 
+  public is_login: boolean = false;
   private is_debug: boolean = false;
   public base_url: string = this.is_debug ? "" : "https://ns.njuics.cn/EnInternalChat";
   // public base_url: string = this.is_debug ? "" : "https://118.89.110.77/EnInternalChat";
@@ -115,6 +116,7 @@ export class API {
   }
 
   public signin(user, token) {
+    this.is_login = true;
     this.data.set_avator_no(user['avatar']);
     this.data.user_name = user['username'];
     this.data.user_id = user['ID'];

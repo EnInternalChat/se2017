@@ -89,7 +89,6 @@ export class Login {
     }
     else
       password_md5 = this.password;
-    console.log("md5: ", password_md5);
     this.native.loading();
     this.api.login(this.username, password_md5).then(
       (res) => {
@@ -114,14 +113,16 @@ export class Login {
               this.native.show_toast("登录成功");
               this.nav_ctrl.push(BasisPage);                
             },
-            (error) => this.native.show_toast("登录失败"));
+            (error) => {
+              this.native.stop_loading();
+              this.native.show_toast("登录失败");
+            });
           return true;
         }
       },
       (error) => {
         this.native.stop_loading();
         this.native.show_toast("请检查网络");
-        this.nav_ctrl.push(BasisPage);                
         return false;
       });
   }

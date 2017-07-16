@@ -78,7 +78,11 @@ export class BasisPage {
           (data) => console.log("注销成功"),
           (error) => console.log("注销失败"));
         Promise.all([p1, this.api.logout(), this.api.clean_cache('Personal')]).then(
-          () => this.navCtrl.pop())
+          () => {
+            this.api.is_login = false;
+            this.navCtrl.pop();
+            return true;
+          })
         .catch(() => this.navCtrl.pop());
       });
     // 注册全局切换页面事件
