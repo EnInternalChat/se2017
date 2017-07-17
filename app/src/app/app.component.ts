@@ -69,24 +69,30 @@ export class MyApp {
       return;
     //启动极光推送
     if(window.plugins && 　window.plugins.jPushPlugin) {
-      window.plugins.jPushPlugin.init();
-      document.addEventListener("jpush.openNotification", 
-        () => {
-          let keys_dict;
-          if(this.platform.is('android')) {
-            keys_dict = window.plugins.jPushPlugin.openNotification.extras;
-          }
-          else if(this.platform.is('ios')) {
-            keys_dict = window.plugins.jPushPlugin.openNotification;
-          }
-          this.events.publish('open_notice', keys_dict['page']);
-          return true;
-        }, false);
-      document.addEventListener('jmessage.onOpenMessage', 
-        (msg: any) => {
-          this.events.publish('open_notice', 0);
-          return true;
-        }, false);
+      this.chat_service.init().then(() => {
+        document.addEventListener("jpush.receiveNotification",
+          (event) => {
+            console.log("Receive Notification: ", event);
+          }, false);
+        document.addEventListener("jpush.openNotification", 
+          () => {
+            let keys_dict;
+            if(this.platform.is('android')) {
+              keys_dict = window.plugins.jPushPlugin.openNotification.extras;
+            }
+            else if(this.platform.is('ios')) {
+              keys_dict = window.plugins.jPushPlugin.openNotification;
+            }
+            this.events.publish('open_notice', keys_dict['page']);
+            return true;
+          }, false);
+        document.addEventListener('jmessage.onOpenMessage', 
+          (msg: any) => {
+            this.events.publish('open_notice', 0);
+            return true;
+          }, false);        
+      })
+
     }
   }
 

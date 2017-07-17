@@ -89,7 +89,8 @@ export class ChatList {
         }
         return true;
       },
-      (error) => this.native.show_toast(this.ui.BasisPage.chat_toast));
+      (error) => this.native.show_toast(this.ui.BasisPage.chat_toast))
+    .catch(() => console.log("Error"));
   }
 
   public add_conversation_item(json) {

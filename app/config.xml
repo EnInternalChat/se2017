@@ -6,6 +6,7 @@
     <content src="index.html"/>
     <access origin="*"/>
     <allow-navigation href="http://ionic.local/*"/>
+    <allow-navigation href="http://192.168.56.1:8100"/>
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
     <allow-intent href="tel:*"/>
@@ -62,10 +63,10 @@
     <plugin name="cordova-plugin-statusbar" spec="2.2.1"/>
     <plugin name="cordova-plugin-device" spec="1.1.4"/>
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
-    <plugin name="jmessage-phonegap-plugin" spec="~2.4.3">
+    <plugin name="jmessage-phonegap-plugin" spec="~2.4.6">
         <variable name="APP_KEY" value="f784911007eb5e69ef4a773f"/>
     </plugin>
-    <plugin name="jpush-phonegap-plugin" spec="~3.1.7">
+    <plugin name="jpush-phonegap-plugin" spec="~3.1.9">
         <variable name="APP_KEY" value="f784911007eb5e69ef4a773f"/>
     </plugin>
     <plugin name="cordova-plugin-jcore" spec="~1.1.4"/>

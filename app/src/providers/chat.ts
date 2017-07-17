@@ -83,7 +83,12 @@ export class Conversation {
     this.id = json['id'];
     if(json['type'] === 'single') {
       this.is_single = true;
-      this.avator = json['targetInfo']['nickname'];
+      if(json['targetInfo'])
+        this.avator = json['targetInfo']['nickname'];
+      else if(!json['latestMessage'])
+        this.avator = json['latestMessage']['targetInfo']['nickname'];
+      else
+        this.avator = "1";
     }
     else {
       this.is_single = false;
@@ -91,7 +96,7 @@ export class Conversation {
       this.group_id = json['targetInfo']['groupID'];
       this.group_name = json['targetInfo']['groupName'];
     }
-    if(json['latestMessage'] == null) {
+    if(!json['latestMessage']) {
       if(this.is_single) {
         this.send_user_name = json['targetInfo']['userName'];
         this.send_user_id = json['targetInfo']['userID'];
@@ -101,6 +106,9 @@ export class Conversation {
     }
     else {
       if(this.is_single) {
+        if(!json['targetInfo']) {
+          json['targetInfo'] = json['latestMessage']['targetInfo'];
+        }
         this.send_user_id = json['targetInfo']['userID'];
         this.send_user_name = json['targetInfo']['userName'];        
       }
