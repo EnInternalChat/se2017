@@ -75,6 +75,8 @@ export class ChatDetail {
   }
 
   public onReceiveMsg(msg: any) {
+    if(!this.chat_service.is_android)
+      msg = this.chat_service.parse_ios_message(msg);
     this.msg_list.push(new Message(msg, this.global_data.user_name));
     this.content.scrollToBottom(500);
     this.changeDetect.detectChanges();
@@ -91,6 +93,8 @@ export class ChatDetail {
         let new_messages = [];
         let username = this.global_data.user_name;
         for(let i = 0, n = data.length; i < n; i++) {
+          if(!this.chat_service.is_android)
+            data[i] = this.chat_service.parse_ios_message(data[i]);
           this.msg_list.unshift(new Message(data[i], username))
         }
         return true;
@@ -120,6 +124,12 @@ export class ChatDetail {
         if(res == null)
           return;
         res = JSON.parse(res);
+        if(!this.chat_service.is_android)
+          res = this.chat_service.parse_ios_message({
+            "msgId": new Date().toString(),
+            "content": res,
+            "contentType": "1"
+          });
         res['fromName'] = res['fromID'];
         let new_msg = new Message(res, this.global_data.user_name);
         new_msg.from_user_avator = this.global_data.avator_no.toString();
@@ -143,6 +153,12 @@ export class ChatDetail {
         if(res == null)
           return;
         res = JSON.parse(res);
+        if(!this.chat_service.is_android)
+          res = this.chat_service.parse_ios_message({
+            "msgId": new Date().toString(),
+            "content": res,
+            "contentType": "2"
+          });
         res['fromName'] = res['fromID'];
         let new_msg = new Message(res, this.global_data.user_name);
         new_msg.from_user_avator = this.global_data.avator_no.toString();
@@ -157,6 +173,8 @@ export class ChatDetail {
   }
 
   public get_img_msg() {
+    if(!this.chat_service.is_android)
+      return;
     let img_action_selector = this.actionCtrl.create({
       cssClass: "image-actionsheet"
     });
@@ -215,11 +233,13 @@ export class ChatDetail {
       return;
     }
     let promise_p = [];
-    promise_p.push(this.chat_service.clear_unread_msg(
-      this.con.is_single, this.con.target_id));
-    promise_p.push(this.chat_service.exit_conversation().then(
-      () => {},
-      (error) => this.native.show_toast('网络连接出现问题')));
+    if(this.chat_service.is_android) {
+      promise_p.push(this.chat_service.clear_unread_msg(
+        this.con.is_single, this.con.target_id));
+      promise_p.push(this.chat_service.exit_conversation().then(
+        () => {},
+        (error) => this.native.show_toast('网络连接出现问题')));      
+    }
     Promise.all(promise_p).then(
       () => this.navCtrl.pop());
   }

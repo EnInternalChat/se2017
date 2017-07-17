@@ -106,20 +106,17 @@ export class Login {
           res.body['username'] = this.username;
           this.api.signin(res.body, res.headers.get('x-auth-token'));
 
-          this.chat_service.set_alias(this.username).then((data) => {
-            console.log("Alias OK: ", data);
-            return this.chat_service.login(this.username, password_md5).then(
-              (data) => {
-                this.native.stop_loading();
-                this.native.show_toast("登录成功");
-                this.nav_ctrl.push(BasisPage);                
-              },
-              (error) => {
-                this.native.stop_loading();
-                this.native.show_toast("登录失败");
-              });            
-          },
-          (error) => console.log("Alias Failed: ", error));
+          this.chat_service.set_alias(this.username);
+          this.chat_service.login(this.username, password_md5).then(
+            (data) => {
+              this.native.stop_loading();
+              this.native.show_toast("登录成功");
+              this.nav_ctrl.push(BasisPage);                
+            },
+            (error) => {
+              this.native.stop_loading();
+              this.native.show_toast("登录失败");
+            });            
           return true;
         }
       },
