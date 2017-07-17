@@ -14,6 +14,7 @@ export class API {
   private options_token: RequestOptions;
   private options_json: RequestOptions;  
   private options_token_json: RequestOptions;
+  private options_jpush: RequestOptions;
 
   public is_login: boolean = false;
   private is_debug: boolean = false;
@@ -28,6 +29,12 @@ export class API {
     private storage: StorageHelper,
     private cache: HttpCache,
     private native: NativeServiceHelper) {
+    this.options_jpush = new RequestOptions({
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "Basic Zjc4NDkxMTAwN2ViNWU2OWVmNGE3NzNmOmQ0YzRmNmRhODY4NDU4ZTQ4ZjRkZTBlOA=="
+      })
+    });
     this.options = new RequestOptions({
       headers: new Headers({
         "Accept": "*/*",
@@ -213,7 +220,6 @@ export class API {
     let url_key = this.base_url + '/company/' + this.data.company_id 
       + '/sections/' + this.data.section_id;
     return this.get_cache(url_key, group, url_key, null,this.options_token);
-    // return this.http.get(url_key, null, this.options_token);
   }
 
   public start_group_chat(group_list) {
@@ -221,6 +227,12 @@ export class API {
       + '/' + this.data.section_id + '/' + this.data.user_id, {
       groupIDList: group_list
     }, this.options_token);
+  }
+
+  public load_media_from_jpush(media_id) {
+    return this.http.get("https://api.im.jpush.cn/v1/resource", {
+      "mediaId": media_id
+    }, this.options_jpush);
   }
 
 }

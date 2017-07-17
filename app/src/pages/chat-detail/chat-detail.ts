@@ -9,6 +9,7 @@ import { NativeServiceHelper } from '../../providers/native_service_helper';
 import { ImageViwer } from '../../components/image-viwer/image-viwer';
 import { UIText } from '../../providers/ui_text';
 import { NewSingleChat } from '../../pages/new-single-chat/new-single-chat';
+import { API } from '../../providers/api';
 
 /**
  * Generated class for the ChatDetail page.
@@ -24,6 +25,7 @@ import { NewSingleChat } from '../../pages/new-single-chat/new-single-chat';
 export class ChatDetail {
   @ViewChild(Content) content: Content;
 
+  public is_ios: boolean;
   public con: Conversation;
   public is_single: boolean;
   public con_title: string;
@@ -43,10 +45,12 @@ export class ChatDetail {
     public global_data: AppGlobal,
     public native: NativeServiceHelper,
     public chat_service: ChatService,
-    public ui: UIText) {
+    public ui: UIText,
+    public api: API) {
   }
 
   ionViewDidLoad() {
+    this.is_ios = !this.chat_service.is_android;
     this.con = this.navParams.data.conversation;
     this.is_single = this.con.is_single;
     if(this.is_single)
@@ -75,7 +79,7 @@ export class ChatDetail {
   }
 
   public onReceiveMsg(msg: any) {
-    if(!this.chat_service.is_android)
+    if(this.is_ios)
       msg = this.chat_service.parse_ios_message(msg);
     this.msg_list.push(new Message(msg, this.global_data.user_name));
     this.content.scrollToBottom(500);
@@ -93,9 +97,17 @@ export class ChatDetail {
         let new_messages = [];
         let username = this.global_data.user_name;
         for(let i = 0, n = data.length; i < n; i++) {
-          if(!this.chat_service.is_android)
+          if(this.is_ios)
             data[i] = this.chat_service.parse_ios_message(data[i]);
-          this.msg_list.unshift(new Message(data[i], username))
+          let new_msg = new Message(data[i], username);
+          if(new_msg.is_img && this.is_ios) {
+            this.api.load_media_from_jpush(new_msg.content["web_path"]).then((data) => {
+              new_msg.content["local_path"] = data.url;
+              new_msg.content["origin_path"] = data.url;
+              console.log("Load Image");
+            });  
+          }
+          this.msg_list.unshift(new_msg);            
         }
         return true;
       },
@@ -124,7 +136,7 @@ export class ChatDetail {
         if(res == null)
           return;
         res = JSON.parse(res);
-        if(!this.chat_service.is_android)
+        if(this.is_ios)
           res = this.chat_service.parse_ios_message({
             "msgId": new Date().toString(),
             "content": res,
@@ -153,7 +165,7 @@ export class ChatDetail {
         if(res == null)
           return;
         res = JSON.parse(res);
-        if(!this.chat_service.is_android)
+        if(this.is_ios)
           res = this.chat_service.parse_ios_message({
             "msgId": new Date().toString(),
             "content": res,
@@ -173,7 +185,7 @@ export class ChatDetail {
   }
 
   public get_img_msg() {
-    if(!this.chat_service.is_android)
+    if(this.is_ios)
       return;
     let img_action_selector = this.actionCtrl.create({
       cssClass: "image-actionsheet"

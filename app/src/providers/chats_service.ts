@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { HTTPService } from './http_helper';
+import { API } from './api';
 import { AppGlobal } from './global_data';
 
 declare let window;
@@ -15,7 +15,7 @@ export class ChatService {
   constructor(
     public platform: Platform,
     public data: AppGlobal,
-    public http: HTTPService) {
+    public api: API) {
     if((this.platform.is('android') || this.platform.is('ios'))
       && this.platform.userAgent().indexOf('Linux x86_64') == -1) {
       this.is_platform = true;
@@ -173,9 +173,9 @@ export class ChatService {
     else {
       res["content"] = {
         "format": "png",
-        "localThumbnailPath" : content["media_id"],
-        "media_id": content["media_id"],
-        "local_path": content["media_id"]
+        "local_path" : content["media_id"],
+        "web_path": content["media_id"],
+        "origin_path": content["media_id"]
       }
     }
     return res;
