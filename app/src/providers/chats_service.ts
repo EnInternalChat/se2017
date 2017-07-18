@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { HTTPService } from './http_helper';
+import { API } from './api';
 import { AppGlobal } from './global_data';
 
 declare let window;
@@ -15,7 +15,7 @@ export class ChatService {
   constructor(
     public platform: Platform,
     public data: AppGlobal,
-    public http: HTTPService) {
+    public api: API) {
     if((this.platform.is('android') || this.platform.is('ios'))
       && this.platform.userAgent().indexOf('Linux x86_64') == -1) {
       this.is_platform = true;
@@ -58,7 +58,7 @@ export class ChatService {
       return Promise.resolve(true);
     if (alias && alias.trim() != '') {
       return new Promise((resolve, reject) => 
-        window.plugins.jPushPlugin.setTagsWithAlias([], alias, resolve, reject));
+        window.plugins.jPushPlugin.setAlias(alias, resolve, reject));
     }
     else {
       alert('Alias不能为空');
@@ -71,6 +71,37 @@ export class ChatService {
       alert("NULL JMessage");
     return new Promise((resolve, reject) =>
       window.JMessage.getConversationList(resolve, reject));      
+  }
+
+  public parse_ios_conversation(json) {
+    let msg_type = (json["lastMessage"] === "[图片]" ? "image" : "text");
+    if(json["gid"]) {
+      return {
+        "id": json["gid"],
+        "type": "group",
+        "targetInfo": {
+          "groupID": json["gid"],
+          "groupName": json["name"]
+        },
+        "latestText": json["lastMessage"],
+        "latestType": msg_type,
+        "lastMsgDate": json["timestamp"],
+         "unReadMsgCnt": json["unreadCount"]
+      }
+    }
+    return {
+      "id": json["appkey"],
+      "type": "single",
+      "targetInfo": {
+        "nickname": json["nickname"],
+        "userID": json["username"],
+        "userName": json["username"]
+      },
+      "latestText": json["lastMessage"],
+      "latestType": msg_type,
+      "lastMsgDate": json["timestamp"],
+      "unReadMsgCnt": json["unreadCount"]
+    }
   }
 
   // Android only
@@ -123,6 +154,31 @@ export class ChatService {
     return new Promise((resolve, reject) => 
       window.JMessage.getHistoryMessages(is_single ? 'single' : 'group', 
         username, null, from, this.message_count, resolve, reject));
+  }
+
+  public parse_ios_message(json) {
+    let content_type = (json["contentType"] === "1" ? "text" : "image");
+    let content = json["content"];
+    let res = {
+      "serverMessageId": json["msgId"],
+      "contentType" : content_type,
+      "fromID": content["from_id"],
+      "fromName": content["from_id"],
+      "fromNickname": content["from_name"],
+      "createTimeInMillis": content["create_time"],
+    };
+    if(content_type === "text") {
+      res["content"] = content["msg_body"]
+    }
+    else {
+      res["content"] = {
+        "format": "png",
+        "local_path" : content["media_id"],
+        "web_path": content["media_id"],
+        "origin_path": content["media_id"]
+      }
+    }
+    return res;
   }
 
   // Android only

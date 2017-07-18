@@ -85,6 +85,8 @@ export class ChatList {
         if(!(typeof(data) == "object" && data.length >= 1))
           data = JSON.parse(data);
         for(let i = 0, n = data.length; i < n; i++) {
+          if(!this.chat_service.is_android)  
+            data[i] = this.chat_service.parse_ios_conversation(data[i]);
           this.add_conversation_item(data[i]);
         }
         return true;

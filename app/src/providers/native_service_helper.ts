@@ -35,7 +35,7 @@ export class NativeServiceHelper {
   }
 
   public take_photo() {
-    if(!this.is_platform)
+    if(!this.is_platform || !this.camera)
       return;
     return this.camera.getPicture(this.camera_options);
   }

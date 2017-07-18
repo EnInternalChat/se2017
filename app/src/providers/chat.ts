@@ -46,8 +46,9 @@ export class Message {
     let msg_content = json['content'];
     if(msg_content == null)
       return;
-    if(this.is_img)
+    if(this.is_img) {
       this.content = new ImageMessage(msg_content);
+    }
     else
       this.content = msg_content['text'];
     this.is_my_send = (cur_username === this.from_user);
