@@ -27,7 +27,7 @@
   </ion-refresher>
   <ion-list class="sections-list">
     <ion-item *ngFor="let item of sections" class="section-item">
-      <ion-label class="section-depth-{{item.depth}}">{{item.name}}</ion-label>
+      <ion-label class="section-depth-1">{{item.name}}</ion-label>
       <ion-checkbox color="primary" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
   </ion-list>
