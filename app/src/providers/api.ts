@@ -139,12 +139,10 @@ export class API {
   public get_notices(not_read: boolean, group: string) {
     let url_key;
     if(not_read) {
-      // url_key = "/assets/data/notices.json";
       url_key = this.base_url + '/notifications/received/unread/' + this.data.user_id;
       return this.get_cache(url_key, group, url_key, null, this.options_token);
     }
     else {
-      // url_key = "/assets/data/notices.json";
       url_key = this.base_url + '/notifications/received/read/' + this.data.user_id;
       return this.get_cache(url_key, group, url_key, null, this.options_token);
     }
@@ -156,7 +154,6 @@ export class API {
   }
 
   public get_tasks(group: string) {
-    // return this.http.get('/assets/data/tasks.json', null, this.options_token);
     let url_key;
     url_key = this.base_url + '/tasks/working/' + this.data.company_id 
       + '/' + this.data.user_id;
@@ -187,11 +184,6 @@ export class API {
     let url_key = this.base_url + '/employees/' + this.data.company_id
       + '/' + this.data.section_id + '/' + this.data.user_id;
     return this.get_cache(url_key, group, url_key, null, this.options_token);
-    // return this.get_cacheItem(url_key).catch(() => {
-    //   return this.http.get(url_key, null, this.options_token).then((res) => {
-    //     return this.cache.saveItem(url_key, res, group_key);
-    //   })
-    // })
   }
 
   public update_personal(info) {
@@ -209,11 +201,6 @@ export class API {
       + this.http.dict_to_query_str(page_obj);
     return this.get_cache(url_key, group, 
       this.base_url + '/employees/' + this.data.company_id, page_obj, this.options_token);
-    // return this.http.get(this.base_url + '/employees/' 
-    //   + this.data.company_id, {
-    //     page: page,
-    //     limit: limit
-    //   }, this.options_token);
   }
 
   public get_group_sections(group) {
